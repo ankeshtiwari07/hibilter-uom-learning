@@ -1,0 +1,2311 @@
+{
+ "FACULTIES": [
+  {
+   "id": "agr",
+   "name": "Faculty of Agriculture",
+   "short": "Agriculture"
+  },
+  {
+   "id": "eng",
+   "name": "Faculty of Engineering",
+   "short": "Engineering"
+  },
+  {
+   "id": "icdt",
+   "name": "Faculty of Information, Communication and Digital Technologies",
+   "short": "ICDT"
+  },
+  {
+   "id": "lm",
+   "name": "Faculty of Law and Management",
+   "short": "Law & Management"
+  },
+  {
+   "id": "mhs",
+   "name": "Faculty of Medicine and Health Sciences",
+   "short": "Medicine & Health"
+  },
+  {
+   "id": "sci",
+   "name": "Faculty of Science",
+   "short": "Science"
+  },
+  {
+   "id": "ssh",
+   "name": "Faculty of Social Sciences and Humanities",
+   "short": "Social Sciences"
+  },
+  {
+   "id": "cill",
+   "name": "Centre for Innovative & Lifelong Learning (CILL)",
+   "short": "CILL"
+  }
+ ],
+ "PROGRAMMES": [
+  {
+   "id": "p-csai",
+   "fac": "icdt",
+   "name": "BSc (Hons) Computer Science with AI",
+   "level": "Undergraduate",
+   "years": 3
+  },
+  {
+   "id": "p-da",
+   "fac": "icdt",
+   "name": "BSc (Hons) Data Science",
+   "level": "Undergraduate",
+   "years": 3
+  },
+  {
+   "id": "p-bm",
+   "fac": "lm",
+   "name": "BSc (Hons) Business Management",
+   "level": "Undergraduate",
+   "years": 3
+  },
+  {
+   "id": "p-ee",
+   "fac": "eng",
+   "name": "BEng (Hons) Electrical & Electronic Engineering",
+   "level": "Undergraduate",
+   "years": 4
+  },
+  {
+   "id": "p-ms",
+   "fac": "sci",
+   "name": "BSc (Hons) Marine Science",
+   "level": "Undergraduate",
+   "years": 3
+  },
+  {
+   "id": "p-pa",
+   "fac": "agr",
+   "name": "BSc (Hons) Agricultural Technology",
+   "level": "Undergraduate",
+   "years": 3
+  },
+  {
+   "id": "p-hi",
+   "fac": "mhs",
+   "name": "BSc (Hons) Health Informatics",
+   "level": "Undergraduate",
+   "years": 3
+  },
+  {
+   "id": "p-cpd",
+   "fac": "cill",
+   "name": "Professional Certificate: AI for Professionals",
+   "level": "Short course",
+   "years": 0
+  }
+ ],
+ "STAFF": [
+  {
+   "id": "l1",
+   "name": "Dr. Meera Lallchand",
+   "first": "Meera",
+   "role": "lecturer",
+   "fac": "icdt",
+   "title": "Senior Lecturer, Computer Science",
+   "email": "m.lallchand@demo.uom.example"
+  },
+  {
+   "id": "l2",
+   "name": "Dr. Olivier Bastien",
+   "first": "Olivier",
+   "role": "lecturer",
+   "fac": "icdt",
+   "title": "Lecturer, Data Science",
+   "email": "o.bastien@demo.uom.example"
+  },
+  {
+   "id": "l3",
+   "name": "Ms. Farah Joomun",
+   "first": "Farah",
+   "role": "lecturer",
+   "fac": "lm",
+   "title": "Lecturer, Management",
+   "email": "f.joomun@demo.uom.example"
+  },
+  {
+   "id": "l4",
+   "name": "Dr. Raj Nundoo",
+   "first": "Raj",
+   "role": "lecturer",
+   "fac": "eng",
+   "title": "Associate Professor, Engineering",
+   "email": "r.nundoo@demo.uom.example"
+  },
+  {
+   "id": "l5",
+   "name": "Dr. Sophie Laval",
+   "first": "Sophie",
+   "role": "lecturer",
+   "fac": "sci",
+   "title": "Lecturer, Marine Science",
+   "email": "s.laval@demo.uom.example"
+  },
+  {
+   "id": "a1",
+   "name": "Anil Seetohul",
+   "first": "Anil",
+   "role": "admin",
+   "fac": null,
+   "title": "Academic Administrator (demo)",
+   "email": "admin@demo.uom.example"
+  }
+ ],
+ "COURSES": [
+  {
+   "id": "c1",
+   "code": "HB-AI101",
+   "title": "Foundations of Artificial Intelligence",
+   "fac": "icdt",
+   "prog": "p-csai",
+   "lec": "l1",
+   "vf": "henri",
+   "credits": 3,
+   "weeks": 12,
+   "format": "Blended",
+   "cv": 1,
+   "sem": "S1 2026/27",
+   "desc": "What AI is, how machine learning systems learn from data, and how to reason about their limits and responsible use.",
+   "outcomes": [
+    "Distinguish artificial intelligence, machine learning and deep learning",
+    "Explain how supervised and unsupervised learning use data",
+    "Evaluate a simple model using accuracy and error",
+    "Identify bias and data-quality risks in AI systems"
+   ]
+  },
+  {
+   "id": "c2",
+   "code": "HB-DS102",
+   "title": "Data Analytics with Python",
+   "fac": "icdt",
+   "prog": "p-da",
+   "lec": "l2",
+   "vf": "arjun",
+   "credits": 3,
+   "weeks": 12,
+   "format": "Blended",
+   "cv": 2,
+   "sem": "S1 2026/27",
+   "desc": "Cleaning, exploring and visualising data with pandas and matplotlib, ending in a small analytics project.",
+   "outcomes": [
+    "Load and clean tabular data",
+    "Summarise data with descriptive statistics",
+    "Choose an appropriate chart for a question",
+    "Communicate findings to a non-technical audience"
+   ]
+  },
+  {
+   "id": "c3",
+   "code": "HB-MG210",
+   "title": "Digital Business and Innovation",
+   "fac": "lm",
+   "prog": "p-bm",
+   "lec": "l3",
+   "vf": "nalini",
+   "credits": 3,
+   "weeks": 12,
+   "format": "Online",
+   "cv": 3,
+   "sem": "S1 2026/27",
+   "desc": "How digital platforms change business models, with case studies from small-island economies.",
+   "outcomes": [
+    "Describe platform business models",
+    "Analyse a digital transformation case",
+    "Build a simple business model canvas"
+   ]
+  },
+  {
+   "id": "c4",
+   "code": "HB-EN215",
+   "title": "Sustainable Energy Systems",
+   "fac": "eng",
+   "prog": "p-ee",
+   "lec": "l4",
+   "vf": "henri",
+   "credits": 4,
+   "weeks": 14,
+   "format": "On campus",
+   "cv": 4,
+   "sem": "S1 2026/27",
+   "desc": "Solar, wind and storage technologies and the grid integration challenges of an island power system.",
+   "outcomes": [
+    "Size a rooftop solar installation",
+    "Explain intermittency and storage",
+    "Compare levelised cost of energy"
+   ]
+  },
+  {
+   "id": "c5",
+   "code": "HB-SC120",
+   "title": "Marine Science and Climate Data",
+   "fac": "sci",
+   "prog": "p-ms",
+   "lec": "l5",
+   "vf": "elena",
+   "credits": 3,
+   "weeks": 12,
+   "format": "Blended",
+   "cv": 5,
+   "sem": "S1 2026/27",
+   "desc": "Using open ocean and climate datasets to study reef health, sea-surface temperature and coastal change.",
+   "outcomes": [
+    "Read gridded climate data",
+    "Plot sea-surface temperature anomalies",
+    "Interpret coral bleaching indicators"
+   ]
+  },
+  {
+   "id": "c6",
+   "code": "HB-LL050",
+   "title": "AI for Professionals (Short Course)",
+   "fac": "cill",
+   "prog": "p-cpd",
+   "lec": "l1",
+   "vf": "elena",
+   "credits": 0,
+   "weeks": 6,
+   "format": "Online, self-paced",
+   "cv": 6,
+   "sem": "Rolling",
+   "desc": "A practical, non-technical introduction to generative AI tools, prompts and responsible workplace use.",
+   "outcomes": [
+    "Use AI assistants safely at work",
+    "Write effective prompts",
+    "Recognise privacy and accuracy risks"
+   ]
+  },
+  {
+   "id": "c7",
+   "code": "HB-AG130",
+   "title": "Precision Agriculture and Remote Sensing",
+   "fac": "agr",
+   "prog": "p-pa",
+   "lec": "l4",
+   "vf": "arjun",
+   "credits": 3,
+   "weeks": 12,
+   "format": "Blended",
+   "cv": 2,
+   "sem": "S1 2026/27",
+   "desc": "Satellite and drone imagery for crop monitoring, with a sugar-cane yield estimation exercise.",
+   "outcomes": [
+    "Explain NDVI",
+    "Process a satellite scene",
+    "Estimate yield from imagery"
+   ]
+  },
+  {
+   "id": "c8",
+   "code": "HB-HS140",
+   "title": "Health Informatics Essentials",
+   "fac": "mhs",
+   "prog": "p-hi",
+   "lec": "l2",
+   "vf": "nalini",
+   "credits": 3,
+   "weeks": 12,
+   "format": "Online",
+   "cv": 1,
+   "sem": "S1 2026/27",
+   "desc": "Electronic health records, interoperability standards and privacy in health data.",
+   "outcomes": [
+    "Describe EHR components",
+    "Explain HL7 FHIR at a high level",
+    "Apply health-data privacy principles"
+   ]
+  }
+ ],
+ "MODULES": {
+  "c1": [
+   {
+    "id": "m1",
+    "title": "Module 1 · Foundations of AI",
+    "lessons": [
+     {
+      "id": "L1",
+      "title": "Understanding Artificial Intelligence and Machine Learning",
+      "type": "virtual",
+      "dur": 25,
+      "vf": true
+     },
+     {
+      "id": "L2",
+      "title": "A short history of AI",
+      "type": "video",
+      "dur": 14
+     },
+     {
+      "id": "L3",
+      "title": "Reading: AI in everyday services",
+      "type": "reading",
+      "dur": 20
+     }
+    ]
+   },
+   {
+    "id": "m2",
+    "title": "Module 2 · How Machines Learn",
+    "lessons": [
+     {
+      "id": "L4",
+      "title": "Supervised learning and labelled data",
+      "type": "video",
+      "dur": 18
+     },
+     {
+      "id": "L5",
+      "title": "Unsupervised learning and clustering",
+      "type": "video",
+      "dur": 16
+     },
+     {
+      "id": "L6",
+      "title": "Quiz: Learning from data",
+      "type": "quiz",
+      "dur": 15
+     }
+    ]
+   },
+   {
+    "id": "m3",
+    "title": "Module 3 · Evaluating Models",
+    "lessons": [
+     {
+      "id": "L7",
+      "title": "Accuracy, error and overfitting",
+      "type": "video",
+      "dur": 20
+     },
+     {
+      "id": "L8",
+      "title": "Assignment: Evaluate a classifier",
+      "type": "assignment",
+      "dur": 120
+     }
+    ]
+   },
+   {
+    "id": "m4",
+    "title": "Module 4 · Responsible AI",
+    "lessons": [
+     {
+      "id": "L9",
+      "title": "Bias, fairness and data quality",
+      "type": "video",
+      "dur": 17
+     },
+     {
+      "id": "L10",
+      "title": "Case study: AI in public services",
+      "type": "reading",
+      "dur": 25
+     }
+    ]
+   }
+  ]
+ },
+ "STUDENTS": [
+  {
+   "id": "s1",
+   "first": "Sagar",
+   "last": "Ramdin",
+   "name": "Sagar Ramdin",
+   "sid": "DEMO-2400100",
+   "prog": "p-csai",
+   "fac": "icdt",
+   "year": 2,
+   "email": "sagar.ramdin@demo.student.example",
+   "activity": 82,
+   "avg": 74,
+   "completion": 64,
+   "overdue": 0,
+   "lastActive": "Today",
+   "trend": "up",
+   "av": "",
+   "status": "Active"
+  },
+  {
+   "id": "s2",
+   "first": "Aisha",
+   "last": "Joomun",
+   "name": "Aisha Joomun",
+   "sid": "DEMO-2400137",
+   "prog": "p-da",
+   "fac": "icdt",
+   "year": 3,
+   "email": "aisha.joomun@demo.student.example",
+   "activity": 59,
+   "avg": 75,
+   "completion": 35,
+   "overdue": 0,
+   "lastActive": "Yesterday",
+   "trend": "down",
+   "av": "t",
+   "status": "Active"
+  },
+  {
+   "id": "s3",
+   "first": "Kevin",
+   "last": "Labonne",
+   "name": "Kevin Labonne",
+   "sid": "DEMO-2400174",
+   "prog": "p-csai",
+   "fac": "icdt",
+   "year": 3,
+   "email": "kevin.labonne@demo.student.example",
+   "activity": 73,
+   "avg": 54,
+   "completion": 49,
+   "overdue": 0,
+   "lastActive": "4 days ago",
+   "trend": "up",
+   "av": "g",
+   "status": "Active"
+  },
+  {
+   "id": "s4",
+   "first": "Priya",
+   "last": "Seebaluck",
+   "name": "Priya Seebaluck",
+   "sid": "DEMO-2400211",
+   "prog": "p-ms",
+   "fac": "sci",
+   "year": 3,
+   "email": "priya.seebaluck@demo.student.example",
+   "activity": 19,
+   "avg": 56,
+   "completion": 22,
+   "overdue": 0,
+   "lastActive": "4 days ago",
+   "trend": "up",
+   "av": "p",
+   "status": "Active"
+  },
+  {
+   "id": "s5",
+   "first": "Jean-Marc",
+   "last": "Lebon",
+   "name": "Jean-Marc Lebon",
+   "sid": "DEMO-2400248",
+   "prog": "p-bm",
+   "fac": "lm",
+   "year": 1,
+   "email": "jeanmarc.lebon@demo.student.example",
+   "activity": 47,
+   "avg": 87,
+   "completion": 49,
+   "overdue": 0,
+   "lastActive": "Yesterday",
+   "trend": "flat",
+   "av": "o",
+   "status": "Active"
+  },
+  {
+   "id": "s6",
+   "first": "Yasmine",
+   "last": "Peerbux",
+   "name": "Yasmine Peerbux",
+   "sid": "DEMO-2400285",
+   "prog": "p-ee",
+   "fac": "eng",
+   "year": 2,
+   "email": "yasmine.peerbux@demo.student.example",
+   "activity": 86,
+   "avg": 79,
+   "completion": 88,
+   "overdue": 3,
+   "lastActive": "Today",
+   "trend": "flat",
+   "av": "",
+   "status": "Active"
+  },
+  {
+   "id": "s7",
+   "first": "Rohan",
+   "last": "Goolaub",
+   "name": "Rohan Goolaub",
+   "sid": "DEMO-2400322",
+   "prog": "p-csai",
+   "fac": "icdt",
+   "year": 3,
+   "email": "rohan.goolaub@demo.student.example",
+   "activity": 33,
+   "avg": 69,
+   "completion": 49,
+   "overdue": 0,
+   "lastActive": "13 days ago",
+   "trend": "up",
+   "av": "t",
+   "status": "Active"
+  },
+  {
+   "id": "s8",
+   "first": "Chloé",
+   "last": "Ah-Kong",
+   "name": "Chloé Ah-Kong",
+   "sid": "DEMO-2400359",
+   "prog": "p-csai",
+   "fac": "icdt",
+   "year": 1,
+   "email": "chlo.ahkong@demo.student.example",
+   "activity": 89,
+   "avg": 87,
+   "completion": 17,
+   "overdue": 0,
+   "lastActive": "Yesterday",
+   "trend": "up",
+   "av": "g",
+   "status": "Active"
+  },
+  {
+   "id": "s9",
+   "first": "Ishaan",
+   "last": "Beeharry",
+   "name": "Ishaan Beeharry",
+   "sid": "DEMO-2400396",
+   "prog": "p-bm",
+   "fac": "lm",
+   "year": 1,
+   "email": "ishaan.beeharry@demo.student.example",
+   "activity": 93,
+   "avg": 84,
+   "completion": 83,
+   "overdue": 0,
+   "lastActive": "Today",
+   "trend": "up",
+   "av": "p",
+   "status": "Active"
+  },
+  {
+   "id": "s10",
+   "first": "Nadia",
+   "last": "Soobratty",
+   "name": "Nadia Soobratty",
+   "sid": "DEMO-2400433",
+   "prog": "p-ee",
+   "fac": "eng",
+   "year": 3,
+   "email": "nadia.soobratty@demo.student.example",
+   "activity": 75,
+   "avg": 62,
+   "completion": 54,
+   "overdue": 0,
+   "lastActive": "Today",
+   "trend": "flat",
+   "av": "o",
+   "status": "Active"
+  },
+  {
+   "id": "s11",
+   "first": "Lucas",
+   "last": "Perrine",
+   "name": "Lucas Perrine",
+   "sid": "DEMO-2400470",
+   "prog": "p-ms",
+   "fac": "sci",
+   "year": 1,
+   "email": "lucas.perrine@demo.student.example",
+   "activity": 52,
+   "avg": 53,
+   "completion": 77,
+   "overdue": 0,
+   "lastActive": "Today",
+   "trend": "down",
+   "av": "",
+   "status": "Active"
+  },
+  {
+   "id": "s12",
+   "first": "Anjali",
+   "last": "Doorgah",
+   "name": "Anjali Doorgah",
+   "sid": "DEMO-2400507",
+   "prog": "p-da",
+   "fac": "icdt",
+   "year": 3,
+   "email": "anjali.doorgah@demo.student.example",
+   "activity": 70,
+   "avg": 87,
+   "completion": 80,
+   "overdue": 0,
+   "lastActive": "Today",
+   "trend": "up",
+   "av": "t",
+   "status": "Active"
+  },
+  {
+   "id": "s13",
+   "first": "Mehdi",
+   "last": "Rawat",
+   "name": "Mehdi Rawat",
+   "sid": "DEMO-2400544",
+   "prog": "p-ee",
+   "fac": "eng",
+   "year": 1,
+   "email": "mehdi.rawat@demo.student.example",
+   "activity": 65,
+   "avg": 62,
+   "completion": 37,
+   "overdue": 3,
+   "lastActive": "13 days ago",
+   "trend": "up",
+   "av": "g",
+   "status": "Active"
+  },
+  {
+   "id": "s14",
+   "first": "Sarah",
+   "last": "Li Wan Po",
+   "name": "Sarah Li Wan Po",
+   "sid": "DEMO-2400581",
+   "prog": "p-ms",
+   "fac": "sci",
+   "year": 3,
+   "email": "sarah.liwanpo@demo.student.example",
+   "activity": 91,
+   "avg": 52,
+   "completion": 62,
+   "overdue": 2,
+   "lastActive": "13 days ago",
+   "trend": "up",
+   "av": "p",
+   "status": "Active"
+  },
+  {
+   "id": "s15",
+   "first": "Vikram",
+   "last": "Teeluck",
+   "name": "Vikram Teeluck",
+   "sid": "DEMO-2400618",
+   "prog": "p-pa",
+   "fac": "agr",
+   "year": 1,
+   "email": "vikram.teeluck@demo.student.example",
+   "activity": 34,
+   "avg": 50,
+   "completion": 29,
+   "overdue": 0,
+   "lastActive": "Today",
+   "trend": "flat",
+   "av": "o",
+   "status": "Active"
+  },
+  {
+   "id": "s16",
+   "first": "Emma",
+   "last": "Rivet",
+   "name": "Emma Rivet",
+   "sid": "DEMO-2400655",
+   "prog": "p-ee",
+   "fac": "eng",
+   "year": 1,
+   "email": "emma.rivet@demo.student.example",
+   "activity": 28,
+   "avg": 92,
+   "completion": 77,
+   "overdue": 0,
+   "lastActive": "9 days ago",
+   "trend": "flat",
+   "av": "",
+   "status": "Active"
+  },
+  {
+   "id": "s17",
+   "first": "Arvind",
+   "last": "Mungur",
+   "name": "Arvind Mungur",
+   "sid": "DEMO-2400692",
+   "prog": "p-ee",
+   "fac": "eng",
+   "year": 1,
+   "email": "arvind.mungur@demo.student.example",
+   "activity": 40,
+   "avg": 63,
+   "completion": 35,
+   "overdue": 0,
+   "lastActive": "4 days ago",
+   "trend": "flat",
+   "av": "t",
+   "status": "Active"
+  },
+  {
+   "id": "s18",
+   "first": "Laila",
+   "last": "Ally",
+   "name": "Laila Ally",
+   "sid": "DEMO-2400729",
+   "prog": "p-ms",
+   "fac": "sci",
+   "year": 2,
+   "email": "laila.ally@demo.student.example",
+   "activity": 73,
+   "avg": 82,
+   "completion": 47,
+   "overdue": 3,
+   "lastActive": "Today",
+   "trend": "flat",
+   "av": "g",
+   "status": "Active"
+  },
+  {
+   "id": "s19",
+   "first": "Thomas",
+   "last": "Hardy-Noel",
+   "name": "Thomas Hardy-Noel",
+   "sid": "DEMO-2400766",
+   "prog": "p-pa",
+   "fac": "agr",
+   "year": 2,
+   "email": "thomas.hardynoel@demo.student.example",
+   "activity": 62,
+   "avg": 47,
+   "completion": 42,
+   "overdue": 0,
+   "lastActive": "13 days ago",
+   "trend": "flat",
+   "av": "p",
+   "status": "Active"
+  },
+  {
+   "id": "s20",
+   "first": "Kavya",
+   "last": "Ramsurrun",
+   "name": "Kavya Ramsurrun",
+   "sid": "DEMO-2400803",
+   "prog": "p-ee",
+   "fac": "eng",
+   "year": 2,
+   "email": "kavya.ramsurrun@demo.student.example",
+   "activity": 37,
+   "avg": 89,
+   "completion": 63,
+   "overdue": 0,
+   "lastActive": "Today",
+   "trend": "flat",
+   "av": "o",
+   "status": "Active"
+  },
+  {
+   "id": "s21",
+   "first": "Nicolas",
+   "last": "Fok",
+   "name": "Nicolas Fok",
+   "sid": "DEMO-2400840",
+   "prog": "p-ee",
+   "fac": "eng",
+   "year": 1,
+   "email": "nicolas.fok@demo.student.example",
+   "activity": 39,
+   "avg": 56,
+   "completion": 90,
+   "overdue": 0,
+   "lastActive": "Yesterday",
+   "trend": "flat",
+   "av": "",
+   "status": "Active"
+  },
+  {
+   "id": "s22",
+   "first": "Zara",
+   "last": "Hosany",
+   "name": "Zara Hosany",
+   "sid": "DEMO-2400877",
+   "prog": "p-hi",
+   "fac": "mhs",
+   "year": 3,
+   "email": "zara.hosany@demo.student.example",
+   "activity": 27,
+   "avg": 56,
+   "completion": 74,
+   "overdue": 3,
+   "lastActive": "Today",
+   "trend": "down",
+   "av": "t",
+   "status": "Active"
+  },
+  {
+   "id": "s23",
+   "first": "Dev",
+   "last": "Ragoobur",
+   "name": "Dev Ragoobur",
+   "sid": "DEMO-2400914",
+   "prog": "p-da",
+   "fac": "icdt",
+   "year": 1,
+   "email": "dev.ragoobur@demo.student.example",
+   "activity": 30,
+   "avg": 70,
+   "completion": 20,
+   "overdue": 0,
+   "lastActive": "2 days ago",
+   "trend": "down",
+   "av": "g",
+   "status": "Active"
+  },
+  {
+   "id": "s24",
+   "first": "Inès",
+   "last": "Maurice",
+   "name": "Inès Maurice",
+   "sid": "DEMO-2400951",
+   "prog": "p-ms",
+   "fac": "sci",
+   "year": 1,
+   "email": "ins.maurice@demo.student.example",
+   "activity": 51,
+   "avg": 73,
+   "completion": 49,
+   "overdue": 0,
+   "lastActive": "9 days ago",
+   "trend": "down",
+   "av": "p",
+   "status": "Active"
+  },
+  {
+   "id": "s25",
+   "first": "Amit",
+   "last": "Gopee",
+   "name": "Amit Gopee",
+   "sid": "DEMO-2400988",
+   "prog": "p-hi",
+   "fac": "mhs",
+   "year": 1,
+   "email": "amit.gopee@demo.student.example",
+   "activity": 77,
+   "avg": 54,
+   "completion": 94,
+   "overdue": 0,
+   "lastActive": "9 days ago",
+   "trend": "up",
+   "av": "o",
+   "status": "Active"
+  },
+  {
+   "id": "s26",
+   "first": "Léa",
+   "last": "Duval",
+   "name": "Léa Duval",
+   "sid": "DEMO-2401025",
+   "prog": "p-da",
+   "fac": "icdt",
+   "year": 2,
+   "email": "la.duval@demo.student.example",
+   "activity": 39,
+   "avg": 74,
+   "completion": 62,
+   "overdue": 0,
+   "lastActive": "13 days ago",
+   "trend": "flat",
+   "av": "",
+   "status": "Active"
+  },
+  {
+   "id": "s27",
+   "first": "Ravi",
+   "last": "Chooramun",
+   "name": "Ravi Chooramun",
+   "sid": "DEMO-2401062",
+   "prog": "p-csai",
+   "fac": "icdt",
+   "year": 2,
+   "email": "ravi.chooramun@demo.student.example",
+   "activity": 82,
+   "avg": 42,
+   "completion": 38,
+   "overdue": 0,
+   "lastActive": "13 days ago",
+   "trend": "down",
+   "av": "t",
+   "status": "Active"
+  },
+  {
+   "id": "s28",
+   "first": "Fatima",
+   "last": "Bhunnoo",
+   "name": "Fatima Bhunnoo",
+   "sid": "DEMO-2401099",
+   "prog": "p-ee",
+   "fac": "eng",
+   "year": 1,
+   "email": "fatima.bhunnoo@demo.student.example",
+   "activity": 61,
+   "avg": 51,
+   "completion": 16,
+   "overdue": 3,
+   "lastActive": "4 days ago",
+   "trend": "flat",
+   "av": "g",
+   "status": "Active"
+  },
+  {
+   "id": "s29",
+   "first": "Hugo",
+   "last": "Antoine",
+   "name": "Hugo Antoine",
+   "sid": "DEMO-2401136",
+   "prog": "p-hi",
+   "fac": "mhs",
+   "year": 3,
+   "email": "hugo.antoine@demo.student.example",
+   "activity": 75,
+   "avg": 53,
+   "completion": 58,
+   "overdue": 0,
+   "lastActive": "2 days ago",
+   "trend": "flat",
+   "av": "p",
+   "status": "Active"
+  },
+  {
+   "id": "s30",
+   "first": "Meena",
+   "last": "Dabee",
+   "name": "Meena Dabee",
+   "sid": "DEMO-2401173",
+   "prog": "p-pa",
+   "fac": "agr",
+   "year": 1,
+   "email": "meena.dabee@demo.student.example",
+   "activity": 76,
+   "avg": 60,
+   "completion": 40,
+   "overdue": 3,
+   "lastActive": "13 days ago",
+   "trend": "down",
+   "av": "o",
+   "status": "Active"
+  }
+ ],
+ "ENROL": {
+  "s1": [
+   "c1",
+   "c2",
+   "c3",
+   "c6"
+  ],
+  "s2": [
+   "c2",
+   "c1",
+   "c6"
+  ],
+  "s3": [
+   "c1"
+  ],
+  "s4": [
+   "c5",
+   "c1",
+   "c6",
+   "c4"
+  ],
+  "s5": [
+   "c3"
+  ],
+  "s6": [
+   "c4",
+   "c5"
+  ],
+  "s7": [
+   "c1"
+  ],
+  "s8": [
+   "c1"
+  ],
+  "s9": [
+   "c3",
+   "c1"
+  ],
+  "s10": [
+   "c4"
+  ],
+  "s11": [
+   "c5",
+   "c6"
+  ],
+  "s12": [
+   "c2",
+   "c1"
+  ],
+  "s13": [
+   "c4",
+   "c1",
+   "c6",
+   "c2"
+  ],
+  "s14": [
+   "c5",
+   "c6"
+  ],
+  "s15": [
+   "c7",
+   "c1"
+  ],
+  "s16": [
+   "c4",
+   "c2"
+  ],
+  "s17": [
+   "c4",
+   "c6"
+  ],
+  "s18": [
+   "c5",
+   "c1",
+   "c3"
+  ],
+  "s19": [
+   "c7"
+  ],
+  "s20": [
+   "c4",
+   "c1"
+  ],
+  "s21": [
+   "c4"
+  ],
+  "s22": [
+   "c8"
+  ],
+  "s23": [
+   "c2",
+   "c1",
+   "c8"
+  ],
+  "s24": [
+   "c5",
+   "c1"
+  ],
+  "s25": [
+   "c8"
+  ],
+  "s26": [
+   "c2",
+   "c1",
+   "c6"
+  ],
+  "s27": [
+   "c1"
+  ],
+  "s28": [
+   "c4",
+   "c1"
+  ],
+  "s29": [
+   "c8",
+   "c1"
+  ],
+  "s30": [
+   "c7"
+  ]
+ },
+ "COURSE_SIZE": {
+  "c1": 184,
+  "c2": 142,
+  "c3": 96,
+  "c4": 78,
+  "c5": 64,
+  "c6": 230,
+  "c7": 52,
+  "c8": 88
+ },
+ "COURSE_COMPLETION": {
+  "c1": 61,
+  "c2": 55,
+  "c3": 68,
+  "c4": 47,
+  "c5": 58,
+  "c6": 72,
+  "c7": 44,
+  "c8": 63
+ },
+ "COURSE_AVG": {
+  "c1": 71,
+  "c2": 66,
+  "c3": 73,
+  "c4": 62,
+  "c5": 69,
+  "c6": 78,
+  "c7": 64,
+  "c8": 70
+ },
+ "SAGAR_PROGRESS": {
+  "c1": 34,
+  "c2": 58,
+  "c3": 72,
+  "c6": 90
+ },
+ "ASSESSMENTS": [
+  {
+   "id": "as1",
+   "course": "c1",
+   "type": "quiz",
+   "title": "Quiz 2: Learning from data",
+   "due": "2026-10-14T23:59",
+   "marks": 20,
+   "weight": 10,
+   "status": "open",
+   "qs": "qz1"
+  },
+  {
+   "id": "as2",
+   "course": "c1",
+   "type": "assignment",
+   "title": "Assignment 1: Evaluate a classifier",
+   "due": "2026-10-20T17:00",
+   "marks": 100,
+   "weight": 25,
+   "status": "open",
+   "brief": "Using the provided spam dataset, train a simple classifier, report accuracy, precision and recall, and discuss two sources of error. Maximum 1,500 words plus notebook."
+  },
+  {
+   "id": "as3",
+   "course": "c2",
+   "type": "assignment",
+   "title": "Lab report: Cleaning the tourism arrivals dataset",
+   "due": "2026-10-12T17:00",
+   "marks": 50,
+   "weight": 15,
+   "status": "open",
+   "brief": "Clean the illustrative arrivals dataset, document every transformation, and produce three charts answering the questions in the brief."
+  },
+  {
+   "id": "as4",
+   "course": "c3",
+   "type": "assignment",
+   "title": "Case analysis: A platform business in a small-island economy",
+   "due": "2026-10-03T17:00",
+   "marks": 100,
+   "weight": 30,
+   "status": "graded",
+   "brief": "Analyse one platform business of your choice using the frameworks from weeks 2–4."
+  },
+  {
+   "id": "as5",
+   "course": "c1",
+   "type": "quiz",
+   "title": "Quiz 1: What is AI?",
+   "due": "2026-09-28T23:59",
+   "marks": 10,
+   "weight": 5,
+   "status": "graded"
+  },
+  {
+   "id": "as6",
+   "course": "c1",
+   "type": "exam",
+   "title": "Mid-semester test",
+   "due": "2026-11-05T09:00",
+   "marks": 100,
+   "weight": 20,
+   "status": "upcoming"
+  }
+ ],
+ "QUIZ": {
+  "qz1": {
+   "title": "Quiz 2: Learning from data",
+   "time": 20,
+   "questions": [
+    {
+     "q": "Which statement best describes supervised learning?",
+     "o": [
+      "The model learns from examples that include the correct output",
+      "The model groups data without any labels",
+      "The model is programmed with explicit if–then rules",
+      "The model learns only by trial-and-error rewards"
+     ],
+     "a": 0,
+     "ex": "Supervised learning trains on labelled examples — inputs paired with the correct output."
+    },
+    {
+     "q": "A bank groups customers by spending behaviour without predefined categories. This is an example of…",
+     "o": [
+      "Regression",
+      "Classification",
+      "Clustering",
+      "Reinforcement learning"
+     ],
+     "a": 2,
+     "ex": "Grouping without predefined labels is clustering, an unsupervised technique."
+    },
+    {
+     "q": "What is the main purpose of a test set?",
+     "o": [
+      "To train the model faster",
+      "To estimate how the model performs on unseen data",
+      "To label the training data",
+      "To remove outliers"
+     ],
+     "a": 1,
+     "ex": "The test set is held back so you can estimate performance on data the model has not seen."
+    },
+    {
+     "q": "A model scores 99% on training data but 62% on new data. This most likely indicates…",
+     "o": [
+      "Underfitting",
+      "Overfitting",
+      "Data leakage into the test set",
+      "A perfectly tuned model"
+     ],
+     "a": 1,
+     "ex": "A large gap between training and unseen performance is the classic sign of overfitting."
+    },
+    {
+     "q": "Which of these is a feature in a model that predicts sugar-cane yield?",
+     "o": [
+      "The predicted yield",
+      "Average rainfall during the growing season",
+      "The model accuracy",
+      "The training algorithm"
+     ],
+     "a": 1,
+     "ex": "Features are the input variables; rainfall is an input that helps predict yield."
+    },
+    {
+     "q": "Which is the best example of biased training data?",
+     "o": [
+      "A face dataset drawn mostly from one age group",
+      "A dataset with 10,000 rows",
+      "A dataset split 80/20 into train and test",
+      "A dataset stored as CSV"
+     ],
+     "a": 0,
+     "ex": "Under-representing groups makes a model perform worse for them — a source of bias."
+    },
+    {
+     "q": "Machine learning is best described as…",
+     "o": [
+      "A separate field unrelated to AI",
+      "A subset of AI where systems learn patterns from data",
+      "Another name for robotics",
+      "Any software that uses a database"
+     ],
+     "a": 1,
+     "ex": "ML is a subset of AI focused on learning patterns from data rather than explicit rules."
+    },
+    {
+     "q": "Precision answers which question?",
+     "o": [
+      "Of all actual positives, how many did we find?",
+      "Of everything we predicted positive, how many were correct?",
+      "How fast is the model?",
+      "How many features are used?"
+     ],
+     "a": 1,
+     "ex": "Precision = true positives ÷ predicted positives."
+    },
+    {
+     "q": "Which task is regression?",
+     "o": [
+      "Predicting tomorrow's electricity demand in MW",
+      "Deciding if an email is spam",
+      "Grouping news articles by topic",
+      "Recognising a handwritten digit"
+     ],
+     "a": 0,
+     "ex": "Regression predicts a continuous number."
+    },
+    {
+     "q": "Why should AI-generated answers in this platform show sources?",
+     "o": [
+      "To make them longer",
+      "So learners can check them against approved course material",
+      "Because it is faster",
+      "It is not necessary"
+     ],
+     "a": 1,
+     "ex": "Sources let learners and lecturers verify answers against approved material."
+    }
+   ]
+  }
+ },
+ "SUBMISSIONS": [
+  {
+   "id": "sb1",
+   "as": "as2",
+   "st": "s2",
+   "status": "submitted",
+   "at": "2026-10-08 21:14",
+   "file": "joomun_classifier_report.pdf",
+   "words": 1420,
+   "mark": null
+  },
+  {
+   "id": "sb2",
+   "as": "as2",
+   "st": "s3",
+   "status": "late",
+   "at": "—",
+   "file": null,
+   "mark": null
+  },
+  {
+   "id": "sb3",
+   "as": "as2",
+   "st": "s4",
+   "status": "submitted",
+   "at": "2026-10-09 10:02",
+   "file": "seebaluck_assignment1.pdf",
+   "words": 1488,
+   "mark": null
+  },
+  {
+   "id": "sb4",
+   "as": "as2",
+   "st": "s5",
+   "status": "graded",
+   "at": "2026-10-07 18:40",
+   "file": "lebon_eval.pdf",
+   "words": 1302,
+   "mark": 78,
+   "fb": "Clear method and well-chosen metrics. Strengthen the discussion of false positives."
+  },
+  {
+   "id": "sb5",
+   "as": "as2",
+   "st": "s6",
+   "status": "submitted",
+   "at": "2026-10-09 16:55",
+   "file": "peerbux_A1.pdf",
+   "words": 1510,
+   "mark": null
+  },
+  {
+   "id": "sb6",
+   "as": "as2",
+   "st": "s7",
+   "status": "pending",
+   "at": "—",
+   "file": null,
+   "mark": null
+  },
+  {
+   "id": "sb7",
+   "as": "as2",
+   "st": "s9",
+   "status": "submitted",
+   "at": "2026-10-09 22:31",
+   "file": "beeharry_classifier.pdf",
+   "words": 1377,
+   "mark": null
+  },
+  {
+   "id": "sb8",
+   "as": "as2",
+   "st": "s10",
+   "status": "graded",
+   "at": "2026-10-06 12:05",
+   "file": "soobratty_report.pdf",
+   "words": 1455,
+   "mark": 84,
+   "fb": "Excellent error analysis. Well referenced."
+  },
+  {
+   "id": "sb9",
+   "as": "as2",
+   "st": "s12",
+   "status": "late",
+   "at": "—",
+   "file": null,
+   "mark": null
+  },
+  {
+   "id": "sb10",
+   "as": "as2",
+   "st": "s13",
+   "status": "submitted",
+   "at": "2026-10-08 09:20",
+   "file": "rawat_a1.pdf",
+   "words": 1290,
+   "mark": null
+  }
+ ],
+ "ANNOUNCEMENTS": [
+  {
+   "id": "n1",
+   "scope": "course",
+   "course": "c1",
+   "title": "Virtual faculty lesson now available for Module 1",
+   "body": "You can now take the interactive lesson “Understanding Artificial Intelligence and Machine Learning” with Prof. Henri Delacroix (digital lecturer). It includes three comprehension checkpoints.",
+   "by": "Dr. Meera Lallchand",
+   "at": "Today, 08:30",
+   "unread": true
+  },
+  {
+   "id": "n2",
+   "scope": "uni",
+   "title": "Library extended opening hours during the assessment period",
+   "body": "Illustrative notice for the demo. Extended hours apply from 12 October.",
+   "by": "Demo Administrator",
+   "at": "Yesterday",
+   "unread": true
+  },
+  {
+   "id": "n3",
+   "scope": "course",
+   "course": "c2",
+   "title": "Lab report deadline: Monday 17:00",
+   "body": "Reminder that the cleaning lab report is due Monday. Office hours Friday 14:00–15:00.",
+   "by": "Dr. Olivier Bastien",
+   "at": "2 days ago",
+   "unread": false
+  },
+  {
+   "id": "n4",
+   "scope": "uni",
+   "title": "Student Welfare Office drop-in sessions",
+   "body": "Illustrative notice. Drop-in sessions every Wednesday afternoon.",
+   "by": "Demo Administrator",
+   "at": "3 days ago",
+   "unread": false
+  },
+  {
+   "id": "n5",
+   "scope": "course",
+   "course": "c3",
+   "title": "Case analysis grades published",
+   "body": "Grades and feedback for the case analysis are now available.",
+   "by": "Ms. Farah Joomun",
+   "at": "5 days ago",
+   "unread": false
+  }
+ ],
+ "THREADS": [
+  {
+   "id": "t1",
+   "course": "c1",
+   "title": "Is deep learning always better than classical ML?",
+   "by": "Kevin Labonne",
+   "replies": 6,
+   "last": "1 h ago",
+   "solved": false
+  },
+  {
+   "id": "t2",
+   "course": "c1",
+   "title": "Clarification on Assignment 1 dataset split",
+   "by": "Aisha Joomun",
+   "replies": 3,
+   "last": "Yesterday",
+   "solved": true
+  },
+  {
+   "id": "t3",
+   "course": "c2",
+   "title": "pandas merge giving duplicate rows",
+   "by": "Rohan Goolaub",
+   "replies": 4,
+   "last": "2 days ago",
+   "solved": true
+  }
+ ],
+ "EVENTS": [
+  {
+   "d": "2026-10-12",
+   "t": "09:00",
+   "e": "10:30",
+   "title": "HB-AI101 Lecture · LT2",
+   "k": "cls"
+  },
+  {
+   "d": "2026-10-12",
+   "t": "11:00",
+   "e": "11:25",
+   "title": "Virtual faculty lesson: AI & ML",
+   "k": "vf"
+  },
+  {
+   "d": "2026-10-12",
+   "t": "13:30",
+   "e": "15:30",
+   "title": "HB-DS102 Lab · Computer Lab 3",
+   "k": "cls"
+  },
+  {
+   "d": "2026-10-12",
+   "t": "17:00",
+   "e": "17:00",
+   "title": "Lab report due (HB-DS102)",
+   "k": "due"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "10:00",
+   "e": "12:00",
+   "title": "HB-MG210 Seminar · Online",
+   "k": "cls"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "09:00",
+   "e": "10:30",
+   "title": "HB-AI101 Tutorial",
+   "k": "cls"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "23:59",
+   "e": "23:59",
+   "title": "Quiz 2 closes (HB-AI101)",
+   "k": "due"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "14:00",
+   "e": "16:00",
+   "title": "Career talk · Illustrative event",
+   "k": "uni"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "11:00",
+   "e": "12:30",
+   "title": "HB-DS102 Lecture",
+   "k": "cls"
+  },
+  {
+   "d": "2026-10-20",
+   "t": "17:00",
+   "e": "17:00",
+   "title": "Assignment 1 due (HB-AI101)",
+   "k": "due"
+  },
+  {
+   "d": "2026-10-22",
+   "t": "09:00",
+   "e": "10:30",
+   "title": "HB-AI101 Lecture",
+   "k": "cls"
+  },
+  {
+   "d": "2026-10-27",
+   "t": "10:00",
+   "e": "12:00",
+   "title": "Research week · Illustrative",
+   "k": "uni"
+  },
+  {
+   "d": "2026-11-05",
+   "t": "09:00",
+   "e": "11:00",
+   "title": "Mid-semester test (HB-AI101)",
+   "k": "exam"
+  },
+  {
+   "d": "2026-10-07",
+   "t": "09:00",
+   "e": "10:30",
+   "title": "HB-AI101 Lecture",
+   "k": "cls"
+  },
+  {
+   "d": "2026-10-09",
+   "t": "13:30",
+   "e": "15:30",
+   "title": "HB-DS102 Lab",
+   "k": "cls"
+  },
+  {
+   "d": "2026-10-29",
+   "t": "13:00",
+   "e": "15:00",
+   "title": "HB-MG210 Group presentations",
+   "k": "cls"
+  }
+ ],
+ "FAQ": [
+  {
+   "q": "How do I reset my password?",
+   "a": "Use “Forgot password” on the sign-in page. In production this would follow the university’s identity provider (single sign-on).",
+   "tag": "Account"
+  },
+  {
+   "q": "Can I request an extension on an assignment?",
+   "a": "Submit an academic support request with the reason and evidence. Extensions are decided by your lecturer under university regulations — the platform does not grant them automatically.",
+   "tag": "Assessment"
+  },
+  {
+   "q": "Are the virtual lecturers real people?",
+   "a": "No. They are AI digital faculty. Their lessons use lecturer-approved material, and your official grades are always set by university staff.",
+   "tag": "Virtual faculty"
+  },
+  {
+   "q": "Who can see my checkpoint answers?",
+   "a": "You and the lecturers of your course. Administrators see aggregated, de-identified analytics unless they have a role-approved reason to open an individual record.",
+   "tag": "Privacy"
+  },
+  {
+   "q": "What if the AI evaluation stops working during a lesson?",
+   "a": "The lesson pauses at the checkpoint, keeps your answer, and lets you retry or save and resume later. It never marks an answer correct by default.",
+   "tag": "Virtual faculty"
+  },
+  {
+   "q": "How do I turn on captions?",
+   "a": "Use the CC control in the lesson player or virtual classroom, or switch captions on by default in Profile › Accessibility.",
+   "tag": "Accessibility"
+  }
+ ],
+ "SUPPORT_TICKETS": [
+  {
+   "id": "SR-1042",
+   "title": "Unable to open Lab 2 notebook",
+   "cat": "Technical",
+   "status": "Resolved",
+   "at": "2 Oct",
+   "last": "IT Helpdesk: Fixed permissions on the shared folder."
+  },
+  {
+   "id": "SR-1057",
+   "title": "Clarification on attendance for blended sessions",
+   "cat": "Academic",
+   "status": "In progress",
+   "at": "8 Oct",
+   "last": "Assigned to programme coordinator."
+  }
+ ],
+ "AVATARS": [
+  {
+   "id": "henri",
+   "teach": "artificial intelligence and machine learning",
+   "tts": "bm_george:en-gb",
+   "name": "Prof. Henri Delacroix",
+   "short": "Prof. Delacroix",
+   "gender": "male",
+   "subject": "Artificial Intelligence & Machine Learning",
+   "photo": "henri",
+   "lip": {
+    "x": 630,
+    "y": 339,
+    "mw": 52,
+    "chin": 425,
+    "jaw": 100,
+    "fade": 0.7,
+    "amp": 15,
+    "smile": 4
+   },
+   "pos": "50% 28%",
+   "voice": "Calm, measured baritone · British English",
+   "voiceHint": [
+    "male",
+    "en-GB"
+   ],
+   "style": "Socratic — builds from everyday examples, pauses to check understanding",
+   "pitch": 0.9,
+   "rate": 0.96
+  },
+  {
+   "id": "isabelle",
+   "teach": "machine learning",
+   "tts": "bf_emma:en-gb",
+   "name": "Dr. Isabelle Rampersad",
+   "short": "Dr. Rampersad",
+   "gender": "female",
+   "subject": "Machine Learning",
+   "photo": "isabelle",
+   "lip": {
+    "x": 658,
+    "y": 324,
+    "mw": 60,
+    "chin": 410,
+    "jaw": 95,
+    "fade": 0.7,
+    "amp": 15,
+    "smile": 8
+   },
+   "pos": "42% 30%",
+   "voice": "Warm, articulate mezzo · British English",
+   "voiceHint": [
+    "female",
+    "en-GB"
+   ],
+   "style": "Structured — clear definitions, worked examples, frequent recaps",
+   "pitch": 1.02,
+   "rate": 0.97
+  },
+  {
+   "id": "arjun",
+   "teach": "data engineering and AI security",
+   "tts": "am_michael:en-us",
+   "name": "Dr. Arjun Mehra",
+   "short": "Dr. Mehra",
+   "gender": "male",
+   "subject": "Data Engineering & AI Security",
+   "photo": "arjun",
+   "lip": {
+    "x": 618,
+    "y": 332,
+    "mw": 60,
+    "chin": 438,
+    "jaw": 115,
+    "fade": 0.7,
+    "amp": 15,
+    "smile": 6
+   },
+   "pos": "48% 28%",
+   "voice": "Calm, precise tenor · American English",
+   "voiceHint": [
+    "male",
+    "en-US"
+   ],
+   "style": "Practical — real datasets, security-minded, quick checks",
+   "pitch": 1,
+   "rate": 1
+  },
+  {
+   "id": "nalini",
+   "teach": "data science and business analytics",
+   "tts": "af_heart:en-us",
+   "name": "Dr. Nalini Rao",
+   "short": "Dr. Rao",
+   "gender": "female",
+   "subject": "Data Science & Business Analytics",
+   "photo": "nalini",
+   "lip": {
+    "x": 630,
+    "y": 334,
+    "mw": 50,
+    "chin": 398,
+    "jaw": 85,
+    "fade": 0.45,
+    "amp": 12,
+    "smile": 8
+   },
+   "pos": "46% 28%",
+   "voice": "Warm, expressive alto · American English",
+   "voiceHint": [
+    "female",
+    "en-US"
+   ],
+   "style": "Story-driven — case studies, encouraging and conversational",
+   "pitch": 1,
+   "rate": 1
+  },
+  {
+   "id": "elena",
+   "teach": "AI in education, and the ethics of AI",
+   "tts": "bf_isabella:en-gb",
+   "name": "Prof. Elena Moreau",
+   "short": "Prof. Moreau",
+   "gender": "female",
+   "subject": "AI in Education & AI Ethics",
+   "photo": "elena",
+   "lip": {
+    "x": 655,
+    "y": 327,
+    "mw": 46,
+    "chin": 388,
+    "jaw": 80,
+    "fade": 0.45,
+    "amp": 12,
+    "smile": 9
+   },
+   "pos": "55% 28%",
+   "voice": "Clear, articulate mezzo · International English",
+   "voiceHint": [
+    "female",
+    "en-GB"
+   ],
+   "style": "Precise — structured explanations, frequent summaries",
+   "pitch": 1.05,
+   "rate": 0.97
+  },
+  {
+   "id": "lucas",
+   "teach": "educational technology and learning design",
+   "tts": "bm_lewis:en-gb",
+   "name": "Dr. Lucas Varenne",
+   "short": "Dr. Varenne",
+   "gender": "male",
+   "subject": "Educational Technology & Learning Design",
+   "photo": "lucas",
+   "lip": {
+    "x": 652,
+    "y": 324,
+    "mw": 52,
+    "chin": 398,
+    "jaw": 100,
+    "fade": 0.7,
+    "amp": 15,
+    "smile": 7
+   },
+   "photoListen": "lucas_listen",
+   "pos": "50% 26%",
+   "voice": "Friendly, energetic baritone · International English",
+   "voiceHint": [
+    "male",
+    "en-GB"
+   ],
+   "style": "Conversational — analogies, quick questions, lots of encouragement",
+   "pitch": 0.95,
+   "rate": 1
+  }
+ ],
+ "LESSON": {
+  "id": "L1",
+  "course": "c1",
+  "module": "Module 1 · Foundations of AI",
+  "title": "Understanding Artificial Intelligence and Machine Learning",
+  "dur": 25,
+  "segments": [
+   {
+    "id": "seg1",
+    "title": "What is artificial intelligence?",
+    "slide": "nested",
+    "speech": [
+     "Artificial intelligence is the broad field of building computer systems that perform tasks we normally associate with human intelligence — understanding language, recognising images, making decisions, or planning.",
+     "Machine learning sits inside that field. Instead of a programmer writing every rule by hand, a machine learning system learns patterns from examples — from data.",
+     "And deep learning sits inside machine learning: it uses large neural networks, and it powers things like speech recognition and modern language models.",
+     "So you can picture three circles, one inside the other: AI, then machine learning, then deep learning."
+    ],
+    "simpler": [
+     "Let me put it more simply. AI is the big idea: computers doing clever things that usually need a person.",
+     "Machine learning is one way of doing AI. We show the computer lots of examples, and it works out the pattern by itself.",
+     "Think of how you learnt to recognise a mango — nobody gave you a rulebook; you saw many mangoes. Machine learning works in a similar way."
+    ],
+    "checkpoint": {
+     "id": "cp1",
+     "mandatory": true,
+     "maxAttempts": 3,
+     "question": "Can you tell me the difference between artificial intelligence and machine learning?",
+     "concepts": [
+      {
+       "id": "subset",
+       "label": "Machine learning is a subset (part) of AI",
+       "required": true,
+       "rx": [
+        {
+         "re": "\\b(ml|machine[- ]learning)\\b[^.]{0,60}\\b(subset|sub-?field|part|branch|type|kind|form|subcategory|component|area|way|method|approach|technique)\\b",
+         "flags": "i"
+        },
+        {
+         "re": "\\b(subset|sub-?field|part|branch|type|kind|form|subcategory|area)\\s+of\\s+(ai|artificial intelligence)\\b",
+         "flags": "i"
+        },
+        {
+         "re": "\\b(ai|artificial intelligence)\\b[^.]{0,40}\\b(includes|contains|encompasses|covers|broader|bigger|wider|umbrella|overall)\\b",
+         "flags": "i"
+        },
+        {
+         "re": "\\b(broad(er)?|bigger|wider|umbrella|general)\\b[^.]{0,30}\\b(field|term|concept|idea|area)\\b",
+         "flags": "i"
+        },
+        {
+         "re": "\\binside\\s+(ai|artificial)",
+         "flags": "i"
+        }
+       ]
+      },
+      {
+       "id": "data",
+       "label": "ML learns patterns from data or examples",
+       "required": true,
+       "rx": [
+        {
+         "re": "\\b(learn|learns|learning|learnt|learned|trained|train|training)\\b[^.]{0,50}\\b(data|examples?|patterns?|experience|datasets?)\\b",
+         "flags": "i"
+        },
+        {
+         "re": "\\b(data|examples?|patterns?|experience)\\b[^.]{0,40}\\b(learn|learns|train|improve)",
+         "flags": "i"
+        },
+        {
+         "re": "\\bfrom (the )?data\\b",
+         "flags": "i"
+        }
+       ]
+      },
+      {
+       "id": "rules",
+       "label": "Without every rule being explicitly programmed",
+       "required": false,
+       "rx": [
+        {
+         "re": "\\b(without|instead of|rather than|not)\\b[^.]{0,40}\\b(explicit(ly)?|hand[- ]?(written|coded)|programm(ed|ing)|rules?|coded)\\b",
+         "flags": "i"
+        },
+        {
+         "re": "\\bexplicit(ly)? program",
+         "flags": "i"
+        }
+       ]
+      },
+      {
+       "id": "aidef",
+       "label": "AI = systems performing tasks that need human-like intelligence",
+       "required": false,
+       "rx": [
+        {
+         "re": "\\b(human|intelligen|think|mimic|imitat|simulat|smart)\\w*\\b[^.]{0,60}\\b(task|behaviou?r|machine|computer|system)s?\\b",
+         "flags": "i"
+        },
+        {
+         "re": "\\b(machine|computer|system)s?\\b[^.]{0,60}\\b(human|intelligen|think|mimic|imitat|simulat)",
+         "flags": "i"
+        }
+       ]
+      }
+     ],
+     "misconceptions": [
+      {
+       "id": "reversed",
+       "label": "Reversed relationship — AI is not a subset of ML",
+       "rx": [
+        {
+         "re": "\\b(ai|artificial intelligence)\\s+is\\s+(a\\s+)?(subset|part|type|branch|kind)\\s+of\\s+(ml|machine learning)\\b",
+         "flags": "i"
+        }
+       ]
+      },
+      {
+       "id": "same",
+       "label": "They are not the same thing",
+       "rx": [
+        {
+         "re": "\\b(same thing|no difference|are identical|exactly the same|interchangeabl)",
+         "flags": "i"
+        }
+       ]
+      }
+     ],
+     "hints": [
+      "Here is a hint. Think about which one is the bigger idea, and which one is a particular way of achieving it.",
+      "Another clue: machine learning systems are not given every rule. Where do they get their knowledge from?",
+      "Let me be more direct. AI is the broad field. Machine learning is one part of it, where the system learns patterns from examples. Can you put that in your own words?"
+     ],
+     "model": "Artificial intelligence is the broad field of making machines perform tasks that need human-like intelligence. Machine learning is a subset of AI in which systems learn patterns from data or examples instead of following rules that were all explicitly programmed.",
+     "reteach": "Let me explain it a different way. Imagine a university. AI is the whole university — every way of making machines act intelligently. Machine learning is one faculty inside it, the one where machines learn from examples. A chess program with hand-written rules is AI but not machine learning; a spam filter that learns from thousands of labelled emails is machine learning."
+    }
+   },
+   {
+    "id": "seg2",
+    "title": "How machine learning learns",
+    "slide": "pipeline",
+    "speech": [
+     "Let us look at how a machine learning system actually learns. It starts with training data — for example, thousands of emails, each already labelled spam or not spam.",
+     "The algorithm looks at the features of each example, such as words, sender and links, and adjusts a model so that its predictions match the labels as closely as possible.",
+     "This is called supervised learning, because the labels supervise the learning — they tell the model the correct answer during training.",
+     "Then we test the model on data it has never seen. If it only does well on its training data, we say it has overfitted."
+    ],
+    "simpler": [
+     "Simply put: we give the computer examples with the answers attached, like a worked answer key.",
+     "It practises on those examples, checks itself against the answers, and keeps adjusting until it gets most of them right.",
+     "Then we give it new questions without the answers, to see whether it really learnt the pattern."
+    ],
+    "checkpoint": {
+     "id": "cp2",
+     "mandatory": true,
+     "maxAttempts": 3,
+     "question": "In supervised learning, what do the labels in the training data provide to the model?",
+     "concepts": [
+      {
+       "id": "answer",
+       "label": "The correct output / answer for each example",
+       "required": true,
+       "rx": [
+        {
+         "re": "\\b(correct|right|true|expected|known|actual|target)\\b[^.]{0,25}\\b(answers?|outputs?|results?|values?|labels?|categor(y|ies)|class(es)?)\\b",
+         "flags": "i"
+        },
+        {
+         "re": "\\b(answer|output|target|ground truth)s?\\b",
+         "flags": "i"
+        },
+        {
+         "re": "\\b(tell|tells|show|shows|say|says)\\b[^.]{0,30}\\b(what|which|correct|right)\\b",
+         "flags": "i"
+        }
+       ]
+      },
+      {
+       "id": "compare",
+       "label": "Used to compare predictions and correct errors during training",
+       "required": false,
+       "rx": [
+        {
+         "re": "\\b(compare|check|measure|correct|adjust|error|mistake|feedback|learn from)\\w*\\b",
+         "flags": "i"
+        }
+       ]
+      },
+      {
+       "id": "mapping",
+       "label": "Pairs each input with its output so the model learns the mapping",
+       "required": false,
+       "rx": [
+        {
+         "re": "\\b(input|example|feature)s?\\b[^.]{0,40}\\b(output|label|answer|pair)",
+         "flags": "i"
+        },
+        {
+         "re": "\\bmapping\\b",
+         "flags": "i"
+        },
+        {
+         "re": "\\bpair(ed|s)?\\b",
+         "flags": "i"
+        }
+       ]
+      }
+     ],
+     "misconceptions": [
+      {
+       "id": "nolabel",
+       "label": "Labels are not used in unsupervised learning; supervised learning depends on them",
+       "rx": [
+        {
+         "re": "\\bno (labels?|answers?)\\b",
+         "flags": "i"
+        },
+        {
+         "re": "\\bwithout (labels?|answers?)\\b",
+         "flags": "i"
+        }
+       ]
+      }
+     ],
+     "hints": [
+      "Think of a worked answer key that a teacher gives a student. What does the key contain?",
+      "When the model makes a prediction during training, how does it know whether it was right?",
+      "Here is the core idea: each training example comes with the correct answer attached. What is the purpose of that?"
+     ],
+     "model": "The labels give the correct answer (target output) for each training example, so the model can compare its predictions with the right answers and adjust to reduce its errors.",
+     "reteach": "Another way to see it: a label is the answer written next to each practice question. During training the model makes a guess, looks at the label, sees how wrong it was, and adjusts. Without labels it would have nothing to check itself against."
+    }
+   },
+   {
+    "id": "seg3",
+    "title": "AI in practice — and its limits",
+    "slide": "apps",
+    "speech": [
+     "Machine learning is already at work in island economies like Mauritius — forecasting electricity demand, estimating sugar-cane yields from satellite images, flagging fraudulent card transactions, and predicting tourist arrivals.",
+     "But a model is only as good as its data. If the training data under-represents some people or situations, the model can be less accurate or unfair for them. That is what we call bias.",
+     "This is why responsible AI needs human oversight, transparent sources, and testing on data that reflects everyone the system will serve."
+    ],
+    "simpler": [
+     "In simple words: machine learning helps with real jobs, like predicting how much electricity people will use tomorrow.",
+     "But if we teach it with examples that leave some people out, it may make worse decisions for them.",
+     "So people must always check how these systems behave."
+    ],
+    "checkpoint": {
+     "id": "cp3",
+     "mandatory": false,
+     "maxAttempts": 2,
+     "question": "Optional check: give one risk of training a model on biased or unrepresentative data.",
+     "concepts": [
+      {
+       "id": "unfair",
+       "label": "Unfair or less accurate results for under-represented groups",
+       "required": true,
+       "rx": [
+        {
+         "re": "\\b(unfair|discriminat|bias(ed)?|inaccura|less accurate|wrong|worse|errors?|mistakes?|exclud|under-?represent|stereotyp)\\w*",
+         "flags": "i"
+        }
+       ]
+      }
+     ],
+     "misconceptions": [],
+     "hints": [
+      "Think about who might be left out of the data, and what happens when the model meets them."
+     ],
+     "model": "The model may be less accurate or unfair for groups that were under-represented in the training data, which can lead to discriminatory decisions.",
+     "reteach": "If a loan model only ever saw applicants from one region, it may misjudge applicants from other regions — that is the risk of biased data."
+    }
+   }
+  ],
+  "closing": [
+   "Excellent work today, {name}.",
+   "Let me summarise what we covered.",
+   "Artificial intelligence is the broad field; machine learning is the part of it where systems learn patterns from data; and supervised learning uses labelled examples so the model can check itself against the correct answers.",
+   "We also saw that biased data can make models unfair, which is why human oversight matters.",
+   "For revision, I recommend the short reading on AI in everyday services, and next we will continue with supervised learning in more depth. Well done."
+  ]
+ },
+ "VF_BASE": {
+  "sessionsStarted": 412,
+  "sessionsCompleted": 351,
+  "avgMin": 23.4,
+  "responseRate": 96.1,
+  "firstAttempt": 63.8,
+  "avgAttempts": 1.52,
+  "hintUse": 34.2,
+  "abandon": 8.7,
+  "techFail": 1.2,
+  "byWeek": [
+   {
+    "w": "W1",
+    "s": 38,
+    "c": 31
+   },
+   {
+    "w": "W2",
+    "s": 52,
+    "c": 44
+   },
+   {
+    "w": "W3",
+    "s": 61,
+    "c": 52
+   },
+   {
+    "w": "W4",
+    "s": 70,
+    "c": 60
+   },
+   {
+    "w": "W5",
+    "s": 88,
+    "c": 76
+   },
+   {
+    "w": "W6",
+    "s": 103,
+    "c": 88
+   }
+  ],
+  "byCheckpoint": [
+   {
+    "id": "cp1",
+    "label": "CP1 · AI vs ML",
+    "first": 58,
+    "attempts": 1.64,
+    "hint": 41
+   },
+   {
+    "id": "cp2",
+    "label": "CP2 · Role of labels",
+    "first": 66,
+    "attempts": 1.46,
+    "hint": 31
+   },
+   {
+    "id": "cp3",
+    "label": "CP3 · Bias risk (optional)",
+    "first": 79,
+    "attempts": 1.18,
+    "hint": 12
+   }
+  ],
+  "misconceptions": [
+   {
+    "label": "Treats AI and ML as the same thing",
+    "n": 64
+   },
+   {
+    "label": "Reverses the relationship (AI ⊂ ML)",
+    "n": 38
+   },
+   {
+    "label": "Thinks labels are the model’s predictions",
+    "n": 33
+   },
+   {
+    "label": "Omits “learning from data”",
+    "n": 52
+   },
+   {
+    "label": "Confuses bias with model error in general",
+    "n": 19
+   }
+  ],
+  "preQuiz": 48,
+  "postQuiz": 71,
+  "byAvatar": [
+   {
+    "id": "henri",
+    "s": 160,
+    "c": 140,
+    "first": 64
+   },
+   {
+    "id": "isabelle",
+    "s": 40,
+    "c": 35,
+    "first": 65
+   },
+   {
+    "id": "arjun",
+    "s": 52,
+    "c": 43,
+    "first": 61
+   },
+   {
+    "id": "nalini",
+    "s": 38,
+    "c": 31,
+    "first": 60
+   },
+   {
+    "id": "elena",
+    "s": 96,
+    "c": 81,
+    "first": 66
+   },
+   {
+    "id": "lucas",
+    "s": 26,
+    "c": 21,
+    "first": 62
+   }
+  ]
+ },
+ "AUDIT": [
+  {
+   "at": "2026-10-10 09:42",
+   "who": "Dr. Meera Lallchand",
+   "act": "Published lesson",
+   "obj": "HB-AI101 · L1 Virtual faculty lesson",
+   "k": "content"
+  },
+  {
+   "at": "2026-10-10 09:40",
+   "who": "Dr. Meera Lallchand",
+   "act": "Updated checkpoint policy",
+   "obj": "CP1 retry limit 2 → 3",
+   "k": "content"
+  },
+  {
+   "at": "2026-10-09 16:12",
+   "who": "Dr. Olivier Bastien",
+   "act": "Changed grade",
+   "obj": "HB-DS102 Lab 1 · Rohan Goolaub 31 → 34 (re-mark)",
+   "k": "grade"
+  },
+  {
+   "at": "2026-10-09 11:03",
+   "who": "Anil Seetohul",
+   "act": "Exported report",
+   "obj": "At-risk learner report (CSV)",
+   "k": "export"
+  },
+  {
+   "at": "2026-10-08 15:25",
+   "who": "Anil Seetohul",
+   "act": "Changed role",
+   "obj": "Dr. Sophie Laval → Lecturer (HB-SC120)",
+   "k": "access"
+  },
+  {
+   "at": "2026-10-08 10:10",
+   "who": "Ms. Farah Joomun",
+   "act": "Published grades",
+   "obj": "HB-MG210 Case analysis (42 students)",
+   "k": "grade"
+  },
+  {
+   "at": "2026-10-07 08:55",
+   "who": "System",
+   "act": "AI evaluation service degraded",
+   "obj": "3 checkpoint evaluations retried successfully",
+   "k": "system"
+  }
+ ],
+ "DEMO_STUDENT_IDS": [
+  "s1",
+  "s2",
+  "s4",
+  "s3"
+ ]
+}

@@ -1,0 +1,30 @@
+name: uom-learning
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    environment: { POSTGRES_USER: uom, POSTGRES_PASSWORD: "${DB_PASSWORD:-uom}", POSTGRES_DB: uom }
+    volumes: [ "pgdata:/var/lib/postgresql/data" ]
+    healthcheck: { test: ["CMD-SHELL", "pg_isready -U uom"], interval: 5s, retries: 20 }
+    restart: unless-stopped
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes: [ "redisdata:/data" ]
+    restart: unless-stopped
+  api:
+    build: ../backend
+    env_file: [ .env ]
+    environment:
+      DATABASE_URL: postgresql+asyncpg://uom:${DB_PASSWORD:-uom}@db:5432/uom
+      REDIS_URL: redis://redis:6379/0
+    volumes: [ "media:/data/media", "../assets:/app/assets:ro" ]
+    depends_on: { db: { condition: service_healthy }, redis: { condition: service_started } }
+    healthcheck: { test: ["CMD", "curl", "-fs", "http://localhost:8000/api/health"], interval: 15s, retries: 5 }
+    restart: unless-stopped
+  web:
+    build: ../frontend
+    ports: [ "${WEB_BIND:-127.0.0.1:8150}:80" ]
+    volumes: [ "media:/srv/media:ro", "../assets:/srv/assets:ro" ]
+    depends_on: [ api ]
+    restart: unless-stopped
+volumes: { pgdata: {}, redisdata: {}, media: {} }

@@ -24,7 +24,9 @@ async def my_course_ids(db: AsyncSession, user: User) -> list[str]:
 async def feed(db: AsyncSession = Depends(get_db), user: User = Depends(current_user)):
     cids = await my_course_ids(db, user)
     read = set((await db.execute(select(AnnouncementRead.announcement_id).where(AnnouncementRead.user_id == user.id))).scalars())
-    anns = (await db.execute(select(Announcement).where(Announcement.status == "published", or_(Announcement.scope == "university",
+    now_ = datetime.now(timezone.utc)
+    anns = (await db.execute(select(Announcement).where(Announcement.status == "published",
+            or_(Announcement.publish_at.is_(None), Announcement.publish_at <= now_), or_(Announcement.scope.in_(["uni", "university"]),
             Announcement.course_id.in_(cids), and_(Announcement.scope == "faculty", Announcement.faculty_id == user.faculty_id)))
             .order_by(Announcement.publish_at.desc()).limit(10))).scalars()
     out = [{"id": a.id, "kind": "news", "title": a.title, "body": a.body[:140], "at": (a.publish_at or a.created_at).isoformat(),
@@ -45,7 +47,7 @@ async def feed(db: AsyncSession = Depends(get_db), user: User = Depends(current_
 @router.post("/read-all")
 async def read_all(db: AsyncSession = Depends(get_db), user: User = Depends(current_user)):
     cids = await my_course_ids(db, user)
-    anns = (await db.execute(select(Announcement.id).where(or_(Announcement.scope == "university", Announcement.course_id.in_(cids))))).scalars()
+    anns = (await db.execute(select(Announcement.id).where(or_(Announcement.scope.in_(["uni", "university"]), Announcement.course_id.in_(cids))))).scalars()
     have = set((await db.execute(select(AnnouncementRead.announcement_id).where(AnnouncementRead.user_id == user.id))).scalars())
     for aid in anns:
         if aid not in have:

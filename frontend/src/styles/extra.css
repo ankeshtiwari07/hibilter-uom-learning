@@ -9,3 +9,8 @@ button.fcard{font:inherit;color:inherit;background:var(--surface)}
 .list .li:hover{background:color-mix(in srgb,var(--surface-2) 50%,transparent)}
 .link-btn{background:none;border:0;padding:0;color:var(--teal);cursor:pointer;font:inherit;text-decoration:underline}
 .stage .media{z-index:1}
+/* admin portal: hide secondary table columns on phones */
+@media (max-width:640px){.adm-hide-sm{display:none}}
+/* `.b.info` badges collide with the `.info` tooltip-dot class; restore badge geometry */
+.b.info{display:inline-flex;width:auto;height:auto;border:0;border-radius:20px;font-size:11.5px;cursor:inherit;place-items:normal}
+.b.info:hover::after,.b.info:focus::after{content:none}

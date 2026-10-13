@@ -24,6 +24,7 @@ services:
   render:
     build: ../backend
     command: ["python", "-m", "app.services.render_worker"]
+    cpus: "${RENDER_CPUS:-2}"   # CPU TTS shares the host with other products
     env_file: [ .env ]
     environment:
       DATABASE_URL: postgresql+asyncpg://uom:${DB_PASSWORD:-uom}@db:5432/uom

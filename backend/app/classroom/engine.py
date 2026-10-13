@@ -91,7 +91,8 @@ def teach(c: Ctx):
     if not sg:
         return complete(c)
     lines = sg["simpler"] if c.s.mode == "simpler" else sg["speech"]
-    c.speak(lines[c.s.sent:])
+    for i in range(c.s.sent, len(lines)):
+        c.say.append({"id": L.line_hash(c.avatar.id, lines[i]), "text": lines[i], "kind": "teach", "idx": i})
 
 
 def next_segment(c: Ctx, forced: bool = False):
@@ -145,7 +146,7 @@ async def do_answer(c: Ctx, text: str, idem: str | None, engine: str | None, fai
         if prev:
             c.extra["duplicate"] = True
             return
-    if c.s.state == "RETRY_OR_CONTINUE":
+    if c.s.state in ("RETRY_OR_CONTINUE", "QUESTION"):
         c.go("WAITING_FOR_ANSWER")
     c.go("EVALUATING")
     n = len(c.atts(cp["id"])) + 1
@@ -348,6 +349,7 @@ def snapshot(c: Ctx) -> dict:
                         "answer": last.answer, "n": last.n} if last else None,
         "can_continue": c.guard_ok(), "can_assist": max_reached and c.policy()["assisted"],
         "pending_answer": (s.hints or {}).get("_pending"),
+        "model_answer": cp["model"] if cp and max_reached else None,
         "say": c.say, **c.extra,
     }
 
@@ -371,6 +373,7 @@ async def act(db: AsyncSession, session_id: str, user: User, action: str, payloa
     if version is not None and version != c.s.version and action not in ("line_done",):
         raise Conflict(snapshot(c))
     await run_action(c, action, payload)
-    c.s.version += 1
+    if action != "line_done":
+        c.s.version += 1
     await db.commit()
     return snapshot(c)

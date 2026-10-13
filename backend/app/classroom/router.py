@@ -104,3 +104,98 @@ async def action(sid: str, body: ActionIn, db: AsyncSession = Depends(get_db), u
         snap = engine.snapshot(c)
         snap["blocked"] = e.msg
         return JSONResponse(status_code=422, content={"detail": e.msg, "session": snap})
+
+
+def public_lesson(lesson: Lesson, course_code: str | None) -> dict:
+    c = lesson.content
+    segs = []
+    for sg in c["segments"]:
+        cp = sg["checkpoint"]
+        segs.append({"id": sg["id"], "title": sg["title"], "slide": sg.get("slide"), "speech": sg["speech"],
+                     "checkpoint": {"id": cp["id"], "question": cp["question"], "mandatory": cp["mandatory"], "maxAttempts": cp["maxAttempts"],
+                                    "concepts": [{"id": x["id"], "label": x["label"], "required": bool(x.get("required"))} for x in cp["concepts"]],
+                                    "misconceptions": [{"id": m["id"], "label": m["label"]} for m in cp.get("misconceptions", [])],
+                                    "hint_count": len(cp["hints"])}})
+    return {"id": lesson.id, "course_id": lesson.course_id, "course_code": course_code, "title": lesson.title, "module": lesson.module,
+            "dur": c.get("dur", 25), "version": lesson.version, "objectives": c.get("objectives", []), "segments": segs,
+            "avatars": lesson.avatars, "policy": {"threshold": "required", "hints": True, "assisted": True, "simpler": True, **(lesson.policy or {})}}
+
+
+@router.get("/lessons/{lesson_id}")
+async def get_lesson(lesson_id: str, db: AsyncSession = Depends(get_db), user: User = Depends(current_user)):
+    from ..models import Course
+    lesson = await db.get(Lesson, lesson_id)
+    if not lesson or (lesson.status != "published" and user.role == "student"):
+        raise HTTPException(404, "Lesson not found")
+    course = await db.get(Course, lesson.course_id)
+    return public_lesson(lesson, course.code if course else None)
+
+
+@router.get("/lessons")
+async def list_lessons(db: AsyncSession = Depends(get_db), user: User = Depends(current_user)):
+    from ..models import Course
+    q = select(Lesson, Course).join(Course, Course.id == Lesson.course_id)
+    if user.role == "student":
+        q = q.join(Enrolment, Enrolment.course_id == Course.id).where(Enrolment.user_id == user.id, Lesson.status == "published")
+    elif user.role == "lecturer":
+        q = q.where(Course.lecturer_id == user.id)
+    rows = (await db.execute(q)).all()
+    out = []
+    for l, c in rows:
+        last = (await db.execute(select(VFSession).where(VFSession.user_id == user.id, VFSession.lesson_id == l.id).order_by(VFSession.updated_at.desc()))).scalars().first()
+        out.append({"id": l.id, "title": l.title, "module": l.module, "course_id": c.id, "course_code": c.code, "course_title": c.title,
+                    "dur": l.content.get("dur", 25), "status": l.status, "version": l.version, "avatars": l.avatars,
+                    "checkpoints": len(l.content["segments"]),
+                    "my_status": last.status if last else None, "my_seg": last.seg if last else None})
+    return out
+
+
+class AskIn(BaseModel):
+    q: str = Field(min_length=1, max_length=500)
+
+
+@router.post("/sessions/{sid}/ask")
+async def ask(sid: str, body: AskIn, db: AsyncSession = Depends(get_db), user: User = Depends(current_user)):
+    from ..services.assistant import side_answer
+    try:
+        c = await engine.load(db, sid, user)
+    except LookupError:
+        raise HTTPException(404, "Session not found")
+    res = await side_answer(db, c, body.q)
+    c.event("side_question", q=body.q[:200], grounded=res["grounded"], engine=res["engine"])
+    await db.commit()
+    from .lines import SIDE_AI, line_hash
+    say_lines = SIDE_AI if res["engine"] == "claude" else [res["answer"]]
+    res["say"] = [{"id": line_hash(c.avatar.id, t), "text": t, "kind": "speech"} for t in say_lines]
+    return res
+
+
+@router.get("/media/{avatar_id}")
+async def media_manifest(avatar_id: str, lesson_id: str | None = None, db: AsyncSession = Depends(get_db), user: User = Depends(current_user)):
+    from ..models import MediaClip
+    rows = (await db.execute(select(MediaClip).where(MediaClip.avatar_id == avatar_id, MediaClip.status.in_(["audio", "ready"])))).scalars()
+    return {r.hash: {"audio_url": r.audio_url, "video_url": r.video_url if r.status == "ready" else None, "envelope": r.envelope,
+                     "duration": r.duration} for r in rows}
+
+
+@router.get("/sessions/{sid}/summary")
+async def summary(sid: str, db: AsyncSession = Depends(get_db), user: User = Depends(current_user)):
+    from ..models import Module
+    try:
+        c = await engine.load(db, sid, user)
+    except LookupError:
+        raise HTTPException(404, "Session not found")
+    rows = []
+    for sg in c.segs:
+        cp = sg["checkpoint"]
+        a = c.atts(cp["id"])
+        outcome = (c.s.outcome or {}).get(cp["id"]) or ("passed" if a and a[-1].verdict == "correct" else "open")
+        rows.append({"id": cp["id"], "question": cp["question"], "attempts": len(a), "first": a[0].verdict if a else None,
+                     "final": a[-1].verdict if a else None, "hints": (c.s.hints or {}).get(cp["id"], 0), "outcome": outcome,
+                     "concepts": "; ".join(x["label"] for x in cp["concepts"] if x.get("required"))})
+    mods = (await db.execute(select(Module).where(Module.course_id == c.lesson.course_id).order_by(Module.ord))).scalars().all()
+    items = [dict(it, module=m.title) for m in mods for it in (m.items or [])]
+    idx = next((i for i, it in enumerate(items) if it.get("id") == c.lesson.id), -1)
+    nxt = [it for it in items[idx + 1: idx + 3]] if idx >= 0 else []
+    return {"checkpoints": rows, "status": c.s.status, "next": nxt,
+            "minutes": max(1, int(((c.s.ended_at or c.s.updated_at) - (c.s.started_at or c.s.created_at)).total_seconds() // 60)) if c.s.started_at else 0}

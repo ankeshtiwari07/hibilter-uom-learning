@@ -99,3 +99,13 @@ async def prefs(body: dict, db: AsyncSession = Depends(get_db), user: User = Dep
     user.prefs = {**(user.prefs or {}), **{k: v for k, v in body.items() if k in allowed}}
     await db.commit()
     return user.prefs
+
+
+@router.get("/demo-accounts")
+async def demo_accounts():
+    import os
+    if os.environ.get("DEMO_MODE", "1") != "1":
+        return {"enabled": False}
+    return {"enabled": True, "password": os.environ.get("SEED_PASSWORD", "Demo-UoM-2026!"),
+            "accounts": {"student": "sagar.ramdin@demo.student.example", "lecturer": "m.lallchand@demo.uom.example",
+                         "admin": "admin@demo.uom.example"}}

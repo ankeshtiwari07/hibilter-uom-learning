@@ -12,6 +12,7 @@ from .classroom.router import router as vf_router
 from .core.config import get_settings
 from .core.db import engine
 from .routers.auth import router as auth_router
+from .routers.notifications import router as notif_router
 
 log = logging.getLogger("uom")
 REQS = Counter("http_requests_total", "Requests", ["method", "route", "status"])
@@ -55,3 +56,20 @@ async def metrics():
 
 app.include_router(auth_router)
 app.include_router(vf_router)
+app.include_router(notif_router)
+
+# Auto-register every other router module in app/routers (one module per feature area).
+import importlib
+import pkgutil
+
+from . import routers as _routers_pkg
+
+for _m in pkgutil.iter_modules(_routers_pkg.__path__):
+    if _m.name in ("auth", "notifications") or _m.name.startswith("_"):
+        continue
+    try:
+        _mod = importlib.import_module(f".routers.{_m.name}", __package__)
+        if hasattr(_mod, "router"):
+            app.include_router(_mod.router)
+    except Exception:  # a broken feature module must not take the whole API down
+        log.exception("router %s failed to load", _m.name)

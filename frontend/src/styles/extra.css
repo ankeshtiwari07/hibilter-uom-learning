@@ -1,0 +1,11 @@
+/* Additions on top of the concept-demo design system */
+.sr:focus{position:fixed;left:12px;top:12px;width:auto;height:auto;clip:auto;z-index:300;background:var(--surface);padding:8px 12px;border-radius:8px;border:1px solid var(--teal)}
+.app{min-height:100vh}
+.side{top:0;height:100vh}
+.top{top:0}
+.fcard.sel,.fcard:hover{border-color:var(--teal)}
+button.fcard{font:inherit;color:inherit;background:var(--surface)}
+.page:focus{outline:none}
+.list .li:hover{background:color-mix(in srgb,var(--surface-2) 50%,transparent)}
+.link-btn{background:none;border:0;padding:0;color:var(--teal);cursor:pointer;font:inherit;text-decoration:underline}
+.stage .media{z-index:1}

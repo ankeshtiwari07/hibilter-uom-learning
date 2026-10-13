@@ -49,7 +49,8 @@ PORTRAITS = {"henri": ("henri.png", None), "isabelle": ("isabelle.png", None), "
 def dt(d: str, t: str | None = None) -> datetime:
     if "T" in d:
         d, t = d.split("T")
-    base = datetime.fromisoformat(f"{d}T{(t or '09:00')[:5]}:00").replace(tzinfo=timezone.utc)
+    # demo times are Mauritius local time (UTC+4)
+    base = datetime.fromisoformat(f"{d}T{(t or '09:00')[:5]}:00").replace(tzinfo=timezone(timedelta(hours=4)))
     return base + SHIFT
 
 
@@ -133,7 +134,7 @@ async def seed(reset_passwords: bool = False):
             db.add(Submission(assessment_id=sb["as"], user_id=sb["st"], attempt=1, file_name=sb.get("file"),
                               submitted_at=dt(*at.split(" ")) if at else None,
                               score=sb.get("mark"), feedback=sb.get("fb"),
-                              status="graded" if sb.get("mark") is not None else ("submitted" if at else "draft"),
+                              status="published" if sb.get("mark") is not None else ("submitted" if at else "draft"),
                               answers={"words": sb.get("words")}))
         for n in DATA["ANNOUNCEMENTS"]:
             db.add(Announcement(id=n["id"], scope=n["scope"], course_id=n.get("course"), title=n["title"], body=n["body"],

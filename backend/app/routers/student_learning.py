@@ -159,6 +159,8 @@ async def dashboard(db: AsyncSession = Depends(get_db), user: User = Depends(stu
 
 async def recommendations(db: AsyncSession, user: User, st: dict, courses: dict, deadlines: list) -> list[dict]:
     """Explainable, rule-based suggestions. Each one carries the reason it is shown."""
+    if ((user.prefs or {}).get("privacy") or {}).get("analytics") is False:
+        return []  # student opted out of activity-based recommendations
     out = []
     # 1. concepts missed in virtual-faculty checkpoints
     sids = {s.id: s for s in st["vf"].values()}
@@ -276,7 +278,7 @@ async def course_detail(course_id: str, db: AsyncSession = Depends(get_db), user
     assess = []
     for a in sorted(st["assessments"], key=lambda a: (a.due is None, a.due)):
         s = subs.get(a.id)
-        status = ("graded" if s and s.status in GRADED else "submitted" if s and s.status == "submitted" else
+        status = ("graded" if s and s.status in GRADED else "submitted" if s and s.status in ("submitted", "graded") else
                   "closed" if a.due and a.due < now() else "open" if a.type in ("quiz", "assignment", "lab") else "upcoming")
         assess.append({"id": a.id, "title": a.title, "type": a.type, "weight": a.weight, "due": iso(a.due), "status": status,
                        "score": s.score if s and s.status in GRADED else None, "max": a.max_score,
@@ -351,7 +353,7 @@ async def lesson_item(course_id: str, item_id: str, db: AsyncSession = Depends(g
             "presenter": raw.get("presenter") or demo.get("presenter") or (lec[c.lecturer_id].name if c.lecturer_id in lec else None),
             "objectives": raw.get("objectives") or demo.get("objectives") or [],
             "transcript": raw.get("transcript") or demo.get("transcript") or [],
-            "chips": demo.get("chips") or [f"Explain {it['title'].split(':')[-1].strip()} simply", "Give me 3 revision questions"],
+            "chips": demo.get("chips") or [f"Explain “{it['title'].split(':')[-1].strip()}” simply", "Give me 3 revision questions"],
             "prev": nav[j - 1] if j > 0 else None, "next": nav[j + 1] if 0 <= j < len(nav) - 1 else None,
             "notes": [{"id": n.id, "kind": (n.payload or {}).get("kind", "note"), "text": (n.payload or {}).get("text", ""), "t": (n.payload or {}).get("t"),
                        "at": iso(n.ts)} for n in notes if (n.payload or {}).get("item_id") == item_id],
@@ -434,7 +436,7 @@ async def progress(db: AsyncSession = Depends(get_db), user: User = Depends(stud
         if s.status in GRADED and s.score is not None:
             scores.append({**row, "score": s.score, "pct": round(100 * s.score / (a.max_score or 100)), "marked_by": "auto" if a.type == "quiz" and not s.graded_by else "lecturer"})
         else:
-            pending.append({**row, "status": s.status})
+            pending.append({**row, "status": "submitted"})
     best: dict[str, dict] = {}
     for r in scores:  # best attempt per assessment
         if r["id"] not in best or r["pct"] > best[r["id"]]["pct"]:
@@ -530,7 +532,7 @@ async def progress(db: AsyncSession = Depends(get_db), user: User = Depends(stud
     timeline = []
     for s, a in all_subs:
         timeline.append({"at": iso(s.submitted_at or s.created_at), "kind": "g" if s.status in GRADED else "",
-                         "text": f"{'Submitted' if s.status == 'submitted' else 'Marked'} {a.title}" + (f" · {s.score:g}/{a.max_score}" if s.status in GRADED and s.score is not None else "")})
+                         "text": f"{'Marked' if s.status in GRADED else 'Submitted'} {a.title}" + (f" · {s.score:g}/{a.max_score}" if s.status in GRADED and s.score is not None else "")})
     for x in vf:
         timeline.append({"at": x["at"], "kind": "" if x["status"] == "completed" else "n",
                          "text": f"{'Completed' if x['status'] == 'completed' else 'Started'} virtual lesson with {x['avatar_short'] or x['avatar']}"})

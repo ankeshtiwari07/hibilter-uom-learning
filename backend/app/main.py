@@ -20,6 +20,8 @@ LAT = Histogram("http_request_seconds", "Latency", ["route"])
 
 app = FastAPI(title="UoM Learning API", version="0.1.0", docs_url="/api/docs", openapi_url="/api/openapi.json")
 s = get_settings()
+if s.env == "production" and (s.jwt_secret.startswith("change-me") or len(s.jwt_secret) < 32):
+    raise RuntimeError("JWT_SECRET must be set to a strong random value (≥32 chars) in production")
 if s.cors_origins:
     app.add_middleware(CORSMiddleware, allow_origins=s.cors_origins.split(","), allow_credentials=True,
                        allow_methods=["*"], allow_headers=["*"])

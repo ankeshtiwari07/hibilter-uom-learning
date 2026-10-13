@@ -12,7 +12,8 @@ from ..models import (Announcement, Assessment, Course, Enrolment, Event, Lesson
                       VFSession)
 
 DONE_SUB = ("submitted", "graded", "published")
-GRADED = ("graded", "published")
+GRADED = ("published",)  # marks/feedback are visible to students only once published
+LOCKED = ("graded", "published")  # lecturer has started (or finished) marking: no more changes
 UNI_SCOPES = ("uni", "university")
 
 
@@ -48,7 +49,7 @@ async def require_enrolled(db: AsyncSession, user: User, course_id: str) -> tupl
 def visible_announcements(user: User, course_ids: list[str]):
     """SQL condition for announcements a student may see."""
     t = now()
-    return and_(Announcement.status == "published", or_(Announcement.publish_at.is_(None), Announcement.publish_at <= t),
+    return and_(Announcement.status.in_(("published", "scheduled")), or_(Announcement.publish_at.is_(None), Announcement.publish_at <= t),
                 or_(Announcement.scope.in_(UNI_SCOPES), Announcement.course_id.in_(course_ids or ["-"]),
                     and_(Announcement.scope == "faculty", Announcement.faculty_id == user.faculty_id)))
 

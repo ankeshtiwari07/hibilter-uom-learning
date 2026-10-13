@@ -22,7 +22,7 @@ from ..core.config import get_settings
 from ..core.db import get_db
 from ..core.deps import require
 from ..models import Assessment, Course, Submission, User
-from ._student_util import DONE_SUB, GRADED, enrolled_ids, iso, now, staff_names, sync_progress
+from ._student_util import DONE_SUB, GRADED, LOCKED, enrolled_ids, iso, now, staff_names, sync_progress
 
 router = APIRouter(prefix="/api/student", tags=["student"])
 student = require("student")
@@ -57,6 +57,7 @@ def _assign_state(a: Assessment, s: Submission | None) -> dict:
     closed = bool(a.due and t > a.due)
     submitted = bool(s and s.status in DONE_SUB)
     graded = bool(s and s.status in GRADED)
+    locked = bool(s and s.status in LOCKED)
     if graded:
         status = "graded"
     elif submitted:
@@ -67,7 +68,7 @@ def _assign_state(a: Assessment, s: Submission | None) -> dict:
         status = "draft"
     else:
         status = "not_submitted"
-    can = not graded and ((not closed) or (allow_late and not submitted))
+    can = not locked and ((not closed) or (allow_late and not submitted))
     return {"status": status, "can_submit": can, "closed": closed, "late_window": closed and can}
 
 
@@ -138,8 +139,8 @@ async def _get_or_create(db: AsyncSession, user: User, a: Assessment) -> Submiss
 async def assignment_draft(aid: str, body: DraftIn, db: AsyncSession = Depends(get_db), user: User = Depends(student)):
     a, _ = await _assessment(db, user, aid, ("assignment", "lab"))
     s = await _get_or_create(db, user, a)
-    if s.status in GRADED:
-        raise HTTPException(409, "This assignment has been marked; it can’t be changed.")
+    if s.status in LOCKED:
+        raise HTTPException(409, "This assignment is being marked; it can’t be changed.")
     s.answers = {**_ans(s), "draft": body.text, "draft_at": iso(now())}
     await db.commit()
     return {"ok": True, "at": s.answers["draft_at"]}
@@ -181,7 +182,7 @@ async def assignment_submit(aid: str, declaration: bool = Form(False), text: str
         return {"receipt": ans.get("receipt"), "submitted_at": iso(s.submitted_at), "late": s.late, "duplicate": True}
     st = _assign_state(a, s)
     if not st["can_submit"]:
-        raise HTTPException(409, "This assignment has been marked." if st["status"] == "graded" else "The deadline has passed; resubmission is closed.")
+        raise HTTPException(409, "This assignment is being marked; it can’t be changed." if s.status in LOCKED else "The deadline has passed; resubmission is closed.")
     if not declaration:
         raise HTTPException(422, "Tick the declaration to confirm the work is your own.")
     text = (text or "").strip()
@@ -290,6 +291,9 @@ def _score(a: Assessment, sel: dict[str, int]) -> tuple[list[bool], int, float]:
 
 def _result(a: Assessment, s: Submission) -> dict:
     ans = _ans(s)
+    if s.status not in GRADED:  # lecturer is re-marking: hide score until published
+        return {"attempt": s.attempt, "score": None, "max": a.max_score, "correct": None, "total": len(a.questions or []), "pct": None,
+                "submitted_at": iso(s.submitted_at), "late": s.late, "minutes": None, "auto": False, "status": "submitted"}
     sel = ans.get("sel") or {}
     res = ans.get("result") or _score(a, sel)[0]
     started = datetime.fromisoformat(ans["started_at"]) if ans.get("started_at") else s.created_at
@@ -310,7 +314,7 @@ async def _finalize(db: AsyncSession, user: User, a: Assessment, s: Submission, 
     dl = _deadline(a, s)
     s.submitted_at = min(t, dl + GRACE) if auto and dl else t
     s.late = bool(a.due and s.submitted_at > a.due + GRACE)
-    s.score, s.status = score, "graded"
+    s.score, s.status = score, "published"  # objective auto-score from the lecturer’s key is released immediately
     s.answers = {**ans, "result": res, "correct": correct, "auto_submitted": auto}
     await db.flush()
     await sync_progress(db, user, a.course_id)
@@ -331,7 +335,7 @@ def _quiz_summary(a: Assessment, c: Course, subs: list[Submission]) -> dict:
     st = _settings(a)
     done = [s for s in subs if s.status in DONE_SUB]
     draft = next((s for s in subs if s.status == "draft"), None)
-    best = max(done, key=lambda s: s.score or 0, default=None)
+    best = max([s for s in done if s.status in GRADED], key=lambda s: s.score or 0, default=None)
     closed = bool(a.due and now() > a.due)
     return {"id": a.id, "title": a.title, "course_id": c.id, "course_code": c.code, "course_title": c.title, "due": iso(a.due),
             "weight": a.weight, "max": a.max_score, "questions": len(a.questions or []), "time_limit": st["time_limit"],

@@ -1,0 +1,1511 @@
+{
+ "course": "c1",
+ "presenter": "henri",
+ "modules": [
+  {
+   "id": "m1",
+   "title": "Module 1 · Foundations of AI",
+   "items": [
+    {
+     "id": "L1",
+     "type": "virtual",
+     "title": "Understanding Artificial Intelligence and Machine Learning",
+     "dur": 25,
+     "objectives": [
+      "Distinguish artificial intelligence, machine learning and deep learning",
+      "Explain how supervised learning uses labelled data to train a model",
+      "Identify how biased or unrepresentative data can make AI unfair"
+     ],
+     "chips": [
+      "Is deep learning the same as machine learning?",
+      "Why do we test a model on data it has never seen?",
+      "How can a model become biased if nobody intends it?"
+     ],
+     "lesson": {
+      "summary": [
+       "AI is the broad field; machine learning is the part where systems learn patterns from data; deep learning sits inside ML",
+       "Supervised learning uses labelled examples so the model can check its predictions against the correct answers",
+       "Biased or unrepresentative data can make models unfair, so human oversight matters"
+      ],
+      "segments": [
+       {
+        "id": "seg1",
+        "title": "What is artificial intelligence?",
+        "slide": {
+         "kind": "cards",
+         "heading": "AI, machine learning and deep learning",
+         "cards": [
+          {
+           "label": "Artificial intelligence",
+           "text": "The broad field: machines doing tasks that need human-like intelligence"
+          },
+          {
+           "label": "Machine learning",
+           "text": "Inside AI: systems that learn patterns from data, not hand-written rules"
+          },
+          {
+           "label": "Deep learning",
+           "text": "Inside machine learning: large neural networks for speech, images and language"
+          }
+         ],
+         "note": {
+          "tone": "info",
+          "text": "Picture three nested circles: AI contains ML, and ML contains deep learning"
+         }
+        },
+        "speech": [
+         "Artificial intelligence is the broad field of building computer systems that perform tasks we normally associate with human intelligence — understanding language, recognising images, making decisions, or planning.",
+         "Machine learning sits inside that field. Instead of a programmer writing every rule by hand, a machine learning system learns patterns from examples — from data.",
+         "And deep learning sits inside machine learning: it uses large neural networks, and it powers things like speech recognition and modern language models.",
+         "So you can picture three circles, one inside the other: AI, then machine learning, then deep learning."
+        ],
+        "simpler": [
+         "Let me put it more simply. AI is the big idea: computers doing clever things that usually need a person.",
+         "Machine learning is one way of doing AI. We show the computer lots of examples, and it works out the pattern by itself.",
+         "Think of how you learnt to recognise a mango — nobody gave you a rulebook; you saw many mangoes. Machine learning works in a similar way."
+        ],
+        "checkpoint": {
+         "id": "cp1",
+         "mandatory": true,
+         "maxAttempts": 3,
+         "question": "Can you tell me the difference between artificial intelligence and machine learning?",
+         "concepts": [
+          {
+           "id": "subset",
+           "label": "Machine learning is a subset (part) of AI",
+           "required": true,
+           "rx": [
+            {
+             "re": "\\b(ml|machine[- ]learning)\\b[^.]{0,60}\\b(subset|sub-?field|part|branch|type|kind|form|subcategory|component|area|way|method|approach|technique)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(subset|sub-?field|part|branch|type|kind|form|subcategory|area)\\s+of\\s+(ai|artificial intelligence)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(ai|artificial intelligence)\\b[^.]{0,40}\\b(includes|contains|encompasses|covers|broader|bigger|wider|umbrella|overall)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(broad(er)?|bigger|wider|umbrella|general)\\b[^.]{0,30}\\b(field|term|concept|idea|area)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\binside\\s+(ai|artificial)",
+             "flags": "i"
+            }
+           ],
+           "ask": "how machine learning relates to AI as a whole"
+          },
+          {
+           "id": "data",
+           "label": "ML learns patterns from data or examples",
+           "required": true,
+           "rx": [
+            {
+             "re": "\\b(learn|learns|learning|learnt|learned|trained|train|training)\\b[^.]{0,50}\\b(data|examples?|patterns?|experience|datasets?)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(data|examples?|patterns?|experience)\\b[^.]{0,40}\\b(learn|learns|train|improve)",
+             "flags": "i"
+            },
+            {
+             "re": "\\bfrom (the )?data\\b",
+             "flags": "i"
+            }
+           ],
+           "ask": "where a machine learning system gets its knowledge from"
+          },
+          {
+           "id": "rules",
+           "label": "Without every rule being explicitly programmed",
+           "required": false,
+           "rx": [
+            {
+             "re": "\\b(without|instead of|rather than|not)\\b[^.]{0,40}\\b(explicit(ly)?|hand[- ]?(written|coded)|programm(ed|ing)|rules?|coded)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\bexplicit(ly)? program",
+             "flags": "i"
+            }
+           ],
+           "ask": "how this differs from a programmer writing every rule"
+          },
+          {
+           "id": "aidef",
+           "label": "AI = systems performing tasks that need human-like intelligence",
+           "required": false,
+           "rx": [
+            {
+             "re": "\\b(human|intelligen|think|mimic|imitat|simulat|smart)\\w*\\b[^.]{0,60}\\b(task|behaviou?r|machine|computer|system)s?\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(machine|computer|system)s?\\b[^.]{0,60}\\b(human|intelligen|think|mimic|imitat|simulat)",
+             "flags": "i"
+            }
+           ],
+           "ask": "what AI as a field tries to do"
+          }
+         ],
+         "misconceptions": [
+          {
+           "id": "reversed",
+           "label": "Reversed relationship — AI is not a subset of ML",
+           "rx": [
+            {
+             "re": "\\b(ai|artificial intelligence)\\s+is\\s+(a\\s+)?(subset|part|type|branch|kind)\\s+of\\s+(ml|machine learning)\\b",
+             "flags": "i"
+            }
+           ]
+          },
+          {
+           "id": "same",
+           "label": "They are not the same thing",
+           "rx": [
+            {
+             "re": "\\b(same thing|no difference|are identical|exactly the same|interchangeabl)",
+             "flags": "i"
+            }
+           ]
+          }
+         ],
+         "hints": [
+          "Here is a hint. Think about which one is the bigger idea, and which one is a particular way of achieving it.",
+          "Another clue: machine learning systems are not given every rule. Where do they get their knowledge from?",
+          "Let me be more direct. AI is the broad field. Machine learning is one part of it, where the system learns patterns from examples. Can you put that in your own words?"
+         ],
+         "model": "Artificial intelligence is the broad field of making machines perform tasks that need human-like intelligence. Machine learning is a subset of AI in which systems learn patterns from data or examples instead of following rules that were all explicitly programmed.",
+         "reteach": "Let me explain it a different way. Imagine a university. AI is the whole university — every way of making machines act intelligently. Machine learning is one faculty inside it, the one where machines learn from examples. A chess program with hand-written rules is AI but not machine learning; a spam filter that learns from thousands of labelled emails is machine learning.",
+         "ack": "Exactly: AI is the broad field, and machine learning is the part of it where systems learn patterns from data.",
+         "calibration": [
+          {
+           "answer": "AI is the broad field of making machines act smart, and machine learning is a subset of AI where the computer learns patterns from data.",
+           "expected": "correct"
+          },
+          {
+           "answer": "ml is one part of ai, it learns from examples instead of being programmed with rules",
+           "expected": "correct"
+          },
+          {
+           "answer": "Artificial intelligence is the bigger umbrella term. Machine learning is a branch of it that trains on data",
+           "expected": "correct"
+          },
+          {
+           "answer": "machine learning is a type of AI where the system gets trained using lots of data, AI is more general",
+           "expected": "correct"
+          },
+          {
+           "answer": "AI is broader, ML is just a part of it",
+           "expected": "partial"
+          },
+          {
+           "answer": "machine learning means the computer learns from data instead of explicit rules",
+           "expected": "partial"
+          },
+          {
+           "answer": "AI is about computers doing smart human tasks, ML learns from data",
+           "expected": "partial"
+          },
+          {
+           "answer": "AI is a subset of machine learning.",
+           "expected": "incorrect"
+          },
+          {
+           "answer": "they are basically the same thing, both are about robots",
+           "expected": "incorrect"
+          },
+          {
+           "answer": "idk tbh",
+           "expected": "unclear"
+          }
+         ]
+        }
+       },
+       {
+        "id": "seg2",
+        "title": "How machine learning learns",
+        "slide": {
+         "kind": "steps",
+         "heading": "How supervised learning works",
+         "steps": [
+          {
+           "title": "Labelled data",
+           "sub": "Examples with the correct answer, e.g. spam or not spam"
+          },
+          {
+           "title": "Training",
+           "sub": "The algorithm adjusts the model to match the labels"
+          },
+          {
+           "title": "Model",
+           "sub": "The learnt pattern, tested on data it has never seen"
+          },
+          {
+           "title": "Prediction",
+           "sub": "The model labels new, unseen examples"
+          }
+         ]
+        },
+        "speech": [
+         "Let us look at how a machine learning system actually learns. It starts with training data — for example, thousands of emails, each already labelled spam or not spam.",
+         "The algorithm looks at the features of each example, such as words, sender and links, and adjusts a model so that its predictions match the labels as closely as possible.",
+         "This is called supervised learning, because the labels supervise the learning — they tell the model the correct answer during training.",
+         "Then we test the model on data it has never seen. If it only does well on its training data, we say it has overfitted."
+        ],
+        "simpler": [
+         "Simply put: we give the computer examples with the answers attached, like a worked answer key.",
+         "It practises on those examples, checks itself against the answers, and keeps adjusting until it gets most of them right.",
+         "Then we give it new questions without the answers, to see whether it really learnt the pattern."
+        ],
+        "checkpoint": {
+         "id": "cp2",
+         "mandatory": true,
+         "maxAttempts": 3,
+         "question": "In supervised learning, what do the labels in the training data provide to the model?",
+         "concepts": [
+          {
+           "id": "answer",
+           "label": "The correct output / answer for each example",
+           "required": true,
+           "rx": [
+            {
+             "re": "\\b(correct|right|true|expected|known|actual|target)\\b[^.]{0,25}\\b(answers?|outputs?|results?|values?|labels?|categor(y|ies)|class(es)?)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(answer|output|target|ground truth)s?\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(tell|tells|show|shows|say|says)\\b[^.]{0,30}\\b(what|which|correct|right)\\b",
+             "flags": "i"
+            }
+           ],
+           "ask": "what information each label actually contains"
+          },
+          {
+           "id": "compare",
+           "label": "Used to compare predictions and correct errors during training",
+           "required": false,
+           "rx": [
+            {
+             "re": "\\b(compare|check|measure|correct|adjust|error|mistake|feedback|learn from)\\w*\\b",
+             "flags": "i"
+            }
+           ],
+           "ask": "how the model uses that information while training"
+          },
+          {
+           "id": "mapping",
+           "label": "Pairs each input with its output so the model learns the mapping",
+           "required": false,
+           "rx": [
+            {
+             "re": "\\b(input|example|feature)s?\\b[^.]{0,40}\\b(output|label|answer|pair)",
+             "flags": "i"
+            },
+            {
+             "re": "\\bmapping\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\bpair(ed|s)?\\b",
+             "flags": "i"
+            }
+           ],
+           "ask": "how inputs and labels are paired"
+          }
+         ],
+         "misconceptions": [
+          {
+           "id": "nolabel",
+           "label": "Labels are not used in unsupervised learning; supervised learning depends on them",
+           "rx": [
+            {
+             "re": "\\bno (labels?|answers?)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\bwithout (labels?|answers?)\\b",
+             "flags": "i"
+            }
+           ]
+          }
+         ],
+         "hints": [
+          "Think of a worked answer key that a teacher gives a student. What does the key contain?",
+          "When the model makes a prediction during training, how does it know whether it was right?",
+          "Here is the core idea: each training example comes with the correct answer attached. What is the purpose of that?"
+         ],
+         "model": "The labels give the correct answer (target output) for each training example, so the model can compare its predictions with the right answers and adjust to reduce its errors.",
+         "reteach": "Another way to see it: a label is the answer written next to each practice question. During training the model makes a guess, looks at the label, sees how wrong it was, and adjusts. Without labels it would have nothing to check itself against.",
+         "ack": "That's right: each label is the correct answer for its example, so the model can compare its predictions and correct its errors.",
+         "calibration": [
+          {
+           "answer": "They give the correct answer for each example so the model can check its predictions",
+           "expected": "correct"
+          },
+          {
+           "answer": "labels tell the model what the right output is",
+           "expected": "correct"
+          },
+          {
+           "answer": "the target value, like spam or not spam, for every training email",
+           "expected": "correct"
+          },
+          {
+           "answer": "the known answers, so it can compare its guess and fix its mistakes",
+           "expected": "correct"
+          },
+          {
+           "answer": "they help the model adjust itself and reduce error",
+           "expected": "partial"
+          },
+          {
+           "answer": "each input is paired with a label",
+           "expected": "partial"
+          },
+          {
+           "answer": "feedback so it can learn from its mistakes",
+           "expected": "partial"
+          },
+          {
+           "answer": "labels give the model more data so it runs faster",
+           "expected": "incorrect"
+          },
+          {
+           "answer": "it groups the data into clusters by itself without labels",
+           "expected": "incorrect"
+          },
+          {
+           "answer": "not sure",
+           "expected": "unclear"
+          }
+         ]
+        }
+       },
+       {
+        "id": "seg3",
+        "title": "AI in practice — and its limits",
+        "slide": {
+         "kind": "cards",
+         "heading": "Machine learning at work in Mauritius",
+         "cards": [
+          {
+           "label": "Energy",
+           "text": "Forecasting tomorrow's electricity demand on the grid"
+          },
+          {
+           "label": "Agriculture",
+           "text": "Estimating sugar-cane yields from satellite images"
+          },
+          {
+           "label": "Finance",
+           "text": "Flagging fraudulent card transactions"
+          },
+          {
+           "label": "Tourism",
+           "text": "Predicting tourist arrivals for the coming season"
+          }
+         ],
+         "note": {
+          "tone": "warn",
+          "text": "Biased or unrepresentative data can make models less accurate or unfair for some people"
+         }
+        },
+        "speech": [
+         "Machine learning is already at work in island economies like Mauritius — forecasting electricity demand, estimating sugar-cane yields from satellite images, flagging fraudulent card transactions, and predicting tourist arrivals.",
+         "But a model is only as good as its data. If the training data under-represents some people or situations, the model can be less accurate or unfair for them. That is what we call bias.",
+         "This is why responsible AI needs human oversight, transparent sources, and testing on data that reflects everyone the system will serve."
+        ],
+        "simpler": [
+         "In simple words: machine learning helps with real jobs, like predicting how much electricity people will use tomorrow.",
+         "But if we teach it with examples that leave some people out, it may make worse decisions for them.",
+         "So people must always check how these systems behave."
+        ],
+        "checkpoint": {
+         "id": "cp3",
+         "mandatory": false,
+         "maxAttempts": 2,
+         "question": "Optional check: give one risk of training a model on biased or unrepresentative data.",
+         "concepts": [
+          {
+           "id": "unfair",
+           "label": "Unfair or less accurate results for under-represented groups",
+           "required": true,
+           "rx": [
+            {
+             "re": "\\b(unfair|discriminat|bias(ed)?|inaccura|less accurate|wrong|worse|errors?|mistakes?|exclud|under-?represent|stereotyp)\\w*",
+             "flags": "i"
+            }
+           ],
+           "ask": "what could happen to people who are under-represented"
+          },
+          {
+           "id": "oversight",
+           "label": "Mitigation: test on representative data or keep human oversight",
+           "required": false,
+           "rx": [
+            {
+             "re": "\\b(human|people|person|someone|experts?)\\w*\\b[^.]{0,40}\\b(check|review|oversee|oversight|monitor|supervis)\\w*",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(test|check|audit|evaluat)\\w*\\b[^.]{0,40}\\b(data|groups?|everyone|everybody)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\bhuman oversight\\b",
+             "flags": "i"
+            }
+           ],
+           "ask": "how people could check for or reduce that risk"
+          }
+         ],
+         "misconceptions": [],
+         "hints": [
+          "Think about who might be left out of the data, and what happens when the model meets them."
+         ],
+         "model": "The model may be less accurate or unfair for groups that were under-represented in the training data, which can lead to discriminatory decisions.",
+         "reteach": "If a loan model only ever saw applicants from one region, it may misjudge applicants from other regions — that is the risk of biased data.",
+         "ack": "Yes: a model trained on unrepresentative data can be less accurate or unfair for the groups that were left out.",
+         "calibration": [
+          {
+           "answer": "The model could be unfair to groups that weren't in the training data",
+           "expected": "correct"
+          },
+          {
+           "answer": "it might make more mistakes for people who are under represented",
+           "expected": "correct"
+          },
+          {
+           "answer": "could discriminate against some groups, e.g. rural loan applicants get rejected",
+           "expected": "correct"
+          },
+          {
+           "answer": "less accurate predictions for minorities",
+           "expected": "correct"
+          },
+          {
+           "answer": "you need to test it on data from everyone",
+           "expected": "partial"
+          },
+          {
+           "answer": "humans should always check the system before using it",
+           "expected": "partial"
+          },
+          {
+           "answer": "it might affect some people differently so people should review it",
+           "expected": "partial"
+          },
+          {
+           "answer": "the model would train slower and use more memory",
+           "expected": "incorrect"
+          },
+          {
+           "answer": "it costs more electricity to run the computer",
+           "expected": "incorrect"
+          },
+          {
+           "answer": "no idea",
+           "expected": "unclear"
+          }
+         ]
+        }
+       }
+      ],
+      "closing": [
+       "Excellent work today, {name}.",
+       "Let me summarise what we covered.",
+       "Artificial intelligence is the broad field; machine learning is the part of it where systems learn patterns from data; and supervised learning uses labelled examples so the model can check itself against the correct answers.",
+       "We also saw that biased data can make models unfair, which is why human oversight matters.",
+       "For revision, I recommend the short reading on AI in everyday services, and next we will continue with supervised learning in more depth. Well done."
+      ]
+     }
+    },
+    {
+     "id": "L2",
+     "type": "video",
+     "title": "A short history of AI",
+     "dur": 6,
+     "objectives": [
+      "Describe the main eras of AI from the 1950s to today",
+      "Contrast rule-based symbolic AI with data-driven machine learning",
+      "Explain what caused the AI winters and the recent deep learning boom",
+      "Place today's AI tools on a historical timeline"
+     ],
+     "chips": [
+      "What was the Turing test actually testing?",
+      "Why did expert systems stop being popular?",
+      "What changed in 2012 that made deep learning take off?"
+     ],
+     "chapters": [
+      {
+       "title": "Can machines think?",
+       "slide": {
+        "kind": "bullets",
+        "heading": "An old question with a young field",
+        "points": [
+         "1950: Alan Turing asks whether machines can think",
+         "Proposes an imitation game, later called the Turing test",
+         "1956: the Dartmouth workshop names the field artificial intelligence",
+         "Early goal: capture human reasoning in a computer"
+        ]
+       },
+       "narration": [
+        "Every technology has a back story, and knowing the story of artificial intelligence helps you judge the claims you read about it today, both the excited ones and the fearful ones.",
+        "In 1950 the British mathematician Alan Turing asked a simple but provocative question: can machines think? Rather than argue about definitions, he proposed a practical test.",
+        "In his imitation game, a person chats in writing with a hidden partner. If they cannot reliably tell whether the partner is a human or a machine, the machine has passed what we now call the Turing test.",
+        "Six years later, in 1956, a small group of researchers met for a summer workshop at Dartmouth College in the United States, and it was there that the phrase artificial intelligence was adopted for the new field.",
+        "Their ambition was enormous. They believed that every aspect of learning and reasoning could, in principle, be described so precisely that a machine could simulate it."
+       ]
+      },
+      {
+       "title": "The age of symbols and rules",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Symbolic AI: 1950s to 1970s",
+        "points": [
+         "Knowledge written as symbols and logical rules",
+         "Programs that search through possible moves or steps",
+         "Early wins: proving theorems, playing draughts, solving puzzles",
+         "Weakness: the real world is messy and hard to write down"
+        ],
+        "note": {
+         "tone": "info",
+         "text": "Often nicknamed GOFAI: good old-fashioned AI"
+        }
+       },
+       "narration": [
+        "The first generation of AI is usually called symbolic AI. The idea was that intelligence means manipulating symbols with rules, rather like doing algebra or following a recipe.",
+        "Programmers wrote rules such as: if the patient has a fever and a rash, consider measles. The computer then searched through these rules, or through possible moves in a game, to reach a conclusion.",
+        "This worked surprisingly well on neat, well-defined problems. Programs proved mathematical theorems, solved logic puzzles and played games like draughts at a respectable level.",
+        "The trouble came with the messy real world. Recognising a face, understanding a casual sentence, or driving through Port Louis traffic involves thousands of exceptions that nobody can write down as rules.",
+        "So the early optimism, with predictions that human-level AI was only twenty years away, turned out to be far too hopeful."
+       ]
+      },
+      {
+       "title": "Winters and expert systems",
+       "slide": {
+        "kind": "steps",
+        "heading": "Boom, bust and boom again",
+        "steps": [
+         {
+          "title": "1960s optimism",
+          "sub": "Generous funding, bold predictions"
+         },
+         {
+          "title": "First AI winter",
+          "sub": "1970s: results fall short, funding cut"
+         },
+         {
+          "title": "Expert systems",
+          "sub": "1980s: rule bases sold to industry"
+         },
+         {
+          "title": "Second AI winter",
+          "sub": "Late 1980s: brittle, costly to maintain"
+         }
+        ]
+       },
+       "narration": [
+        "When the promised breakthroughs did not arrive, governments and companies lost patience. Funding was cut in the 1970s, and this cold period became known as the first AI winter.",
+        "In the 1980s, AI returned in a more practical form called expert systems. Engineers interviewed human specialists and turned their know-how into hundreds or thousands of if-then rules.",
+        "Some expert systems were genuinely useful, for example in configuring computer orders or suggesting diagnoses. But they were brittle: faced with a case outside their rules, they failed badly.",
+        "They were also expensive to maintain, because every change in the business meant rewriting rules by hand. By the late 1980s enthusiasm collapsed again, giving us the second AI winter.",
+        "The lesson that came out of both winters is important for us: writing intelligence down rule by rule does not scale well to the complexity of the real world."
+       ]
+      },
+      {
+       "title": "Learning from data",
+       "slide": {
+        "kind": "compare",
+        "heading": "Two ways to build an intelligent system",
+        "columns": [
+         {
+          "title": "Rule-based (symbolic)",
+          "points": [
+           "Humans write the rules",
+           "Transparent but brittle",
+           "Hard to scale to messy data"
+          ]
+         },
+         {
+          "title": "Machine learning",
+          "points": [
+           "Rules are learnt from examples",
+           "Improves with more data",
+           "Needs good, representative data"
+          ]
+         }
+        ]
+       },
+       "narration": [
+        "From the 1990s onwards the field shifted its emphasis. Instead of writing the rules ourselves, why not let the computer learn the rules from examples? That is the heart of machine learning.",
+        "Several things made this practical at the same time. Computers became much cheaper and faster, the internet produced huge amounts of digital data, and statistical methods matured.",
+        "Spam filters are a good example from this period. Rather than listing every suspicious word by hand, a filter could learn from thousands of emails that people had already marked as spam or not spam.",
+        "Symbolic AI did not disappear. In 1997 a chess computer defeated the reigning world champion largely through massive search, which shows that different approaches suit different problems.",
+        "But by the early two thousands, learning from data had become the dominant way to build practical AI systems."
+       ]
+      },
+      {
+       "title": "The deep learning boom",
+       "slide": {
+        "kind": "steps",
+        "heading": "Why deep learning took off after 2012",
+        "steps": [
+         {
+          "title": "Big labelled datasets",
+          "sub": "Millions of tagged images and texts"
+         },
+         {
+          "title": "Graphics processors",
+          "sub": "Chips that train large networks fast"
+         },
+         {
+          "title": "Better network designs",
+          "sub": "Deeper models that train reliably"
+         },
+         {
+          "title": "Language models",
+          "sub": "Transformers from 2017 onwards"
+         }
+        ]
+       },
+       "narration": [
+        "Neural networks, loosely inspired by the brain, had existed since the 1950s, but for decades they were too slow and too data hungry to beat other methods.",
+        "Around 2012 that changed. A deep neural network, trained on graphics processors with more than a million labelled images, won a major image recognition competition by a wide margin.",
+        "This was the start of the deep learning era. The same recipe of large data, fast hardware and deep networks soon improved speech recognition, translation and medical image analysis.",
+        "In 2017 researchers introduced a network design called the transformer. It became the foundation of the large language models behind today's chatbots and writing assistants.",
+        "Notice the pattern: each leap forward depended as much on data and computing power as on clever ideas, and that is why data quality will be such a theme in this course.",
+        "These same tools now appear in everyday services, from voice assistants that answer in several languages to apps that translate a menu for a visitor in Grand Baie."
+       ]
+      },
+      {
+       "title": "Recap",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Key ideas from the history of AI",
+        "points": [
+         "1950s to 1980s: symbolic AI and expert systems built from rules",
+         "Two AI winters when promises outran results",
+         "1990s onwards: machine learning learns rules from data",
+         "2012 onwards: deep learning, then large language models"
+        ]
+       },
+       "narration": [
+        "Let me recap. AI began in the 1950s with the hope of writing intelligence down as symbols and rules, which led to useful but brittle expert systems and two AI winters.",
+        "Since the 1990s the field has mostly learnt from data instead, and since 2012 deep learning, powered by big datasets and fast hardware, has driven the most visible progress.",
+        "Keep this timeline in mind, because it explains why the rest of this course focuses so much on data, learning and evaluation."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "L3",
+     "type": "reading",
+     "title": "Reading: AI in everyday services",
+     "dur": 10,
+     "objectives": [
+      "Recognise the main families of AI-powered everyday services",
+      "Explain whether a service is rule-based or learns from data",
+      "Describe a demand-forecasting example as supervised regression",
+      "Identify limits and risks of everyday AI for local users"
+     ],
+     "chips": [
+      "Is a recommender system supervised or unsupervised?",
+      "How do I tell if a service is rule-based or uses machine learning?",
+      "Why might voice assistants struggle with Mauritian Creole?"
+     ],
+     "body": "Artificial intelligence is often imagined as robots or science-fiction computers, but most of the AI you meet each day is quiet and almost invisible. It sorts your email, suggests the next song, translates a message from a relative abroad and checks whether a card payment looks suspicious. This reading surveys the main families of everyday AI services, explains what kind of learning sits behind each one, and introduces a simple question you can ask of any \"smart\" service: *is it following rules someone wrote, or patterns it learnt from data?*\n\nAll figures in this reading are round, illustrative numbers chosen to make the ideas clear; they are not real statistics.\n\n## Recommendation and search\n\nWhen a streaming service suggests a film, or an online shop shows \"customers also bought\", a **recommender system** is at work. Recommenders learn from the behaviour of many users: what they clicked, watched to the end, rated or bought. If people who enjoyed the same five films as you also enjoyed a sixth one you have not seen, the system predicts you may like it too.\n\nSearch engines use machine learning in a similar way. They learn which results people actually click and stay on for a given query, and use those signals to rank pages. Neither system \"understands\" films or web pages the way you do; they find statistical patterns in huge amounts of behaviour data.\n\n> **Why it matters:** recommenders shape what we see. If a system only ever shows you more of what you already like, it can narrow your choices. Designers sometimes deliberately add variety for this reason.\n\n## Language and voice\n\nTyping on a phone keyboard that predicts your next word, asking a voice assistant for the weather, or translating a menu from English to French all rely on **language models** and **speech recognition**. Since about 2012, these services have been transformed by deep learning, the branch of machine learning that uses large neural networks trained on enormous collections of text and audio.\n\nThese systems have obvious strengths, but they also have limits that matter in a multilingual island society. A speech recogniser trained mostly on a few major languages and accents may struggle with Mauritian Creole, Bhojpuri, or English spoken with a local accent. The issue is not that the technology is \"bad\" in general; it is that its training data did not represent those speakers well. You will meet this idea again as **sampling bias** in Module 4.\n\n## Forecasting, detection and decisions\n\nA third family of services makes predictions that organisations use to plan or to act:\n\n- **Demand forecasting** — a utility such as an electricity provider predicts how much power the grid will need tomorrow evening, so that enough generating capacity is ready.\n- **Fraud detection** — a bank flags card transactions that look unusual compared with a customer's normal behaviour.\n- **Yield estimation** — agronomists estimate sugar-cane yields from satellite images and weather data.\n- **Tourism planning** — hotels and authorities predict visitor arrivals for the coming season.\n\n### Worked example: forecasting electricity demand\n\nImagine an electricity utility on a small island that wants to forecast the evening peak demand for the next day. It has several years of records. For each past day it knows:\n\n| Feature | Example value |\n|---|---|\n| Day of the week | Tuesday |\n| Forecast maximum temperature | 31 °C |\n| Public holiday? | No |\n| Peak demand the day before | 470 MW |\n\nand the **label**: the actual peak demand that day, say 480 MW.\n\nBecause the label is a number, this is a **supervised regression** task. A model learns from thousands of past days how temperature, weekday and holidays push demand up or down. Hot days raise demand because of air conditioning; public holidays usually lower it because offices are closed. Given tomorrow's features, the model predicts a number, perhaps 495 MW, and the utility schedules generation accordingly.\n\nNotice three things. First, nobody wrote a rule such as \"add 12 MW for every degree above 30\"; the model learnt the relationship from data. Second, the forecast is only as good as the history: an unusual event, such as a cyclone shutting down businesses, may produce a day unlike anything in the training data. Third, a human controller still makes the final decision on which power stations to run.\n\n## Rules or learning? A simple test\n\nNot every \"smart\" system uses machine learning. Many useful services still run on rules written by people. The table below contrasts the two approaches.\n\n| | Rule-based system | Machine learning system |\n|---|---|---|\n| Where knowledge comes from | Rules written by experts | Patterns learnt from data |\n| Example | A tax form that checks you entered a valid ID number | A spam filter trained on labelled emails |\n| Strength | Predictable, easy to explain | Copes with messy, varied inputs |\n| Weakness | Brittle when cases are unusual | Can absorb errors and bias in its data |\n\nA useful habit is to ask, for any service: *if the world changed, would someone have to rewrite the rules, or would the system need new data?* A rule-based parking-fine calculator needs new rules when fines change. A spam filter needs new examples when spammers change their tricks.\n\nMany real services combine both. A bank's fraud system might use a learnt model to give each payment a risk score, then apply hand-written rules such as \"always block payments above a certain amount from a newly added device\".\n\n## Living with everyday AI\n\nEveryday AI brings convenience, but it also raises questions you should get used to asking:\n\n1. **What data was it trained on?** Does it represent people like me, and people unlike me?\n2. **What happens when it is wrong?** A poor song recommendation is harmless; a wrongly blocked bank card on holiday is not.\n3. **Who checks it?** Is there a person who can review a decision, and can I appeal?\n\nThese questions connect directly to the course outcomes: understanding how systems learn from data, evaluating how accurate they are, and spotting bias and data-quality risks.\n\n## Key takeaways\n\n- Most everyday AI is machine learning that finds patterns in large amounts of data rather than following hand-written rules.\n- Recommenders and search learn from user behaviour; language and voice services rely on deep learning.\n- Forecasting and detection services, such as electricity demand forecasts and fraud checks, are often supervised learning tasks.\n- Some services are rule-based, and many combine learnt models with rules.\n- A system can work well for most users and poorly for groups that were under-represented in its training data.\n\n## Check your understanding\n\n1. A phone keyboard suggests the next word as you type. Is this more likely to be rule-based or machine learning, and why?\n*Answer:* Machine learning. It predicts likely next words from patterns learnt from very large amounts of text, rather than from a list of rules written by hand.\n2. In the electricity example, why is forecasting peak demand a regression task rather than classification?\n*Answer:* Because the label being predicted is a number (demand in megawatts) on a continuous scale, not a category.\n3. Give one reason a voice assistant might work less well for some Mauritian users.\n*Answer:* Its training data may contain few examples of local languages or accents, so it has not learnt those speech patterns well — a form of sampling bias.\n"
+    }
+   ]
+  },
+  {
+   "id": "m2",
+   "title": "Module 2 · How Machines Learn",
+   "items": [
+    {
+     "id": "L4",
+     "type": "video",
+     "title": "Supervised learning and labelled data",
+     "dur": 6,
+     "objectives": [
+      "Define features, labels and training examples",
+      "Distinguish classification from regression tasks",
+      "Explain why data is split into training and test sets",
+      "Recognise the cost and quality issues of labelling data"
+     ],
+     "chips": [
+      "What is the difference between a feature and a label?",
+      "Is predicting electricity demand classification or regression?",
+      "Why can't we test a model on its training data?"
+     ],
+     "chapters": [
+      {
+       "title": "Learning with an answer key",
+       "slide": {
+        "kind": "bullets",
+        "heading": "What makes learning supervised",
+        "points": [
+         "Every training example comes with the correct answer",
+         "The answer is called the label or target",
+         "The model learns a mapping from inputs to labels",
+         "Goal: predict labels for new, unseen examples"
+        ]
+       },
+       "narration": [
+        "In the virtual lesson you met the idea of supervised learning. Today we will look at it more carefully, because it is the most widely used kind of machine learning in practice.",
+        "Supervised learning means learning from examples that come with the correct answer attached. Those answers are called labels, and they supervise the learning just as a teacher's answer key supervises your practice.",
+        "The model's job is to discover a mapping, a rule that takes the inputs of an example and produces the right label. We never write that rule ourselves; the algorithm finds it from the data.",
+        "And the real goal is not to do well on the examples we already have. The goal is to predict the label correctly for new examples the model has never seen before.",
+        "Spam filtering, credit scoring, medical image diagnosis and weather-based demand forecasts are all supervised problems, so the ideas in this video will keep coming back throughout the course."
+       ]
+      },
+      {
+       "title": "Features and labels",
+       "slide": {
+        "kind": "cards",
+        "heading": "Example: classifying sugar-cane fields",
+        "cards": [
+         {
+          "label": "Features",
+          "text": "Leaf colour index, rainfall, soil moisture, field age"
+         },
+         {
+          "label": "Label",
+          "text": "Healthy or diseased, recorded by a field officer"
+         },
+         {
+          "label": "One example",
+          "text": "One field, its feature values and its label"
+         },
+         {
+          "label": "Dataset",
+          "text": "Hundreds of such fields from past seasons"
+         }
+        ],
+        "note": {
+         "tone": "info",
+         "text": "Illustrative example; figures are not real survey data"
+        }
+       },
+       "narration": [
+        "Let us make this concrete with an illustrative example. Imagine an agricultural agency that wants to spot diseased sugar-cane fields early from satellite and weather data.",
+        "Each field is one example. The measurements we know about it, such as a leaf colour index from satellite images, recent rainfall, soil moisture and the age of the crop, are called features.",
+        "The label is the thing we want to predict. Here it is whether a field officer, visiting in person, recorded the field as healthy or diseased.",
+        "Put a few hundred fields from past seasons together, each with its features and its label, and you have a labelled dataset that a supervised algorithm can learn from.",
+        "Once trained, the model can look at the features of a field nobody has visited yet and predict whether it is likely to be diseased, so officers can prioritise their visits."
+       ]
+      },
+      {
+       "title": "Classification and regression",
+       "slide": {
+        "kind": "compare",
+        "heading": "Two kinds of supervised task",
+        "columns": [
+         {
+          "title": "Classification",
+          "points": [
+           "Label is a category",
+           "Spam or not spam",
+           "Healthy or diseased field"
+          ]
+         },
+         {
+          "title": "Regression",
+          "points": [
+           "Label is a number",
+           "Tomorrow's electricity demand",
+           "Tonnes of cane per hectare"
+          ]
+         }
+        ]
+       },
+       "narration": [
+        "Supervised tasks come in two main flavours, and the difference depends entirely on what kind of label you are predicting.",
+        "If the label is a category, such as spam or not spam, or healthy or diseased, the task is called classification. The model picks one class out of a fixed set.",
+        "If the label is a number on a continuous scale, the task is called regression. Predicting tomorrow evening's electricity demand on the national grid, in megawatts, is a regression problem.",
+        "So is estimating the yield of a cane field in tonnes per hectare. The features might be the same as before, but because the label is now a quantity, we have changed the task.",
+        "A quick way to decide is to ask yourself: is the answer a name of a group, or is it an amount? A group means classification, an amount means regression."
+       ]
+      },
+      {
+       "title": "Training and testing",
+       "slide": {
+        "kind": "steps",
+        "heading": "Splitting a labelled dataset",
+        "steps": [
+         {
+          "title": "Shuffle the data",
+          "sub": "Mix examples so each split is representative"
+         },
+         {
+          "title": "Training set",
+          "sub": "About 70 to 80 per cent, used to fit the model"
+         },
+         {
+          "title": "Validation set",
+          "sub": "Used to compare and tune models"
+         },
+         {
+          "title": "Test set",
+          "sub": "Held back until the end for a fair final score"
+         }
+        ]
+       },
+       "narration": [
+        "Here is a crucial habit. We never judge a model on the same examples it learnt from, because a model can simply memorise them, just as a student can memorise last year's answers.",
+        "Instead we split our labelled data. Typically about seventy to eighty per cent becomes the training set, which the algorithm uses to adjust the model.",
+        "A smaller validation set is used while we compare different models or settings, and a test set is locked away until the very end to give an honest final score.",
+        "The test set plays the role of the real exam. Because the model has never seen those examples, its performance there is our best estimate of how it will behave on new fields or new emails.",
+        "In Module 3 we will look closely at how to measure that performance, using accuracy and error.",
+        "One practical warning: if the same field or the same email appears in both the training set and the test set, the test score will look better than it really is, so check for duplicates before you split."
+       ]
+      },
+      {
+       "title": "The cost of good labels",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Labels are expensive and imperfect",
+        "points": [
+         "Labelling often needs experts and field visits",
+         "Different labellers may disagree",
+         "Wrong labels teach the model wrong patterns",
+         "Clear labelling guidelines improve consistency"
+        ],
+        "note": {
+         "tone": "warn",
+         "text": "A model can only be as reliable as its labels"
+        }
+       },
+       "narration": [
+        "Supervised learning has one big practical cost: someone has to produce the labels. For our cane fields, that means officers physically visiting and inspecting every field in the training set.",
+        "Labellers are human, so they get tired, they disagree and they make mistakes. One officer may call a field mildly diseased while another calls it healthy.",
+        "If many labels are wrong, the model faithfully learns the wrong pattern. This is why teams write clear labelling guidelines and check a sample of labels twice.",
+        "When labels are scarce or too costly, we may turn to unsupervised learning instead, which finds structure in data without any labels. That is the subject of the next video."
+       ]
+      },
+      {
+       "title": "Recap",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Supervised learning in four lines",
+        "points": [
+         "Examples have features and a label",
+         "Category label: classification; number: regression",
+         "Train on one part of the data, test on unseen data",
+         "Label quality limits model quality"
+        ]
+       },
+       "narration": [
+        "To recap, supervised learning uses labelled examples, each made of features and a correct answer, to learn a mapping that predicts labels for new cases.",
+        "If the label is a category it is classification, and if it is a number it is regression; in both cases we test on data the model has never seen, and good labels are essential."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "L5",
+     "type": "video",
+     "title": "Unsupervised learning and clustering",
+     "dur": 6,
+     "objectives": [
+      "Explain how unsupervised learning differs from supervised learning",
+      "Describe the steps of k-means clustering",
+      "Interpret clusters responsibly and choose a sensible number of groups",
+      "Name other uses of unsupervised learning such as anomaly detection"
+     ],
+     "chips": [
+      "How does k-means decide which group a point belongs to?",
+      "How do I choose the number of clusters?",
+      "Can unsupervised learning tell me what each cluster means?"
+     ],
+     "chapters": [
+      {
+       "title": "Learning without an answer key",
+       "slide": {
+        "kind": "compare",
+        "heading": "Supervised versus unsupervised",
+        "columns": [
+         {
+          "title": "Supervised",
+          "points": [
+           "Labelled examples",
+           "Learns to predict a known target",
+           "Example: spam or not spam"
+          ]
+         },
+         {
+          "title": "Unsupervised",
+          "points": [
+           "No labels at all",
+           "Finds structure and groups in the data",
+           "Example: customer segments"
+          ]
+         }
+        ]
+       },
+       "narration": [
+        "In supervised learning every example came with an answer. Now imagine you have plenty of data but no labels at all. Can a machine still learn something useful? It can, and that is unsupervised learning.",
+        "Unsupervised learning looks for structure hidden in the data itself: groups of similar examples, unusual points that do not fit, or simpler ways to describe many measurements.",
+        "Because there is no correct answer to check against, the algorithm is not predicting a target. It is organising the data, and then a human has to interpret what that organisation means.",
+        "The most common unsupervised task, and our focus today, is clustering: automatically grouping examples so that items in the same group are similar and items in different groups are not.",
+        "Unlabelled data is far easier to come by than labelled data. Every booking system, electricity meter and card terminal produces it continuously, which is why unsupervised methods are so useful in practice."
+       ]
+      },
+      {
+       "title": "A tourism example",
+       "slide": {
+        "kind": "cards",
+        "heading": "Clustering visitors to an island resort",
+        "cards": [
+         {
+          "label": "Data",
+          "text": "Length of stay, spend per day, activities booked, age band"
+         },
+         {
+          "label": "No labels",
+          "text": "Nobody has tagged visitors with a type"
+         },
+         {
+          "label": "Possible clusters",
+          "text": "Short-stay divers, long-stay families, luxury couples"
+         },
+         {
+          "label": "Use",
+          "text": "Tailor packages and marketing to each group"
+         }
+        ],
+        "note": {
+         "tone": "info",
+         "text": "Illustrative scenario with invented groups"
+        }
+       },
+       "narration": [
+        "Let us take an illustrative example. A hotel group on the west coast of Mauritius has booking records for a few thousand guests, with length of stay, spending per day and activities booked.",
+        "Nobody has labelled these guests as particular types of tourist. The managers simply suspect that there are distinct groups with different needs.",
+        "A clustering algorithm can examine the records and propose, say, three groups. Perhaps one cluster is short stays with lots of diving, another is long family stays, and a third is high-spending couples.",
+        "Those names are not produced by the algorithm. It only says which guests are similar; the marketing team looks at each cluster and decides what to call it and how to serve it.",
+        "The payoff is practical. Once the groups are known, the hotels can design a diving package for one cluster, kids club offers for another and spa weekends for the third, rather than sending everyone the same advertisement."
+       ]
+      },
+      {
+       "title": "How k-means works",
+       "slide": {
+        "kind": "steps",
+        "heading": "The k-means algorithm",
+        "steps": [
+         {
+          "title": "Choose k",
+          "sub": "Decide how many clusters to look for"
+         },
+         {
+          "title": "Place k centres",
+          "sub": "Start with k points, often chosen at random"
+         },
+         {
+          "title": "Assign",
+          "sub": "Each example joins its nearest centre"
+         },
+         {
+          "title": "Update",
+          "sub": "Move each centre to the average of its members"
+         },
+         {
+          "title": "Repeat",
+          "sub": "Until the assignments stop changing"
+         }
+        ]
+       },
+       "narration": [
+        "The best-known clustering method is called k-means, where k is simply the number of clusters you ask for. It is easy to picture if you imagine guests as dots on a chart.",
+        "First you choose k, say three, and place three centre points, often at random. Then every guest is assigned to whichever centre is nearest to them.",
+        "Next, each centre moves to the average position of the guests assigned to it. Because the centres have moved, some guests are now closer to a different centre, so they switch groups.",
+        "We repeat these two steps, assign and update, until nothing changes any more. The final centres describe the typical member of each cluster.",
+        "Notice what nearest means here. Distance is measured using the features, so if one feature has much larger numbers than the others, like spending in rupees against nights stayed, we usually rescale them first."
+       ]
+      },
+      {
+       "title": "Choosing k and reading the results",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Using clusters responsibly",
+        "points": [
+         "k-means always returns k groups, even if no real groups exist",
+         "Try several values of k and compare how tight the clusters are",
+         "Check clusters make sense to people who know the domain",
+         "Results can change with the random starting points"
+        ],
+        "note": {
+         "tone": "warn",
+         "text": "A cluster is a pattern in the data, not proof of a real type of person"
+        }
+       },
+       "narration": [
+        "There is a catch with k-means: it will always give you exactly k clusters, even if the data has no natural groups at all. So choosing k needs care.",
+        "A common approach is to try several values, measure how tightly packed each set of clusters is, and look for the point where adding more clusters stops helping much.",
+        "Equally important is domain knowledge. If the hotel managers cannot recognise or use a cluster, it may be an accident of the data rather than a real group of guests.",
+        "And because k-means starts from random centres, it is good practice to run it several times and check that the clusters are stable before you base decisions on them.",
+        "Finally, remember that clusters inherit the limits of the data. If the booking records leave out guests who booked through small local agencies, those guests simply cannot appear in any cluster."
+       ]
+      },
+      {
+       "title": "Other unsupervised tasks",
+       "slide": {
+        "kind": "cards",
+        "heading": "Beyond clustering",
+        "cards": [
+         {
+          "label": "Anomaly detection",
+          "text": "Flag unusual meter readings that may signal a fault or fraud"
+         },
+         {
+          "label": "Dimensionality reduction",
+          "text": "Summarise many measurements with a few combined ones"
+         },
+         {
+          "label": "Association rules",
+          "text": "Find items often bought together in a supermarket"
+         }
+        ]
+       },
+       "narration": [
+        "Clustering is not the only unsupervised task. Anomaly detection learns what normal looks like and flags examples that are unusual, such as an electricity meter whose readings suddenly behave strangely.",
+        "Dimensionality reduction compresses many features into a few combined ones, which makes data easier to visualise and can speed up later supervised learning.",
+        "And association rule mining finds items that tend to occur together, like products that shoppers in a Port Louis supermarket often buy in the same basket.",
+        "In practice, unsupervised and supervised methods are often combined. For instance, clusters found without labels can become useful features for a later supervised model.",
+        "Anomaly detection is especially valuable when the thing we are looking for is rare and changes over time, such as new kinds of fraud that no labelled dataset has captured yet."
+       ]
+      },
+      {
+       "title": "Recap",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Key points",
+        "points": [
+         "Unsupervised learning uses data without labels",
+         "Clustering groups similar examples together",
+         "k-means: assign to nearest centre, update centres, repeat",
+         "Humans must interpret and validate the clusters"
+        ]
+       },
+       "narration": [
+        "To recap, unsupervised learning finds structure in data that has no labels, and clustering groups similar examples together.",
+        "K-means does this by repeatedly assigning points to the nearest centre and moving the centres, but it is up to us to choose k sensibly and to interpret what the clusters really mean."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "L6",
+     "type": "quiz",
+     "title": "Quiz: Learning from data",
+     "dur": 15,
+     "assessment": "as1"
+    }
+   ]
+  },
+  {
+   "id": "m3",
+   "title": "Module 3 · Evaluating Models",
+   "items": [
+    {
+     "id": "L7",
+     "type": "video",
+     "title": "Accuracy, error and overfitting",
+     "dur": 6,
+     "objectives": [
+      "Calculate accuracy and error rate from a model's predictions",
+      "Explain why accuracy can mislead when classes are imbalanced",
+      "Distinguish overfitting from underfitting using training and test error",
+      "Describe practical ways to reduce overfitting"
+     ],
+     "chips": [
+      "How do I calculate accuracy and error rate?",
+      "Why is 99 per cent accuracy sometimes useless?",
+      "How can I tell if my model is overfitting?"
+     ],
+     "chapters": [
+      {
+       "title": "Why we measure",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Evaluating a model",
+        "points": [
+         "A model is only useful if its predictions are reliable",
+         "We measure performance on data it has not seen",
+         "Different measures answer different questions",
+         "Today: accuracy, error rate and overfitting"
+        ]
+       },
+       "narration": [
+        "Training a model is only half the job. Before anyone relies on its predictions, whether to filter emails or to flag a suspicious card payment, we need to know how good it actually is.",
+        "Evaluation means measuring performance in a fair and honest way, which, as you saw in the previous module, means using a test set the model has never seen during training.",
+        "Today we will cover the simplest measures, accuracy and error rate, see where they can mislead us, and then look at the most common way models fail, which is overfitting.",
+        "Keep the assignment for this module in mind as you watch, because you will be applying exactly these ideas to a real classifier of your own."
+       ]
+      },
+      {
+       "title": "Accuracy and error rate",
+       "slide": {
+        "kind": "formula",
+        "heading": "Accuracy and error rate",
+        "formula": "Accuracy = correct predictions / total predictions",
+        "points": [
+         "Error rate = 1 minus accuracy",
+         "Example: 180 correct out of 200 emails",
+         "Accuracy = 0.90, or 90 per cent",
+         "Error rate = 0.10, or 10 per cent"
+        ]
+       },
+       "narration": [
+        "Accuracy is the proportion of predictions the model gets right. You count the correct predictions and divide by the total number of predictions.",
+        "Suppose our spam filter is tested on two hundred emails it has never seen, and it classifies one hundred and eighty of them correctly. Its accuracy is one hundred and eighty divided by two hundred, which is ninety per cent.",
+        "The error rate is simply the other side of the coin: the proportion it gets wrong. Here twenty emails out of two hundred were misclassified, an error rate of ten per cent.",
+        "Accuracy and error rate always add up to one, or a hundred per cent, so reporting one tells you the other.",
+        "For regression tasks, where we predict numbers, we instead measure how far predictions are from the true values on average, for example the average error in megawatts of a demand forecast."
+       ]
+      },
+      {
+       "title": "When accuracy misleads",
+       "slide": {
+        "kind": "stat",
+        "heading": "The imbalanced-class trap",
+        "stats": [
+         {
+          "value": "1 in 100",
+          "label": "card payments that are fraudulent"
+         },
+         {
+          "value": "99%",
+          "label": "accuracy of a model that says never fraud"
+         },
+         {
+          "value": "0",
+          "label": "frauds it actually catches"
+         }
+        ],
+        "note": {
+         "tone": "warn",
+         "text": "Illustrative figures. Always compare against a do-nothing baseline"
+        }
+       },
+       "narration": [
+        "Accuracy has a famous weakness. Imagine a bank where, to use an illustrative figure, one card payment in a hundred is fraudulent.",
+        "A lazy model that simply predicts not fraud for every single payment would be right ninety nine times out of a hundred. Its accuracy is ninety nine per cent, yet it catches no fraud at all.",
+        "This happens whenever one class is much rarer than the other, which we call class imbalance. In such cases high accuracy can hide a model that is useless for the job we care about.",
+        "The fix is to look at errors class by class. Measures such as precision and recall, which you will meet in the reading for this module, tell you how well the rare class is handled.",
+        "A good habit is to always compare your model with a simple baseline, like predicting the most common class. If you cannot beat the baseline, you have not learnt anything useful."
+       ]
+      },
+      {
+       "title": "Overfitting and underfitting",
+       "slide": {
+        "kind": "compare",
+        "heading": "Fitting too little or too much",
+        "columns": [
+         {
+          "title": "Underfitting",
+          "points": [
+           "Model too simple",
+           "High training error",
+           "High test error"
+          ]
+         },
+         {
+          "title": "Good fit",
+          "points": [
+           "Captures the real pattern",
+           "Low training error",
+           "Similar low test error"
+          ]
+         },
+         {
+          "title": "Overfitting",
+          "points": [
+           "Memorises noise",
+           "Very low training error",
+           "Much higher test error"
+          ]
+         }
+        ]
+       },
+       "narration": [
+        "Now to the most common failure in machine learning. Picture a student who memorises every past exam paper word for word but never understands the topic. They score perfectly on old papers and poorly on the real exam.",
+        "A model can do exactly the same. When it learns the noise and quirks of its training data instead of the general pattern, we say it has overfitted.",
+        "The tell-tale sign is a gap between the two scores: training accuracy is excellent, perhaps close to one hundred per cent, but test accuracy is much lower.",
+        "The opposite problem is underfitting, where the model is too simple to capture the real pattern at all. It performs poorly on both the training data and the test data.",
+        "What we want sits in between: a model that does well on the training data and almost as well on new data, because it has learnt the pattern rather than the examples."
+       ]
+      },
+      {
+       "title": "Reducing overfitting",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Practical remedies",
+        "points": [
+         "Collect more, and more varied, training data",
+         "Prefer a simpler model when results are similar",
+         "Use cross-validation to check results are stable",
+         "Keep the test set untouched until the final check"
+        ]
+       },
+       "narration": [
+        "How do we reduce overfitting? The most reliable remedy is more data, and more varied data, so that the quirks of individual examples average out.",
+        "Another is to choose a simpler model, or to limit how complex the model is allowed to become. When two models score similarly on validation data, the simpler one usually generalises better.",
+        "Cross-validation helps too. We split the training data into several folds, train on all but one fold and validate on the remaining one, rotating until every fold has been used for checking.",
+        "Finally, protect your test set. If you keep tweaking the model until the test score looks good, the test set quietly becomes training data and your final score is no longer honest.",
+        "Remember, the aim is never a perfect score on data you already have. The aim is dependable performance on the new emails, payments or fields the model will meet tomorrow."
+       ]
+      },
+      {
+       "title": "Recap",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Key points",
+        "points": [
+         "Accuracy = correct / total; error rate = 1 minus accuracy",
+         "With imbalanced classes, accuracy can mislead",
+         "Overfitting: great on training data, poor on new data",
+         "More data, simpler models and cross-validation help"
+        ]
+       },
+       "narration": [
+        "To recap, accuracy is the share of correct predictions and the error rate is the share of wrong ones, but with imbalanced classes accuracy alone can be badly misleading.",
+        "Overfitting shows up as a big gap between training and test performance, and we fight it with more data, simpler models, cross-validation and an untouched test set."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "L11",
+     "type": "reading",
+     "title": "Reading: Precision, recall and the confusion matrix",
+     "dur": 9,
+     "objectives": [
+      "Build a confusion matrix from a classifier's test results",
+      "Calculate accuracy, precision and recall",
+      "Explain the precision–recall trade-off when changing a threshold",
+      "Choose a suitable measure based on the cost of each error"
+     ],
+     "chips": [
+      "What is the difference between precision and recall?",
+      "Which cell of the confusion matrix is a false negative?",
+      "When should I care more about recall than precision?"
+     ],
+     "body": "In the video on accuracy and error you saw that accuracy can be misleading, especially when one class is rare. To evaluate a classifier properly — as you will in the assignment for this module — you need a richer picture of *which kinds* of mistakes a model makes. This reading introduces the **confusion matrix** and two measures built from it, **precision** and **recall**, using a spam filter as a running example. All numbers are illustrative.\n\n## The four possible outcomes\n\nFor a two-class problem we usually call one class **positive** (the thing we are trying to detect, such as spam, fraud or disease) and the other **negative**. Every prediction then falls into one of four boxes:\n\n- **True positive (TP)** — the email is spam and the model says spam.\n- **False positive (FP)** — the email is genuine but the model says spam. A real message ends up in your junk folder.\n- **True negative (TN)** — the email is genuine and the model says genuine.\n- **False negative (FN)** — the email is spam but the model says genuine. Spam reaches your inbox.\n\nArranged in a grid, these counts form the confusion matrix:\n\n| | Predicted spam | Predicted genuine |\n|---|---|---|\n| **Actually spam** | TP | FN |\n| **Actually genuine** | FP | TN |\n\nThe diagonal (TP and TN) holds the correct predictions; the other two cells hold the two different kinds of error.\n\n## Worked example: a university spam filter\n\nSuppose a spam filter is tested on 1,000 emails that it never saw during training. Of these, 100 are really spam and 900 are genuine. The results are:\n\n| | Predicted spam | Predicted genuine | Total |\n|---|---|---|---|\n| **Actually spam** | 80 | 20 | 100 |\n| **Actually genuine** | 30 | 870 | 900 |\n| **Total** | 110 | 890 | 1,000 |\n\n**Accuracy** counts all correct predictions:\n\n```\naccuracy = (TP + TN) / total = (80 + 870) / 1000 = 0.95\n```\n\nSo the filter is 95% accurate, with an error rate of 5%. That sounds excellent, but it hides two quite different problems: 20 spam emails slipped through, and 30 genuine emails were wrongly sent to junk. For a student waiting for a scholarship letter, those 30 matter a lot.\n\n## Precision and recall\n\n**Precision** answers: *when the model says positive, how often is it right?*\n\n```\nprecision = TP / (TP + FP) = 80 / (80 + 30) = 80 / 110 ≈ 0.73\n```\n\nAbout 73% of the emails flagged as spam really were spam; the other 27% were genuine messages wrongly flagged.\n\n**Recall** (also called *sensitivity*) answers: *of all the real positives, how many did the model find?*\n\n```\nrecall = TP / (TP + FN) = 80 / (80 + 20) = 80 / 100 = 0.80\n```\n\nThe filter caught 80% of the spam and missed 20%.\n\n> **Memory aid:** **P**recision looks along the **P**redicted-positive column. **R**ecall looks along the **R**eal-positive row.\n\nSometimes a single number is convenient. The **F1 score** combines the two as their harmonic mean: `F1 = 2 × precision × recall / (precision + recall)`. Here F1 = 2 × 0.73 × 0.80 / 1.53 ≈ 0.76. F1 is only high when *both* precision and recall are reasonably high.\n\n## The precision–recall trade-off\n\nMost classifiers output a score, such as \"87% likely to be spam\", and we choose a **threshold** above which we call an email spam.\n\n- **Raise the threshold** (only flag emails that are very likely spam): fewer genuine emails are wrongly flagged, so precision rises — but more spam slips through, so recall falls.\n- **Lower the threshold**: the model catches more spam, so recall rises — but more genuine emails are caught too, so precision falls.\n\nThere is no universally right setting. The choice depends on the **cost of each kind of error** in the real situation:\n\n| Situation | Worse mistake | Prioritise |\n|---|---|---|\n| Screening blood samples for a serious disease | Missing a sick patient (FN) | Recall |\n| Spam filter for important university mail | Hiding a genuine email (FP) | Precision |\n| Flagging card payments for a quick text-message check | Missing fraud (FN) | Recall |\n| Automatically closing a customer's account for fraud | Punishing an innocent customer (FP) | Precision |\n\n### Case box: the rare-class trap revisited\n\nA bank sees, illustratively, 10 fraudulent payments in every 1,000. A model that predicts \"not fraud\" for everything has 99% accuracy — but TP = 0, so its **recall is 0**. The confusion matrix exposes immediately what accuracy hid. This is why, for imbalanced problems such as fraud, disease or equipment failure, you should always report the confusion matrix together with precision and recall.\n\n## Reporting results well\n\nWhen you evaluate a classifier, a good short report:\n\n1. States the size and class balance of the **test set**, and confirms it was not used for training.\n2. Shows the **confusion matrix**.\n3. Reports **accuracy, precision and recall** (and F1 if useful), with a sentence interpreting each in plain language.\n4. Compares the model with a **baseline**, such as always predicting the most common class.\n5. Discusses **sources of error**, for example ambiguous emails, mislabelled training data, or groups of messages (such as emails written in Creole or French) that the model handles less well.\n\nPoint 5 links evaluation to fairness: it is good practice to compute these measures separately for different groups of data, not only overall.\n\n## Key takeaways\n\n- A confusion matrix splits predictions into true positives, false positives, true negatives and false negatives.\n- Accuracy = (TP + TN) / total; it can look high even when the model misses most of a rare class.\n- Precision = TP / (TP + FP): how trustworthy a positive prediction is.\n- Recall = TP / (TP + FN): how many real positives the model finds.\n- Changing the decision threshold trades precision against recall; choose based on the real cost of each error.\n\n## Check your understanding\n\n1. A disease-screening model has TP = 45, FN = 5, FP = 50, TN = 900. What are its precision and recall?\n*Answer:* Precision = 45 / (45 + 50) ≈ 0.47; recall = 45 / (45 + 5) = 0.90. It finds most sick patients but over half its alarms are false.\n2. Why can a fraud model with 99% accuracy still be useless?\n*Answer:* If only about 1% of payments are fraud, predicting \"not fraud\" for everything already gives 99% accuracy while catching no fraud — its recall is zero.\n3. For a spam filter protecting job-offer emails, would you raise or lower the threshold, and which measure improves?\n*Answer:* Raise it, so that only emails very likely to be spam are filtered; this improves precision and reduces genuine emails lost to the junk folder, at some cost to recall.\n"
+    },
+    {
+     "id": "L8",
+     "type": "assignment",
+     "title": "Assignment: Evaluate a classifier",
+     "dur": 120,
+     "assessment": "as2"
+    }
+   ]
+  },
+  {
+   "id": "m4",
+   "title": "Module 4 · Responsible AI",
+   "items": [
+    {
+     "id": "L9",
+     "type": "video",
+     "title": "Bias, fairness and data quality",
+     "dur": 5,
+     "objectives": [
+      "Identify common sources of bias in training data",
+      "Describe the main dimensions of data quality",
+      "Explain how to check a model for unfair error rates across groups",
+      "Suggest practical safeguards including human oversight"
+     ],
+     "chips": [
+      "What is the difference between sampling bias and historical bias?",
+      "How can I check whether a model is fair?",
+      "Can't we just remove sensitive attributes like gender from the data?"
+     ],
+     "chapters": [
+      {
+       "title": "Garbage in, garbage out",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Models inherit their data",
+        "points": [
+         "A model learns whatever patterns its data contains",
+         "Including gaps, errors and past unfairness",
+         "High overall accuracy can hide unfair results",
+         "Responsible AI starts with the data"
+        ]
+       },
+       "narration": [
+        "There is an old saying in computing: garbage in, garbage out. In machine learning it matters more than ever, because a model learns whatever patterns are in its data, good or bad.",
+        "If the data has gaps, errors or traces of past unfairness, the model will absorb them and repeat them, often at great speed and scale.",
+        "And because these problems can hide behind a good overall accuracy score, they are easy to miss unless you look for them deliberately.",
+        "In this video we will look at where bias comes from, what we mean by data quality, and how to check and reduce unfair outcomes.",
+        "This matters for everyone who builds or uses AI, not only for specialists, because the people affected by an unfair model rarely see the data or the code behind the decision."
+       ]
+      },
+      {
+       "title": "Where bias comes from",
+       "slide": {
+        "kind": "cards",
+        "heading": "Common sources of bias",
+        "cards": [
+         {
+          "label": "Sampling bias",
+          "text": "Some groups or places are missing or under-represented"
+         },
+         {
+          "label": "Historical bias",
+          "text": "Data reflects unfair decisions made in the past"
+         },
+         {
+          "label": "Measurement bias",
+          "text": "A feature is recorded less accurately for some groups"
+         },
+         {
+          "label": "Label bias",
+          "text": "Labellers' judgements are inconsistent or prejudiced"
+         }
+        ]
+       },
+       "narration": [
+        "Bias, in this sense, means a systematic error that makes a model less accurate or less fair for particular groups. It usually enters through the data in one of a few ways.",
+        "Sampling bias happens when the training data does not represent everyone the system will serve, for example data collected mostly in towns and hardly at all in rural villages.",
+        "Historical bias happens when the data faithfully records past decisions that were themselves unfair. A model trained on them learns to repeat the unfairness.",
+        "Measurement bias arises when a feature is recorded less accurately for some groups, and label bias when the people producing labels judge some cases inconsistently.",
+        "In each case, nobody needs to intend harm. Bias is usually an accident of how the data was gathered, which is exactly why we have to check for it."
+       ]
+      },
+      {
+       "title": "Data quality",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Dimensions of data quality",
+        "points": [
+         "Completeness: are values or whole groups missing?",
+         "Accuracy: are the recorded values correct?",
+         "Consistency: same format and meaning everywhere?",
+         "Timeliness: is the data still up to date?",
+         "Representativeness: does it match the people served?"
+        ]
+       },
+       "narration": [
+        "Bias is closely linked to data quality. Before training any model, a careful team asks a set of simple questions about its data.",
+        "Is it complete, or are there missing values and missing groups? Is it accurate, or are there typing errors and faulty sensors? Is it consistent, with the same units and categories everywhere?",
+        "Is it timely? A tourism model trained only on data from before a major cyclone or a global travel shutdown may describe a world that no longer exists.",
+        "And is it representative of the people and situations the system will actually face? This last question is the one most directly connected to fairness.",
+        "Simple checks go a long way here. Counting how many examples come from each district, age group or language, and comparing those counts with the population served, often reveals gaps immediately."
+       ]
+      },
+      {
+       "title": "Checking for fairness",
+       "slide": {
+        "kind": "stat",
+        "heading": "Same model, different error rates",
+        "stats": [
+         {
+          "value": "8%",
+          "label": "error rate for urban applicants"
+         },
+         {
+          "value": "25%",
+          "label": "error rate for rural applicants"
+         },
+         {
+          "value": "11%",
+          "label": "overall error rate"
+         }
+        ],
+        "note": {
+         "tone": "warn",
+         "text": "Illustrative figures for a hypothetical loan model"
+        }
+       },
+       "narration": [
+        "Here is an illustrative case. A lender trains a loan approval model mostly on past applicants from Port Louis and other towns, with only a few from rural villages.",
+        "Overall the model looks fine, with an error rate of about eleven per cent. But when we break the results down, the error rate is eight per cent for urban applicants and twenty five per cent for rural ones.",
+        "That is the core fairness check: evaluate the model separately for each relevant group and compare error rates, not just the overall score.",
+        "You might think we could just delete sensitive information such as gender or district. Unfortunately other features, like postcode or type of employment, can act as proxies and carry the same information.",
+        "So removing a column is not enough. We have to measure outcomes for each group and look at why they differ.",
+        "Sometimes the difference has a fair explanation, and sometimes it reveals a gap in the data that we must fix. Either way, it should be investigated and documented before the model is used."
+       ]
+      },
+      {
+       "title": "Safeguards",
+       "slide": {
+        "kind": "steps",
+        "heading": "A responsible workflow",
+        "steps": [
+         {
+          "title": "Audit the data",
+          "sub": "Check coverage, quality and history"
+         },
+         {
+          "title": "Improve the data",
+          "sub": "Collect more examples for missing groups"
+         },
+         {
+          "title": "Test by group",
+          "sub": "Compare error rates across groups"
+         },
+         {
+          "title": "Keep humans involved",
+          "sub": "Review, appeal and monitor after launch"
+         }
+        ]
+       },
+       "narration": [
+        "What can we do about it? First, audit the data before training: who is included, who is missing, and how were the labels produced.",
+        "Second, improve the data where possible, for instance by collecting more examples from under-represented groups or correcting faulty records.",
+        "Third, test the trained model group by group, and do not deploy it if some groups receive clearly worse results without a good, documented reason.",
+        "Finally, keep humans involved. People affected by an automated decision should be able to ask for a human review, and the system should be monitored after launch, because data drifts over time.",
+        "Fairness is not a box you tick once. It is an ongoing responsibility shared by the people who collect the data, build the model and decide how it is used."
+       ]
+      },
+      {
+       "title": "Recap",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Key points",
+        "points": [
+         "Bias often comes from unrepresentative or historical data",
+         "Check completeness, accuracy, consistency, timeliness, representativeness",
+         "Compare error rates across groups",
+         "Human oversight and monitoring are essential"
+        ]
+       },
+       "narration": [
+        "To recap, models inherit the weaknesses of their data, and bias often enters through sampling, history, measurement or labelling.",
+        "Good practice means checking data quality, comparing error rates across groups rather than trusting one overall score, and keeping humans in the loop before and after deployment."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "L10",
+     "type": "reading",
+     "title": "Case study: AI in public services",
+     "dur": 9,
+     "objectives": [
+      "Analyse how a public body might use a model to set priorities",
+      "Evaluate a model with recall and precision in context",
+      "Identify sampling, historical and proxy bias in a realistic case",
+      "Propose safeguards such as human override and transparency"
+     ],
+     "chips": [
+      "Why was overall accuracy not enough in this case study?",
+      "What is a proxy feature?",
+      "What safeguards should a ministry put in place before using AI?"
+     ],
+     "body": "Governments and public bodies increasingly use AI to decide where to send inspectors, which cases to review first, or how to plan services. Done well, this can make scarce public resources go further. Done badly, it can make unfair decisions at scale and erode public trust. This case study follows a **fictional** pilot project on a small island state to show how the ideas from this course — learning from data, evaluation, and bias — come together in a real-world decision. The organisation, people and all figures are invented for teaching purposes.\n\n## The scenario: prioritising post-cyclone inspections\n\nAfter a severe cyclone, a fictional island's Ministry of Housing receives around 6,000 reports of damaged homes. It has only 40 building inspectors, and each can inspect about 15 homes a day. Inspecting everything would take ten working days, while some families are living in homes that are unsafe right now.\n\nThe ministry's data team proposes a machine learning model to **rank reports by likely severity**, so that inspectors visit the most dangerous cases first. The model would not decide who receives help; it would only set the order of visits.\n\n### The data\n\nThe team has records from three previous cyclones, about 9,000 inspected homes in total. For each home they know:\n\n- **Features:** age of the building, roof type (concrete or corrugated iron), district, distance to the coast, maximum wind speed recorded nearby, and whether the report was submitted online or by telephone.\n- **Label:** the inspector's final rating — *minor*, *moderate* or *severe* damage.\n\nBecause the label is a category, this is a **supervised classification** task.\n\n## Building and evaluating the model\n\nThe team splits the historical data into a training set (70%) and a test set (30%), using homes from the most recent cyclone as an additional check. On the test set the model is 82% accurate overall.\n\nBut the team knows from experience that accuracy alone is not enough, because only about 15% of homes were rated *severe*. They build a confusion matrix for the *severe* class and find:\n\n| | Predicted severe | Predicted not severe |\n|---|---|---|\n| **Actually severe** | 340 | 65 |\n| **Actually not severe** | 120 | 2,175 |\n\nRecall for severe cases is 340 / 405 ≈ 0.84 — the model finds most dangerous homes. Precision is 340 / 460 ≈ 0.74 — about a quarter of the homes it sends inspectors to first are not actually severe. For this use, the team decides that **recall matters more**: sending an inspector to a moderately damaged home first is a small cost, but leaving a family in a collapsing house is a serious one.\n\n## The fairness review\n\nBefore deployment, an internal review board asks the team to break the results down by group. Two problems appear.\n\n**1. Districts with fewer past reports.** One rural district in the south had very few inspected homes in the historical data, because during earlier cyclones many residents there did not file reports. The model's recall for severe damage in that district is only 0.55, compared with 0.88 in urban districts. This is classic **sampling bias**: the district was under-represented in the training data, so the model learnt its patterns poorly.\n\n**2. Online versus telephone reports.** The feature \"submitted online\" turns out to be linked with lower predicted severity. Investigation shows why: older residents and lower-income households tended to phone in their reports, and they also tended to live in older homes with iron roofs. The feature was acting partly as a **proxy** for age and income, rather than describing the damage itself. Worse, in previous cyclones telephone reports had been inspected later, so some damage had grown worse and some had been repaired before inspection — a form of **historical and measurement bias** in the labels.\n\n> **Lesson:** an overall accuracy of 82% concealed a model that would systematically send inspectors last to the communities that were already least well served.\n\n## What the ministry changed\n\nThe team and the review board agreed on several changes before a limited pilot:\n\n1. **Removed the reporting-channel feature**, and checked that no other feature was acting as a strong proxy for income or age.\n2. **Added data** from a rapid field survey of 300 homes in the under-represented district, labelled by inspectors using a common checklist.\n3. **Set a minimum recall target per district** (at least 0.80 for severe cases) rather than a single national target.\n4. **Kept humans in the loop.** The ranking is advisory. Duty officers can move any case to the top, for example when a caller reports a family with a newborn or a person with a disability.\n5. **Published a plain-language notice** explaining that reports are prioritised with the help of a model, which factors it uses, and how residents can ask for an urgent review.\n6. **Monitored the live system** daily during the pilot, comparing predicted and actual severity as inspections came in.\n\nAfter retraining, recall in the rural district rose to 0.81, while overall accuracy fell slightly to 80%. The ministry judged this trade-off clearly worthwhile.\n\n## A checklist for public-sector AI\n\nThe case suggests questions that any public body — and any student evaluating a public AI system — should ask:\n\n- **Purpose:** What decision does the model support, and could it be done well enough without AI?\n- **Data:** Who is represented in the training data, and who is missing? How were the labels produced?\n- **Evaluation:** Which errors are most harmful? Are precision and recall reported, not just accuracy?\n- **Fairness:** Are error rates compared across districts, age groups and other relevant groups?\n- **Oversight:** Who can override the model, and how can affected people ask for a human review?\n- **Transparency and monitoring:** Is the use of AI explained publicly, and is performance checked after launch?\n\n## Key takeaways\n\n- Public-sector AI usually supports a human decision, such as setting priorities, rather than replacing it.\n- Choose evaluation measures based on the real cost of each kind of error; here, missing severe damage was worst.\n- Overall accuracy can hide much worse performance for under-represented groups.\n- Features can act as proxies for sensitive characteristics such as age or income.\n- Better data, group-level targets, human override and public transparency are practical safeguards.\n\n## Check your understanding\n\n1. Why did the team care more about recall than precision for severe cases?\n*Answer:* Because missing a truly severe home (a false negative) could leave a family in danger, whereas visiting a less damaged home first (a false positive) only costs some inspector time.\n2. What type of bias explains the low recall in the southern rural district?\n*Answer:* Sampling bias — the district had very few inspected homes in the historical training data, so it was under-represented.\n3. Why was simply removing the \"submitted online\" feature not the end of the fairness work?\n*Answer:* Other features could still act as proxies for age or income, and the labels themselves carried historical bias, so the team also had to collect better data, check results by group and keep human oversight.\n"
+    }
+   ]
+  }
+ ]
+}

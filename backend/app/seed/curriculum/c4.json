@@ -1,0 +1,1678 @@
+{
+ "course": "c4",
+ "presenter": "henri",
+ "modules": [
+  {
+   "id": "m1",
+   "title": "Module 1 · Energy Foundations and the Solar Resource",
+   "items": [
+    {
+     "id": "c4-L1",
+     "type": "virtual",
+     "title": "From Sunlight to Kilowatt-hours: Power, Energy and Storage",
+     "dur": 20,
+     "objectives": [
+      "Distinguish power in kilowatts from energy in kilowatt-hours",
+      "Estimate daily PV yield from peak sun hours and performance ratio",
+      "Explain why solar intermittency creates a need for storage"
+     ],
+     "chips": [
+      "Why is my electricity bill in kWh and not kW?",
+      "What does 'peak sun hours' actually mean?",
+      "Can batteries alone keep an island grid running at night?"
+     ],
+     "lesson": {
+      "summary": [
+       "Kilowatts measure power, the rate; kilowatt-hours measure energy, the amount over time.",
+       "Daily PV energy is roughly kWp times peak sun hours times performance ratio.",
+       "Solar is variable, so an island grid needs storage or flexible supply to match demand."
+      ],
+      "segments": [
+       {
+        "id": "seg1",
+        "title": "Power and energy: kilowatts versus kilowatt-hours",
+        "slide": {
+         "kind": "formula",
+         "heading": "Energy is power multiplied by time",
+         "formula": "Energy (kWh) = Power (kW) × Time (h)",
+         "points": [
+          "1 kW running for 1 hour delivers 1 kWh",
+          "A 2 kW kettle for 6 minutes uses about 0.2 kWh",
+          "Panels are rated in kWp: a power rating, not an energy figure"
+         ]
+        },
+        "speech": [
+         "Every calculation in this course rests on one distinction: power versus energy. Power is the rate at which energy flows, and we measure it in watts or kilowatts.",
+         "Energy is the amount delivered over a period of time, and on your electricity bill it appears in kilowatt-hours. One kilowatt running for one hour delivers one kilowatt-hour.",
+         "So a two kilowatt kettle used for six minutes, which is a tenth of an hour, uses only about zero point two kilowatt-hours, even though its power is high.",
+         "Solar panels are rated in kilowatt-peak, which is a power rating under standard test conditions. What we really want to know, though, is how many kilowatt-hours they deliver in a day or a year."
+        ],
+        "simpler": [
+         "Here is a simpler way to see it. Power is like the speed of a car, and energy is like the distance it travels.",
+         "Speed tells you how fast you are going right now, while distance depends on the speed and on how long you keep driving.",
+         "In the same way, kilowatts tell you how fast electricity is being used, and kilowatt-hours tell you how much was used altogether."
+        ],
+        "checkpoint": {
+         "id": "cp1",
+         "mandatory": true,
+         "maxAttempts": 3,
+         "question": "In your own words, what is the difference between a kilowatt and a kilowatt-hour?",
+         "concepts": [
+          {
+           "id": "kw_power",
+           "label": "A kilowatt is a unit of power, the rate of using or producing energy",
+           "required": true,
+           "ask": "what a kilowatt actually measures",
+           "rx": [
+            {
+             "re": "\\b(kw|kilowatts?)\\b(?![- ]?h)[^.,;]{0,40}\\b(power|rate|how fast|speed|per second|instant\\w*)",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(power|rate)\\b[^.,;]{0,30}\\b(kw|kilowatts?)\\b(?![- ]?h)",
+             "flags": "i"
+            },
+            {
+             "re": "\\bfirst (one )?is (the )?(power|rate)\\b",
+             "flags": "i"
+            }
+           ]
+          },
+          {
+           "id": "kwh_energy",
+           "label": "A kilowatt-hour is a unit of energy, the amount used over a period of time",
+           "required": true,
+           "ask": "what a kilowatt-hour measures, and how time comes into it",
+           "rx": [
+            {
+             "re": "\\b(kwh|kilowatt[- ]?hours?)\\b[^.;]{0,40}\\b(energy|amount|total|quantity|how much|over (a )?(time|period|hour)|consum\\w*|used)",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(energy|amount|how much)\\b[^.;]{0,30}\\b(kwh|kilowatt[- ]?hours?)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(power|kw|kilowatts?)\\b[^.;]{0,30}\\b(times|multiplied by|x|for)\\b[^.;]{0,15}\\b(time|hours?)\\b",
+             "flags": "i"
+            }
+           ]
+          },
+          {
+           "id": "example",
+           "label": "Example: one kilowatt for one hour gives one kilowatt-hour",
+           "required": false,
+           "ask": "how much energy one kilowatt delivers in one hour",
+           "rx": [
+            {
+             "re": "\\b(one|1|a)\\s*(kw|kilowatt)s?\\s+for\\s+(one|1|an)\\s+hours?\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\bover time\\b",
+             "flags": "i"
+            }
+           ]
+          }
+         ],
+         "misconceptions": [
+          {
+           "id": "same",
+           "label": "They are not the same unit written differently",
+           "rx": [
+            {
+             "re": "\\b(same thing|no difference|are identical|exactly the same|interchangeabl\\w*|just the same)",
+             "flags": "i"
+            }
+           ]
+          },
+          {
+           "id": "reversed",
+           "label": "Reversed: the kilowatt is power, the kilowatt-hour is energy",
+           "rx": [
+            {
+             "re": "\\b(kw|kilowatts?)\\b(?![- ]?h)[^.,;]{0,15}\\b(is|are|measures?)\\b[^.,;]{0,10}\\b(energy|amount)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(kwh|kilowatt[- ]?hours?)\\b[^.,;]{0,15}\\b(is|are|measures?)\\b[^.,;]{0,10}\\b(power|rate)\\b",
+             "flags": "i"
+            }
+           ]
+          }
+         ],
+         "hints": [
+          "Here is a hint. Think about the speed of a car and the distance it travels. Which unit is like speed?",
+          "Another clue: the word hour is in one of the units. What happens when you multiply a rate by a length of time?",
+          "Let me be more direct. One of them measures power, how fast energy flows; the other measures energy, the amount over time. Which is which?"
+         ],
+         "model": "A kilowatt is a unit of power, the rate at which energy is used or produced, while a kilowatt-hour is a unit of energy, the amount delivered over time; one kilowatt running for one hour gives one kilowatt-hour.",
+         "ack": "Exactly: the kilowatt measures power, a rate, and the kilowatt-hour measures energy, that rate kept up over time.",
+         "reteach": "Let me try a different picture. Think of a tap filling a bucket. How far the tap is open, the litres per minute, is like kilowatts. How much water ends up in the bucket, the litres, is like kilowatt-hours, and it depends on both the flow and how long you leave the tap running.",
+         "calibration": [
+          {
+           "answer": "A kilowatt is a unit of power, so how fast energy is used, and a kilowatt-hour is the energy used over time.",
+           "expected": "correct"
+          },
+          {
+           "answer": "kw is the rate, kwh is the amount of energy",
+           "expected": "correct"
+          },
+          {
+           "answer": "kW measures power at an instant. kWh = power multiplied by time so its the total energy",
+           "expected": "correct"
+          },
+          {
+           "answer": "power vs energy. a kilowatt is power, if you run 1 kilowatt for one hour you get one kilowatt hour which is energy",
+           "expected": "correct"
+          },
+          {
+           "answer": "kilowatt is power",
+           "expected": "partial"
+          },
+          {
+           "answer": "a kWh is the energy you use, like on the CEB bill",
+           "expected": "partial"
+          },
+          {
+           "answer": "kW is how fast you use electricity and kWh is bigger",
+           "expected": "partial"
+          },
+          {
+           "answer": "a kilowatt hour is just a bigger unit, like 1000 kilowatts",
+           "expected": "incorrect"
+          },
+          {
+           "answer": "they are the same thing really, just written differently",
+           "expected": "incorrect"
+          },
+          {
+           "answer": "idk",
+           "expected": "unclear"
+          }
+         ]
+        }
+       },
+       {
+        "id": "seg2",
+        "title": "Peak sun hours and daily solar yield",
+        "slide": {
+         "kind": "formula",
+         "heading": "Estimating daily PV energy",
+         "formula": "E_day (kWh) = P_array (kWp) × PSH (h) × PR",
+         "points": [
+          "PSH: daily insolation in kWh/m² ÷ 1 kW/m²",
+          "PR: performance ratio, typically 0.75–0.85",
+          "Example: 3 kWp × 5 h × 0.8 = 12 kWh per day"
+         ],
+         "note": {
+          "tone": "info",
+          "text": "Irradiance figures for Mauritius here are round, illustrative values."
+         }
+        },
+        "speech": [
+         "Sunlight arriving on a surface is measured as irradiance, in watts per square metre. Near midday on a clear Mauritian day it can approach about one thousand watts per square metre.",
+         "Over a whole day, the total solar energy falling on a square metre is called insolation. If a site receives five kilowatt-hours per square metre per day, we say it has five peak sun hours.",
+         "That is a neat shortcut. It is as if the sun shone at full standard strength for five hours, and was then switched off completely.",
+         "A real system loses some energy to heat, dust, wiring and the inverter, so we multiply by a performance ratio, typically around zero point seven five to zero point eight five. Daily energy is kilowatt-peak times peak sun hours times performance ratio."
+        ],
+        "simpler": [
+         "Think of peak sun hours as a way of squashing a whole sunny day into a few hours of full-strength sunshine.",
+         "A one kilowatt array in full sun for one hour makes about one kilowatt-hour, before any losses.",
+         "So you multiply the size of the system by the number of full-sun hours, then take off a slice for losses, a bit like tax taken from a pay cheque."
+        ],
+        "checkpoint": {
+         "id": "cp2",
+         "mandatory": true,
+         "maxAttempts": 3,
+         "question": "A 3 kilowatt-peak rooftop system gets 5 peak sun hours, with a performance ratio of 0.8. About how much energy does it produce per day, and how did you work it out?",
+         "concepts": [
+          {
+           "id": "result",
+           "label": "About 12 kWh per day",
+           "required": true,
+           "ask": "what number of kilowatt-hours per day you end up with",
+           "rx": [
+            {
+             "re": "\\b12(\\.0+)?(?!\\d|\\.\\d)",
+             "flags": "i"
+            },
+            {
+             "re": "\\btwelve\\b",
+             "flags": "i"
+            }
+           ]
+          },
+          {
+           "id": "method",
+           "label": "Multiply array size by peak sun hours and by performance ratio",
+           "required": true,
+           "ask": "how you combine the system size, the sun hours and the performance ratio",
+           "rx": [
+            {
+             "re": "\\bmultipl\\w*",
+             "flags": "i"
+            },
+            {
+             "re": "\\btimes\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\d\\s*(x|×|\\*)\\s*\\d",
+             "flags": "i"
+            },
+            {
+             "re": "\\bproduct of\\b",
+             "flags": "i"
+            }
+           ]
+          },
+          {
+           "id": "losses",
+           "label": "The performance ratio allows for real-world losses",
+           "required": false,
+           "ask": "why we include the performance ratio at all",
+           "rx": [
+            {
+             "re": "\\b(loss|losses|lost|heat|dust|inverter|wiring|efficien\\w*|performance ratio|pr)\\b",
+             "flags": "i"
+            }
+           ]
+          }
+         ],
+         "misconceptions": [],
+         "hints": [
+          "Here is a hint. Start with the ideal case: how much would a three kilowatt array make in five hours of full sun?",
+          "Now remember that real systems lose some energy. The performance ratio tells you what fraction survives.",
+          "Let me be more direct. Three times five gives fifteen kilowatt-hours before losses. What do you get when you multiply that by zero point eight?"
+         ],
+         "model": "About 12 kWh per day: multiply 3 kWp by 5 peak sun hours to get 15 kWh, then multiply by the performance ratio of 0.8 to allow for losses.",
+         "ack": "Right: three kilowatt-peak times five peak sun hours times zero point eight gives about twelve kilowatt-hours a day.",
+         "reteach": "Let me put it another way. Imagine a shop that sells three items an hour for five busy hours: that is fifteen sales. If one in five sales is returned, you keep eighty per cent, which is twelve. The solar array works the same way: size times full-sun hours, then keep the share that survives the losses.",
+         "calibration": [
+          {
+           "answer": "3 x 5 x 0.8 = 12 kWh per day",
+           "expected": "correct"
+          },
+          {
+           "answer": "around 12 kwh a day. you multiply the kWp by the peak sun hours and then by the performance ratio for losses",
+           "expected": "correct"
+          },
+          {
+           "answer": "Multiply 3 by 5 to get 15, then times 0.8 so about twelve kilowatt hours",
+           "expected": "correct"
+          },
+          {
+           "answer": "Its kWp times PSH times PR which gives 12kWh daily",
+           "expected": "correct"
+          },
+          {
+           "answer": "3 times 5 times 0.8",
+           "expected": "partial"
+          },
+          {
+           "answer": "about 12 kWh",
+           "expected": "partial"
+          },
+          {
+           "answer": "you multiply by the hours so 15 kwh",
+           "expected": "partial"
+          },
+          {
+           "answer": "3 + 5 + 0.8 so about 8.8 kWh",
+           "expected": "incorrect"
+          },
+          {
+           "answer": "only 3 kWh because the system is 3 kilowatts",
+           "expected": "incorrect"
+          },
+          {
+           "answer": "not sure tbh",
+           "expected": "unclear"
+          }
+         ]
+        }
+       },
+       {
+        "id": "seg3",
+        "title": "Intermittency and why storage matters",
+        "slide": {
+         "kind": "compare",
+         "heading": "Supply and demand do not line up",
+         "columns": [
+          {
+           "title": "Solar supply",
+           "points": [
+            "Zero at night",
+            "Peaks around midday",
+            "Drops sharply under passing cloud"
+           ]
+          },
+          {
+           "title": "Household demand",
+           "points": [
+            "Low around midday",
+            "Peaks in the early evening",
+            "Continues through the night"
+           ]
+          },
+          {
+           "title": "Ways to bridge the gap",
+           "points": [
+            "Batteries shift midday surplus",
+            "Flexible plant: bagasse, engines, hydro",
+            "Demand response"
+           ]
+          }
+         ]
+        },
+        "speech": [
+         "Solar output follows the sun: zero at night, a smooth curve on clear days, and a jagged one when clouds pass over. We call this variability, or intermittency.",
+         "Household demand in Mauritius often peaks in the early evening, when people come home, cook and switch on lights and fans, just as solar output is falling to zero.",
+         "On a small island grid with no neighbours to import from, the operator must match supply and demand every second, so this mismatch matters a great deal.",
+         "Storage, such as batteries, shifts midday surplus into the evening, while flexible plants such as bagasse boilers, fuel-oil engines and hydro, together with demand response, fill the remaining gaps."
+        ],
+        "simpler": [
+         "Imagine collecting rainwater. The rain comes when it wants, but you need water every evening.",
+         "A tank lets you save rain for later, and a battery lets you save sunshine for later.",
+         "And when the tank runs dry, you still need a tap connected to another supply, which is the role of flexible power stations."
+        ],
+        "checkpoint": {
+         "id": "cp3",
+         "mandatory": false,
+         "maxAttempts": 2,
+         "question": "Optional check: Why does an island grid with lots of solar power need storage or other flexible supply?",
+         "concepts": [
+          {
+           "id": "variable",
+           "label": "Solar output is variable: none at night and it drops under cloud",
+           "required": true,
+           "ask": "what solar output does over a day and night",
+           "rx": [
+            {
+             "re": "\\b(intermittent|intermittency|variab\\w*|fluctuat\\w*|unpredictab\\w*|unreliab\\w*|inconsistent|varies|vary)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(night|dark|cloud\\w*|sun ?sets?|sun goes down|not always|only (during|in) the day)\\b",
+             "flags": "i"
+            }
+           ]
+          },
+          {
+           "id": "match",
+           "label": "Supply must match demand, so energy must be shifted to when it is needed",
+           "required": true,
+           "ask": "what the grid operator has to keep in balance at every moment",
+           "rx": [
+            {
+             "re": "\\b(match|balanc|meet|cover)\\w*\\b[^.]{0,40}\\b(demand|load|need|consumption|supply)",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(shift|store|save|stor(e|ing)|use)\\w*\\b[^.]{0,40}\\b(later|evening|night|needed|peak)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(demand|load)\\b[^.]{0,40}\\b(evening|night|peak|after sunset)",
+             "flags": "i"
+            }
+           ]
+          },
+          {
+           "id": "isolated",
+           "label": "An island grid cannot import power from neighbours",
+           "required": false,
+           "ask": "why being an island makes this harder",
+           "rx": [
+            {
+             "re": "\\b(island|isolated|no (neighbou?rs?|interconnect\\w*|imports?)|can'?t import|cannot import)\\b",
+             "flags": "i"
+            }
+           ]
+          }
+         ],
+         "misconceptions": [
+          {
+           "id": "creates",
+           "label": "Storage does not create extra energy; it only moves it in time",
+           "rx": [
+            {
+             "re": "\\b(storage|batter\\w*)\\b[^.]{0,30}\\b(creat|generat|produc|make)\\w*\\s+(more|extra|new)\\b",
+             "flags": "i"
+            }
+           ]
+          }
+         ],
+         "hints": [
+          "Here is a hint. What happens to a solar panel's output after sunset, or when a cloud passes?",
+          "Now think about the demand side. When do households use the most electricity, and is the sun still shining then?",
+          "Let me be more direct. Solar is variable, but supply must match demand every moment. What does storage let you do with midday surplus?"
+         ],
+         "model": "Solar output is intermittent, falling to zero at night and dropping under cloud, but supply must match demand at every moment, so storage or flexible plants are needed to shift or supply energy when the sun is not there, such as at the evening peak.",
+         "ack": "Well put: solar comes and goes, demand does not wait, so storage and flexible supply move or fill energy to keep the grid in balance.",
+         "reteach": "Think of a beach restaurant whose fish only arrives at noon but whose diners come at seven. Without a fridge, the fish is wasted at noon and the diners go hungry at seven. Storage is the fridge, and flexible power stations are the backup supplier you can call when the fridge is empty.",
+         "calibration": [
+          {
+           "answer": "Because solar is intermittent, theres no sun at night, so you need batteries to store it and use it in the evening when demand peaks",
+           "expected": "correct"
+          },
+          {
+           "answer": "solar output varies with clouds and the grid must always balance supply and demand",
+           "expected": "correct"
+          },
+          {
+           "answer": "the sun isnt there at night but people still need power, storage shifts the midday surplus to later",
+           "expected": "correct"
+          },
+          {
+           "answer": "Its an isolated island so it cant import power, and solar fluctuates, so you need something to meet demand when the sun goes down",
+           "expected": "correct"
+          },
+          {
+           "answer": "because solar is intermittent",
+           "expected": "partial"
+          },
+          {
+           "answer": "so that supply always matches demand",
+           "expected": "partial"
+          },
+          {
+           "answer": "solar doesnt work at night",
+           "expected": "partial"
+          },
+          {
+           "answer": "because batteries create extra energy for the grid",
+           "expected": "incorrect"
+          },
+          {
+           "answer": "to make electricity cheaper for tourists",
+           "expected": "incorrect"
+          },
+          {
+           "answer": "no idea",
+           "expected": "unclear"
+          }
+         ]
+        }
+       }
+      ],
+      "closing": [
+       "Excellent work today, {name}.",
+       "Let me summarise. Kilowatts measure power, the rate of flow, while kilowatt-hours measure energy, the amount delivered over time.",
+       "To estimate daily solar yield, multiply the system size in kilowatt-peak by the peak sun hours and by the performance ratio.",
+       "And because solar is variable while demand peaks in the evening, an island grid needs storage and flexible supply to keep the two in balance.",
+       "Next, we will use these ideas to size a real rooftop system step by step. Well done."
+      ]
+     }
+    },
+    {
+     "id": "c4-L2",
+     "type": "video",
+     "title": "Energy on an Island: Demand, Supply and the Grid",
+     "dur": 5,
+     "objectives": [
+      "Describe how an isolated island grid differs from a continental one",
+      "Identify the main electricity sources of a small island system",
+      "Read a daily load curve and locate the evening peak"
+     ],
+     "chips": [
+      "Why can't Mauritius just import electricity when demand is high?",
+      "What is bagasse and why is it burned for power?",
+      "What does a daily load curve look like?"
+     ],
+     "chapters": [
+      {
+       "title": "Why islands are different",
+       "slide": {
+        "kind": "bullets",
+        "heading": "An island grid stands alone",
+        "points": [
+         "No interconnector to neighbouring countries",
+         "Supply must match demand every second",
+         "Most fuel arrives by ship",
+         "Cyclones threaten lines, plant and rooftops"
+        ]
+       },
+       "narration": [
+        "Let us begin with a simple question: what makes an island power system special? On a continent, a country that is short of electricity can import it over high-voltage lines from its neighbours.",
+        "Mauritius has no such option. The nearest large grid is thousands of kilometres away, so every kilowatt used on the island must be generated on the island at that very moment.",
+        "That makes the grid operator's job a constant balancing act. If generation falls short of demand even briefly, the frequency drops, and if it falls too far, protection systems start disconnecting customers.",
+        "Islands also tend to depend on imported fuels, which arrive by ship and expose the country to world price swings. That is one of the strongest arguments for local renewable sources such as sunshine and sugar cane.",
+        "And finally there is the weather. A tropical cyclone can bring down lines, damage plant and lift poorly fixed panels off roofs, so resilience is a design requirement, not an afterthought."
+       ]
+      },
+      {
+       "title": "Where the electricity comes from",
+       "slide": {
+        "kind": "cards",
+        "heading": "A typical small-island generation mix",
+        "cards": [
+         {
+          "label": "Fuel oil engines",
+          "text": "Flexible, quick to start, but imported fuel"
+         },
+         {
+          "label": "Coal",
+          "text": "Steady baseload, imported, high emissions"
+         },
+         {
+          "label": "Bagasse",
+          "text": "Sugar cane fibre burned in cogeneration plants"
+         },
+         {
+          "label": "Hydro",
+          "text": "Small, but useful for fast response"
+         },
+         {
+          "label": "Solar and wind",
+          "text": "Local, zero fuel cost, but variable"
+         }
+        ],
+        "note": {
+         "tone": "info",
+         "text": "Illustrative mix for teaching; not official national statistics."
+        }
+       },
+       "narration": [
+        "A small island grid usually relies on a handful of source types. Fuel-oil engines are flexible and can start quickly, but every litre of fuel is imported.",
+        "Coal plants provide steady output around the clock, but they are also imported and carry high carbon emissions, which sits awkwardly with national climate targets.",
+        "Bagasse is the fibrous residue left after sugar cane is crushed. Mills burn it in boilers to make steam for their own process and to export electricity to the grid, a process called cogeneration.",
+        "Hydro schemes on an island are small, but they can respond within minutes, which is valuable for balancing. Solar and wind add local energy with no fuel bill, but their output depends on the weather.",
+        "In this course I will use round, illustrative numbers for these sources. The point is to understand the engineering trade-offs, not to memorise any particular year's statistics.",
+        "Each of these sources has a different role. Some run steadily, some follow demand up and down, and some simply produce whatever the weather allows, which the others must then work around."
+       ]
+      },
+      {
+       "title": "Power and energy on the grid",
+       "slide": {
+        "kind": "formula",
+        "heading": "Energy is power sustained over time",
+        "formula": "E (kWh) = P (kW) × t (h)",
+        "points": [
+         "Grid capacity is a power question: megawatts",
+         "Fuel use and bills are energy questions: kilowatt-hours",
+         "1 MW for 1 hour = 1 MWh = 1,000 kWh"
+        ]
+       },
+       "narration": [
+        "Engineers ask two different questions about a grid. The first is about power: can the plants deliver enough megawatts at the busiest moment of the year?",
+        "The second is about energy: over a day or a year, how many megawatt-hours must be produced, and how much fuel will that burn?",
+        "Remember the link between them. Energy equals power multiplied by time, so one megawatt sustained for one hour delivers one megawatt-hour, which is one thousand kilowatt-hours.",
+        "A solar farm may have a large power rating but deliver modest energy, because it only runs at full output for a few hours a day. We capture that with a number called the capacity factor.",
+        "Capacity factor is the actual annual energy divided by what the plant would produce running flat out all year. For solar in a sunny tropical location, it is typically somewhere around seventeen to twenty per cent."
+       ]
+      },
+      {
+       "title": "Reading a daily load curve",
+       "slide": {
+        "kind": "steps",
+        "heading": "A typical weekday load curve",
+        "steps": [
+         {
+          "title": "Night trough",
+          "sub": "Lowest demand, roughly 2 to 5 am"
+         },
+         {
+          "title": "Morning ramp",
+          "sub": "Homes, offices and factories switch on"
+         },
+         {
+          "title": "Daytime plateau",
+          "sub": "Air conditioning and commerce, while solar is strong"
+         },
+         {
+          "title": "Evening peak",
+          "sub": "Cooking, lighting and fans as the sun sets"
+         },
+         {
+          "title": "Late decline",
+          "sub": "Demand falls back towards the night trough"
+         }
+        ]
+       },
+       "narration": [
+        "A load curve shows total demand on the grid, hour by hour. On a typical weekday it starts with a trough in the early morning, when most people are asleep.",
+        "Demand then ramps up as homes, offices, hotels and factories switch on, and it holds a fairly high plateau through the working day, helped along by air conditioning on hot afternoons.",
+        "The most important feature for us is the evening peak. As the sun sets, people come home, cook, switch on lights, televisions and fans, and demand climbs to its highest point of the day.",
+        "Notice the timing problem. Solar generation is strongest around midday and has fallen to zero by the evening peak, so solar alone cannot serve that peak without help.",
+        "Grid planners sometimes call the shape that remains after subtracting solar the duck curve, because the deep midday dip and steep evening rise look a little like a duck's back and neck.",
+        "When you size rooftop systems or batteries later in this course, keep this daily shape in mind, because the value of a kilowatt-hour depends very much on the hour at which it arrives."
+       ]
+      },
+      {
+       "title": "Recap",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Key points",
+        "points": [
+         "Island grids must balance supply and demand alone",
+         "Mix: oil, coal, bagasse, hydro, solar, wind",
+         "Power is about capacity; energy is about fuel and bills",
+         "The evening peak arrives after solar has faded"
+        ]
+       },
+       "narration": [
+        "To recap: an island grid must balance supply and demand on its own, with no neighbours to lean on, and its traditional fuels are largely imported.",
+        "We separated power, which is about capacity at the busiest moment, from energy, which is about fuel use and bills over time.",
+        "And we saw that the evening peak arrives just as solar fades, a mismatch that will shape everything we do on storage later in the course."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "c4-L3",
+     "type": "reading",
+     "title": "The Solar Resource: Irradiance, Peak Sun Hours and Yield",
+     "dur": 9,
+     "objectives": [
+      "Distinguish irradiance from insolation",
+      "Convert daily insolation into peak sun hours",
+      "Explain how orientation, tilt, shading and losses affect yield",
+      "Calculate daily yield and capacity factor"
+     ],
+     "chips": [
+      "Why do panels in Mauritius face north?",
+      "What losses are in the performance ratio?",
+      "How is capacity factor calculated?"
+     ],
+     "body": "Every solar design begins with one question: how much sunshine actually reaches the site? This reading introduces the vocabulary engineers use to describe the solar resource, shows how to turn it into a single practical number, and explains why two rooftops only twenty kilometres apart in Mauritius can have noticeably different yields. All Mauritian figures below are **round, illustrative values** chosen for teaching, not official measurements.\n\n## Irradiance and insolation\n\n**Irradiance** is the instantaneous power of sunlight arriving on a surface, measured in watts per square metre (W/m²). Above the atmosphere it is about 1,360 W/m². At ground level on a clear tropical day, with the sun high in the sky, it peaks at roughly 1,000 W/m², because the atmosphere absorbs and scatters part of the beam.\n\n**Insolation** (also called *irradiation*) is the *energy* received over a period, usually a day, measured in kWh/m² per day. It is the area under the irradiance curve: irradiance is power, insolation is energy. The distinction mirrors the kilowatt and kilowatt-hour of your electricity bill.\n\nSunlight reaches a panel in three ways:\n\n- **Direct (beam) radiation** travels straight from the sun's disc and casts sharp shadows.\n- **Diffuse radiation** has been scattered by air, dust and cloud and arrives from the whole sky.\n- **Reflected (albedo) radiation** bounces off the ground or nearby surfaces.\n\nOn a clear day the direct component dominates. Under the thin, broken cloud common over the central plateau, diffuse light can make up half or more of the total, which is why panels still generate useful energy on grey days.\n\n## Peak sun hours: one number for a whole day\n\nDesigners compress a whole day of changing irradiance into a single number called **peak sun hours** (PSH). Because solar modules are rated at a standard irradiance of 1,000 W/m², we ask: *for how many hours would the sun need to shine at exactly 1,000 W/m² to deliver today's insolation?*\n\n```\nPSH (hours) = daily insolation (kWh/m² per day) ÷ 1 kW/m²\n```\n\nSo a site receiving 5.5 kWh/m² per day has 5.5 peak sun hours. The number is the same as the insolation value, but the unit changes from kWh/m² to hours, which makes sizing arithmetic very convenient: a 1 kWp array at a site with 5.5 PSH produces about 5.5 kWh per day *before losses*.\n\n> **Illustrative Mauritian figures.** For teaching, we will assume about 6 PSH on the sunny, dry west and north coasts, about 5.5 PSH as an island-wide average, and about 5 PSH on the cloudier central plateau around Curepipe. Summer months (November to February) are higher; winter months (June to August) are lower.\n\n## Orientation, tilt and shading\n\nA panel collects the most energy when it faces the sun. Mauritius lies at roughly 20° south, so:\n\n- Panels should face **north** (towards the equator) in the southern hemisphere.\n- A **tilt close to the latitude**, around 20°, maximises annual energy. Flatter tilts favour summer, steeper tilts favour winter.\n- Small deviations cost little: a panel facing north-east or north-west, or tilted at 10° instead of 20°, typically loses only a few per cent of annual yield.\n- On a flat concrete roof, a modest tilt also helps rain wash off dust and salt.\n\n**Shading** is far more damaging than small orientation errors. Cells in a module are connected in series, so shading even one cell can drag down the current of a whole string. Water tanks, parapet walls, neighbouring buildings and trees are the usual culprits. A designer should check shade at different times of day and in winter, when the sun is lower and shadows are longer. Bypass diodes and module-level electronics reduce, but do not eliminate, the loss.\n\n## From the sky to the socket: the performance ratio\n\nA module's rating assumes laboratory conditions: 1,000 W/m², a cell temperature of 25 °C and clean glass. Real rooftops are hotter and dustier. We bundle all of the real-world losses into a single **performance ratio** (PR):\n\n| Loss source | Typical illustrative loss |\n|---|---|\n| High cell temperature | 6–10% |\n| Dust, salt and soiling | 2–5% |\n| Wiring and mismatch | 2–3% |\n| Inverter conversion | 2–4% |\n| Shading and availability | 0–5% |\n\nMultiplying the surviving fractions gives a PR typically between **0.75 and 0.85**. Hot tropical roofs sit at the lower end unless panels are well ventilated. Coastal sites need more frequent cleaning because of salt spray.\n\n### Worked example: a guesthouse in Flic en Flac\n\nA small guesthouse on the west coast installs a 4 kWp array facing north at a 15° tilt with no shading. Assume 6 PSH and a PR of 0.78.\n\n1. Ideal daily energy = 4 kWp × 6 h = 24 kWh.\n2. Real daily energy = 24 kWh × 0.78 ≈ 18.7 kWh.\n3. Annual energy ≈ 18.7 × 365 ≈ 6,800 kWh.\n\nThe same array in Curepipe, with 5 PSH and the same PR, would give 4 × 5 × 0.78 = 15.6 kWh per day, about 5,700 kWh per year. Location alone changes yield by roughly a sixth.\n\n## Capacity factor\n\nA convenient way to summarise yield is the **capacity factor**: actual energy divided by the energy the array would produce at full rated power all year.\n\n```\nCapacity factor = annual energy ÷ (kWp × 8,760 h)\n```\n\nFor the Flic en Flac guesthouse: 6,800 ÷ (4 × 8,760) ≈ 0.19, or about 19%. Solar capacity factors are modest compared with a baseload plant simply because of night, clouds and the sun's angle, not because the panels are inefficient.\n\n## Key takeaways\n\n- Irradiance is power per square metre (W/m²); insolation is energy per square metre per day (kWh/m²).\n- Peak sun hours convert daily insolation into the equivalent hours of 1,000 W/m² sunshine.\n- In Mauritius, panels should face north with a tilt near 20°; shading matters far more than small orientation errors.\n- The performance ratio, typically 0.75–0.85, bundles temperature, soiling, wiring and inverter losses.\n- Daily yield ≈ kWp × PSH × PR, and capacity factor = annual energy ÷ (kWp × 8,760).\n\n## Check your understanding\n\n1. A site receives 5.2 kWh/m² per day. How many peak sun hours is that, and how much would a 2 kWp array with a PR of 0.8 produce in a day?\n*Answer:* 5.2 PSH; 2 × 5.2 × 0.8 ≈ 8.3 kWh per day.\n2. Why should panels in Mauritius face north rather than south?\n*Answer:* Mauritius is in the southern hemisphere, so the sun tracks across the northern sky; north-facing panels point towards it for most of the year.\n3. Which is usually more damaging to yield: a 15° error in orientation or a water tank shading one corner of the array for three hours a day? Why?\n*Answer:* The shading, because series-connected cells mean a small shaded area can cut the output of a whole string, whereas a modest orientation error costs only a few per cent.\n"
+    }
+   ]
+  },
+  {
+   "id": "m2",
+   "title": "Module 2 · Sizing Rooftop Solar",
+   "items": [
+    {
+     "id": "c4-L4",
+     "type": "video",
+     "title": "Sizing a Rooftop Solar System Step by Step",
+     "dur": 5,
+     "objectives": [
+      "Convert a household bill into a daily energy target",
+      "Calculate the required array size in kilowatt-peak",
+      "Translate array size into panel count and roof area",
+      "Check the result against roof, budget and grid limits"
+     ],
+     "chips": [
+      "How do I find my daily consumption from a monthly bill?",
+      "Why do we divide by the performance ratio when sizing?",
+      "How much roof space does a 3 kWp system need?"
+     ],
+     "chapters": [
+      {
+       "title": "Start from the energy you need",
+       "slide": {
+        "kind": "steps",
+        "heading": "The sizing workflow",
+        "steps": [
+         {
+          "title": "Daily energy target",
+          "sub": "From the bill, in kWh per day"
+         },
+         {
+          "title": "Array size",
+          "sub": "Divide by peak sun hours and performance ratio"
+         },
+         {
+          "title": "Panel count",
+          "sub": "Divide by the rating of one module"
+         },
+         {
+          "title": "Roof check",
+          "sub": "Area, orientation, shading, structure"
+         },
+         {
+          "title": "Inverter and grid",
+          "sub": "Match inverter and connection limits"
+         }
+        ]
+       },
+       "narration": [
+        "Sizing a rooftop solar system is mostly careful arithmetic, done in the right order. We always start from the energy the building needs, not from the number of panels we would like to fit.",
+        "The best source is a year of electricity bills. Each bill shows kilowatt-hours used over roughly a month, and averaging them smooths out the seasons.",
+        "Suppose a family home in Curepipe uses about three hundred kilowatt-hours a month, which is an illustrative round figure. Dividing by thirty gives a daily energy target of about ten kilowatt-hours.",
+        "We also need to decide what fraction of that we want solar to cover. For this example, we will aim to cover the whole daily average, and later we will discuss why some owners deliberately aim lower.",
+        "One practical tip: look for seasonal patterns in the bills. Many Mauritian homes use noticeably more in the hot, humid summer months because of fans and air conditioning, and that matters if you want to cover the summer peak."
+       ]
+      },
+      {
+       "title": "From energy to kilowatt-peak",
+       "slide": {
+        "kind": "formula",
+        "heading": "Required array size",
+        "formula": "P_array (kWp) = E_day ÷ (PSH × PR)",
+        "points": [
+         "E_day = 10 kWh per day",
+         "PSH = 5 hours (illustrative, inland plateau)",
+         "PR = 0.8",
+         "P_array = 10 ÷ (5 × 0.8) = 2.5 kWp"
+        ],
+        "note": {
+         "tone": "info",
+         "text": "Peak sun hours are illustrative; use site data for real designs."
+        }
+       },
+       "narration": [
+        "Earlier we estimated daily yield by multiplying array size by peak sun hours and by performance ratio. To size a system, we simply turn that formula around.",
+        "The required array size equals the daily energy target divided by the product of peak sun hours and performance ratio.",
+        "For our home, let us assume five peak sun hours, a reasonable illustrative figure for the cloudier central plateau, and a performance ratio of zero point eight.",
+        "Five times zero point eight is four, and ten divided by four gives two and a half kilowatt-peak. That is the size of array that should, on an average day, produce the ten kilowatt-hours we need.",
+        "Notice what happens on the sunnier west coast. With six peak sun hours instead of five, the same home would need only about two point one kilowatt-peak, because each panel works harder."
+       ]
+      },
+      {
+       "title": "Panels and roof space",
+       "slide": {
+        "kind": "stat",
+        "heading": "Turning kWp into hardware",
+        "stats": [
+         {
+          "value": "400 Wp",
+          "label": "rating of one module"
+         },
+         {
+          "value": "7",
+          "label": "modules for 2.8 kWp"
+         },
+         {
+          "value": "≈ 2 m²",
+          "label": "area of one module"
+         },
+         {
+          "value": "≈ 15–20 m²",
+          "label": "roof area with spacing"
+         }
+        ],
+        "note": {
+         "tone": "info",
+         "text": "Module ratings and areas are illustrative round numbers."
+        }
+       },
+       "narration": [
+        "Now we turn kilowatt-peak into panels. A common modern module is rated at about four hundred watts-peak, so two thousand five hundred watts divided by four hundred gives six point two five modules.",
+        "We cannot install a quarter of a panel, so we round up to seven modules, giving two point eight kilowatt-peak. Rounding up adds a little margin for degradation as the panels age.",
+        "Each module of this rating is roughly two square metres, so seven modules cover about fourteen square metres, and with access paths and edge clearances you should budget fifteen to twenty.",
+        "Orientation matters too. Mauritius is in the southern hemisphere, so panels should face roughly north, tilted at about the latitude, which is around twenty degrees, to collect the most energy over the year.",
+        "Shading is the silent killer of yield. A water tank, a neighbour's wall or a mango tree can cut output far more than you would expect, so always check the shade path from morning to evening."
+       ]
+      },
+      {
+       "title": "Inverter, grid connection and checks",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Sanity checks before you commit",
+        "points": [
+         "Inverter sized near the array rating, often 0.8 to 1.0 times kWp",
+         "Utility limits on export and connection size",
+         "Roof structure and fixings rated for cyclone winds",
+         "Budget and payback compared with the bill saved"
+        ]
+       },
+       "narration": [
+        "The panels produce direct current, so we need an inverter to convert it to the alternating current used in the house. For a two point eight kilowatt-peak array, a two point five to three kilowatt inverter is typical.",
+        "Slightly undersizing the inverter is common, because the array rarely produces its full rated power. The small amount of energy clipped at noon is usually worth the saving.",
+        "Next, check the rules of the utility scheme you are connecting under. Schemes often limit the size of a residential system and set how exported energy is credited, and that can change the best size.",
+        "If exported energy is credited at a lower rate than the energy you buy, it usually pays to size the system to match daytime use closely, rather than to maximise the number of panels on the roof.",
+        "Then check the roof itself. In a cyclone, wind can try to lift panels like a wing, so the structure and fixings must be rated for very high gusts, a theme we will return to in the next reading.",
+        "Finally, compare the cost with the value of the energy saved each year. That is the bridge to our later work on levelised cost of energy."
+       ]
+      },
+      {
+       "title": "Recap",
+       "slide": {
+        "kind": "steps",
+        "heading": "Sizing in one line",
+        "steps": [
+         {
+          "title": "Bill to kWh per day",
+          "sub": "300 kWh per month ÷ 30 = 10 kWh"
+         },
+         {
+          "title": "kWh to kWp",
+          "sub": "10 ÷ (5 × 0.8) = 2.5 kWp"
+         },
+         {
+          "title": "kWp to modules",
+          "sub": "2.5 kWp ÷ 0.4 kWp → 7 modules"
+         }
+        ]
+       },
+       "narration": [
+        "To recap: start from the bill and find the daily energy target, then divide by peak sun hours times performance ratio to get the array size in kilowatt-peak.",
+        "Divide by the module rating and round up to get the panel count, then check roof area, orientation, shading and cyclone-rated fixings.",
+        "Finally, match the inverter and the utility's connection rules, and you have a defensible first design."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "c4-L5",
+     "type": "reading",
+     "title": "Inside the System: Inverters, Losses and Cyclone-Resilient Mounting",
+     "dur": 9,
+     "objectives": [
+      "Compare grid-tied, off-grid and hybrid systems",
+      "Check string voltage and DC/AC ratio against an inverter",
+      "Build a performance ratio from individual losses",
+      "List design measures for cyclone resilience"
+     ],
+     "chips": [
+      "Why does my solar switch off when the grid fails?",
+      "What is inverter clipping?",
+      "How are panels fixed to survive a cyclone?"
+     ],
+     "body": "Knowing the size of an array in kilowatt-peak is only the start. A real rooftop system is a chain of components: modules, mounting structure, cabling, protection devices, an inverter and a connection to the grid. Each link affects how much energy reaches the building and whether the system survives a cyclone season. This reading takes you through that chain, with Mauritian examples and **illustrative round numbers**.\n\n## Grid-tied, off-grid and hybrid systems\n\nThere are three broad system types:\n\n| Type | How it works | Typical use |\n|---|---|---|\n| Grid-tied | Panels and inverter feed the building; surplus is exported, shortfall is imported | Most urban homes and businesses |\n| Off-grid | Panels charge batteries; no utility connection | Remote sites, islets, telecom masts |\n| Hybrid | Grid-tied with a battery and a backup circuit | Homes and businesses wanting cyclone backup |\n\nA plain grid-tied inverter **shuts down when the grid fails**. This is a safety feature called *anti-islanding*: it stops the system from energising lines that line workers believe are dead. Many owners are surprised to learn that their solar panels do not keep the lights on after a cyclone. Only a hybrid system with a battery and an isolated backup circuit can do that.\n\n## Strings, voltage and the inverter\n\nModules are wired in series into **strings**. Series connection adds voltages, so ten modules of about 40 V each give a string of roughly 400 V DC. The inverter has an allowed input voltage window, and the designer must check two extremes:\n\n- On a **cool, bright morning**, module voltage rises; the string must stay *below* the inverter's maximum input voltage.\n- On a **hot afternoon**, voltage falls; the string must stay *above* the inverter's minimum operating voltage.\n\nThe inverter contains a **maximum power point tracker** (MPPT), which continuously adjusts the operating voltage to extract the most power as light and temperature change. Larger inverters have two or more MPPT inputs, letting you put east- and west-facing strings on separate trackers.\n\n### Sizing ratio\n\nThe **DC/AC ratio** is the array's kWp divided by the inverter's AC rating. Ratios between about 1.0 and 1.3 are common. A 3.3 kWp array on a 3 kW inverter (ratio 1.1) will occasionally *clip* at midday on cold, clear days, but the lost energy is small and the cheaper inverter usually pays off.\n\n## Where the energy goes: the loss chain\n\n> **Worked example: a family home in Rose Hill.** The household uses 330 kWh per month (illustrative), about 11 kWh per day. Assume 5.5 PSH and target 100% of average consumption.\n>\n> 1. Choose a PR. Estimate losses: temperature 8%, soiling 3%, wiring 2%, inverter 3%, other 2%. PR ≈ 0.92 × 0.97 × 0.98 × 0.97 × 0.98 ≈ 0.83. Round down to 0.80 for safety.\n> 2. Array size = 11 ÷ (5.5 × 0.80) = 2.5 kWp.\n> 3. With 400 Wp modules: 2.5 ÷ 0.4 = 6.25 → **7 modules = 2.8 kWp**.\n> 4. Inverter: 2.8 kWp ÷ 1.1 ≈ 2.5 kW → choose a **2.5 or 3 kW** inverter.\n> 5. Check: expected yield = 2.8 × 5.5 × 0.80 × 365 ≈ 4,500 kWh per year, slightly above the 4,000 kWh consumed, leaving margin for module degradation of roughly 0.5% per year.\n\nNotice the order of operations: energy target first, then losses, then array size, then hardware. Designers who start by asking how many panels fit on the roof often end up with oversized systems whose surplus is credited at a low export rate.\n\n## Designing for cyclones\n\nMauritius lies in the cyclone belt of the south-west Indian Ocean. Intense systems can bring gusts well above 200 km/h. Wind does not simply push on a panel; it flows over and under it and creates **uplift**, like air over an aircraft wing. Most rooftop failures start at the fixings, not the modules.\n\nGood practice includes:\n\n- **Structural assessment** of the roof slab or trusses before installation. Concrete roofs, common in Mauritius, generally offer good anchorage; light iron-sheet roofs need careful attention to purlin fixings.\n- **Mounting rated for the local design wind speed**, with certified calculations rather than catalogue guesses.\n- **Keeping arrays back from roof edges and corners**, where wind suction is strongest.\n- **Low tilt and limited gaps** to reduce lift; very steep tilt frames on flat roofs act like sails.\n- **Corrosion-resistant hardware** such as aluminium rails and stainless steel bolts, because coastal salt rapidly attacks ordinary steel.\n- **Post-cyclone inspection**: checking fixings, cable glands and earthing before re-energising.\n\nA detached panel can become a dangerous projectile, so cyclone rating is a safety issue for neighbours as well as an investment issue for the owner.\n\n## Safety and protection\n\nEvery system needs DC and AC isolators so it can be disconnected safely, overcurrent protection, surge protection (lightning is common in summer storms) and proper earthing of frames. Firefighters and electricians must be able to see clearly labelled isolation points. These items add cost but are non-negotiable, and they are inspected before a utility allows connection.\n\n## Key takeaways\n\n- Grid-tied inverters shut down during a grid outage; only hybrid systems with batteries provide backup.\n- String voltage must stay inside the inverter's window on both cool mornings and hot afternoons.\n- A DC/AC ratio of about 1.0 to 1.3 trades a little midday clipping for a cheaper inverter.\n- Estimate PR from individual losses, then size the array from the energy target, not the roof area.\n- Cyclone resilience depends on fixings, edge clearance, low tilt and corrosion-resistant hardware.\n\n## Check your understanding\n\n1. A homeowner says their grid-tied solar system will power the fridge during a cyclone blackout. Are they right?\n*Answer:* No. Anti-islanding protection shuts a grid-tied inverter down when the grid fails; they would need a hybrid inverter with a battery and a backup circuit.\n2. A 3.6 kWp array is connected to a 3 kW inverter. What is the DC/AC ratio, and what is the main consequence?\n*Answer:* 1.2; the inverter will clip some output around midday on very bright days, losing a small amount of energy in exchange for a cheaper inverter.\n3. Why are roof corners and edges poor locations for panels in a cyclone-prone area?\n*Answer:* Wind suction and uplift are strongest at edges and corners, so fixings there are the most likely to fail.\n"
+    },
+    {
+     "id": "c4-L6",
+     "type": "quiz",
+     "title": "Quiz 1: Solar Resource and Rooftop Sizing",
+     "dur": 15,
+     "quiz": {
+      "time": 15,
+      "weight": 5,
+      "questions": [
+       {
+        "q": "Which unit measures energy rather than power?",
+        "o": [
+         "Kilowatt (kW)",
+         "Kilowatt-hour (kWh)",
+         "Kilowatt-peak (kWp)",
+         "Watt per square metre (W/m²)"
+        ],
+        "a": 1,
+        "ex": "A kilowatt-hour is power multiplied by time, so it measures energy; the others are rates or power ratings."
+       },
+       {
+        "q": "A site receives 5.5 kWh/m² of solar energy per day. How many peak sun hours is that?",
+        "o": [
+         "1.0 hour",
+         "11 hours",
+         "5.5 hours",
+         "0.55 hours"
+        ],
+        "a": 2,
+        "ex": "Peak sun hours equal daily insolation divided by the standard 1 kW/m², so 5.5 kWh/m² gives 5.5 hours."
+       },
+       {
+        "q": "A home uses 360 kWh per month. With 6 peak sun hours and a performance ratio of 0.8, roughly what array size covers its average consumption?",
+        "o": [
+         "1.5 kWp",
+         "2.5 kWp",
+         "3.6 kWp",
+         "4.8 kWp"
+        ],
+        "a": 1,
+        "ex": "Daily need is 360 ÷ 30 = 12 kWh, and 12 ÷ (6 × 0.8) = 2.5 kWp."
+       },
+       {
+        "q": "In Mauritius, which direction should a fixed rooftop array ideally face?",
+        "o": [
+         "North",
+         "South",
+         "East",
+         "West"
+        ],
+        "a": 0,
+        "ex": "Mauritius is in the southern hemisphere, so the sun tracks across the northern sky and north-facing panels collect the most energy."
+       },
+       {
+        "q": "Which of these is NOT normally included in the performance ratio?",
+        "o": [
+         "Losses from high cell temperature",
+         "Inverter conversion losses",
+         "Dust and salt soiling",
+         "The number of peak sun hours at the site"
+        ],
+        "a": 3,
+        "ex": "Peak sun hours describe the solar resource itself; the performance ratio bundles the system's real-world losses."
+       },
+       {
+        "q": "A homeowner's grid-tied system has no battery. What happens to its output during a cyclone-related grid outage?",
+        "o": [
+         "It powers the house as normal",
+         "The inverter shuts down because of anti-islanding protection",
+         "It exports extra energy to neighbours",
+         "It charges the panels for later use"
+        ],
+        "a": 1,
+        "ex": "Anti-islanding protection disconnects a grid-tied inverter when the grid fails, to protect line workers; backup needs a hybrid system with storage."
+       },
+       {
+        "q": "Why should rooftop arrays in cyclone-prone areas be kept back from roof edges and corners?",
+        "o": [
+         "Panels there are harder to clean",
+         "Wind uplift and suction are strongest at edges and corners",
+         "Edges receive less sunlight",
+         "Utilities forbid panels near edges for billing reasons"
+        ],
+        "a": 1,
+        "ex": "Wind flow separates at edges and corners, creating the highest suction, so fixings there are most likely to fail."
+       },
+       {
+        "q": "A 3.6 kWp array is paired with a 3 kW inverter. Which statement is correct?",
+        "o": [
+         "The system will not work because the inverter is too small",
+         "The DC/AC ratio is 0.83",
+         "The DC/AC ratio is 1.2 and some midday output may be clipped",
+         "The inverter will be damaged on sunny days"
+        ],
+        "a": 2,
+        "ex": "3.6 ÷ 3 = 1.2, a common ratio that trades a little midday clipping for a cheaper inverter."
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "m3",
+   "title": "Module 3 · Intermittency and Storage",
+   "items": [
+    {
+     "id": "c4-L7",
+     "type": "video",
+     "title": "Intermittency: Why Sun and Wind Vary",
+     "dur": 6,
+     "objectives": [
+      "Distinguish predictable from unpredictable variability",
+      "Explain how cloud and wind changes affect an island grid",
+      "Describe ramp rates, reserves and curtailment"
+     ],
+     "chips": [
+      "Is solar variability predictable or random?",
+      "Why does a passing cloud matter more on an island grid?",
+      "What is curtailment and why would anyone waste free energy?"
+     ],
+     "chapters": [
+      {
+       "title": "Two kinds of variability",
+       "slide": {
+        "kind": "compare",
+        "heading": "Predictable and unpredictable variation",
+        "columns": [
+         {
+          "title": "Predictable",
+          "points": [
+           "Day and night cycle",
+           "Seasonal sun angle",
+           "Trade-wind seasons"
+          ]
+         },
+         {
+          "title": "Unpredictable",
+          "points": [
+           "Passing clouds",
+           "Gusts and lulls in wind",
+           "Storm and cyclone events"
+          ]
+         }
+        ]
+       },
+       "narration": [
+        "Intermittency is a word you will hear constantly in energy debates, and it is worth being precise about it. Solar and wind output vary in two quite different ways.",
+        "Some variation is perfectly predictable. We know exactly when the sun will rise and set on any day of the year, and we know the winter sun in Mauritius sits lower in the sky than the summer sun.",
+        "Other variation is uncertain. A cloud drifting over a solar farm can cut its output by more than half within a minute, and wind speed can rise and fall from one gust to the next.",
+        "The predictable part is a planning problem: we can schedule other plants around sunrise and sunset. The unpredictable part is an operating problem: we need reserves ready to respond in seconds or minutes."
+       ]
+      },
+      {
+       "title": "Solar on a cloudy island",
+       "slide": {
+        "kind": "stat",
+        "heading": "How fast can solar change?",
+        "stats": [
+         {
+          "value": "≈ 60%",
+          "label": "possible drop in a single farm's output under cloud"
+         },
+         {
+          "value": "< 1 min",
+          "label": "time for that drop to happen"
+         },
+         {
+          "value": "Smoother",
+          "label": "output when many sites are spread out"
+         }
+        ],
+        "note": {
+         "tone": "info",
+         "text": "Illustrative round figures to show orders of magnitude."
+        }
+       },
+       "narration": [
+        "Tropical islands often have fast-moving cumulus clouds, especially over the central plateau, where moist trade winds rise over the high ground.",
+        "For a single large solar farm, a passing cloud can produce a steep drop in output and then a steep recovery, a pattern engineers call a ramp.",
+        "Geographic spread helps a lot. When thousands of rooftops are scattered from Grand Baie to Mahébourg, clouds rarely cover them all at once, so the combined output is much smoother than any one site.",
+        "That is why rooftop solar spread across a whole island behaves differently from one big farm in a single valley, even if the total capacity is the same.",
+        "Engineers measure this with the ramp rate, the change in output per minute. Grid codes sometimes limit how fast large solar farms may ramp, which is another job batteries can do."
+       ]
+      },
+      {
+       "title": "Wind on an island",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Wind: a different pattern",
+        "points": [
+         "Output rises with roughly the cube of wind speed",
+         "Trade winds give a seasonal pattern",
+         "Turbines shut down in extreme winds to protect themselves",
+         "Cyclone design limits turbine size and type"
+        ]
+       },
+       "narration": [
+        "Wind turbines vary for different reasons. Their output rises very steeply with wind speed, roughly with the cube of the speed, so a small change in wind gives a large change in power.",
+        "On a trade-wind island, wind is often steadier in some months than others, and unlike solar it can blow at night, which makes it a useful partner to sunshine.",
+        "In very strong winds, turbines must stop and feather their blades to protect themselves. In a cyclone, that means wind output vanishes exactly when the grid is under the most stress.",
+        "This is why island wind farms often use turbines that can be lowered or are specially rated for cyclones, which tends to make them smaller and more expensive per kilowatt.",
+        "The cube relationship cuts both ways. If the wind drops from ten metres per second to eight, the output falls by about half, which is a much bigger swing than the change in wind suggests."
+       ]
+      },
+      {
+       "title": "How the grid copes",
+       "slide": {
+        "kind": "cards",
+        "heading": "Tools for handling variability",
+        "cards": [
+         {
+          "label": "Forecasting",
+          "text": "Predict solar and wind hours to days ahead"
+         },
+         {
+          "label": "Spinning reserve",
+          "text": "Plants running below full output, ready to ramp up"
+         },
+         {
+          "label": "Fast storage",
+          "text": "Batteries respond in fractions of a second"
+         },
+         {
+          "label": "Curtailment",
+          "text": "Deliberately limiting output when supply exceeds demand"
+         }
+        ]
+       },
+       "narration": [
+        "Grid operators have several tools to manage this variability. The first is forecasting: weather models can predict solar and wind output hours or days ahead with useful accuracy.",
+        "The second is reserve. Some conventional plants are kept running below full output, so they can ramp up quickly if solar suddenly drops. That is safe, but it burns fuel while waiting.",
+        "Batteries are increasingly used for this job, because power electronics can respond in a fraction of a second, far faster than any engine or turbine.",
+        "The last resort is curtailment: deliberately limiting solar or wind output when there is more than the grid can absorb. It sounds wasteful, but occasional curtailment is often cheaper than building storage for every last kilowatt-hour.",
+        "In practice, operators use all four tools together, choosing the cheapest combination that keeps the frequency steady and the lights on."
+       ]
+      },
+      {
+       "title": "Why mixing sources helps",
+       "slide": {
+        "kind": "cards",
+        "heading": "Smoothing through diversity",
+        "cards": [
+         {
+          "label": "Spread",
+          "text": "Many rooftops across the island rarely see the same cloud"
+         },
+         {
+          "label": "Solar plus wind",
+          "text": "Wind can blow at night when solar is zero"
+         },
+         {
+          "label": "Firm partners",
+          "text": "Bagasse, hydro and engines cover lulls"
+         },
+         {
+          "label": "Forecast error",
+          "text": "Smaller for a whole fleet than for one site"
+         }
+        ]
+       },
+       "narration": [
+        "There is an important statistical idea hiding in all of this. When you add together many variable sources that do not rise and fall at exactly the same moment, the total varies much less than any one of them.",
+        "Think of it like a classroom. Any one student might be cheerful or grumpy on a given morning, but the average mood of the whole class is far steadier from day to day.",
+        "Solar and wind are a good example of partners. On many islands the wind is stronger at night or in the cooler season, just when solar output is lower, so the two together are steadier than either alone.",
+        "Forecasting also improves with diversity. The error in predicting one rooftop's output may be large, but the error for thousands of rooftops spread across the island is much smaller.",
+        "None of this removes the need for firm supply, because there will still be calm, cloudy evenings. But it does reduce how much storage and reserve the system needs."
+       ]
+      },
+      {
+       "title": "Recap",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Key points",
+        "points": [
+         "Predictable variation is a planning problem",
+         "Unpredictable variation needs fast reserves",
+         "Spread and mix smooth the total output",
+         "Forecasts, reserves, storage and curtailment are the toolkit"
+        ]
+       },
+       "narration": [
+        "To recap: intermittency has a predictable part, such as night and seasons, and an unpredictable part, such as clouds and gusts.",
+        "Spreading many sites across the island and mixing solar with wind smooths the total output considerably.",
+        "And the operator copes using forecasting, reserves, fast storage and, occasionally, curtailment."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "c4-L8",
+     "type": "reading",
+     "title": "Battery Storage: Sizing, Depth of Discharge and Efficiency",
+     "dur": 8,
+     "objectives": [
+      "Distinguish battery energy and power ratings",
+      "Apply depth of discharge and round-trip efficiency in sizing",
+      "Size a home battery for evening load or cyclone backup",
+      "Describe grid-scale storage options for an island"
+     ],
+     "chips": [
+      "How big a battery do I need for the evening?",
+      "What does depth of discharge mean?",
+      "Is pumped hydro possible on an island?"
+     ],
+     "body": "Solar panels produce energy when the sun shines; people use it when they need it. Storage is the bridge between the two. This reading explains the key properties of batteries, shows how to size a battery for a home in Mauritius, and introduces the bigger storage options available to an island grid. As always, the figures are **round and illustrative**.\n\n## Power, energy and duration\n\nA battery has two separate ratings, and confusing them is the most common beginner's mistake:\n\n- **Energy capacity** (kWh): how much energy it can store.\n- **Power rating** (kW): how fast it can charge or discharge.\n\nTheir ratio is the **duration**: a 10 kWh battery with a 5 kW inverter can supply full power for 2 hours. Home batteries typically run for 2–4 hours at full power; grid batteries built for frequency support may have only 30 minutes, while batteries for shifting solar to the evening need 3–4 hours or more.\n\n## Depth of discharge, efficiency and ageing\n\nThree further properties decide how much useful energy a battery delivers.\n\n**Depth of discharge (DoD).** Most batteries should not be emptied completely. A lithium-ion battery might allow 90% DoD; older lead-acid designs often only 50%. Only the allowed fraction is *usable*.\n\n**Round-trip efficiency.** Some energy is lost as heat when charging and discharging. If you put in 10 kWh and get back 9 kWh, the round-trip efficiency is 90%. Lithium-ion systems are typically around 85–95%; lead-acid is lower.\n\n**Cycle life and temperature.** Every charge-discharge cycle wears the battery a little. Manufacturers quote a number of cycles, for example 6,000 cycles to 80% of original capacity. Heat accelerates ageing, so a battery in a hot garage under a tin roof will age faster than one in a shaded, ventilated room.\n\n| Property | Lithium iron phosphate (illustrative) | Lead-acid (illustrative) |\n|---|---|---|\n| Usable DoD | 90% | 50% |\n| Round-trip efficiency | 92% | 80% |\n| Cycle life | 6,000 | 1,000 |\n| Maintenance | Very low | Regular checks |\n\n## Sizing a home battery\n\nThe aim is usually to cover the evening and night load that solar cannot serve directly.\n\n```\nNominal capacity (kWh) = night energy ÷ (DoD × round-trip efficiency)\n```\n\n### Worked example: covering the evening peak in Quatre Bornes\n\nA household uses 10 kWh per day, of which an estimated 4 kWh falls between sunset and sunrise (illustrative). They choose a lithium iron phosphate battery with 90% DoD and 90% round-trip efficiency.\n\n1. Energy that must come out of the battery each night: 4 kWh.\n2. Energy that must be stored to deliver it: 4 ÷ 0.90 ≈ 4.4 kWh.\n3. Nominal capacity allowing for DoD: 4.4 ÷ 0.90 ≈ 4.9 kWh.\n4. Choose a standard **5 kWh** battery, or 6 kWh to allow for ageing.\n5. Check power: evening loads (cooker, lights, fans, television) might reach 3 kW at once, so the battery inverter should be rated for at least 3 kW.\n6. Check the array: the panels must now supply the daytime load *plus* about 4.4 kWh to charge the battery, so the array may need to grow by roughly 1 kWp at 5.5 PSH and a PR of 0.8.\n\n> **Cyclone backup is a different design goal.** To keep a fridge, lights, a router and a water pump running for two days after a cyclone, list only those essential loads, say 3 kWh per day, and size for two days of autonomy with limited solar: about 6 kWh usable, or 7 kWh nominal. The backup circuit must be wired separately so that the battery is not drained by the air conditioner.\n\n## Storage for the whole island\n\nGrid-scale storage serves the same two purposes at a larger scale: *energy shifting* (moving midday solar to the evening peak) and *fast response* (holding frequency steady when a cloud passes or a generator trips). Options include:\n\n- **Battery energy storage systems**: containerised lithium-ion units installed at substations, able to respond in milliseconds.\n- **Pumped hydro storage**: pumping water uphill with surplus energy and running it back through turbines later. It suits sites with two reservoirs at different heights and gives long life, but it needs particular terrain.\n- **Thermal storage**: storing cold or heat, such as chilled water for hotel air conditioning produced at midday, or solar water heaters, which displace electric water heating altogether.\n- **Flexible demand**: scheduling water pumping, ice-making or electric vehicle charging into sunny hours.\n\nStorage never *creates* energy; it moves energy in time and loses some on the way. Its value comes from delivering energy when it is worth more, and from reducing the fuel burned in reserve plants that would otherwise idle in case of a sudden drop in solar output.\n\n## Key takeaways\n\n- A battery has an energy rating (kWh) and a power rating (kW); their ratio is the duration.\n- Usable energy is reduced by depth of discharge, and delivered energy by round-trip efficiency.\n- Size a home battery as night energy ÷ (DoD × efficiency), then check the power rating and the array size.\n- Heat shortens battery life, so location and ventilation matter in a tropical climate.\n- Grid storage shifts energy and provides fast response; it moves energy in time but does not create it.\n\n## Check your understanding\n\n1. A battery is rated 8 kWh and 4 kW. How long can it run at full power?\n*Answer:* 8 ÷ 4 = 2 hours.\n2. A home needs 3 kWh from its battery each night. With 80% DoD and 90% round-trip efficiency, what nominal capacity is needed?\n*Answer:* 3 ÷ (0.8 × 0.9) ≈ 4.2 kWh, so choose a battery of about 4.5–5 kWh.\n3. Why might a hotel use chilled-water storage instead of a larger battery?\n*Answer:* Cooling is a large share of hotel demand; making chilled water at midday from solar stores energy cheaply as cold and shifts the air-conditioning load away from the evening peak.\n"
+    },
+    {
+     "id": "c4-L9",
+     "type": "video",
+     "title": "Balancing an Island Grid: Bagasse, Storage and Flexibility",
+     "dur": 6,
+     "objectives": [
+      "Compare energy-shifting and fast-response roles of storage",
+      "Explain the role of bagasse cogeneration in a seasonal energy mix",
+      "Discuss resilience strategies for cyclones on an island grid"
+     ],
+     "chips": [
+      "Is bagasse really renewable?",
+      "What's the difference between a battery for energy and one for power?",
+      "How can solar help keep the lights on after a cyclone?"
+     ],
+     "chapters": [
+      {
+       "title": "Storage does two different jobs",
+       "slide": {
+        "kind": "compare",
+        "heading": "Energy shifting versus fast response",
+        "columns": [
+         {
+          "title": "Energy shifting",
+          "points": [
+           "Moves midday solar to the evening",
+           "Measured in MWh",
+           "Several hours of discharge"
+          ]
+         },
+         {
+          "title": "Fast response",
+          "points": [
+           "Steadies frequency within seconds",
+           "Measured in MW",
+           "Minutes of discharge are enough"
+          ]
+         }
+        ]
+       },
+       "narration": [
+        "In the previous lecture we saw how variable sun and wind can be. Now let us look at the tools that make a high-renewable island grid work, starting with storage.",
+        "Storage does two quite different jobs. The first is energy shifting: soaking up surplus solar at midday and releasing it during the evening peak. This needs many megawatt-hours of capacity.",
+        "The second job is fast response: injecting or absorbing power within a fraction of a second when a cloud passes or a generator trips. This needs megawatts of power, but only for minutes.",
+        "So when someone quotes a battery size, always ask for both numbers. A battery rated at ten megawatts and five megawatt-hours can deliver its full power for only half an hour.",
+        "A rule of thumb is helpful here. Energy shifting is about how much, measured in megawatt-hours, while fast response is about how quickly, measured in megawatts."
+       ]
+      },
+      {
+       "title": "Bagasse and the sugar season",
+       "slide": {
+        "kind": "cards",
+        "heading": "Bagasse cogeneration",
+        "cards": [
+         {
+          "label": "What it is",
+          "text": "Fibre left after crushing sugar cane"
+         },
+         {
+          "label": "How it is used",
+          "text": "Burned in boilers; steam drives turbines and the mill"
+         },
+         {
+          "label": "When",
+          "text": "Mainly during the harvest and crushing season"
+         },
+         {
+          "label": "Off-season",
+          "text": "Plants may switch to other fuels or stand idle"
+         }
+        ]
+       },
+       "narration": [
+        "Bagasse is a distinctly Mauritian part of this story. When cane is crushed for sugar, the fibrous residue that remains is burned in boilers to raise steam.",
+        "That steam drives the mill and turbines that generate electricity, both for the factory and for export to the grid. Because the useful heat and the electricity both come from one fuel, we call it cogeneration.",
+        "Bagasse is usually counted as renewable, since new cane regrows and absorbs carbon each season. But it is seasonal: most of it is available during the harvest months, roughly the second half of the year.",
+        "So a bagasse plant is a firm, dispatchable source in season, which is valuable for balancing solar. Outside the harvest, the same plant may run on another fuel or not at all, and planners must fill that seasonal gap.",
+        "There is also a land-use question. Cane fields compete with other uses of land, so the future of bagasse power is tied to the future of the sugar industry itself, not only to energy policy."
+       ]
+      },
+      {
+       "title": "Other sources of flexibility",
+       "slide": {
+        "kind": "bullets",
+        "heading": "The flexibility toolkit",
+        "points": [
+         "Fast-start engines running on fuel oil or, in future, biofuels",
+         "Small hydro and pumped storage where terrain allows",
+         "Demand response: shifting water heating and pumping",
+         "Smart inverters that support voltage and frequency"
+        ]
+       },
+       "narration": [
+        "Storage and bagasse are not the only tools. Fuel-oil engines can start and ramp quickly, and in future they could run on biofuels, keeping their flexibility while cutting emissions.",
+        "Small hydro can respond within minutes, and where the terrain allows, pumped storage uses surplus electricity to pump water uphill and releases it through turbines later.",
+        "Demand can be flexible too. Water heaters, pumps and cold stores can be scheduled to run at midday when solar is plentiful, which is a form of storage hidden in hot water and cold rooms.",
+        "Modern inverters on rooftop systems can also help, by supporting voltage and riding through brief faults instead of disconnecting all at once."
+       ]
+      },
+      {
+       "title": "Resilience after a cyclone",
+       "slide": {
+        "kind": "steps",
+        "heading": "Designing for the day after the storm",
+        "steps": [
+         {
+          "title": "Harden",
+          "sub": "Cyclone-rated mounts, underground critical feeders"
+         },
+         {
+          "title": "Island",
+          "sub": "Solar plus battery microgrids for hospitals and shelters"
+         },
+         {
+          "title": "Restore",
+          "sub": "Black-start plants bring the grid back in stages"
+         }
+        ]
+       },
+       "narration": [
+        "Resilience is the ability to survive a shock and recover quickly. For an island exposed to cyclones, this is as important as cost or emissions.",
+        "The first layer is hardening: panels and frames rated for extreme gusts, and critical feeders placed underground where it is worth the cost.",
+        "The second layer is local backup. A hospital, a cyclone shelter or a water pumping station with its own solar array and battery can keep running as a microgrid even if the main grid is down for days.",
+        "The third layer is restoration. Some plants must be able to start without outside power, which we call black start, so the grid can be rebuilt section by section after a blackout."
+       ]
+      },
+      {
+       "title": "Putting the pieces together",
+       "slide": {
+        "kind": "steps",
+        "heading": "A sunny day on a high-solar island",
+        "steps": [
+         {
+          "title": "Morning",
+          "sub": "Engines and bagasse ramp up with demand"
+         },
+         {
+          "title": "Midday",
+          "sub": "Solar covers much of demand; batteries charge"
+         },
+         {
+          "title": "Evening peak",
+          "sub": "Batteries discharge; firm plants ramp up"
+         },
+         {
+          "title": "Night",
+          "sub": "Firm plants and wind carry the load"
+         }
+        ]
+       },
+       "narration": [
+        "Let us walk through a sunny day on an island with a lot of solar, to see how the pieces fit together. In the early morning, firm plants such as engines and, in season, bagasse units carry most of the load.",
+        "As the sun climbs, rooftop and utility solar take over a growing share. Firm plants turn down towards their minimum output, and batteries begin to charge from the midday surplus.",
+        "If a large cloud passes, fast batteries cover the dip within seconds, while the slower plants are asked to ramp up gently in case the cloud lingers.",
+        "As the sun sets, demand climbs towards the evening peak. Batteries discharge to cover the steepest part of the ramp, and engines ramp up to cover the rest and to carry the island through the night.",
+        "Every one of those decisions is a trade-off between cost, emissions and security, and getting the balance right is the core skill of an island grid planner."
+       ]
+      },
+      {
+       "title": "Recap",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Key points",
+        "points": [
+         "Storage shifts energy and provides fast response",
+         "Bagasse is firm but seasonal",
+         "Demand response and smart inverters add flexibility",
+         "Resilience: harden, island, restore"
+        ]
+       },
+       "narration": [
+        "To recap: storage both shifts energy across the day and provides fast response, so always ask for its power and its energy rating.",
+        "Bagasse cogeneration gives firm renewable power in the harvest season, while engines, hydro, demand response and smart inverters fill other gaps.",
+        "And resilience means hardening equipment, letting critical sites run as microgrids, and planning how to restart the grid after a cyclone."
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "m4",
+   "title": "Module 4 · Economics: Levelised Cost of Energy",
+   "items": [
+    {
+     "id": "c4-L10",
+     "type": "video",
+     "title": "Levelised Cost of Energy: Comparing Technologies Fairly",
+     "dur": 6,
+     "objectives": [
+      "Define levelised cost of energy and its components",
+      "Explain why future costs and energy are discounted",
+      "Compare LCOE across solar, fuel oil and storage-backed options",
+      "Recognise what LCOE leaves out"
+     ],
+     "chips": [
+      "Why do we discount future kilowatt-hours?",
+      "Is rooftop solar cheaper than fuel oil in LCOE terms?",
+      "What does LCOE not tell me about a technology?"
+     ],
+     "chapters": [
+      {
+       "title": "Why we need a common yardstick",
+       "slide": {
+        "kind": "compare",
+        "heading": "Very different cost shapes",
+        "columns": [
+         {
+          "title": "Solar PV",
+          "points": [
+           "High upfront cost",
+           "Almost no fuel cost",
+           "25 years or more of output"
+          ]
+         },
+         {
+          "title": "Fuel-oil engine",
+          "points": [
+           "Moderate upfront cost",
+           "Large ongoing fuel bill",
+           "Exposed to oil prices"
+          ]
+         }
+        ]
+       },
+       "narration": [
+        "Suppose you must advise a hotel in Flic en Flac: should it build rooftop solar, or keep buying electricity generated mostly from imported fuel? The costs look completely different.",
+        "Solar is almost all upfront: you pay for panels and installation on day one, then enjoy decades of energy with no fuel bill. An engine is cheaper to buy, but it burns fuel every hour it runs.",
+        "To compare them fairly, we need a single number that spreads all the lifetime costs over all the lifetime energy. That number is the levelised cost of energy, usually shortened to LCOE.",
+        "LCOE answers a simple question: what constant price per kilowatt-hour would exactly cover all the costs of this plant over its life, including a fair return on the money invested?"
+       ]
+      },
+      {
+       "title": "The formula",
+       "slide": {
+        "kind": "formula",
+        "heading": "Levelised cost of energy",
+        "formula": "LCOE = Σ (Cₜ + O&Mₜ + Fₜ) / (1+r)ᵗ  ÷  Σ Eₜ / (1+r)ᵗ",
+        "points": [
+         "C = capital, O&M = operation and maintenance, F = fuel",
+         "E = energy produced in year t",
+         "r = discount rate; both costs and energy are discounted"
+        ]
+       },
+       "narration": [
+        "Here is the formula. On top, we add up every cost in every year: capital, operation and maintenance, and fuel. Underneath, we add up every kilowatt-hour produced.",
+        "Crucially, both the costs and the energy are discounted, which means each future year is divided by one plus the discount rate, raised to the power of the year number.",
+        "Why discount energy as well as money? Because the LCOE is a price, and the revenue from selling a kilowatt-hour in year twenty is worth less today than revenue in year one.",
+        "If you discount costs but forget to discount energy, you will badly underestimate the cost of every long-lived, capital-heavy technology, and solar is exactly that kind of technology.",
+        "In practice we often simplify by assuming the same energy and maintenance every year. Then the formula collapses to annualised capital plus annual running costs, divided by annual energy."
+       ]
+      },
+      {
+       "title": "A worked rooftop example",
+       "slide": {
+        "kind": "stat",
+        "heading": "Illustrative 3 kWp rooftop system",
+        "stats": [
+         {
+          "value": "Rs 150,000",
+          "label": "installed cost"
+         },
+         {
+          "value": "4,400 kWh",
+          "label": "energy per year"
+         },
+         {
+          "value": "Rs 1,500",
+          "label": "maintenance per year"
+         },
+         {
+          "value": "≈ Rs 3.5",
+          "label": "LCOE per kWh at 8% over 25 years"
+         }
+        ],
+        "note": {
+         "tone": "warn",
+         "text": "All figures are illustrative round numbers, not market prices."
+        }
+       },
+       "narration": [
+        "Let us try an illustrative case: a three kilowatt-peak rooftop system costing one hundred and fifty thousand rupees, producing about four thousand four hundred kilowatt-hours a year, with fifteen hundred rupees of maintenance each year.",
+        "A handy shortcut is the capital recovery factor, which turns an upfront cost into an equal annual payment. At eight per cent over twenty-five years, it is about zero point zero nine four.",
+        "One hundred and fifty thousand times zero point zero nine four is about fourteen thousand rupees a year. Add the fifteen hundred for maintenance and the annual cost is about fifteen and a half thousand rupees.",
+        "Divide that by four thousand four hundred kilowatt-hours and you get roughly three and a half rupees per kilowatt-hour. If you forgot to discount, you would get well under two rupees, which shows how much the discount rate matters."
+       ]
+      },
+      {
+       "title": "Comparing options, and what LCOE misses",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Using LCOE wisely",
+        "points": [
+         "Fuel-heavy plants: LCOE driven by fuel price",
+         "Solar: LCOE driven by capital cost and discount rate",
+         "Solar plus storage costs more per kWh but delivers in the evening",
+         "LCOE ignores timing, firmness and grid integration costs"
+        ]
+       },
+       "narration": [
+        "For a fuel-oil engine, most of the levelised cost is fuel, so its LCOE rises and falls with world oil prices and the exchange rate. For solar, the LCOE is dominated by capital cost and the discount rate.",
+        "Adding a battery raises the cost per kilowatt-hour, but the energy now arrives in the evening, when it is worth more to the grid. Comparing the two plain LCOE figures hides that difference.",
+        "This is the key limitation. LCOE treats every kilowatt-hour as equal, but a kilowatt-hour at the evening peak, or during a cyclone recovery, is far more valuable than one at noon on a sunny Sunday.",
+        "So use LCOE as a first filter, and then add the system view: firmness, timing, fuel security and the cost of the extra reserves and storage that variable sources require."
+       ]
+      },
+      {
+       "title": "Sensitivity: what moves the answer",
+       "slide": {
+        "kind": "compare",
+        "heading": "What drives LCOE up or down?",
+        "columns": [
+         {
+          "title": "Solar PV",
+          "points": [
+           "Installed cost per kWp",
+           "Discount rate",
+           "Peak sun hours and PR"
+          ]
+         },
+         {
+          "title": "Fuel-oil engine",
+          "points": [
+           "Fuel price and exchange rate",
+           "Engine efficiency",
+           "Hours of operation"
+          ]
+         }
+        ],
+        "note": {
+         "tone": "info",
+         "text": "Always test a range of assumptions, not just one central case."
+        }
+       },
+       "narration": [
+        "A single LCOE figure hides a lot of uncertainty, so good engineers always run a sensitivity analysis: change one assumption at a time and watch how the answer moves.",
+        "For our rooftop example, raising the discount rate from eight to twelve per cent pushes the capital recovery factor up to about zero point one three, and the LCOE rises by roughly a third.",
+        "Moving the same system from the cloudy plateau to the sunny west coast does the opposite: more peak sun hours mean more kilowatt-hours to share the same cost, so the LCOE falls.",
+        "For a fuel-oil engine, the key variable is the fuel price. A rise in the world oil price, or a weaker rupee, feeds almost directly into the cost of every kilowatt-hour it produces.",
+        "That asymmetry is itself a useful insight for an island. Solar locks in most of its cost on day one, while fuel-based power leaves the country exposed to prices it cannot control."
+       ]
+      },
+      {
+       "title": "Recap",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Key points",
+        "points": [
+         "LCOE = discounted lifetime cost ÷ discounted lifetime energy",
+         "Discount both money and energy",
+         "Capital-heavy options are sensitive to the discount rate",
+         "Compare value and timing, not just LCOE"
+        ]
+       },
+       "narration": [
+        "To recap: the levelised cost of energy divides discounted lifetime costs by discounted lifetime energy to give a break-even price per kilowatt-hour.",
+        "Solar is capital-heavy and sensitive to the discount rate, while fuel-based plants are sensitive to fuel prices.",
+        "And because LCOE ignores when energy arrives, a sound comparison also weighs timing, firmness and resilience."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "c4-L11",
+     "type": "quiz",
+     "title": "Quiz 2: Intermittency, Storage and LCOE",
+     "dur": 15,
+     "quiz": {
+      "time": 15,
+      "weight": 5,
+      "questions": [
+       {
+        "q": "Which of these is an example of unpredictable variability in solar output?",
+        "o": [
+         "Output falling to zero at night",
+         "Lower output in winter than summer",
+         "A passing cloud cutting output within a minute",
+         "Output peaking around midday"
+        ],
+        "a": 2,
+        "ex": "Night, seasons and the midday peak are predictable; a passing cloud is an uncertain, short-term change."
+       },
+       {
+        "q": "A battery is rated 10 kWh and 5 kW. For how long can it deliver full power?",
+        "o": [
+         "0.5 hours",
+         "2 hours",
+         "5 hours",
+         "50 hours"
+        ],
+        "a": 1,
+        "ex": "Duration is energy divided by power: 10 kWh ÷ 5 kW = 2 hours."
+       },
+       {
+        "q": "A household needs 4 kWh from its battery each night. With 90% depth of discharge and 90% round-trip efficiency, what nominal capacity is closest to the minimum?",
+        "o": [
+         "3.2 kWh",
+         "4.0 kWh",
+         "4.9 kWh",
+         "8.0 kWh"
+        ],
+        "a": 2,
+        "ex": "4 ÷ (0.9 × 0.9) ≈ 4.9 kWh of nominal capacity is needed."
+       },
+       {
+        "q": "Why is bagasse cogeneration described as firm but seasonal?",
+        "o": [
+         "It can be dispatched when needed, but fuel is mainly available during the cane harvest",
+         "It only works on sunny days",
+         "It depends on wind speed in winter",
+         "It is imported by ship once a year"
+        ],
+        "a": 0,
+        "ex": "Bagasse is burned in boilers on demand, but it is produced mainly when cane is crushed during the harvest season."
+       },
+       {
+        "q": "Which statement about storage on an island grid is correct?",
+        "o": [
+         "Batteries create extra energy for the grid",
+         "Storage moves energy in time and loses some in the process",
+         "Storage removes the need for any flexible power stations",
+         "Storage only matters on continental grids"
+        ],
+        "a": 1,
+        "ex": "Storage shifts energy from when it is produced to when it is needed, with some round-trip losses; it does not create energy."
+       },
+       {
+        "q": "In the LCOE formula, why is future energy production discounted as well as future costs?",
+        "o": [
+         "Because panels degrade every year",
+         "To make solar look cheaper",
+         "Because LCOE is a price, and revenue earned in later years is worth less today",
+         "Because energy prices always fall over time"
+        ],
+        "a": 2,
+        "ex": "LCOE is the constant price that recovers costs, so the energy that earns revenue must be discounted on the same basis as the costs."
+       },
+       {
+        "q": "A rooftop system costs Rs 100,000, has a capital recovery factor of 0.1, Rs 1,000 per year of maintenance, and produces 3,000 kWh per year. What is its approximate LCOE?",
+        "o": [
+         "Rs 0.37 per kWh",
+         "Rs 3.67 per kWh",
+         "Rs 33 per kWh",
+         "Rs 11 per kWh"
+        ],
+        "a": 1,
+        "ex": "Annual cost is 100,000 × 0.1 + 1,000 = Rs 11,000, and 11,000 ÷ 3,000 ≈ Rs 3.67 per kWh (illustrative figures)."
+       },
+       {
+        "q": "What is the main limitation of comparing technologies by LCOE alone?",
+        "o": [
+         "It ignores capital cost",
+         "It cannot handle fuel costs",
+         "It treats every kWh as equally valuable, regardless of when it is delivered",
+         "It only works for solar"
+        ],
+        "a": 2,
+        "ex": "LCOE ignores timing and firmness, so an evening kilowatt-hour from storage looks worse than it is compared with a midday one."
+       }
+      ]
+     }
+    },
+    {
+     "id": "c4-L12",
+     "type": "assignment",
+     "title": "Assignment: Rooftop Solar and Storage Proposal for a Mauritian Building",
+     "dur": 120,
+     "assignment": {
+      "weight": 25,
+      "max": 100,
+      "brief": "You are a junior engineer at a small energy consultancy. A client in Mauritius has asked for a technical and economic proposal for rooftop solar, with or without a battery. Choose ONE client: (a) a family home in Curepipe on the central plateau, or (b) a 20-room guesthouse in Flic en Flac on the west coast.\n\nData provided (illustrative, for this assignment only): a 12-month consumption table for each client (home: 250–340 kWh per month; guesthouse: 2,800–4,200 kWh per month), an hourly load profile for a typical day, monthly peak sun hours (plateau 4.3–5.8; west coast 5.2–6.8), roof plans with dimensions and shading obstacles, and a cost sheet: installed PV Rs 50,000 per kWp, battery Rs 30,000 per kWh, inverter replacement in year 12, maintenance 1% of capital per year, grid tariff Rs 6 per kWh (home) and Rs 8 per kWh (guesthouse), export credit Rs 3 per kWh, discount rate 8%, lifetime 25 years.\n\nTasks: 1) Determine the daily energy target and size the PV array in kWp, panel count and roof layout, justifying peak sun hours, performance ratio and orientation. 2) Analyse the hourly profile to estimate self-consumed and exported energy, and decide whether a battery is worthwhile; if so, size it using depth of discharge and round-trip efficiency. 3) Calculate the LCOE of your design (show the capital recovery factor and discounting) and compare it with the grid tariff, with and without the battery. 4) Specify cyclone-resilience measures and explain what the system will and will not do during a grid outage. 5) Run a sensitivity check on two variables of your choice (for example discount rate, PV cost or tariff).\n\nDeliverables: a technical report of at most 2,000 words (excluding tables, calculations and appendices) plus a spreadsheet showing all calculations. State every assumption clearly; marks are awarded for transparent reasoning, not for any single 'right' number.",
+      "rubric": [
+       {
+        "criterion": "PV system sizing and layout",
+        "max": 25,
+        "desc": "Correct daily energy target, justified peak sun hours and performance ratio, array size, panel count, inverter choice and a realistic roof layout that avoids shading."
+       },
+       {
+        "criterion": "Intermittency and storage analysis",
+        "max": 20,
+        "desc": "Uses the hourly profile to quantify self-consumption and export; battery decision is reasoned, and any battery is sized correctly using DoD, efficiency and power rating."
+       },
+       {
+        "criterion": "Levelised cost and economic comparison",
+        "max": 25,
+        "desc": "Correct LCOE with discounting and capital recovery factor, a clear comparison with the grid tariff, and a sensible two-variable sensitivity analysis."
+       },
+       {
+        "criterion": "Cyclone resilience and safety",
+        "max": 15,
+        "desc": "Specific, appropriate mounting, protection and backup measures, with an accurate explanation of behaviour during a grid outage."
+       },
+       {
+        "criterion": "Communication and transparency",
+        "max": 15,
+        "desc": "Well-structured report within the word limit, clear assumptions, traceable spreadsheet and a recommendation the client can act on."
+       }
+      ]
+     }
+    }
+   ]
+  }
+ ]
+}

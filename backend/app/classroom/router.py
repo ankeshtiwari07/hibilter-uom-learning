@@ -124,7 +124,7 @@ def public_lesson(lesson: Lesson, course_code: str | None) -> dict:
                                     "misconceptions": [{"id": m["id"], "label": m["label"]} for m in cp.get("misconceptions", [])],
                                     "hint_count": len(cp["hints"])}})
     return {"id": lesson.id, "course_id": lesson.course_id, "course_code": course_code, "title": lesson.title, "module": lesson.module,
-            "dur": c.get("dur", 25), "version": lesson.version, "objectives": c.get("objectives", []), "segments": segs,
+            "dur": c.get("dur", 25), "version": lesson.version, "objectives": c.get("objectives", []), "summary": c.get("summary", []), "chips": c.get("chips", []), "segments": segs,
             "avatars": lesson.avatars, "policy": {"threshold": "required", "hints": True, "assisted": True, "simpler": True, **(lesson.policy or {})}}
 
 

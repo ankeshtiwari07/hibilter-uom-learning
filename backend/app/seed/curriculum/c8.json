@@ -1,0 +1,1787 @@
+{
+ "course": "c8",
+ "presenter": "nalini",
+ "modules": [
+  {
+   "id": "m1",
+   "title": "Module 1 · Electronic health records",
+   "items": [
+    {
+     "id": "c8-L1",
+     "type": "video",
+     "title": "From paper folders to electronic health records",
+     "dur": 6,
+     "objectives": [
+      "Define health informatics as the meeting point of people, information and technology",
+      "Distinguish an electronic medical record, an electronic health record and a personal health record",
+      "Identify the main users of an EHR and what each needs from it",
+      "Weigh the main benefits and challenges of moving from paper to electronic records"
+     ],
+     "chips": [
+      "What is the difference between an EMR and an EHR?",
+      "Why can a paper folder be dangerous in an emergency?",
+      "Who besides doctors uses the electronic health record?"
+     ],
+     "chapters": [
+      {
+       "title": "The folder that went missing",
+       "slide": {
+        "kind": "cards",
+        "heading": "One patient, three paper folders",
+        "cards": [
+         {
+          "label": "Area health centre",
+          "text": "Blood pressure readings and prescriptions"
+         },
+         {
+          "label": "Regional hospital",
+          "text": "Admission notes and an allergy written in red"
+         },
+         {
+          "label": "Private laboratory",
+          "text": "HbA1c results posted on paper"
+         }
+        ],
+        "note": {
+         "tone": "info",
+         "text": "A hypothetical Mauritian scenario used throughout the course"
+        }
+       },
+       "narration": [
+        "Picture a sixty-eight-year-old woman with diabetes who collapses at a bus stop in Port Louis and is rushed to the emergency department of a regional public hospital.",
+        "Her blood pressure readings live in a paper folder at her area health centre in Rose-Hill, her last blood test sits in a private laboratory, and her penicillin allergy is written in red ink on a hospital folder from three years ago.",
+        "The emergency doctor has none of these in front of her. She has to decide on treatment while the information that could guide her is scattered across three buildings.",
+        "This is the everyday problem that health informatics sets out to solve. Information exists, but it is not in the right place, in the right form, at the right moment.",
+        "Over the next twelve weeks we will look at how electronic records, data standards and privacy safeguards work together so that this patient gets safer care."
+       ]
+      },
+      {
+       "title": "What health informatics is",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Health informatics: three ingredients",
+        "points": [
+         "People: patients, clinicians, managers, public health teams",
+         "Information: what is recorded, how, and what it means",
+         "Technology: records systems, networks, standards",
+         "Goal: better, safer, more efficient care"
+        ]
+       },
+       "narration": [
+        "Health informatics is the discipline that studies how health information is collected, stored, shared and used to improve care.",
+        "I like to describe it as the meeting point of three things: people, information and technology. If you forget any one of the three, projects fail.",
+        "A beautifully designed computer system that nurses find too slow to use at the bedside will simply be bypassed, and the information will end up back on scraps of paper.",
+        "So as future health professionals, you do not need to become programmers. You need to understand what good health information looks like and how systems help or hinder your work.",
+        "That is exactly the level this course is pitched at, practical and clinical rather than deeply technical.",
+        "Throughout the course I will keep asking a simple question: does this help the right person get the right information at the right time, without exposing it to the wrong person?"
+       ]
+      },
+      {
+       "title": "EMR, EHR and PHR",
+       "slide": {
+        "kind": "compare",
+        "heading": "Three kinds of electronic record",
+        "columns": [
+         {
+          "title": "EMR",
+          "points": [
+           "One organisation's record",
+           "Digital version of the chart",
+           "Mostly stays inside the clinic"
+          ]
+         },
+         {
+          "title": "EHR",
+          "points": [
+           "Longitudinal, across settings",
+           "Shared with authorised teams",
+           "Built for exchange"
+          ]
+         },
+         {
+          "title": "PHR",
+          "points": [
+           "Managed by the patient",
+           "Apps, portals, wearables",
+           "Patient decides what to share"
+          ]
+         }
+        ]
+       },
+       "narration": [
+        "You will meet three terms that people often mix up. An electronic medical record is the digital chart held by a single organisation, such as one clinic or one hospital.",
+        "An electronic health record goes further. It aims to be a longitudinal record of a person's health across many settings and over time, shared with the authorised professionals who care for them.",
+        "A personal health record is controlled by the patient, for example a mobile app where someone logs their blood glucose and chooses what to share with their doctor.",
+        "In practice the words are used loosely, but the key idea is reach. An electronic health record is designed to travel with the patient between the health centre, the hospital and the laboratory.",
+        "Notice that our collapsed patient would have been helped most by exactly that kind of record."
+       ]
+      },
+      {
+       "title": "Who uses the record, and why",
+       "slide": {
+        "kind": "cards",
+        "heading": "Many users, many needs",
+        "cards": [
+         {
+          "label": "Doctors and nurses",
+          "text": "History, results, medications, care plans"
+         },
+         {
+          "label": "Pharmacists",
+          "text": "Prescriptions, allergies, interactions"
+         },
+         {
+          "label": "Managers",
+          "text": "Bed occupancy, waiting times, stock"
+         },
+         {
+          "label": "Public health",
+          "text": "Disease trends such as dengue cases"
+         },
+         {
+          "label": "Patients",
+          "text": "Appointments, results, their own data"
+         }
+        ]
+       },
+       "narration": [
+        "The electronic record is not only a clinical notebook. Doctors and nurses use it for history, results and care plans, but many other people depend on it too.",
+        "Pharmacists check prescriptions against allergies and other medicines. Laboratory staff send results into it. Managers use summary data to plan beds, staff and drug stock.",
+        "Public health teams use aggregated data to spot trends, for instance a rise in dengue cases after heavy summer rains, so that vector control can be targeted quickly.",
+        "And increasingly, patients themselves want to see their results and appointments online. Each of these users needs a different view of the same underlying data.",
+        "That is an important design principle we will come back to when we discuss access control: different roles should see different slices of the record.",
+        "Even the cleaner and the porter may appear in the workflow, for example when a bed is marked as ready, but they should see nothing clinical."
+       ]
+      },
+      {
+       "title": "Benefits and challenges",
+       "slide": {
+        "kind": "compare",
+        "heading": "Paper to electronic: the trade-offs",
+        "columns": [
+         {
+          "title": "Benefits",
+          "points": [
+           "Legible, available record",
+           "Alerts for allergies and interactions",
+           "Data for planning and research"
+          ]
+         },
+         {
+          "title": "Challenges",
+          "points": [
+           "Cost, training and downtime",
+           "Poor usability and alert fatigue",
+           "Privacy and security risks"
+          ]
+         }
+        ],
+        "note": {
+         "tone": "warn",
+         "text": "Technology alone does not guarantee safer care"
+        }
+       },
+       "narration": [
+        "The benefits are real. Records become legible and available around the clock, computers can warn about allergies and drug interactions, and managers get data instead of guesswork.",
+        "But there are challenges. Systems cost money, staff need training, power cuts and network failures during a cyclone can make records unavailable, and badly designed screens slow clinicians down.",
+        "Too many warnings cause alert fatigue, where busy staff click through every pop-up without reading it, which can be as dangerous as having no warnings at all.",
+        "And when records are electronic and shared, a single breach can expose thousands of patients at once. That is why privacy is one of the three pillars of this course."
+       ]
+      },
+      {
+       "title": "Recap",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Key points",
+        "points": [
+         "Informatics joins people, information and technology",
+         "An EHR is longitudinal and shared across settings",
+         "Many users need different views of one record",
+         "Benefits come with usability, downtime and privacy risks"
+        ]
+       },
+       "narration": [
+        "To recap, health informatics is about getting the right information to the right person at the right time, and it depends on people as much as technology.",
+        "An electronic health record differs from a single clinic's chart because it follows the patient across settings and is shared with authorised professionals.",
+        "Next, in our interactive lesson, we will open up an electronic health record and look at the components inside it."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "c8-L2",
+     "type": "virtual",
+     "title": "Inside an electronic health record: the core components",
+     "dur": 20,
+     "objectives": [
+      "Explain how an EHR differs from a scanned paper record",
+      "Describe the core components of an EHR and how they work together",
+      "Explain why coded terminologies matter for EHR data"
+     ],
+     "chips": [
+      "What is clinical decision support?",
+      "What goes in a problem list?",
+      "What is SNOMED CT used for?"
+     ],
+     "lesson": {
+      "summary": [
+       "An EHR holds structured, shared data, not pictures of paper",
+       "Components such as the allergy list, order entry and decision support work together",
+       "Coded terminologies make diagnoses consistent and countable"
+      ],
+      "segments": [
+       {
+        "id": "seg1",
+        "title": "More than a scanned folder",
+        "slide": {
+         "kind": "compare",
+         "heading": "Scanned folder versus EHR",
+         "columns": [
+          {
+           "title": "Scanned folder",
+           "points": [
+            "An image of handwriting",
+            "One copy in one place",
+            "Cannot be searched or trended"
+           ]
+          },
+          {
+           "title": "Electronic health record",
+           "points": [
+            "Structured, coded fields",
+            "Shared with authorised staff",
+            "Can drive alerts and graphs"
+           ]
+          }
+         ]
+        },
+        "speech": [
+         "Some hospitals begin their digital journey by scanning old paper folders. That is useful for storage, but a scanned page is only a picture of handwriting.",
+         "In a true electronic health record, a blood pressure is stored as numbers in a defined field, a diagnosis as a code, and a medicine with its dose and frequency. That is what we call structured data.",
+         "Because the data is structured, the computer can search it, draw a graph of a patient's blood glucose over a year, and check a new prescription against known allergies.",
+         "And because the record is shared, the nurse on the ward, the pharmacist and the doctor in clinic can all open the same up-to-date record at the same time, wherever they are authorised to work."
+        ],
+        "simpler": [
+         "Let me put it more simply. A scanned folder is like a photo of a page. You can look at it, but the computer cannot understand it.",
+         "An electronic health record is more like a spreadsheet that the computer understands, so it can search, sort and warn.",
+         "And instead of one folder on one shelf, everyone who is allowed can open the same record from wherever they are."
+        ],
+        "checkpoint": {
+         "id": "cp1",
+         "mandatory": true,
+         "maxAttempts": 3,
+         "question": "In your own words, how is an electronic health record more than just a scanned copy of a paper folder?",
+         "ack": "Exactly: an EHR holds structured data the computer can work with, and it is shared so authorised staff in different places can use the same record at once.",
+         "concepts": [
+          {
+           "id": "structured",
+           "label": "Data is structured or coded so the computer can search, trend or process it",
+           "required": true,
+           "ask": "what the computer can do with the data inside an electronic record that it cannot do with a scanned page",
+           "rx": [
+            {
+             "re": "\\b(structur|coded|codes|standardi[sz]ed|fields?\\b|discrete)\\w*",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(search|sort|filter|query|analy[sz]|calculat|graph|trend|count)\\w*",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(computer|system|software|machine)s?\\b[^.]{0,40}\\b(understand|read|process|interpret|work with|act on)",
+             "flags": "i"
+            }
+           ]
+          },
+          {
+           "id": "shared",
+           "label": "Authorised staff in different departments or sites can access the same record, even at the same time",
+           "required": true,
+           "ask": "who can use the record and from where",
+           "rx": [
+            {
+             "re": "\\b(shar|access|availab|accessib|view|see|open)\\w*\\b[^.]{0,60}\\b(anywhere|everywhere|across|multiple|several|same time|at once|simultaneous|any (ward|department|clinic|hospital|site|place))",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(different|multiple|many|other|several)\\s+(doctors?|clinicians?|staff|nurses?|departments?|wards?|sites?|hospitals?|clinics?|places|people|professionals)\\b[^.]{0,40}\\b(see|view|access|use|read|open|share)",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(same time|at once|simultaneous)",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(anywhere|everywhere)\\b[^.]{0,30}\\b(see|access|view|open|use)",
+             "flags": "i"
+            }
+           ]
+          },
+          {
+           "id": "support",
+           "label": "It can drive alerts, reminders or decision support",
+           "required": false,
+           "ask": "how the record can actively help a clinician make a safer decision",
+           "rx": [
+            {
+             "re": "\\b(alert|warn|remind|decision support|pop[- ]?up|prompt)\\w*",
+             "flags": "i"
+            }
+           ]
+          }
+         ],
+         "misconceptions": [
+          {
+           "id": "same",
+           "label": "An EHR is not just the same as paper on a screen",
+           "rx": [
+            {
+             "re": "\\b(same thing|no (real )?difference|basically the same|exactly the same|nothing more than a (scan|copy|pdf))",
+             "flags": "i"
+            }
+           ]
+          }
+         ],
+         "hints": [
+          "Here is a hint. Think about what a computer can actually do with a scanned picture of handwriting, compared with a blood pressure typed into a proper field.",
+          "Another clue: remember our patient whose information was spread across three buildings. What does an electronic health record change about who can see it?",
+          "Let me be more direct. The data is structured so the computer can search and trend it, and the record is shared so staff in different places can open it at once. Can you put that in your own words?"
+         ],
+         "model": "An EHR holds structured, coded data that the computer can search, trend and use for alerts, and authorised clinicians in different departments or sites can access the same up-to-date record at the same time.",
+         "reteach": "Think of the difference between a photograph of a train timetable and a live journey-planner app. The photo only shows what was written; the app understands the times, can search them and warn you of delays, and everyone at every station sees the same update. A scanned folder is the photograph; an electronic health record is the app.",
+         "calibration": [
+          {
+           "answer": "An EHR stores the data in structured fields so the computer can search and graph it, and different doctors and nurses can access the same record from any ward.",
+           "expected": "correct"
+          },
+          {
+           "answer": "the info is coded so the system can process it, also its shared across departments at the same time",
+           "expected": "correct"
+          },
+          {
+           "answer": "A scan is just a picture. In an ehr the results are discrete data you can trend over time and the lab, pharmacy and ward can all see it at once",
+           "expected": "correct"
+          },
+          {
+           "answer": "its structurd data not a picture, and multiple clinicians can view it from different sites",
+           "expected": "correct"
+          },
+          {
+           "answer": "you can search it and sort it, a scan you cant",
+           "expected": "partial"
+          },
+          {
+           "answer": "Many staff in different departments can open it at the same time",
+           "expected": "partial"
+          },
+          {
+           "answer": "it can give alerts like allergy warnings and doctors anywhere can see it",
+           "expected": "partial"
+          },
+          {
+           "answer": "Its basically the same thing as paper, just on a computer screen",
+           "expected": "incorrect"
+          },
+          {
+           "answer": "It saves paper and money for the hospital",
+           "expected": "incorrect"
+          },
+          {
+           "answer": "idk tbh",
+           "expected": "unclear"
+          }
+         ]
+        }
+       },
+       {
+        "id": "seg2",
+        "title": "The core components and how they connect",
+        "slide": {
+         "kind": "cards",
+         "heading": "Core EHR components",
+         "cards": [
+          {
+           "label": "Demographics",
+           "text": "Identity, contacts, national identifier"
+          },
+          {
+           "label": "Problems and allergies",
+           "text": "Diagnoses, allergies, alerts"
+          },
+          {
+           "label": "Medications and orders",
+           "text": "Electronic prescribing, lab and imaging orders"
+          },
+          {
+           "label": "Results",
+           "text": "Laboratory values, imaging reports"
+          },
+          {
+           "label": "Clinical notes",
+           "text": "Consultations, nursing and discharge notes"
+          },
+          {
+           "label": "Decision support",
+           "text": "Alerts, reminders, care pathways"
+          }
+         ]
+        },
+        "speech": [
+         "Most EHRs share a common set of components. Demographics identify the patient. The problem list and allergy list summarise what matters most clinically.",
+         "The medication list and order entry let clinicians prescribe and request tests electronically, often called computerised provider order entry. Results flow back from the laboratory and radiology.",
+         "Clinical notes capture the story: consultations, nursing observations and discharge summaries. Around all of this sits clinical decision support, which applies rules to the data.",
+         "The power comes from the connections. When a doctor orders a medicine, decision support checks it against the allergy list and the other medicines, and raises an alert if there is a problem."
+        ],
+        "simpler": [
+         "Think of the EHR as a house with several rooms: a room for who you are, a room for your allergies, a room for your medicines, and a room for your test results.",
+         "Decision support is like a careful housekeeper who walks between the rooms and notices when something does not fit.",
+         "If a new medicine arrives that clashes with an allergy, the housekeeper raises the alarm before any harm is done."
+        ],
+        "checkpoint": {
+         "id": "cp2",
+         "mandatory": true,
+         "maxAttempts": 3,
+         "question": "A doctor at an area health centre starts to prescribe amoxicillin for a patient whose record lists a penicillin allergy. Which parts of the EHR work together to catch this, and how?",
+         "ack": "That is it: the recorded allergy in the allergy list is checked by clinical decision support against the new medication order, which raises an alert before the prescription is signed.",
+         "concepts": [
+          {
+           "id": "allergy",
+           "label": "The allergy list or allergy record holds the penicillin allergy",
+           "required": true,
+           "ask": "which part of the record holds the information that makes this prescription dangerous",
+           "rx": [
+            {
+             "re": "\\ballerg\\w*",
+             "flags": "i"
+            },
+            {
+             "re": "\\bsensitivit\\w*",
+             "flags": "i"
+            },
+            {
+             "re": "\\bintoleran\\w*",
+             "flags": "i"
+            }
+           ]
+          },
+          {
+           "id": "alert",
+           "label": "Decision support checks the order and raises an alert or warning",
+           "required": true,
+           "ask": "how the system tells the doctor something is wrong",
+           "rx": [
+            {
+             "re": "\\b(alert|warn|flag|notif|interrupt)\\w*",
+             "flags": "i"
+            },
+            {
+             "re": "\\bpops?[- ]?ups?\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\bdecision[- ]support\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\bcds\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(check|compar|cross[- ]?check|match)\\w*\\b[^.]{0,40}\\b(allerg|order|prescri|drug|medic)",
+             "flags": "i"
+            }
+           ]
+          },
+          {
+           "id": "order",
+           "label": "The electronic prescribing or order entry component where the medicine is ordered",
+           "required": false,
+           "ask": "where in the record the doctor actually enters the medicine",
+           "rx": [
+            {
+             "re": "\\b(prescri|orders?\\b|ordering|cpoe|e-?prescri)\\w*",
+             "flags": "i"
+            },
+            {
+             "re": "\\bmedication (list|module|record|section)",
+             "flags": "i"
+            }
+           ]
+          }
+         ],
+         "misconceptions": [
+          {
+           "id": "billing",
+           "label": "Billing or appointment modules do not check medication safety",
+           "rx": [
+            {
+             "re": "\\b(billing|invoice|payment|appointment)\\w*",
+             "flags": "i"
+            }
+           ]
+          }
+         ],
+         "hints": [
+          "Here is a hint. Somewhere in the record, the penicillin allergy was written down. Which component holds that?",
+          "Another clue: the computer does not just store the allergy; it compares it with what the doctor is ordering. What does it do when it finds a match?",
+          "Let me be more direct. The allergy list holds the allergy, and decision support checks the new order against it and shows an alert. Can you explain that in your own words?"
+         ],
+         "model": "The allergy list holds the recorded penicillin allergy, and when the doctor enters the amoxicillin order, clinical decision support checks it against that list and shows an alert before the prescription is signed.",
+         "reteach": "Imagine a supermarket till that knows you have asked never to be sold peanuts. The note on your loyalty card is the allergy list, the scanner at the till is the order entry, and the beep that stops the sale is decision support. The EHR safety check needs all three parts talking to each other.",
+         "calibration": [
+          {
+           "answer": "The allergy list and the prescribing module - when the doc orders amoxicillin the system checks it against the allergy and pops up a warning",
+           "expected": "correct"
+          },
+          {
+           "answer": "clinical decision support compares the new medication with the recorded allergies and alerts the doctor",
+           "expected": "correct"
+          },
+          {
+           "answer": "allergy record + CDS flag it",
+           "expected": "correct"
+          },
+          {
+           "answer": "its the allergies section, the computer would give an alert becuase amoxicillin is a penicillin",
+           "expected": "correct"
+          },
+          {
+           "answer": "The allergy list shows the patient is allergic to penicillin.",
+           "expected": "partial"
+          },
+          {
+           "answer": "The system will give a warning to the doctor before it is prescribed",
+           "expected": "partial"
+          },
+          {
+           "answer": "the medication order section",
+           "expected": "partial"
+          },
+          {
+           "answer": "the billing module and appointment system",
+           "expected": "incorrect"
+          },
+          {
+           "answer": "The lab results would show it",
+           "expected": "incorrect"
+          },
+          {
+           "answer": "no idea sorry",
+           "expected": "unclear"
+          }
+         ]
+        }
+       },
+       {
+        "id": "seg3",
+        "title": "Why codes matter",
+        "slide": {
+         "kind": "cards",
+         "heading": "Common health terminologies",
+         "cards": [
+          {
+           "label": "ICD-10",
+           "text": "Classifying diagnoses for statistics and reporting"
+          },
+          {
+           "label": "SNOMED CT",
+           "text": "Detailed clinical terms for the record"
+          },
+          {
+           "label": "LOINC",
+           "text": "Identifying laboratory tests and observations"
+          }
+         ],
+         "note": {
+          "tone": "info",
+          "text": "Free text is still useful for the narrative, but codes make data computable"
+         }
+        },
+        "speech": [
+         "Free text is natural for clinicians, but one doctor writes type 2 diabetes, another writes T2DM, and a third writes diabetes, non insulin dependent.",
+         "Standard terminologies solve this. ICD-10 classifies diagnoses for statistics, SNOMED CT offers detailed clinical terms, and LOINC identifies laboratory tests such as glycated haemoglobin.",
+         "When a diagnosis carries a standard code, it means exactly the same thing in every record and every system, so the computer can search for it and count it reliably.",
+         "That is how a health ministry can produce accurate figures on diabetes across all its clinics, and, as we will see next module, how systems can exchange data without losing meaning."
+        ],
+        "simpler": [
+         "Think of a barcode on a packet of rice. The label might be written in different ways, but the barcode is always the same.",
+         "A terminology code is a barcode for a diagnosis or a test.",
+         "Because the barcode never changes, the computer can count and find things without getting confused."
+        ],
+        "checkpoint": {
+         "id": "cp3",
+         "mandatory": false,
+         "maxAttempts": 2,
+         "question": "Optional check: Why is it better to record a diagnosis with a code from a standard terminology rather than only as free text?",
+         "ack": "Well put: a standard code means exactly the same thing everywhere, so computers can reliably search, count and analyse it.",
+         "concepts": [
+          {
+           "id": "meaning",
+           "label": "A code is consistent and unambiguous, avoiding spelling variants and abbreviations",
+           "required": true,
+           "ask": "what a code guarantees about the meaning of the diagnosis",
+           "rx": [
+            {
+             "re": "\\b(consisten|unambiguous|ambigu|exact|precise|uniform|misinterpret|misunderstand|confus|spelling|typo|abbreviat|variation)\\w*",
+             "flags": "i"
+            },
+            {
+             "re": "\\bmeans? (exactly )?the same\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\bsame meaning\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\bdifferent (ways|words|terms|names)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(everyone|every (system|hospital|doctor|clinic))\\b[^.]{0,30}\\b(same|understand)",
+             "flags": "i"
+            }
+           ]
+          },
+          {
+           "id": "compute",
+           "label": "Computers can search, count and analyse coded data for care, reporting or research",
+           "required": true,
+           "ask": "what coded data allows computers and analysts to do",
+           "rx": [
+            {
+             "re": "\\b(count|search|analy[sz]|statistic|report|aggregat|research|surveillance|query|sort|filter|trend|epidemiolog)\\w*",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(computer|system|software|machine)s?\\b[^.]{0,40}\\b(understand|read|process|recogni[sz]e)",
+             "flags": "i"
+            }
+           ]
+          },
+          {
+           "id": "share",
+           "label": "Codes let different systems exchange data without losing meaning",
+           "required": false,
+           "ask": "how codes help when data moves between systems",
+           "rx": [
+            {
+             "re": "\\b(exchang|interoperab|shar)\\w*",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(between|other|different) systems\\b",
+             "flags": "i"
+            }
+           ]
+          }
+         ],
+         "misconceptions": [
+          {
+           "id": "shorter",
+           "label": "Codes are not mainly about saving typing or space",
+           "rx": [
+            {
+             "re": "\\b(shorter|save (space|typing)|less typing|quicker to type|faster to type)\\b",
+             "flags": "i"
+            }
+           ]
+          }
+         ],
+         "hints": [
+          "Here is a hint. Think of how many different ways a busy doctor might write type 2 diabetes in free text.",
+          "Another clue: imagine the Ministry wants to know how many patients have diabetes. What is easier to count, free text or codes?",
+          "Let me be more direct. A code means exactly the same thing everywhere, so a computer can search and count it reliably. Can you say that in your own words?"
+         ],
+         "model": "A standard code means exactly the same thing in every record and system, avoiding spelling variations and ambiguity, so computers can reliably search, count and analyse diagnoses for care, reporting and research.",
+         "reteach": "Think of the barcode on a packet of rice. The label might say rice, riz or basmati in different fonts, but the barcode is identical at every till, so the shop can count exactly how many packets were sold. A terminology code is the barcode for a diagnosis.",
+         "calibration": [
+          {
+           "answer": "Codes mean the same thing everywhere so the computer can count how many diabetes cases there are",
+           "expected": "correct"
+          },
+          {
+           "answer": "free text has typos and abbreviations, codes are consistent and you can run reports and statistics on them",
+           "expected": "correct"
+          },
+          {
+           "answer": "because its unambiguous and the ministry can analyse disease trends",
+           "expected": "correct"
+          },
+          {
+           "answer": "different doctors write DM2, diabetes type 2 or T2DM. a code makes it uniform so the system can search for all of them",
+           "expected": "correct"
+          },
+          {
+           "answer": "so it's consistent and everyone understands it",
+           "expected": "partial"
+          },
+          {
+           "answer": "computers can search and count codes easily",
+           "expected": "partial"
+          },
+          {
+           "answer": "So it can be shared with other systems",
+           "expected": "partial"
+          },
+          {
+           "answer": "codes are shorter so it is quicker to type",
+           "expected": "incorrect"
+          },
+          {
+           "answer": "because doctors handwriting is bad",
+           "expected": "incorrect"
+          },
+          {
+           "answer": "not sure tbh",
+           "expected": "unclear"
+          }
+         ]
+        }
+       }
+      ],
+      "closing": [
+       "Excellent work today, {name}.",
+       "Let me summarise what we covered.",
+       "An electronic health record holds structured, shared data that the computer can search and act on, which is what makes it more than a scanned folder.",
+       "Its components, such as the allergy list, order entry and decision support, work together to catch errors, and coded terminologies make the data consistent and countable.",
+       "For revision, read the next article on the anatomy of an EHR, and then we will move on to how records are exchanged between systems. Well done."
+      ]
+     }
+    },
+    {
+     "id": "c8-L3",
+     "type": "reading",
+     "title": "Anatomy of an EHR: components, workflow and data quality",
+     "dur": 9,
+     "objectives": [
+      "List the core functional components of an electronic health record",
+      "Trace how data moves through the EHR during a typical patient visit",
+      "Explain the main dimensions of health-data quality",
+      "Recognise how poor data quality can harm patients"
+     ],
+     "chips": [
+      "What is the difference between a problem list and a diagnosis?",
+      "Why is a master patient index important?",
+      "What does data completeness mean in an EHR?"
+     ],
+     "body": "An electronic health record (EHR) is often described as \"the patient's chart on a computer\", but that description undersells it. A modern EHR is a collection of linked functional components, each with its own data and its own users, connected by a single patient identity. In this reading we open up those components, follow a patient through a typical visit, and examine why the *quality* of the data matters as much as the software that holds it.\n\n## The core components\n\nDifferent vendors package things differently, but almost every EHR contains the following building blocks.\n\n| Component | What it holds | Typical users |\n|---|---|---|\n| Patient demographics and identity | Name, date of birth, sex, address, contacts, national identifier | Registration clerks, all clinicians |\n| Problem list | Active and past diagnoses, often coded | Doctors, nurses |\n| Allergy and alert list | Drug and food allergies, other safety alerts | Doctors, pharmacists, nurses |\n| Medication list and e-prescribing | Current medicines, doses, prescriptions | Doctors, pharmacists |\n| Order entry | Requests for laboratory tests, imaging, referrals | Doctors, nurses |\n| Results | Laboratory values, imaging reports | Clinicians, laboratory staff |\n| Clinical notes | Consultation, nursing, discharge notes | All clinicians |\n| Clinical decision support | Rules, alerts, reminders, care pathways | Works in the background |\n| Administrative functions | Appointments, admissions, bed management | Clerks, managers |\n\nTwo components deserve special attention.\n\n### The master patient index\n\nEvery other component hangs off the patient's identity. A **master patient index** (MPI) makes sure that \"Marie Claire Lebon, born 1958\" registered at a health centre is recognised as the same person when she arrives at a regional hospital. If identity matching fails, the system creates a duplicate record, and the allergy recorded in one copy is invisible from the other. In a country that issues a national identity card, the identifier helps, but clinics still need rules for patients who arrive without documents, such as visitors or unconscious patients.\n\n### Clinical decision support\n\nClinical decision support (CDS) applies knowledge to patient data. Simple examples include a drug–allergy alert, a dose check for children based on weight, or a reminder that a diabetic patient is due for an annual eye examination. CDS is only as good as the data it reads: if the allergy was typed into a free-text note instead of the allergy list, the rule will never fire.\n\n## Following a patient through the record\n\n> **Worked example: a diabetes review at a hypothetical area health centre**\n>\n> 1. **Registration.** The clerk searches the MPI using the patient's national identifier and confirms address and phone number. The appointment is marked as arrived.\n> 2. **Triage.** A nurse records weight, blood pressure and a finger-prick glucose into structured fields. The system plots the blood pressure against the last four visits.\n> 3. **Consultation.** The doctor reviews the problem list (type 2 diabetes, hypertension), sees that the last HbA1c result from the laboratory was high, and writes a short note.\n> 4. **Orders.** The doctor increases the metformin dose through e-prescribing and orders a repeat HbA1c. Decision support checks the dose against kidney function results and raises no alert.\n> 5. **Results.** A week later the laboratory system sends the HbA1c result back into the record, where it appears in the results view and triggers a task for the doctor to review it.\n> 6. **Reporting.** At the end of the month, coded diagnoses and results from all visits are aggregated, without names, into a report on diabetes control across the region.\n\nNotice how each step both *uses* and *creates* data, and how the value at step 6 depends on careful recording at steps 1 to 5.\n\n## Data quality: the hidden foundation\n\nClinicians sometimes say \"rubbish in, rubbish out\". Health informatics uses a more precise vocabulary. The most widely used dimensions of data quality are:\n\n- **Accuracy**: the data correctly describes reality. A weight of 7 kg recorded for an adult is clearly an error.\n- **Completeness**: the required data is present. An allergy list that is simply empty is ambiguous; good systems distinguish \"no known allergies\" from \"not yet asked\".\n- **Timeliness**: data is recorded and available when needed. A result that arrives after the patient has left may never be acted on.\n- **Consistency**: the same fact is recorded the same way in different places. Coded terminologies such as ICD-10, SNOMED CT and LOINC are a major tool here.\n- **Validity**: values follow the agreed format and range, such as dates in a valid format or blood pressure within plausible limits.\n- **Uniqueness**: each patient has one record, not several duplicates.\n\n### Why poor quality is a safety issue\n\nData quality is not just an administrative concern. A duplicate record can hide an allergy; a missing unit can turn 5 mg into 5 g; a result filed against the wrong patient can lead to treatment for a disease the patient does not have. At population level, poor coding distorts statistics, so a ministry might under-estimate the burden of hypertension and under-order medicines.\n\n## Designing for good data\n\nGood data quality comes from a combination of system design and professional habits:\n\n1. **Structured entry where it matters.** Allergies, medicines and vital signs belong in structured fields, while the clinical narrative can remain free text.\n2. **Validation at the point of entry.** The system can reject impossible values or ask the user to confirm unusual ones.\n3. **Sensible defaults and pick-lists.** Choosing from a coded list is faster and more consistent than typing, provided the list is well designed.\n4. **Feedback to staff.** When teams see the reports built from their data, they understand why accuracy matters.\n5. **Avoiding copy-and-paste.** Copying yesterday's note forward is convenient but can carry outdated or wrong information into today's record.\n\nUsability is part of quality. If recording an allergy takes eight clicks, busy staff will find a shortcut, and the shortcut is usually a free-text note that decision support cannot read.\n\n## Key takeaways\n\n- An EHR is a set of linked components (identity, problems, allergies, medications, orders, results, notes and decision support) sharing one patient identity.\n- The master patient index prevents duplicate records that could hide vital information.\n- Clinical decision support only works when the data it needs is recorded in the right structured place.\n- Data quality has several dimensions: accuracy, completeness, timeliness, consistency, validity and uniqueness.\n- Poor data quality is a patient-safety issue as well as a reporting problem.\n\n## Check your understanding\n\n1. Why might an allergy recorded only in a free-text consultation note fail to protect a patient?\n*Answer:* Decision support rules read the structured allergy list, so an allergy hidden in free text will not trigger an alert when a conflicting medicine is ordered.\n2. A clinic's report shows far fewer hypertension cases than expected. Name two data-quality dimensions that might explain this.\n*Answer:* Completeness (diagnoses not recorded) and consistency (diagnoses recorded in free text or with different codes so they are not counted).\n3. What is the role of the master patient index?\n*Answer:* It links all records belonging to the same person and prevents duplicates, so information recorded in one setting is visible in another.\n"
+    }
+   ]
+  },
+  {
+   "id": "m2",
+   "title": "Module 2 · Interoperability and HL7 FHIR",
+   "items": [
+    {
+     "id": "c8-L4",
+     "type": "video",
+     "title": "Interoperability: why health systems need to talk to each other",
+     "dur": 6,
+     "objectives": [
+      "Define interoperability in health care",
+      "Distinguish structural and semantic interoperability",
+      "Outline the evolution of HL7 standards from version 2 to FHIR",
+      "Explain the role of terminologies in exchanging meaning"
+     ],
+     "chips": [
+      "What is semantic interoperability?",
+      "Why did HL7 create FHIR when version 2 already existed?",
+      "How does LOINC help when exchanging lab results?"
+     ],
+     "chapters": [
+      {
+       "title": "Islands of information",
+       "slide": {
+        "kind": "steps",
+        "heading": "One patient, many systems",
+        "steps": [
+         {
+          "title": "Health centre",
+          "sub": "Primary care record"
+         },
+         {
+          "title": "Laboratory",
+          "sub": "Laboratory information system"
+         },
+         {
+          "title": "Hospital",
+          "sub": "Hospital information system"
+         },
+         {
+          "title": "Pharmacy",
+          "sub": "Dispensing system"
+         }
+        ]
+       },
+       "narration": [
+        "Mauritius is an island nation, and health data has a habit of behaving like a set of islands too. Each clinic, laboratory and hospital may run its own computer system.",
+        "A laboratory information system is excellent at managing samples. A hospital system is good at admissions and wards. A pharmacy system tracks dispensing. But each was built for its own job.",
+        "If these systems cannot exchange data, clinicians fall back on printing results, faxing letters and retyping information, which is slow and introduces errors.",
+        "Interoperability is the ability of different systems and organisations to exchange data and to use the data they receive. Those last few words, use the data, are the important part.",
+        "Think of our patient from week one. Her laboratory result was correct, but it was trapped in the wrong system, so it could not help the doctor who needed it."
+       ]
+      },
+      {
+       "title": "Levels of interoperability",
+       "slide": {
+        "kind": "steps",
+        "heading": "Levels of interoperability",
+        "steps": [
+         {
+          "title": "Foundational",
+          "sub": "Data can be sent and received"
+         },
+         {
+          "title": "Structural",
+          "sub": "Agreed format and fields"
+         },
+         {
+          "title": "Semantic",
+          "sub": "Shared meaning through codes"
+         },
+         {
+          "title": "Organisational",
+          "sub": "Policy, consent, governance, trust"
+         }
+        ]
+       },
+       "narration": [
+        "It helps to think of interoperability in levels. The foundational level simply means one system can send data and the other can receive it, like posting a letter.",
+        "Structural interoperability means both sides agree on the format, so the receiving system knows which part is the patient's name and which part is the test result.",
+        "Semantic interoperability goes further. Both systems agree on what the data means, usually by using shared codes, so a glucose result from one laboratory is recognised as the same test everywhere.",
+        "Finally, organisational interoperability covers the policies, agreements and trust between institutions, including who is allowed to see what, and under what consent. Technology alone cannot deliver this level.",
+        "In practice, most failures happen at the semantic and organisational levels, not because data cannot travel, but because nobody agreed what it means or who may use it."
+       ]
+      },
+      {
+       "title": "A short history of HL7",
+       "slide": {
+        "kind": "compare",
+        "heading": "Three generations of HL7 standards",
+        "columns": [
+         {
+          "title": "HL7 version 2",
+          "points": [
+           "From the late 1980s",
+           "Pipe-delimited text messages",
+           "Hugely used, many local variants"
+          ]
+         },
+         {
+          "title": "CDA",
+          "points": [
+           "Clinical documents in XML",
+           "Discharge summaries, referrals",
+           "Document-centred"
+          ]
+         },
+         {
+          "title": "FHIR",
+          "points": [
+           "Modular resources",
+           "Web APIs, JSON or XML",
+           "Designed for apps and mobile"
+          ]
+         }
+        ]
+       },
+       "narration": [
+        "The most important standards body in this area is HL7 International. HL7 stands for Health Level Seven, a reference to the application layer in a classic networking model.",
+        "HL7 version 2, first released in the late nineteen eighties, defined text messages with fields separated by vertical bar characters. It is still used in laboratories and hospitals all over the world.",
+        "Its weakness was flexibility. Every hospital interpreted it slightly differently, so each new interface needed custom work. People joked that if you have seen one version two interface, you have seen one version two interface.",
+        "Later came the Clinical Document Architecture, which packages whole documents such as discharge summaries. And then, in the twenty tens, HL7 developed FHIR, which we will study in detail next.",
+        "Version two is not going away soon. Many hospitals run version two interfaces for laboratory orders and results alongside newer FHIR services, and integration engines translate between them."
+       ]
+      },
+      {
+       "title": "Why FHIR appeared",
+       "slide": {
+        "kind": "bullets",
+        "heading": "What FHIR set out to fix",
+        "points": [
+         "Use ordinary web technology developers already know",
+         "Break health data into small, reusable resources",
+         "Support apps, mobile phones and cloud services",
+         "Make the basics simple and allow extensions"
+        ]
+       },
+       "narration": [
+        "FHIR, pronounced fire, stands for Fast Healthcare Interoperability Resources. It was designed to use the same web technology that powers online banking and shopping apps.",
+        "Instead of one huge message, FHIR breaks health information into small building blocks called resources, such as a Patient, an Observation or an Encounter.",
+        "Systems exchange these resources through a web interface called a RESTful API, usually in JSON format, which any modern programmer can read.",
+        "That lowered the barrier enormously. A small team building a mobile app for a diabetes clinic can now connect to a hospital system without learning a decades-old message format.",
+        "Another important design choice is that FHIR focuses on the common cases. Rather than modelling everything, it covers what most systems need, and lets countries add local requirements through extensions.",
+        "A widely implemented release is called R4, and newer releases continue to be published, so projects always state which version they build on."
+       ]
+      },
+      {
+       "title": "Terminologies carry the meaning",
+       "slide": {
+        "kind": "cards",
+        "heading": "Format plus meaning",
+        "cards": [
+         {
+          "label": "FHIR",
+          "text": "Defines the structure: which field is which"
+         },
+         {
+          "label": "LOINC",
+          "text": "Says which test was measured"
+         },
+         {
+          "label": "SNOMED CT",
+          "text": "Says which clinical finding or problem"
+         },
+         {
+          "label": "UCUM",
+          "text": "Says which unit, such as millimoles per litre"
+         }
+        ],
+        "note": {
+         "tone": "warn",
+         "text": "A well-formed message with the wrong code is still wrong"
+        }
+       },
+       "narration": [
+        "A standard like FHIR gives us structural interoperability: everyone agrees where the result goes. But we still need semantic interoperability: everyone agrees what the result is.",
+        "That is the job of terminologies. LOINC codes identify laboratory tests and observations, SNOMED CT identifies clinical findings and procedures, and units come from a standard called UCUM.",
+        "So a glucose value travelling from a private laboratory to a public health centre carries a LOINC code saying which test it was, the number itself, and a standard unit.",
+        "Without those codes, the receiving system sees only a number and a label it may not recognise, and we are back to a human reading and retyping."
+       ]
+      },
+      {
+       "title": "Recap",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Key points",
+        "points": [
+         "Interoperability means exchanging and using data",
+         "Structural agrees on format; semantic agrees on meaning",
+         "HL7 version 2, CDA, then FHIR",
+         "Terminologies such as LOINC and SNOMED CT carry meaning"
+        ]
+       },
+       "narration": [
+        "To recap, interoperability is about exchanging data and being able to use it, and it works at foundational, structural, semantic and organisational levels.",
+        "HL7 standards evolved from version two messages to documents and then to FHIR resources, while terminologies like LOINC and SNOMED CT make sure the meaning survives the journey.",
+        "In the next reading we will open up FHIR resources and look at what is inside them."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "c8-L5",
+     "type": "reading",
+     "title": "HL7 FHIR resources explained",
+     "dur": 9,
+     "objectives": [
+      "Describe what a FHIR resource is and how it is structured",
+      "Identify common resources such as Patient, Observation and Encounter",
+      "Read a simple FHIR resource in JSON",
+      "Explain how references link resources together"
+     ],
+     "chips": [
+      "What does resourceType mean in a FHIR JSON file?",
+      "How does an Observation point to its patient?",
+      "What is a FHIR profile?"
+     ],
+     "body": "HL7 **FHIR** (Fast Healthcare Interoperability Resources) is the newest family of HL7 standards and the one you are most likely to meet in new health IT projects. You do not need to be a programmer to understand it. At its heart, FHIR is a catalogue of agreed building blocks, called **resources**, and a set of rules for exchanging them over the web. This reading explains what resources are, introduces the ones you will meet most often, and walks through a worked example from a hypothetical Mauritian health centre.\n\n## What is a resource?\n\nA resource is a small, self-contained unit of health information with a defined structure. Each resource type describes one kind of \"thing\" in health care: a person, an event, a measurement, a medicine order. The FHIR specification defines around 150 resource types, but a small core covers most everyday needs.\n\nEvery resource has:\n\n- a **resourceType**, such as `Patient` or `Observation`, which tells the receiver what kind of thing it is;\n- an **id**, the identifier of that resource on the server that holds it;\n- a set of **elements** (fields) defined by the specification, such as `birthDate` for a Patient or `valueQuantity` for an Observation;\n- optional **metadata**, such as when it was last updated;\n- usually a short human-readable **narrative**, so a person can still read the content.\n\nResources can be represented in JSON or XML. JSON is the most common choice for modern web and mobile applications.\n\n## Resources you will meet most often\n\n| Resource | Represents | Example |\n|---|---|---|\n| `Patient` | Demographic details of a person receiving care | Name, date of birth, national identifier |\n| `Practitioner` | A health professional | A medical officer at a health centre |\n| `Organization` | A hospital, clinic, laboratory or ministry | A regional public hospital |\n| `Encounter` | An interaction between patient and provider | An outpatient visit or an admission |\n| `Observation` | A measurement or finding | Blood pressure, HbA1c, smoking status |\n| `Condition` | A problem or diagnosis | Type 2 diabetes |\n| `AllergyIntolerance` | An allergy or intolerance | Penicillin allergy |\n| `MedicationRequest` | A prescription or medication order | Metformin 500 mg twice daily |\n\nNotice how closely these map to the EHR components you studied earlier: the problem list becomes a set of `Condition` resources, the allergy list a set of `AllergyIntolerance` resources, results become `Observation` resources, and so on.\n\n## Reading a resource in JSON\n\nHere is a simplified `Patient` resource for a fictional patient:\n\n```json\n{\n  \"resourceType\": \"Patient\",\n  \"id\": \"pat-1024\",\n  \"identifier\": [\n    { \"system\": \"urn:example:mu-national-id\", \"value\": \"L0101580000000\" }\n  ],\n  \"name\": [ { \"family\": \"Lebon\", \"given\": [\"Marie\", \"Claire\"] } ],\n  \"gender\": \"female\",\n  \"birthDate\": \"1958-03-14\"\n}\n```\n\nEven without any programming knowledge you can read it: it is a Patient, its server id is `pat-1024`, it carries an identifier from a (made-up) national identifier system, and it has a name, gender and date of birth. Curly brackets group the elements of an object, square brackets hold lists, because a patient can have more than one name or identifier.\n\n## References: linking resources together\n\nResources rarely stand alone. An Observation is *about* a patient and usually happened *during* an encounter. FHIR expresses these links with **references**, which point from one resource to another.\n\n> **Worked example: a blood glucose result at a hypothetical health centre**\n>\n> A nurse measures a fasting blood glucose during an outpatient visit. The system creates an `Encounter` for the visit and an `Observation` for the result:\n>\n> ```json\n> {\n>   \"resourceType\": \"Observation\",\n>   \"id\": \"obs-5531\",\n>   \"status\": \"final\",\n>   \"code\": {\n>     \"coding\": [ { \"system\": \"http://loinc.org\", \"code\": \"1558-6\",\n>                   \"display\": \"Fasting glucose [Moles/volume] in Serum or Plasma\" } ]\n>   },\n>   \"subject\": { \"reference\": \"Patient/pat-1024\" },\n>   \"encounter\": { \"reference\": \"Encounter/enc-778\" },\n>   \"effectiveDateTime\": \"2026-02-10T08:40:00+04:00\",\n>   \"valueQuantity\": { \"value\": 7.8, \"unit\": \"mmol/L\",\n>                      \"system\": \"http://unitsofmeasure.org\", \"code\": \"mmol/L\" }\n> }\n> ```\n>\n> Read it piece by piece. The `code` uses a LOINC code to say *which* test was done. The `subject` points to the Patient resource. The `encounter` links it to the visit. The `valueQuantity` carries the number with a UCUM unit. The `+04:00` in the time is Mauritius time. Any FHIR-capable system receiving this knows exactly what was measured, for whom, when and in what unit.\n\nThe `status` element matters too: `final` means the result is confirmed, whereas `preliminary` would warn the reader that it might still change.\n\n## Terminology bindings, profiles and extensions\n\nFHIR deliberately keeps resources general so they work in any country. Three mechanisms let them be tailored:\n\n1. **Terminology bindings** say which code system an element should use, for example LOINC for laboratory Observation codes or SNOMED CT for Conditions.\n2. **Profiles** are rules that constrain a resource for a particular use, such as \"in our national programme, every Patient must carry a national identifier\". A set of profiles for one country or project is published as an **implementation guide**.\n3. **Extensions** add elements the base specification does not include, such as a locally required field, in a standard way that other systems can safely ignore.\n\nA ministry planning national health data exchange would typically publish its own implementation guide, so that every vendor builds to the same profiles.\n\n## Bundles: sending several resources together\n\nSometimes you need to send many resources at once, such as a patient, an encounter and five observations from a single visit, or the results of a search. FHIR wraps them in a **Bundle** resource. You will see Bundles again when we look at searching a FHIR server through its API.\n\n## Key takeaways\n\n- FHIR breaks health information into small, well-defined building blocks called resources.\n- Every resource has a `resourceType`, an id and defined elements, and is usually exchanged as JSON.\n- Core resources include `Patient`, `Practitioner`, `Organization`, `Encounter`, `Observation`, `Condition`, `AllergyIntolerance` and `MedicationRequest`.\n- References such as `\"subject\": {\"reference\": \"Patient/pat-1024\"}` link resources together.\n- Terminologies give meaning; profiles and implementation guides tailor FHIR to a country or project.\n\n## Check your understanding\n\n1. Which FHIR resource would you use to record a patient's blood pressure reading?\n*Answer:* An `Observation`, with a code identifying blood pressure and the measured values.\n2. In the glucose example, how does the receiving system know which patient the result belongs to?\n*Answer:* The `subject` element contains a reference to the Patient resource, `Patient/pat-1024`.\n3. What is the purpose of a FHIR profile?\n*Answer:* It constrains a general resource for a specific use, for example making a national identifier mandatory, so that all systems in a programme record data in the same way.\n"
+    },
+    {
+     "id": "c8-L6",
+     "type": "video",
+     "title": "FHIR in action: the RESTful API and JSON",
+     "dur": 6,
+     "objectives": [
+      "Explain what a RESTful API is in plain terms",
+      "Match the main HTTP operations to FHIR interactions",
+      "Describe how a FHIR search returns a Bundle",
+      "Recognise how access to a FHIR server is secured"
+     ],
+     "chips": [
+      "What does GET do in a FHIR API?",
+      "What is a Bundle in a search result?",
+      "What is SMART on FHIR?"
+     ],
+     "chapters": [
+      {
+       "title": "Ordering from a menu",
+       "slide": {
+        "kind": "bullets",
+        "heading": "An API is a menu",
+        "points": [
+         "A client asks, a server answers",
+         "Requests follow agreed rules",
+         "FHIR uses ordinary web technology",
+         "Answers usually come back as JSON"
+        ]
+       },
+       "narration": [
+        "In the last reading we looked inside FHIR resources. Now let us see how systems actually ask for them and send them.",
+        "An application programming interface, or API, is like a menu in a restaurant. You do not walk into the kitchen. You order from a fixed list, in an agreed way, and the kitchen sends back your dish.",
+        "In FHIR, the client might be a mobile app at a diabetes clinic and the server might be the hospital's FHIR server. The app sends a request over the internet, and the server replies with resources.",
+        "FHIR uses a style called REST, which simply means it uses the same web addresses and operations that your browser already uses every day.",
+        "The good news for you as clinicians is that you will rarely type these requests yourselves. But understanding them helps you talk to the technical teams who build your systems."
+       ]
+      },
+      {
+       "title": "Resources have addresses",
+       "slide": {
+        "kind": "steps",
+        "heading": "Anatomy of a FHIR address",
+        "steps": [
+         {
+          "title": "Base address",
+          "sub": "Where the FHIR server lives"
+         },
+         {
+          "title": "Resource type",
+          "sub": "Patient, Observation, Encounter"
+         },
+         {
+          "title": "Resource id",
+          "sub": "Which particular one"
+         }
+        ]
+       },
+       "narration": [
+        "In a RESTful API, every resource has its own web address. It is built from three parts: the base address of the server, the resource type, and the id of that particular resource.",
+        "So to fetch the patient with id pat one zero two four, the app asks for the base address followed by slash Patient slash pat one zero two four.",
+        "To fetch a particular observation, it uses Observation followed by its id in exactly the same way. Once you have seen the pattern, it is easy to predict.",
+        "This predictability is a big part of FHIR's appeal. Developers from banking or tourism apps already understand the pattern, so they can start working with health data quickly.",
+        "The base address is set by the organisation. A ministry might run one national FHIR server, or each hospital might have its own, connected through an exchange service."
+       ]
+      },
+      {
+       "title": "The four everyday operations",
+       "slide": {
+        "kind": "cards",
+        "heading": "HTTP operations used by FHIR",
+        "cards": [
+         {
+          "label": "GET",
+          "text": "Read a resource or search"
+         },
+         {
+          "label": "POST",
+          "text": "Create a new resource"
+         },
+         {
+          "label": "PUT",
+          "text": "Update an existing resource"
+         },
+         {
+          "label": "DELETE",
+          "text": "Remove a resource, where allowed"
+         }
+        ]
+       },
+       "narration": [
+        "The web uses a handful of operations, and FHIR maps its interactions onto them. GET means read. When the app sends a GET request for a Patient address, the server returns that patient.",
+        "POST means create. When a nurse records a new blood pressure on a tablet, the app posts a new Observation resource to the server, which stores it and gives it an id.",
+        "PUT means update, for example correcting a patient's phone number. And DELETE removes a resource, although in health care deletion is often restricted, because records must be kept.",
+        "Each reply also carries a status code. Two hundred means success, two hundred and one means created, and four hundred and four means not found, the same codes your browser sees.",
+        "There is also PATCH, for changing just part of a resource, but the four we have mentioned are enough to understand how almost every FHIR application works."
+       ]
+      },
+      {
+       "title": "Searching and Bundles",
+       "slide": {
+        "kind": "code",
+        "heading": "A FHIR search and its reply",
+        "lang": "http",
+        "code": "GET [base]/Observation?patient=pat-1024&code=http://loinc.org|4548-4\n\n{\n  \"resourceType\": \"Bundle\",\n  \"type\": \"searchset\",\n  \"total\": 3,\n  \"entry\": [ { \"resource\": { \"resourceType\": \"Observation\", ... } } ]\n}",
+        "points": [
+         "Search parameters filter the results",
+         "Matches come back inside a Bundle"
+        ]
+       },
+       "narration": [
+        "Often we do not know the id. We want, say, all the glycated haemoglobin results for one patient. FHIR supports this with search parameters added to the address.",
+        "The app asks the Observation endpoint for observations where the patient is pat one zero two four and the code is the LOINC code for haemoglobin A one c.",
+        "The server replies with a Bundle, a container resource of type search set. It says how many matches there were, and holds each matching Observation as an entry.",
+        "The app can then draw a graph of the patient's diabetes control over time, which is exactly the kind of feature a clinic dashboard needs.",
+        "Searches can combine parameters such as date ranges, so a clinic can ask only for results from the last twelve months, which keeps the reply small and relevant."
+       ]
+      },
+      {
+       "title": "Reading the JSON and keeping it secure",
+       "slide": {
+        "kind": "bullets",
+        "heading": "JSON and security",
+        "points": [
+         "JSON: names and values in curly brackets",
+         "resourceType tells you what you are reading",
+         "All traffic encrypted with HTTPS",
+         "SMART on FHIR uses OAuth 2.0 for authorisation"
+        ],
+        "note": {
+         "tone": "warn",
+         "text": "An open API without authorisation would be a privacy disaster"
+        }
+       },
+       "narration": [
+        "The replies come back as JSON, short for JavaScript Object Notation. It is simply pairs of names and values, such as resource type Patient, or birth date nineteen fifty-eight.",
+        "Because health data is so sensitive, a FHIR server must never be open to anyone who knows the address. Traffic is encrypted, and every request must be authorised.",
+        "A widely used approach is SMART on FHIR, which builds on the OAuth two point zero standard. The user logs in, and the app receives a token that limits what it may read or write.",
+        "For example, a patient app might be allowed to read only that patient's own observations, while a clinician's app can read the records of patients under their care. This links directly to our privacy module."
+       ]
+      },
+      {
+       "title": "Recap",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Key points",
+        "points": [
+         "Every resource has a predictable web address",
+         "GET reads, POST creates, PUT updates, DELETE removes",
+         "Searches return a Bundle of matching resources",
+         "Access is encrypted and authorised, for example with SMART on FHIR"
+        ]
+       },
+       "narration": [
+        "To recap, FHIR exposes resources through a RESTful API, where each resource has a predictable address and ordinary web operations read, create, update or delete it.",
+        "Searches return Bundles, data travels as JSON, and security standards such as SMART on FHIR control who can access what.",
+        "Next you will test yourself on records and FHIR in the first quiz."
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "m3",
+   "title": "Module 3 · Principles of health-data privacy",
+   "items": [
+    {
+     "id": "c8-L7",
+     "type": "quiz",
+     "title": "Quiz 1: Electronic health records and FHIR",
+     "dur": 15,
+     "quiz": {
+      "time": 15,
+      "weight": 10,
+      "questions": [
+       {
+        "q": "Which feature most clearly distinguishes an electronic health record from an electronic medical record?",
+        "o": [
+         "It is stored in the cloud",
+         "It is longitudinal and shared across care settings",
+         "It contains only laboratory results",
+         "It is controlled entirely by the patient"
+        ],
+        "a": 1,
+        "ex": "An EHR aims to follow the patient across organisations and over time, whereas an EMR is one organisation's chart."
+       },
+       {
+        "q": "A patient's penicillin allergy was typed only into a free-text consultation note. Why might the EHR fail to warn a doctor who prescribes amoxicillin?",
+        "o": [
+         "Decision support reads the structured allergy list, not free-text notes",
+         "Amoxicillin is not related to penicillin",
+         "Free-text notes are deleted after each visit",
+         "Allergy alerts only work for hospital inpatients"
+        ],
+        "a": 0,
+        "ex": "Decision support rules run on structured, coded data, so an allergy hidden in free text does not trigger the alert."
+       },
+       {
+        "q": "A clinic finds that one patient has three separate records. Which component is designed to prevent this?",
+        "o": [
+         "Clinical decision support",
+         "The results viewer",
+         "The appointment scheduler",
+         "The master patient index"
+        ],
+        "a": 3,
+        "ex": "The master patient index matches and links records belonging to the same person, preventing duplicates."
+       },
+       {
+        "q": "Two systems exchange a lab result in an agreed format, but one uses a local code the other does not recognise. Which level of interoperability is missing?",
+        "o": [
+         "Foundational",
+         "Structural",
+         "Semantic",
+         "Physical"
+        ],
+        "a": 2,
+        "ex": "Semantic interoperability requires shared meaning, usually through common codes such as LOINC."
+       },
+       {
+        "q": "Which FHIR resource is most appropriate for recording a patient's HbA1c result?",
+        "o": [
+         "Patient",
+         "Encounter",
+         "Condition",
+         "Observation"
+        ],
+        "a": 3,
+        "ex": "Measurements and test results are represented as Observation resources."
+       },
+       {
+        "q": "In a FHIR Observation, what does the element \"subject\": {\"reference\": \"Patient/pat-1024\"} do?",
+        "o": [
+         "Links the observation to the patient it is about",
+         "Encrypts the patient's name",
+         "Creates a new patient record",
+         "Records which clinician measured the value"
+        ],
+        "a": 0,
+        "ex": "A reference in the subject element points to the Patient resource the observation describes."
+       },
+       {
+        "q": "A clinic app needs to create a new blood pressure Observation on a FHIR server. Which HTTP operation does it normally use?",
+        "o": [
+         "GET",
+         "POST",
+         "DELETE",
+         "PATCH only"
+        ],
+        "a": 1,
+        "ex": "POST to the resource type endpoint creates a new resource; GET reads or searches."
+       },
+       {
+        "q": "An app searches GET [base]/Observation?patient=pat-1024. What type of resource does the server return?",
+        "o": [
+         "A single Observation",
+         "A Patient",
+         "A Bundle containing matching resources",
+         "A CDA document"
+        ],
+        "a": 2,
+        "ex": "FHIR search results are returned as a Bundle of type searchset holding the matching entries."
+       }
+      ]
+     }
+    },
+    {
+     "id": "c8-L8",
+     "type": "video",
+     "title": "Core principles of health-data privacy",
+     "dur": 5,
+     "objectives": [
+      "Distinguish privacy, confidentiality and security",
+      "Explain consent and purpose limitation in health care",
+      "Apply data minimisation and need-to-know access to clinical scenarios",
+      "Explain why audit trails underpin accountability"
+     ],
+     "chips": [
+      "What is the difference between privacy and security?",
+      "What does data minimisation mean in a clinic?",
+      "Is consent always needed to share data for treatment?"
+     ],
+     "chapters": [
+      {
+       "title": "Why health data is special",
+       "slide": {
+        "kind": "cards",
+        "heading": "Why health data needs extra care",
+        "cards": [
+         {
+          "label": "Intimate",
+          "text": "Diagnoses, sexual and mental health, genetics"
+         },
+         {
+          "label": "Permanent",
+          "text": "You cannot change your medical history like a password"
+         },
+         {
+          "label": "Small island",
+          "text": "In a small community, people are easily recognised"
+         }
+        ]
+       },
+       "narration": [
+        "Imagine a nurse at a district hospital who notices that a neighbour has been admitted, opens his record out of curiosity, and mentions his diagnosis at a family wedding.",
+        "No hacker was involved, no system failed, yet a serious breach of privacy has happened, and the patient may lose trust in the health service altogether.",
+        "Health data is special. It can reveal mental illness, sexual health, pregnancy or genetic risk. Once it is exposed it cannot be changed like a password.",
+        "In a small island community, where people often know each other, even a few details such as age, village and diagnosis can identify a person. That makes careful handling even more important.",
+        "Patients who fear that their information will leak may hide symptoms or avoid care altogether, which harms their own health and, for infectious diseases, the health of the community."
+       ]
+      },
+      {
+       "title": "Privacy, confidentiality and security",
+       "slide": {
+        "kind": "compare",
+        "heading": "Three related ideas",
+        "columns": [
+         {
+          "title": "Privacy",
+          "points": [
+           "A person's right to control",
+           "information about themselves"
+          ]
+         },
+         {
+          "title": "Confidentiality",
+          "points": [
+           "The professional duty",
+           "not to disclose what you learn"
+          ]
+         },
+         {
+          "title": "Security",
+          "points": [
+           "The technical and physical safeguards",
+           "that protect data"
+          ]
+         }
+        ]
+       },
+       "narration": [
+        "Three words are often used interchangeably, but they mean different things. Privacy is the patient's right to control how information about them is collected and used.",
+        "Confidentiality is the duty that health professionals owe patients: what you learn in the course of care is not disclosed without a proper reason. It is as old as the Hippocratic tradition.",
+        "Security is the set of safeguards, such as passwords, encryption, locked rooms and backups, that protect data from unauthorised access, loss or damage.",
+        "You can have strong security and still breach privacy, as our curious nurse shows. She had a valid login; she simply had no legitimate reason to use it.",
+        "In practice we need all three working together. Security protects the data, confidentiality guides professional behaviour, and respect for privacy shapes how systems are designed in the first place."
+       ]
+      },
+      {
+       "title": "Consent and purpose",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Lawful use and purpose",
+        "points": [
+         "Use data for a clear, legitimate purpose",
+         "Direct care: often implied consent within the care team",
+         "New purposes, such as research, need a fresh basis",
+         "Patients should be told how their data is used"
+        ]
+       },
+       "narration": [
+        "Data protection laws in many countries, including the Mauritian Data Protection Act, treat health data as a special category that needs extra protection. Our focus here is on the general principles.",
+        "The first principle is that data must be used for a clear, legitimate purpose that the patient has been told about. Using it for something quite different needs a fresh justification.",
+        "For direct care, sharing within the care team is usually based on implied consent or on the law, because a patient who sees a doctor expects the nurse and pharmacist to see the relevant parts of the record.",
+        "But using the same data for a new purpose, such as a research study or marketing, normally needs explicit consent or another specific legal basis, such as approval by an ethics committee.",
+        "Transparency supports all of this. Simple notices in waiting rooms and on forms should explain what is recorded, who may see it, and how patients can ask questions or raise concerns about their records."
+       ]
+      },
+      {
+       "title": "Minimisation and need to know",
+       "slide": {
+        "kind": "steps",
+        "heading": "Applying minimisation",
+        "steps": [
+         {
+          "title": "Collect",
+          "sub": "Only what the purpose needs"
+         },
+         {
+          "title": "Show",
+          "sub": "Only what each role needs"
+         },
+         {
+          "title": "Share",
+          "sub": "Only the fields the recipient needs"
+         },
+         {
+          "title": "Keep",
+          "sub": "Only as long as required"
+         }
+        ]
+       },
+       "narration": [
+        "Data minimisation means collecting, showing and sharing only the data that is actually needed for the purpose, and keeping it no longer than necessary.",
+        "A physiotherapist planning knee exercises needs the surgery details, not the patient's full psychiatric history. A receptionist booking appointments needs contact details, not laboratory results.",
+        "Access control turns this into practice. Each user gets a role, each role sees what it needs, and the principle of least privilege means nobody gets more access than their job requires.",
+        "Minimisation applies to sharing too. A public health report on dengue cases needs counts by area and week, not names and addresses of every patient.",
+        "Minimisation also protects staff. The less unnecessary data appears on a screen, the less chance there is of an accidental disclosure to someone standing nearby."
+       ]
+      },
+      {
+       "title": "Audit and accountability",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Audit trails",
+        "points": [
+         "Record who accessed which record, when and what they did",
+         "Review regularly, not only after complaints",
+         "Deter curiosity browsing",
+         "Support investigation when something goes wrong"
+        ]
+       },
+       "narration": [
+        "Even with good access control, clinicians need wide access in emergencies, so we cannot block everything. That is why audit is the partner of access control.",
+        "An audit trail records who opened which record, when, from where, and what they did. Systems can flag unusual patterns, such as staff opening records of patients with the same surname.",
+        "Audit trails only work if someone actually reviews them and if staff know they exist. The knowledge that every access is logged is itself one of the strongest deterrents.",
+        "In our opening story, an audit review would show the nurse opened a record of a patient she was not caring for, allowing the hospital to act and to reassure the patient."
+       ]
+      },
+      {
+       "title": "Recap",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Key principles",
+        "points": [
+         "Privacy is a right; confidentiality a duty; security a safeguard",
+         "Use data only for legitimate, explained purposes",
+         "Minimise what is collected, shown and shared",
+         "Control access by role and audit every access"
+        ]
+       },
+       "narration": [
+        "To recap, privacy, confidentiality and security are related but different, and good security alone does not guarantee privacy.",
+        "The core principles are a lawful purpose and appropriate consent, data minimisation, role-based access with least privilege, and audit trails that create accountability.",
+        "In the next reading we will see how these principles are built into real systems."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "c8-L9",
+     "type": "reading",
+     "title": "Access control, audit trails and consent in practice",
+     "dur": 9,
+     "objectives": [
+      "Compare role-based access control with simpler approaches",
+      "Explain break-the-glass access and why it must be audited",
+      "Describe what an audit log records and how it is used",
+      "Distinguish consent models used in health information exchange"
+     ],
+     "chips": [
+      "What is break-the-glass access?",
+      "What does a FHIR AuditEvent record?",
+      "What is the difference between opt-in and opt-out consent?"
+     ],
+     "body": "Privacy principles such as minimisation and need-to-know only protect patients when they are built into the everyday behaviour of information systems. This reading looks at three practical mechanisms: **access control**, which decides who may see what; **audit trails**, which record what actually happened; and **consent management**, which records what the patient has agreed to. We finish with a worked case from a hypothetical regional hospital.\n\n## Access control\n\nAccess control answers the question: *is this user allowed to perform this action on this data right now?* Three ideas underpin it.\n\n1. **Authentication** confirms who the user is, for example with a personal username and password, ideally backed by a second factor such as a code on a phone. Shared logins (\"ward3nurse\") destroy accountability and should never be used.\n2. **Authorisation** decides what the authenticated user may do.\n3. **Least privilege** means each user gets the minimum access their job requires.\n\n### Role-based access control\n\nMost EHRs use **role-based access control (RBAC)**. Permissions are attached to roles, and users are assigned roles.\n\n| Role | Can view | Can create or edit |\n|---|---|---|\n| Registration clerk | Demographics, appointments | Demographics, appointments |\n| Nurse | Demographics, problems, allergies, medications, vital signs, notes for patients on their ward | Vital signs, nursing notes |\n| Doctor | Full clinical record for patients under their care | Diagnoses, orders, prescriptions, notes |\n| Pharmacist | Allergies, medications, relevant results | Dispensing records |\n| Data analyst | De-identified or aggregated data only | Reports |\n\nRBAC is easy to manage because a new nurse simply receives the nurse role. Its weakness is that roles can be too broad: a doctor role that allows access to *every* patient in the country is far more than any doctor needs. Many systems therefore add **context**, such as the patient being on the user's ward or having an appointment in the user's clinic. This is sometimes called a care relationship check.\n\n### Sensitive records\n\nSome information deserves an extra layer of protection: mental health, sexual health, HIV status, termination of pregnancy, or the records of staff members and well-known people. Systems can mark these records or sections as restricted, so that even users with a general clinical role must give a reason before opening them.\n\n## Break the glass\n\nHealth care cannot always wait for permissions. A patient may arrive unconscious at the emergency department of a hospital where they have never been treated. **Break-the-glass** access lets an authorised clinician override normal restrictions in an emergency. The user must state a reason, the access is granted immediately, and the event is logged and reviewed later. The design principle is simple: *never block urgent care, but always make exceptional access visible.*\n\n## Audit trails\n\nAn audit trail (or audit log) is a tamper-resistant record of access to and changes in the record. A useful entry answers:\n\n- **Who** acted (user identity and role)?\n- **What** did they do (view, create, update, print, export)?\n- **Which** patient and which data?\n- **When** and **from where** (time, workstation or device)?\n- **Why**, where a reason was given (for example a break-the-glass justification)?\n\nFHIR includes an `AuditEvent` resource for recording such events in a standard form, and a `Provenance` resource for recording where a piece of data came from and who created it.\n\nAudit logs are useful in three ways. They allow **investigation** when a complaint is made; **proactive monitoring**, where software flags unusual patterns such as staff viewing family members' records or a user exporting thousands of records at midnight; and **deterrence**, because staff who know every access is logged are far less likely to browse out of curiosity. Some health services let patients see a list of who has accessed their record, which builds trust.\n\n## Consent in practice\n\nConsent is not a single checkbox. Health systems use different **consent models** depending on the purpose of data use:\n\n- **Implied consent** for direct care within the care team: a patient who attends a clinic reasonably expects the doctor, nurse and pharmacist to see relevant information.\n- **Opt-out**: data is shared (for example into a regional shared record) unless the patient objects. This achieves high coverage but relies on patients being well informed.\n- **Opt-in**: data is shared only if the patient actively agrees. This gives stronger control but lower participation.\n- **Explicit consent for specific purposes**, such as joining a research study or allowing a third-party app to read one's results.\n\nWhatever the model, consent should be **informed** (the patient understands what will happen), **specific**, **recorded**, and **revocable**. FHIR has a `Consent` resource that lets systems record a patient's choices in a computable way, so that an exchange service can check them automatically before releasing data.\n\n> **Worked example: a hypothetical regional hospital**\n>\n> A thirty-four-year-old teacher is admitted with a severe depressive episode. Her mother works as a clerk in the same hospital's finance department.\n>\n> - **Access control:** the finance clerk's role gives no access to clinical records at all. The ward nurses can see the record because the patient is on their ward. The psychiatric notes are flagged as sensitive, so a doctor from another ward must give a reason to open them.\n> - **Break the glass:** two nights later the patient is transferred to the medical ward after an overdose. The on-call doctor uses break-the-glass to see the psychiatric notes, entering the reason \"acute admission, medication history needed\". This is legitimate and is reviewed and closed the next morning.\n> - **Audit:** the monthly audit report flags that a radiographer with no involvement in her care opened the record twice. The privacy officer investigates, finds curiosity browsing, and the hospital follows its disciplinary procedure and informs the patient.\n> - **Consent:** before discharge the patient is invited to join a depression research registry. She declines; her choice is recorded, and her data is excluded from the registry extract.\n\n## Key takeaways\n\n- Access control combines authentication, authorisation and least privilege; shared logins undermine accountability.\n- Role-based access control is common, but should be refined with care-relationship context and extra protection for sensitive records.\n- Break-the-glass allows emergency access without delay, at the price of mandatory justification and review.\n- Audit trails record who did what, to which record, when and why, and support investigation, monitoring and deterrence.\n- Consent models range from implied consent for direct care to explicit opt-in for research; FHIR's `Consent` and `AuditEvent` resources support them technically.\n\n## Check your understanding\n\n1. Why should every member of staff have a personal login rather than a shared ward login?\n*Answer:* Because audit trails can only hold people accountable if each action is linked to an identifiable individual.\n2. What three things should happen when a clinician uses break-the-glass access?\n*Answer:* They give a reason, access is granted without delay, and the event is logged and reviewed afterwards.\n3. A patient's data is used in a research registry. Which consent model is usually appropriate, and why?\n*Answer:* Explicit (opt-in) consent, or another specific legal basis such as ethics approval, because research is a new purpose beyond the direct care the patient originally expected.\n"
+    }
+   ]
+  },
+  {
+   "id": "m4",
+   "title": "Module 4 · Privacy by design and applying it",
+   "items": [
+    {
+     "id": "c8-L10",
+     "type": "video",
+     "title": "Privacy by design: secondary use, de-identification and breaches",
+     "dur": 5,
+     "objectives": [
+      "Explain primary and secondary use of health data",
+      "Distinguish de-identification, pseudonymisation and anonymisation",
+      "Recognise re-identification risk in small populations",
+      "Outline the steps of responding to a data breach"
+     ],
+     "chips": [
+      "What is pseudonymisation?",
+      "Why is re-identification a risk in Mauritius?",
+      "What should a clinic do first after a data breach?"
+     ],
+     "chapters": [
+      {
+       "title": "Primary and secondary use",
+       "slide": {
+        "kind": "compare",
+        "heading": "Two kinds of use",
+        "columns": [
+         {
+          "title": "Primary use",
+          "points": [
+           "Direct care of this patient",
+           "Care team access",
+           "Implied consent common"
+          ]
+         },
+         {
+          "title": "Secondary use",
+          "points": [
+           "Research, planning, quality",
+           "Public health surveillance",
+           "Needs extra safeguards"
+          ]
+         }
+        ]
+       },
+       "narration": [
+        "So far we have mostly discussed data used for the care of the individual patient. We call that primary use. But health data is also valuable for many other purposes.",
+        "Secondary use includes research into which diabetes treatments work best, planning how many dialysis machines a region needs, monitoring the quality of care, and public health surveillance.",
+        "These uses can benefit everyone. But the patient did not come to the clinic to take part in research, so secondary use needs its own justification and extra safeguards.",
+        "The main safeguard is to strip away, as far as possible, the information that identifies individuals before the data leaves the care setting.",
+        "Public health surveillance is a special case. Reporting notifiable diseases such as dengue or tuberculosis is usually required by law, so it does not depend on individual consent, but it still follows minimisation."
+       ]
+      },
+      {
+       "title": "De-identification and pseudonymisation",
+       "slide": {
+        "kind": "cards",
+        "heading": "Reducing identifiability",
+        "cards": [
+         {
+          "label": "Remove direct identifiers",
+          "text": "Names, ID numbers, phone numbers, addresses"
+         },
+         {
+          "label": "Generalise",
+          "text": "Age band instead of birth date, district instead of street"
+         },
+         {
+          "label": "Pseudonymise",
+          "text": "Replace identity with a code; key kept separately"
+         },
+         {
+          "label": "Aggregate",
+          "text": "Publish counts, not individual rows"
+         }
+        ]
+       },
+       "narration": [
+        "De-identification is the process of removing or altering information that identifies a person. The obvious step is removing direct identifiers such as names, national identity numbers and phone numbers.",
+        "Pseudonymisation replaces the identity with a code, such as patient number seven four two. The key that links the code back to the person is held separately and securely.",
+        "Pseudonymised data is still personal data, because someone with the key can re-identify it. It is useful for research that must follow the same patient over time.",
+        "Anonymisation goes further. The data is altered so that individuals can no longer be identified by any reasonable means, often by generalising details and publishing only aggregated counts.",
+        "In practice, analysts often receive pseudonymised data inside a secure environment, where they can run their analysis but cannot download the raw records."
+       ]
+      },
+      {
+       "title": "The small-island problem",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Re-identification risk",
+        "points": [
+         "Indirect identifiers combine: age, village, occupation, rare diagnosis",
+         "Small populations mean small groups",
+         "Suppress small counts in published tables",
+         "Assess risk before any release"
+        ],
+        "note": {
+         "tone": "warn",
+         "text": "Removing names is not the same as anonymising"
+        }
+       },
+       "narration": [
+        "Removing names is not enough. Indirect identifiers, such as age, sex, village, occupation and date of admission, can combine to point to a single person.",
+        "In a small island state this risk is high. If a dataset shows a forty-two-year-old male fisherman from a small coastal village with a rare cancer, many people in that village would know exactly who he is.",
+        "So data custodians generalise details, for instance using five-year age bands and districts instead of villages, and suppress small numbers in published tables, such as any cell with fewer than five patients.",
+        "The safest approach is to assess the risk of re-identification for each release, considering who will receive the data and what else they might already know."
+       ]
+      },
+      {
+       "title": "Privacy by design",
+       "slide": {
+        "kind": "steps",
+        "heading": "Privacy by design checklist",
+        "steps": [
+         {
+          "title": "Map the data",
+          "sub": "What, why, where, who"
+         },
+         {
+          "title": "Minimise",
+          "sub": "Only the fields needed"
+         },
+         {
+          "title": "Protect",
+          "sub": "Roles, encryption, audit"
+         },
+         {
+          "title": "Be transparent",
+          "sub": "Tell patients, record consent"
+         },
+         {
+          "title": "Review",
+          "sub": "Impact assessment before launch"
+         }
+        ]
+       },
+       "narration": [
+        "Privacy by design means building privacy into a system from the start rather than bolting it on afterwards. Let me illustrate with a hypothetical project.",
+        "Suppose a health centre wants a mobile app so diabetes patients can upload glucose readings as FHIR Observations to the clinic's server.",
+        "Privacy by design would ask: which data do we really need, which staff should see it, how is it encrypted on the phone and in transit, how is access authorised, and how is every access audited?",
+        "It would also ask how patients are told about the app, how they consent and withdraw, and how long readings are kept. Writing these answers down before launch is called a data protection impact assessment.",
+        "None of this needs to make the project slow. Asking these questions early is far cheaper than redesigning an app after patients have already started using it."
+       ]
+      },
+      {
+       "title": "When things go wrong",
+       "slide": {
+        "kind": "steps",
+        "heading": "Responding to a breach",
+        "steps": [
+         {
+          "title": "Contain",
+          "sub": "Stop the leak, secure systems"
+         },
+         {
+          "title": "Assess",
+          "sub": "What data, whose, what risk"
+         },
+         {
+          "title": "Notify",
+          "sub": "Regulator and patients as required"
+         },
+         {
+          "title": "Learn",
+          "sub": "Fix causes, train, review"
+         }
+        ]
+       },
+       "narration": [
+        "Despite best efforts, breaches happen: a laptop is stolen, an email with a spreadsheet goes to the wrong address, or ransomware locks a hospital's systems.",
+        "The response follows a clear sequence. First contain the breach, for example by revoking access or recalling the email. Then assess what data was involved, whose, and how serious the risk is.",
+        "Then notify, as the law requires, which usually means the data protection regulator within a short deadline and, where the risk to people is high, the affected patients themselves.",
+        "Finally, learn. Find the root cause, fix it, and share the lessons, without simply blaming individuals, so the same mistake is less likely to happen again.",
+        "Preparation matters. Teams that have a written breach plan, know who to call, and have practised the steps respond far faster and cause less harm."
+       ]
+      },
+      {
+       "title": "Recap",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Key points",
+        "points": [
+         "Secondary use needs its own basis and safeguards",
+         "Pseudonymised data is still personal data",
+         "Small populations raise re-identification risk",
+         "Design privacy in; contain, assess, notify, learn after breaches"
+        ]
+       },
+       "narration": [
+        "To recap, secondary use of health data brings big benefits but needs its own justification, de-identification and careful risk assessment, especially in small populations.",
+        "Privacy by design builds minimisation, access control, audit and transparency into systems from day one, and a clear breach response limits harm when things go wrong.",
+        "You are now ready for the privacy quiz and for the final assignment, which brings records, FHIR and privacy together."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "c8-L11",
+     "type": "quiz",
+     "title": "Quiz 2: Health-data privacy in practice",
+     "dur": 15,
+     "quiz": {
+      "time": 15,
+      "weight": 10,
+      "questions": [
+       {
+        "q": "A ward clerk with a valid login opens a celebrity patient's record out of curiosity. Which statement is most accurate?",
+        "o": [
+         "No breach occurred because the login was valid",
+         "Security worked but privacy and confidentiality were breached",
+         "This is only a security failure",
+         "It is acceptable if the information is not shared"
+        ],
+        "a": 1,
+        "ex": "Having a valid login does not create a legitimate need to know, so privacy and confidentiality were breached even though security controls functioned."
+       },
+       {
+        "q": "Which example best illustrates data minimisation?",
+        "o": [
+         "Sending a public health team weekly dengue counts by district rather than patient names",
+         "Encrypting the full patient database",
+         "Keeping all records forever in case they are useful",
+         "Giving every doctor access to every record nationally"
+        ],
+        "a": 0,
+        "ex": "Minimisation means sharing only the data the purpose needs; aggregated counts are enough for surveillance."
+       },
+       {
+        "q": "Under role-based access control, what should a registration clerk normally be able to see?",
+        "o": [
+         "Full clinical notes",
+         "Laboratory results",
+         "Demographics and appointments",
+         "Psychiatric history"
+        ],
+        "a": 2,
+        "ex": "Least privilege gives clerks only the data needed to register and book patients."
+       },
+       {
+        "q": "An unconscious patient arrives at an emergency department where they have no care relationship. What is the appropriate mechanism?",
+        "o": [
+         "Wait for written consent",
+         "Use a colleague's login with wider rights",
+         "Deny access until the patient wakes",
+         "Break-the-glass access with a reason, logged and reviewed"
+        ],
+        "a": 3,
+        "ex": "Break-the-glass gives immediate emergency access while ensuring justification and later review."
+       },
+       {
+        "q": "What is the main purpose of an audit trail in an EHR?",
+        "o": [
+         "To record who accessed or changed which record, when and why",
+         "To speed up the system",
+         "To store backup copies of results",
+         "To replace access control"
+        ],
+        "a": 0,
+        "ex": "Audit trails create accountability by recording access and changes, supporting investigation and deterrence."
+       },
+       {
+        "q": "A research dataset replaces names with study codes, and the key is held by the hospital. How should it be classified?",
+        "o": [
+         "Anonymised data, no longer personal",
+         "Pseudonymised data, still personal data",
+         "Aggregated data",
+         "Public data"
+        ],
+        "a": 1,
+        "ex": "Because the key allows re-identification, pseudonymised data remains personal data."
+       },
+       {
+        "q": "A published table shows one patient aged 40 to 44 with a rare cancer in a small village. What is the best action?",
+        "o": [
+         "Publish it, since names are removed",
+         "Add the patient's initials for accuracy",
+         "Suppress or combine small cells to reduce re-identification risk",
+         "Publish only on social media"
+        ],
+        "a": 2,
+        "ex": "Small counts in small populations can identify people, so they should be suppressed or aggregated."
+       },
+       {
+        "q": "An email containing a spreadsheet of patient results is sent to the wrong address. What should the clinic do first?",
+        "o": [
+         "Contain the breach, for example by recalling the email and asking the recipient to delete it",
+         "Wait to see if anyone complains",
+         "Delete the audit logs",
+         "Immediately publish a press release"
+        ],
+        "a": 0,
+        "ex": "Breach response starts with containment, followed by assessment, notification and learning."
+       }
+      ]
+     }
+    },
+    {
+     "id": "c8-L12",
+     "type": "assignment",
+     "title": "Assignment: Designing a privacy-aware FHIR data flow for a diabetes clinic",
+     "dur": 180,
+     "assignment": {
+      "weight": 30,
+      "max": 100,
+      "brief": "Scenario (hypothetical): A public area health centre in the south of Mauritius runs a weekly diabetes clinic for about 400 patients. The Ministry wants to pilot a link between the centre's EHR, the regional hospital laboratory and a patient mobile app, so that HbA1c and blood glucose results reach the clinic automatically and patients can upload home glucose readings. Aggregated data will also be sent to the national non-communicable disease programme.\n\nTask: Write a briefing report (1,500 to 2,000 words, excluding tables, JSON and references) for the clinic's management committee that:\n1. Describes the EHR components the clinic needs for this service (identity, problem list, medications, results, decision support and others) and how data flows between them during a typical diabetes review.\n2. Explains, at a high level, how HL7 FHIR would support the exchange: name the resources you would use (at least Patient, Encounter and Observation), describe the RESTful interactions involved (for example, the laboratory creating an Observation and the app searching for a patient's results), and include one annotated FHIR Observation in JSON for an HbA1c result with a LOINC code, a reference to the patient and a UCUM unit.\n3. Applies health-data privacy principles: a role-based access table for at least four roles, how data minimisation applies to the national programme extract, how consent will be obtained and recorded for the app, and what audit and break-the-glass arrangements are needed.\n4. Identifies three key risks (technical, organisational or privacy) with a mitigation for each, and gives a short recommendation.\n\nDeliverables: one PDF report with headings, at least one diagram or table of the data flow, the annotated JSON example, and a reference list of at least four sources (course materials may be cited). All patients and figures must be fictional; never include real patient data. Data provided: none beyond this scenario; state any assumptions you make.",
+      "rubric": [
+       {
+        "criterion": "EHR components and data flow",
+        "max": 20,
+        "desc": "Accurately identifies the relevant EHR components and explains a clear, realistic data flow for a diabetes review, supported by a diagram or table."
+       },
+       {
+        "criterion": "FHIR resources and API",
+        "max": 25,
+        "desc": "Selects appropriate FHIR resources, describes RESTful interactions correctly, and provides a valid, well-annotated Observation in JSON with LOINC code, patient reference and UCUM unit."
+       },
+       {
+        "criterion": "Privacy principles applied",
+        "max": 30,
+        "desc": "Applies consent, minimisation, role-based access with least privilege, audit and break-the-glass specifically to the scenario, with a sensible access table and justified choices."
+       },
+       {
+        "criterion": "Risks and recommendation",
+        "max": 15,
+        "desc": "Identifies three credible risks with practical mitigations and a clear, well-argued recommendation."
+       },
+       {
+        "criterion": "Communication and referencing",
+        "max": 10,
+        "desc": "Well-structured report for a non-technical committee, within the word limit, with clear tables and correctly formatted references."
+       }
+      ]
+     }
+    }
+   ]
+  }
+ ]
+}

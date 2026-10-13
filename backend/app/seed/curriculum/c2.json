@@ -1,0 +1,1636 @@
+{
+  "course": "c2",
+  "presenter": "arjun",
+  "modules": [
+    {
+      "id": "m1",
+      "title": "Module 1 · Tabular data and pandas",
+      "items": [
+        {
+          "id": "c2-L1",
+          "type": "virtual",
+          "title": "Tidy data and your first DataFrame: the tourism arrivals table",
+          "dur": 20,
+          "objectives": [
+            "Describe the three rules of tidy tabular data",
+            "Check and correct column data types in pandas",
+            "Explain why missing values must not be filled with zero by default"
+          ],
+          "chips": [
+            "What is the difference between a tidy and a messy table?",
+            "How do I convert a text column to numbers in pandas?",
+            "When is it acceptable to fill a missing value?"
+          ],
+          "lesson": {
+            "summary": [
+              "Tidy data: one observation per row, one variable per column, one value per cell",
+              "Check dtypes early; convert text-numbers with pd.to_numeric",
+              "Missing is not zero: leave NaN, drop or interpolate, and document it"
+            ],
+            "segments": [
+              {
+                "id": "seg1",
+                "title": "What makes a table tidy?",
+                "slide": {
+                  "kind": "compare",
+                  "heading": "Messy versus tidy arrivals table",
+                  "columns": [
+                    {
+                      "title": "Messy",
+                      "points": [
+                        "One column per month: Jan, Feb, Mar…",
+                        "Totals row mixed in with data",
+                        "Two values squeezed into one cell"
+                      ]
+                    },
+                    {
+                      "title": "Tidy",
+                      "points": [
+                        "Each row = one observation (market × month)",
+                        "Each column = one variable",
+                        "Each cell = one single value"
+                      ]
+                    }
+                  ],
+                  "note": {
+                    "tone": "info",
+                    "text": "The tourism arrivals data in this course is synthetic, made up for teaching."
+                  }
+                },
+                "speech": [
+                  "Before we write a single line of Python, we need to agree on what a well-shaped table looks like, because pandas works best when data is tidy.",
+                  "Tidy data follows three simple rules: each row is one observation, each column is one variable, and each cell holds exactly one value.",
+                  "In our synthetic Mauritius tourism dataset, one observation is the number of visitors from one source market in one month, so France in January is one row and France in February is another.",
+                  "A spreadsheet with a separate column for every month looks neat to the eye, but it hides the month variable inside the column headers, and that makes grouping and plotting much harder."
+                ],
+                "simpler": [
+                  "Let me put it more simply. Think of a class register at school.",
+                  "Each line in the register is one student, and each column is one thing you record about them, such as name, age or attendance.",
+                  "A tidy table is just a register like that: one thing per row, one kind of information per column, and never two answers squeezed into one box."
+                ],
+                "checkpoint": {
+                  "id": "cp1",
+                  "mandatory": true,
+                  "maxAttempts": 3,
+                  "question": "In a tidy table, what should each row and each column represent?",
+                  "concepts": [
+                    {
+                      "id": "row_obs",
+                      "label": "Each row is one observation (record, case, entity, data point)",
+                      "required": true,
+                      "rx": [
+                        {
+                          "re": "\\b(rows?|lines?)\\b[^.]{0,50}\\b(observations?|records?|cases?|entr(y|ies)|instances?|data ?points?|samples?|events?|individuals?|items?|measurements?|thing|subject|unit|market|month)\\b",
+                          "flags": "i"
+                        },
+                        {
+                          "re": "\\b(observations?|records?|cases?|entr(y|ies)|instances?|data ?points?)\\b[^.]{0,40}\\b(per|in each|for each|each|a|one)\\s+(rows?|line)\\b",
+                          "flags": "i"
+                        },
+                        {
+                          "re": "\\bone (observation|record|case|entry|instance|data ?point)\\b[^.]{0,20}\\b(per|each|a)\\s+row",
+                          "flags": "i"
+                        }
+                      ],
+                      "ask": "what a single row of a tidy table stands for"
+                    },
+                    {
+                      "id": "col_var",
+                      "label": "Each column is one variable (attribute, feature, field)",
+                      "required": true,
+                      "rx": [
+                        {
+                          "re": "\\b(columns?|cols?|fields?|headers?)\\b[^.]{0,50}\\b(variables?|attributes?|features?|propert(y|ies)|characteristics?|measures?|kind of (info|information|data)|type of (info|information|data))\\b",
+                          "flags": "i"
+                        },
+                        {
+                          "re": "\\b(variables?|attributes?|features?)\\b[^.]{0,40}\\b(per|in each|for each|each|a|one)\\s+(columns?|col)\\b",
+                          "flags": "i"
+                        },
+                        {
+                          "re": "\\bone (variable|attribute|feature)\\b[^.]{0,20}\\b(per|each|a)\\s+col",
+                          "flags": "i"
+                        }
+                      ],
+                      "ask": "what a single column of a tidy table stands for"
+                    },
+                    {
+                      "id": "cell_val",
+                      "label": "Each cell holds a single value",
+                      "required": false,
+                      "rx": [
+                        {
+                          "re": "\\b(cells?|box(es)?)\\b[^.]{0,40}\\b(one|single|1)\\s+(value|thing|number|entry)",
+                          "flags": "i"
+                        },
+                        {
+                          "re": "\\b(one|single) value\\b[^.]{0,20}\\b(per|in each|each)\\s+cell",
+                          "flags": "i"
+                        }
+                      ],
+                      "ask": "what each individual cell should contain"
+                    }
+                  ],
+                  "misconceptions": [
+                    {
+                      "id": "reversed",
+                      "label": "Rows and columns swapped — rows are observations, columns are variables",
+                      "rx": [
+                        {
+                          "re": "\\b(rows?|lines?)\\b[^.]{0,20}\\b(are|is|=|hold|represent)\\w*\\s+(a |one |the )?(variables?|attributes?|features?)\\b",
+                          "flags": "i"
+                        },
+                        {
+                          "re": "\\b(columns?|cols?|fields?|headers?)\\b[^.]{0,20}\\b(are|is|=|hold|represent)\\w*\\s+(a |one |the |each )?(observations?|records?|cases?)\\b",
+                          "flags": "i"
+                        }
+                      ]
+                    }
+                  ],
+                  "hints": [
+                    "Think about the class register analogy: what does one line of the register stand for?",
+                    "Now think about the columns of that register: name, age, attendance. What do they have in common?",
+                    "Here is the core idea: one row stands for one observation, and one column stands for one variable. Can you put that in your own words?"
+                  ],
+                  "model": "In a tidy table each row is one observation, such as visitors from one market in one month, and each column is one variable, such as month, market or arrivals.",
+                  "reteach": "Let me try a different picture. Imagine a bus ticket log at the Port Louis terminus: each ticket sold gets its own line, and the log has fixed headings such as time, route and fare. Each line is one observation, a single ticket, and each heading is one variable that every ticket has a value for.",
+                  "calibration": [
+                    {
+                      "answer": "each row is one observation and each column is a variable",
+                      "expected": "correct"
+                    },
+                    {
+                      "answer": "Rows = one record, like France in January. Columns = the different variables like month, market, arrivals",
+                      "expected": "correct"
+                    },
+                    {
+                      "answer": "every row should be a single case or data point and every column one attribute that you measure for it",
+                      "expected": "correct"
+                    },
+                    {
+                      "answer": "one observation per row, one variable per column, and each cell has a single value",
+                      "expected": "correct"
+                    },
+                    {
+                      "answer": "each row is one observation i think",
+                      "expected": "partial"
+                    },
+                    {
+                      "answer": "the columns are the variables like arrivals and month",
+                      "expected": "partial"
+                    },
+                    {
+                      "answer": "a row is one record, columns are just whatever the spreadsheet has",
+                      "expected": "partial"
+                    },
+                    {
+                      "answer": "rows are the variables and columns are the observations",
+                      "expected": "incorrect"
+                    },
+                    {
+                      "answer": "the table should be sorted and have nice colours so its easy to read",
+                      "expected": "incorrect"
+                    },
+                    {
+                      "answer": "idk",
+                      "expected": "unclear"
+                    }
+                  ],
+                  "ack": "Exactly: in a tidy table each row is one observation and each column is one variable."
+                }
+              },
+              {
+                "id": "seg2",
+                "title": "Data types: numbers that are secretly text",
+                "slide": {
+                  "kind": "code",
+                  "heading": "Checking and fixing a column's type",
+                  "lang": "python",
+                  "code": "df = pd.read_csv('arrivals.csv')\ndf.dtypes            # arrivals -> object (text!)\n\ndf['arrivals'] = (df['arrivals']\n    .str.replace(',', '')\n    .pipe(pd.to_numeric, errors='coerce'))\ndf['arrivals'].dtype  # float64",
+                  "points": [
+                    "object usually means text",
+                    "to_numeric turns text into numbers",
+                    "errors='coerce' makes bad entries NaN"
+                  ]
+                },
+                "speech": [
+                  "Every column in a pandas DataFrame has a data type, and you can see them all with the dtypes attribute.",
+                  "Numbers become int or float, dates should become datetime, and text becomes object. Trouble starts when a number column is quietly read in as object.",
+                  "In our arrivals file, someone typed figures such as twelve thousand with a comma, and one cell says not available, so pandas treats the whole column as text.",
+                  "Text cannot be added up or averaged properly, so we strip out the commas and convert the column with pandas to numeric, letting the bad entries become missing values."
+                ],
+                "simpler": [
+                  "Here is a simpler way to see it. Imagine a shop till that receives prices written as words on scraps of paper.",
+                  "Until someone types them in as real numbers, the till cannot add them up or work out the change.",
+                  "Converting a column's data type is that typing-in step: we turn text that looks like numbers into actual numbers the computer can calculate with."
+                ],
+                "checkpoint": {
+                  "id": "cp2",
+                  "mandatory": true,
+                  "maxAttempts": 3,
+                  "question": "Why is it a problem if the arrivals column is loaded as text, the object type, instead of as numbers, and what should you do about it?",
+                  "concepts": [
+                    {
+                      "id": "no_calc",
+                      "label": "You cannot calculate with it correctly (sum, mean, sort, plot)",
+                      "required": true,
+                      "rx": [
+                        {
+                          "re": "\\b(can'?t|cannot|can ?not|unable|won'?t|wont|doesn'?t|does not|not able|impossible|fail|wrong|error|incorrect|break)\\w*[^.]{0,60}\\b(calculat|comput|math|maths|arithmetic|sum|summ|add|total|averag|mean|median|sort|plot|graph|chart|statistic|stats|describe|aggregat)\\w*",
+                          "flags": "i"
+                        },
+                        {
+                          "re": "\\b(calculat|comput|math|maths|arithmetic|sum|summ|add|total|averag|mean|median|sort|plot|graph|chart|statistic|stats|describe|aggregat)\\w*[^.]{0,50}\\b(won'?t|wont|doesn'?t|does not|don'?t|fail|wrong|incorrect|error|not work|break|impossible|can'?t|cannot)",
+                          "flags": "i"
+                        },
+                        {
+                          "re": "\\b(text|strings?)\\b[^.]{0,40}\\b(concatenat|join|stick)\\w*",
+                          "flags": "i"
+                        },
+                        {
+                          "re": "\\bno (maths|math|calculations?|arithmetic)\\b",
+                          "flags": "i"
+                        }
+                      ],
+                      "ask": "what goes wrong when you try to calculate with a text column"
+                    },
+                    {
+                      "id": "convert",
+                      "label": "Convert the column to a numeric type (clean it first, e.g. remove commas)",
+                      "required": true,
+                      "rx": [
+                        {
+                          "re": "\\bto_?numeric\\b",
+                          "flags": "i"
+                        },
+                        {
+                          "re": "\\bastype\\b",
+                          "flags": "i"
+                        },
+                        {
+                          "re": "\\b(convert|chang|cast|turn|transform|make|fix|switch|coerc)\\w*[^.]{0,40}\\b(numbers?|numeric|numerical|int|integers?|float|number type|type|dtype)",
+                          "flags": "i"
+                        },
+                        {
+                          "re": "\\b(numbers?|numeric|int|float)\\b[^.]{0,20}\\b(conver|cast)\\w*",
+                          "flags": "i"
+                        }
+                      ],
+                      "ask": "how you would fix the column so pandas treats it as numbers"
+                    },
+                    {
+                      "id": "cause",
+                      "label": "Recognises the cause: commas, symbols or words like 'n/a' in the cells",
+                      "required": false,
+                      "rx": [
+                        {
+                          "re": "\\b(commas?|symbols?|letters?|words?|spaces?|n/?a|not available|typos?|characters?)\\b",
+                          "flags": "i"
+                        }
+                      ],
+                      "ask": "what in the cells made pandas read the column as text"
+                    }
+                  ],
+                  "misconceptions": [
+                    {
+                      "id": "same",
+                      "label": "Text and numbers are not interchangeable — the type matters",
+                      "rx": [
+                        {
+                          "re": "\\b(doesn'?t|does not|won'?t|dont|don'?t) (really )?matter\\b",
+                          "flags": "i"
+                        },
+                        {
+                          "re": "\\bno (difference|problem)\\b",
+                          "flags": "i"
+                        },
+                        {
+                          "re": "\\b(not a problem|isn'?t a problem|is fine)\\b",
+                          "flags": "i"
+                        }
+                      ]
+                    }
+                  ],
+                  "hints": [
+                    "Think about the shop till: what can it not do with prices written as words?",
+                    "What happens if you ask Python for the average of a column of text? And which pandas function did we use to fix that?",
+                    "Here is the core idea: text cannot be summed or averaged, so we clean the column and convert it to a numeric type with pandas to numeric. Can you say that in your own words?"
+                  ],
+                  "model": "If arrivals is stored as text you cannot calculate with it, so sums, means and sorting fail or give wrong results; you should remove the commas and convert the column to numbers with pd.to_numeric.",
+                  "reteach": "Picture a calculator where someone has taped paper labels over the number keys. The labels look like numbers, but pressing them does nothing mathematical. An object column is the same: it looks numeric when you print it, but until you convert it to int or float, pandas cannot add it, average it or sort it numerically.",
+                  "calibration": [
+                    {
+                      "answer": "because you cant calculate the mean or sum on text, so you convert it with pd.to_numeric",
+                      "expected": "correct"
+                    },
+                    {
+                      "answer": "Text columns break any maths like averages. Remove the commas and change it to a numeric type",
+                      "expected": "correct"
+                    },
+                    {
+                      "answer": "sorting and totals will be wrong since its strings, need to cast it to float using astype",
+                      "expected": "correct"
+                    },
+                    {
+                      "answer": "you won't be able to compute statistics. fix: convert to integers after cleaning the n/a values",
+                      "expected": "correct"
+                    },
+                    {
+                      "answer": "you cannot do calculations on it like the average",
+                      "expected": "partial"
+                    },
+                    {
+                      "answer": "you should convert it to numeric with to_numeric",
+                      "expected": "partial"
+                    },
+                    {
+                      "answer": "because there are commas in the numbers, and you cant add text together properly",
+                      "expected": "partial"
+                    },
+                    {
+                      "answer": "it doesnt matter, pandas still knows they look like numbers",
+                      "expected": "incorrect"
+                    },
+                    {
+                      "answer": "the file is probably too big to open so you should split it into smaller files",
+                      "expected": "incorrect"
+                    },
+                    {
+                      "answer": "not sure tbh",
+                      "expected": "unclear"
+                    }
+                  ],
+                  "ack": "That's right: text cannot be summed or averaged, so we clean it and convert it to a numeric type with pandas to numeric."
+                }
+              },
+              {
+                "id": "seg3",
+                "title": "Missing values are information too",
+                "slide": {
+                  "kind": "cards",
+                  "heading": "Three honest ways to handle a gap",
+                  "cards": [
+                    {
+                      "label": "Leave as NaN",
+                      "text": "pandas skips NaN in mean() and sum() by default"
+                    },
+                    {
+                      "label": "Drop the row",
+                      "text": "dropna() — fine if few rows and gaps are random"
+                    },
+                    {
+                      "label": "Fill with care",
+                      "text": "e.g. interpolate a single missing month, and say so"
+                    }
+                  ],
+                  "note": {
+                    "tone": "warn",
+                    "text": "Filling with 0 claims that nobody arrived — usually false."
+                  }
+                },
+                "speech": [
+                  "When a value is missing, pandas shows it as NaN, which stands for not a number, and you can count the gaps in every column with isna followed by sum.",
+                  "A very tempting shortcut is to replace every gap with zero, but in our dataset a zero would claim that no tourists at all arrived from that market that month.",
+                  "That false zero drags the average down and can create a fake collapse in a line chart, so a recording problem starts to look like a real event.",
+                  "Better options are to leave the gap as NaN, which most pandas statistics skip automatically, to drop the row, or to fill it carefully, for example by interpolating between neighbouring months, and then to say clearly what you did."
+                ],
+                "simpler": [
+                  "Think of a cricket scorecard where the scorer missed one batter's runs because it rained on the page.",
+                  "Writing a zero would say the batter scored nothing, which is unfair and also lowers the team's batting average.",
+                  "It is more honest to mark the score as unknown, or to make a sensible estimate and write a note saying it was estimated."
+                ],
+                "checkpoint": {
+                  "id": "cp3",
+                  "mandatory": false,
+                  "maxAttempts": 2,
+                  "question": "Optional check: Why is replacing missing arrival counts with zero usually a bad idea?",
+                  "concepts": [
+                    {
+                      "id": "false_value",
+                      "label": "Zero is a real value: it falsely claims no tourists arrived",
+                      "required": true,
+                      "rx": [
+                        {
+                          "re": "\\b(no|zero|0|nobody|none|no one|noone)\\b[^.]{0,20}\\b(tourists?|visitors?|arrivals?|people|one|body)\\b[^.]{0,20}\\b(came|arriv|visit|travel|there)\\w*",
+                          "flags": "i"
+                        },
+                        {
+                          "re": "\\b(zero|0|zeros|zeroes)\\b[^.]{0,40}\\b(real|actual|genuine|meaningful|valid|true|legit)\\w*\\s+(value|number|count|figure|data)",
+                          "flags": "i"
+                        },
+                        {
+                          "re": "\\b(zero|0|zeros|zeroes)\\b[^.]{0,30}\\b(means?|says?|claims?|implies|suggests?|shows?|tells?|pretends?)\\b",
+                          "flags": "i"
+                        },
+                        {
+                          "re": "\\b(not the same as|different from|isn'?t the same as)\\b[^.]{0,20}\\b(zero|0|missing|unknown)\\b",
+                          "flags": "i"
+                        },
+                        {
+                          "re": "\\b(fake|false|made[- ]up|invented|wrong|misleading|incorrect)\\b[^.]{0,15}\\b(data|values?|numbers?|zeros?|information)\\b",
+                          "flags": "i"
+                        }
+                      ],
+                      "ask": "what a zero in the arrivals column actually claims about tourists"
+                    },
+                    {
+                      "id": "distort",
+                      "label": "It distorts statistics/charts (lowers the mean, fake drop)",
+                      "required": true,
+                      "rx": [
+                        {
+                          "re": "\\b(averages?|means?|totals?|sums?|statistics?|stats|results?|analysis|trends?|charts?|graphs?|plots?|medians?)\\b[^.]{0,40}\\b(lower|drop|down|distort|skew|bias|wrong|off|mess|reduc|decreas|smaller|affect|ruin|misleading|inaccurate)\\w*",
+                          "flags": "i"
+                        },
+                        {
+                          "re": "\\b(lower|pull|drag|distort|skew|bias|mess|reduc|decreas|affect|ruin|throw)\\w*[^.]{0,30}\\b(averages?|means?|totals?|sums?|statistics?|stats|results?|analysis|trends?|charts?|graphs?|medians?)\\b",
+                          "flags": "i"
+                        },
+                        {
+                          "re": "\\b(fake|false|artificial)\\b[^.]{0,15}\\b(drop|dip|collapse|fall|crash)\\w*",
+                          "flags": "i"
+                        }
+                      ],
+                      "ask": "how a false zero affects the average or a chart"
+                    },
+                    {
+                      "id": "alternative",
+                      "label": "Suggests a better option (leave NaN, drop, interpolate, flag)",
+                      "required": false,
+                      "rx": [
+                        {
+                          "re": "\\b(nan|dropna|drop|interpolat|imput|leave it|flag|note|document)\\w*",
+                          "flags": "i"
+                        }
+                      ],
+                      "ask": "what you could do with the gap instead of writing zero"
+                    }
+                  ],
+                  "misconceptions": [
+                    {
+                      "id": "zero_ok",
+                      "label": "Zero is not a neutral filler",
+                      "rx": [
+                        {
+                          "re": "\\bzeros? (is|are) (fine|ok|okay|neutral|safe|good)\\b",
+                          "flags": "i"
+                        },
+                        {
+                          "re": "\\b(doesn'?t|does not|won'?t) (change|affect)\\b",
+                          "flags": "i"
+                        }
+                      ]
+                    }
+                  ],
+                  "hints": [
+                    "Think about what a zero in the arrivals column actually says about tourists from that market.",
+                    "Now imagine computing the average monthly arrivals with that zero included. What happens?",
+                    "The idea is: zero falsely claims nobody arrived, and that wrong value pulls the average down and shows a fake dip on a chart. Can you explain that?"
+                  ],
+                  "model": "Because zero is a real value meaning no tourists arrived, filling gaps with it invents false data that lowers the average and creates a fake drop in charts; it is better to leave NaN, drop or interpolate and say so.",
+                  "reteach": "Imagine a rain gauge in Curepipe that breaks for a week. If you record zero rain for that week, you are claiming a dry spell that never happened, and the monthly rainfall total comes out too low. Missing means unknown, not nothing, and treating unknown as nothing changes every statistic you compute.",
+                  "calibration": [
+                    {
+                      "answer": "because zero means no tourists arrived which is false, and it will lower the average",
+                      "expected": "correct"
+                    },
+                    {
+                      "answer": "0 is a real value not the same as missing, so it skews the mean and the trend line shows a fake dip",
+                      "expected": "correct"
+                    },
+                    {
+                      "answer": "a zero says nobody came that month, which drags the totals and averages down. better to leave NaN or interpolate",
+                      "expected": "correct"
+                    },
+                    {
+                      "answer": "Its false data, the charts become misleading",
+                      "expected": "correct"
+                    },
+                    {
+                      "answer": "it will make the average lower than it should be",
+                      "expected": "partial"
+                    },
+                    {
+                      "answer": "because zero implies that no visitors came",
+                      "expected": "partial"
+                    },
+                    {
+                      "answer": "the statistics get distorted so just use dropna",
+                      "expected": "partial"
+                    },
+                    {
+                      "answer": "zero is fine, it is a neutral number so nothing changes",
+                      "expected": "incorrect"
+                    },
+                    {
+                      "answer": "pandas will crash if you use fillna on a column with strings",
+                      "expected": "incorrect"
+                    },
+                    {
+                      "answer": "no idea",
+                      "expected": "unclear"
+                    }
+                  ],
+                  "ack": "Spot on: zero falsely says nobody arrived, and that invented value drags averages down and fakes a dip in charts."
+                }
+              }
+            ],
+            "closing": [
+              "Excellent work today, {name}.",
+              "Let me summarise what we covered. Tidy data puts one observation in each row and one variable in each column, which is the shape pandas is built for.",
+              "We saw that a number column read in as text cannot be summed or averaged until we clean it and convert it with pandas to numeric.",
+              "And we agreed that missing is not the same as zero, so we leave gaps as missing, drop them or fill them carefully, and always say what we did.",
+              "Next, the video on loading and inspecting a CSV file puts all of this into practice with the arrivals dataset. Well done."
+            ]
+          }
+        },
+        {
+          "id": "c2-L2",
+          "type": "video",
+          "title": "Loading and inspecting a CSV file with pandas",
+          "objectives": [
+            "Load a CSV file into a pandas DataFrame",
+            "Inspect a DataFrame's size, columns and data types",
+            "Spot common data problems in the first five minutes of analysis"
+          ],
+          "chips": [
+            "What does df.info() tell me that df.head() does not?",
+            "Why does read_csv sometimes get my dates wrong?",
+            "What should I check first when I open a new dataset?"
+          ],
+          "chapters": [
+            {
+              "title": "Why we start by looking",
+              "slide": {
+                "kind": "bullets",
+                "heading": "The first five minutes with a new dataset",
+                "points": [
+                  "Load it without changing anything",
+                  "Check its size and its columns",
+                  "Check every column's data type",
+                  "Look for gaps, duplicates and odd values"
+                ]
+              },
+              "narration": [
+                "Every analysis begins in the same humble way: you open the data and you look at it carefully before you trust a single number.",
+                "In this lecture we will load a synthetic file of monthly tourist arrivals to Mauritius, and I will show you the handful of commands I run on every new dataset.",
+                "The file is made up for teaching, but it has the same kinds of problems you will meet in real files from tourism offices, hospitals or the electricity board.",
+                "Think of these first five minutes as a health check. We are not fixing anything yet; we are simply finding out what we have.",
+                "The habit of looking first will save you hours later, because almost every surprising result I have seen from students traced back to a problem that was visible on day one."
+              ]
+            },
+            {
+              "title": "Reading the file",
+              "slide": {
+                "kind": "code",
+                "heading": "Loading the arrivals file",
+                "lang": "python",
+                "code": "import pandas as pd\n\ndf = pd.read_csv('arrivals.csv',\n                 parse_dates=['month'])\ndf.head()",
+                "points": [
+                  "pd is the usual nickname for pandas",
+                  "parse_dates turns the month column into real dates",
+                  "head() shows the first five rows"
+                ]
+              },
+              "narration": [
+                "We begin by importing pandas, and by convention we give it the short nickname p d, so every pandas function starts with those two letters.",
+                "The function read CSV takes the file name and returns a DataFrame, which is simply a table with named columns and a numbered index down the left.",
+                "I also pass the parse dates option for the month column. Without it, pandas would store a value like January twenty twenty-four as plain text rather than as a date.",
+                "Finally I call head, which prints the first five rows. It is the quickest way to confirm that the file loaded and that the columns look the way you expected.",
+                "If the first row of data appears as column names, or everything sits in one column, the separator or header setting is wrong, and head shows you that immediately.",
+                "If the file uses semicolons instead of commas, which is common in files exported from French or German software, pass the separator option to tell pandas which character to split on."
+              ]
+            },
+            {
+              "title": "Size, columns and types",
+              "slide": {
+                "kind": "code",
+                "heading": "Three questions, three commands",
+                "lang": "python",
+                "code": "df.shape        # (rows, columns)\ndf.columns      # the column names\ndf.info()       # types + non-null counts",
+                "points": [
+                  "shape: how big is it?",
+                  "columns: what is recorded?",
+                  "info: what type is each column, and how complete?"
+                ]
+              },
+              "narration": [
+                "Next I ask three questions. How big is the table? What is recorded? And what type is each column? The shape attribute answers the first one.",
+                "In our file, shape reports about two thousand four hundred rows and six columns, which matches twenty source markets over ten years of monthly data.",
+                "The columns attribute lists the names: month, market, region, arrivals, average stay in nights, and purpose of visit.",
+                "Then I call info, my favourite command. For each column it shows the data type and how many values are not missing, so in one screen you see both types and gaps.",
+                "Here info tells us that arrivals is stored as object, which means text, and that it has about forty fewer non-missing values than there are rows. That is two problems found already."
+              ]
+            },
+            {
+              "title": "Looking for odd values",
+              "slide": {
+                "kind": "code",
+                "heading": "Quick checks for odd values",
+                "lang": "python",
+                "code": "df.describe()\ndf['market'].value_counts()\ndf.isna().sum()\ndf.duplicated().sum()",
+                "points": [
+                  "describe: min, max, mean of numeric columns",
+                  "value_counts: spelling variants show up here",
+                  "isna().sum(): missing values per column",
+                  "duplicated(): repeated rows"
+                ]
+              },
+              "narration": [
+                "The describe method gives the count, mean, minimum, maximum and quartiles of each numeric column. I look first at the minimum and the maximum, because impossible values hide there.",
+                "For average stay, describe shows a maximum of nine hundred and ninety-nine nights, which is almost certainly a placeholder code someone used for unknown, not a real holiday.",
+                "For text columns I use value counts. On the market column it reveals France, france with a small f, and France with a trailing space, which pandas treats as three different markets.",
+                "Then isna followed by sum counts missing values per column, and duplicated followed by sum counts rows that appear twice, which often happens when two monthly files are combined.",
+                "Each of these commands takes a second to run, but together they give you a surprisingly complete picture of what the file contains and what it is hiding."
+              ]
+            },
+            {
+              "title": "Writing down what you found",
+              "slide": {
+                "kind": "bullets",
+                "heading": "Our arrivals health check",
+                "points": [
+                  "arrivals stored as text (commas, 'n/a')",
+                  "About 40 missing arrival counts",
+                  "999 used as a code for unknown stay",
+                  "Inconsistent market spellings; some duplicate rows"
+                ],
+                "note": {
+                  "tone": "info",
+                  "text": "Counts are illustrative — the dataset is synthetic."
+                }
+              },
+              "narration": [
+                "Before you clean anything, write your findings down as a short list. This becomes the plan for the cleaning stage and, later, the method section of your lab report.",
+                "For our file the list reads: arrivals stored as text, about forty missing counts, a placeholder value of nine hundred and ninety-nine, inconsistent market names, and a few duplicate rows.",
+                "Keeping this record matters because cleaning involves decisions, and a reader deserves to know which decisions you made and why.",
+                "I suggest keeping these notes in a markdown cell at the top of your notebook, right next to the code, so the evidence and the plan always travel together.",
+                "Notice too what we did not do. We did not delete anything, fill anything or rename anything. Inspection and cleaning are separate stages, and mixing them makes mistakes much harder to trace."
+              ]
+            },
+            {
+              "title": "Recap",
+              "slide": {
+                "kind": "steps",
+                "heading": "The inspection routine",
+                "steps": [
+                  {
+                    "title": "Load",
+                    "sub": "read_csv with parse_dates"
+                  },
+                  {
+                    "title": "Size up",
+                    "sub": "head, shape, columns"
+                  },
+                  {
+                    "title": "Types and gaps",
+                    "sub": "info, isna().sum()"
+                  },
+                  {
+                    "title": "Odd values",
+                    "sub": "describe, value_counts, duplicated"
+                  }
+                ]
+              },
+              "narration": [
+                "To recap, we load the file with read CSV, glance at it with head, and size it up with shape and columns.",
+                "Then info, describe, value counts, isna and duplicated reveal the types, the gaps and the odd values, and we write every finding down before we change a thing.",
+                "Run this routine on every new dataset you meet, and within a few weeks it will take you less than five minutes."
+              ]
+            }
+          ],
+          "dur": 6
+        },
+        {
+          "id": "c2-L3",
+          "type": "reading",
+          "title": "Tabular data, file formats and pandas data types",
+          "objectives": [
+            "Recognise tidy and untidy layouts of the same data",
+            "Compare CSV and Excel files as sources of tabular data",
+            "Map real-world variables to suitable pandas data types",
+            "Reshape a wide table into a long, tidy one with melt"
+          ],
+          "chips": [
+            "When should I use melt in pandas?",
+            "Is it better to load CSV or Excel files?",
+            "What is the category data type for?"
+          ],
+          "body": "Almost every dataset you will meet in this course arrives as a table: rows, columns and a header line. Tables feel familiar because we all use spreadsheets, but the *shape* of a table and the *types* of its columns decide how easy the analysis will be. This reading explains what a well-shaped table looks like, where tables usually come from, and how pandas represents the different kinds of values they contain. Throughout, we use the course's synthetic Mauritius tourism-arrivals dataset; all figures are invented for teaching.\n\n## Tidy data in three rules\n\nA table is **tidy** when:\n\n1. Each **row** is one observation.\n2. Each **column** is one variable.\n3. Each **cell** holds a single value.\n\nWhat counts as \"one observation\" depends on the question. In the arrivals data, one observation is *the number of visitors from one source market in one calendar month*. So the tidy table has columns such as `month`, `market`, `region`, `arrivals`, `avg_stay` and `purpose`, and one row for every market–month pair.\n\nTidy data is not about looks. It is about making every common operation — filtering, grouping, plotting — work the same way. If you want \"arrivals from Germany in 2023\", you filter rows. If you want \"total arrivals by region\", you group on a column. No special cases.\n\n## Wide versus long: the same data, two shapes\n\nOfficial statistics are often published in a **wide** layout that is pleasant to read on paper:\n\n| market | Jan | Feb | Mar |\n|---|---|---|---|\n| France | 26,000 | 21,500 | 19,800 |\n| Reunion | 12,400 | 9,900 | 11,100 |\n\nHere the month variable is hidden inside the column headers. To plot a monthly trend or group by month, we need the **long** (tidy) layout:\n\n| market | month | arrivals |\n|---|---|---|\n| France | Jan | 26000 |\n| France | Feb | 21500 |\n| Reunion | Jan | 12400 |\n\n> **Worked example — reshaping with `melt`.** Suppose `wide` holds the table above. One call turns it into the tidy layout:\n\n```python\nlong = wide.melt(id_vars='market',\n                 var_name='month',\n                 value_name='arrivals')\n```\n\n`id_vars` lists the columns that identify each observation and should stay as they are; every other column is \"melted\" into two new columns, one holding the old header (`month`) and one holding the value (`arrivals`). The reverse operation, from long to wide, is `pivot`, which is handy when you want to *display* a table in a report.\n\nOther untidy patterns to watch for:\n\n- **Two variables in one column**, such as `\"France - Leisure\"`. Split it with `str.split`.\n- **Totals and sub-totals mixed in with data rows**, such as a \"TOTAL\" row at the bottom of a sheet. Remove them, or you will double-count.\n- **Notes and footnotes inside cells**, such as `\"12,400*\"`. Strip the symbol and record the note elsewhere.\n\n## Where tables come from\n\nThe two formats you will meet most are CSV files and Excel workbooks.\n\nA **CSV** (comma-separated values) file is plain text: one line per row, values separated by commas. It is simple, portable and readable by almost any program, which is why open-data portals favour it. Its weaknesses are that it stores *no* type information — everything is text until a program interprets it — and that some regions use semicolons as separators and commas as decimal points. `pd.read_csv` has options for these situations, such as `sep=';'` and `decimal=','`.\n\nAn **Excel** workbook can hold several sheets, formatting, merged cells and formulas. `pd.read_excel('file.xlsx', sheet_name='Arrivals')` reads one sheet. Excel files are convenient, but they invite untidy layouts: decorative title rows, merged headers and colour used as data (\"the red rows are estimates\"). Colour is lost when you load the data, so any meaning carried by colour must be turned into a proper column first.\n\nWhatever the format, **never edit the raw file by hand**. Keep the original untouched and do every change in code, so that you — or your marker — can rerun the whole process from scratch.\n\n## Data types in pandas\n\nEvery pandas column has a **dtype**. Choosing the right one determines what you can do with the column.\n\n| Kind of variable | Example in arrivals data | Suitable dtype |\n|---|---|---|\n| Count (whole numbers) | `arrivals` | `int64` (or `float64` if it has gaps) |\n| Measurement | `avg_stay` in nights | `float64` |\n| Date or time | `month` | `datetime64` |\n| Category with few values | `region`, `purpose` | `category` or `object` |\n| Free text | comments | `object` / `string` |\n\nA few points deserve emphasis:\n\n- **`object` usually means text.** If a column you expect to be numeric shows `object` in `df.info()`, something inside it is not a number — commas, spaces, `\"n/a\"` or a stray letter.\n- **Missing values force floats.** Because `NaN` is technically a floating-point value, an integer column with gaps becomes `float64`. That is normal and harmless.\n- **Dates must be parsed.** Use `parse_dates=['month']` in `read_csv`, or `pd.to_datetime` afterwards. Once a column is a datetime, you can extract parts with `.dt.year` or `.dt.month` and sort correctly through time.\n- **The `category` type** saves memory and records a fixed set of allowed labels. It is useful for columns like `region` with a handful of values repeated thousands of times.\n\n> **Case box — a misleading sort.** An analyst sorted markets by arrivals and found that \"9,800\" ranked above \"12,400\". The column was text, and text sorts character by character, so \"9\" beats \"1\". After converting with `pd.to_numeric(df['arrivals'].str.replace(',', ''))`, the ranking was correct. The lesson: check `dtypes` before you trust any sort, sum or chart.\n\n## Variables: numeric and categorical\n\nIt also helps to classify variables by *meaning*, not only by storage type. **Numeric** variables can be *discrete* (counts such as arrivals) or *continuous* (measurements such as length of stay). **Categorical** variables can be *nominal*, with no natural order (market, purpose), or *ordinal*, with an order (a satisfaction rating from \"poor\" to \"excellent\"). This classification will guide your choice of statistics in Module 3 and your choice of chart later on: you average numbers, you count categories.\n\n## Key takeaways\n\n- Tidy data has one observation per row, one variable per column and one value per cell.\n- Wide tables hide a variable in their headers; `melt` converts them to the long, tidy layout.\n- CSV is simple plain text with no types; Excel can hide meaning in formatting and merged cells.\n- Check `df.info()` early: a numeric column stored as `object` signals dirty values.\n- Parse dates explicitly so that you can sort and group through time.\n- Keep the raw file untouched and do every change in code.\n\n## Check your understanding\n\n1. A sheet has one row per market and one column per year. Is it tidy? What would you do?\n*Answer:* No — the year variable is hidden in the headers. Use `melt` with `market` as the identifier to produce `market`, `year` and `arrivals` columns.\n2. `df.info()` shows `arrivals` as `object`. What does that suggest?\n*Answer:* At least one value is not a valid number (for example a comma or \"n/a\"), so pandas stored the whole column as text; it must be cleaned and converted.\n3. Why might an `arrivals` column with no decimals still appear as `float64`?\n*Answer:* Because it contains missing values, and `NaN` is a floating-point value, so pandas uses a float type for the column.\n",
+          "dur": 10
+        }
+      ]
+    },
+    {
+      "id": "m2",
+      "title": "Module 2 · Cleaning data",
+      "items": [
+        {
+          "id": "c2-L4",
+          "type": "video",
+          "title": "Cleaning data: types, missing values and duplicates",
+          "objectives": [
+            "Convert text columns to numbers and dates safely",
+            "Choose between dropping, keeping and filling missing values",
+            "Standardise categories and remove duplicate rows",
+            "Record each cleaning step so it can be reproduced"
+          ],
+          "chips": [
+            "What does errors='coerce' actually do?",
+            "Should I use dropna or fillna for my data?",
+            "How do I fix inconsistent spellings in a column?"
+          ],
+          "chapters": [
+            {
+              "title": "Cleaning is a series of decisions",
+              "slide": {
+                "kind": "steps",
+                "heading": "A cleaning pipeline",
+                "steps": [
+                  {
+                    "title": "Fix types",
+                    "sub": "numbers and dates"
+                  },
+                  {
+                    "title": "Fix categories",
+                    "sub": "spellings, spaces, case"
+                  },
+                  {
+                    "title": "Handle gaps",
+                    "sub": "keep, drop or fill"
+                  },
+                  {
+                    "title": "Remove duplicates",
+                    "sub": "check, then drop"
+                  },
+                  {
+                    "title": "Record it",
+                    "sub": "a log of every step"
+                  }
+                ]
+              },
+              "narration": [
+                "In the last lecture we found five problems in the arrivals file. Now we fix them, and I want you to see cleaning as a series of decisions rather than a set of tricks.",
+                "Each decision changes the numbers you will report later, so we make it deliberately, we make it in code rather than by hand in a spreadsheet, and we write it down.",
+                "We will work in a sensible order: first data types, then categories, then missing values, and finally duplicates, because each step makes the next one easier to check.",
+                "A useful test is to imagine a classmate rerunning your notebook on the raw file next year. If they would get exactly the same cleaned table without asking you a single question, your cleaning is reproducible.",
+                "That is also why we keep the raw data untouched and work on a copy. If a decision turns out to be wrong, we change one line and run everything again."
+              ]
+            },
+            {
+              "title": "Fixing data types",
+              "slide": {
+                "kind": "code",
+                "heading": "Text to numbers, safely",
+                "lang": "python",
+                "code": "raw = df['arrivals'].str.replace(',', '')\ndf['arrivals'] = pd.to_numeric(raw, errors='coerce')\n\ndf['avg_stay'] = df['avg_stay'].replace(999, pd.NA)",
+                "points": [
+                  "Remove thousands separators first",
+                  "coerce: anything unparseable becomes NaN",
+                  "Replace placeholder codes with a true missing value"
+                ]
+              },
+              "narration": [
+                "The arrivals column is text because some figures contain commas and one cell says not available. We first remove the commas with the string replace method.",
+                "Then we call pandas to numeric with errors set to coerce. Anything that still cannot be read as a number becomes a missing value instead of crashing the program.",
+                "Coerce is powerful but it is quiet, so I always count the missing values before and after. If the count jumps by hundreds, I have probably destroyed good data and need to look again.",
+                "The average stay column has the placeholder nine hundred and ninety-nine. We replace that code with a proper missing value, because leaving it in would wildly inflate the average.",
+                "Be careful with thousands separators. Some files use a full stop or a space instead of a comma, and if you remove the wrong character you can turn twelve thousand into twelve."
+              ]
+            },
+            {
+              "title": "Fixing categories",
+              "slide": {
+                "kind": "code",
+                "heading": "Standardising market names",
+                "lang": "python",
+                "code": "df['market'] = (df['market']\n    .str.strip()\n    .str.title()\n    .replace({'Uk': 'United Kingdom'}))\ndf['market'].value_counts()",
+                "points": [
+                  "strip removes leading and trailing spaces",
+                  "title gives consistent capitals",
+                  "replace maps known variants to one label"
+                ]
+              },
+              "narration": [
+                "Next come the market names. Strip removes stray spaces at either end, and title case gives every word a capital first letter, so france and France become the same.",
+                "Some variants need a mapping that you write yourself, such as turning U K into United Kingdom, or Reunion with and without its accent into a single spelling.",
+                "Run value counts again afterwards. You should see each market exactly once, and the number of distinct markets should now match what the tourism office says it publishes.",
+                "Doing this before any grouping matters, because otherwise every later total would quietly split one market across three or four slightly different labels.",
+                "Some markets need judgement, such as whether Rodrigues should count as a source market at all; when in doubt, ask the data provider and record the answer."
+              ]
+            },
+            {
+              "title": "Handling missing values",
+              "slide": {
+                "kind": "compare",
+                "heading": "Three options for a gap",
+                "columns": [
+                  {
+                    "title": "Keep as NaN",
+                    "points": [
+                      "Most stats skip NaN",
+                      "Honest and simple"
+                    ]
+                  },
+                  {
+                    "title": "Drop rows",
+                    "points": [
+                      "dropna(subset=['arrivals'])",
+                      "OK if few and random"
+                    ]
+                  },
+                  {
+                    "title": "Fill",
+                    "points": [
+                      "interpolate() within a market",
+                      "Always flag filled values"
+                    ]
+                  }
+                ]
+              },
+              "narration": [
+                "Now the missing arrival counts. You have three honest options: keep them as missing, drop the affected rows, or fill them with a reasonable estimate.",
+                "Keeping them is often fine, because mean, sum and most pandas statistics skip missing values automatically. Dropping is reasonable when gaps are few and appear at random.",
+                "Filling makes sense for an isolated missing month in a smooth series. You can interpolate within each market, which draws a straight line between the months either side.",
+                "Whatever you choose, never fill with zero by reflex, and add a column that flags which values were estimated, so readers can tell real counts from filled ones.",
+                "Remember that cleaning is never perfect. Your aim is a dataset whose remaining problems are known, small and clearly described, so that readers can judge your results fairly.",
+                "In the next reading we will turn this exact sequence into a written cleaning log, with a before and after table for every step."
+              ]
+            },
+            {
+              "title": "Removing duplicates",
+              "slide": {
+                "kind": "code",
+                "heading": "Duplicates: count, inspect, drop",
+                "lang": "python",
+                "code": "keys = ['month', 'market']\ndf.duplicated(subset=keys).sum()\ndf[df.duplicated(subset=keys, keep=False)]\ndf = df.drop_duplicates(subset=keys)",
+                "points": [
+                  "Decide which columns define 'the same row'",
+                  "Look at the duplicates before you drop them"
+                ]
+              },
+              "narration": [
+                "Duplicates usually appear when two files overlap. First decide what makes two rows the same. Here it is the combination of month and market, because each pair should appear only once.",
+                "Count the duplicates, then actually look at them. If the two copies have different arrival figures, you have a conflict to investigate, not a harmless copy.",
+                "Once you are satisfied, drop duplicates on those key columns and confirm that the number of rows now equals markets multiplied by months.",
+                "When conflicting copies come from a provisional and a revised release, the usual rule is to keep the revised figure, because the statistics office corrected it, and to note that choice in your log.",
+                "Finally, check that the month column really is a date and that no month falls outside the period the file claims to cover."
+              ]
+            },
+            {
+              "title": "Recap",
+              "slide": {
+                "kind": "bullets",
+                "heading": "Cleaning recap",
+                "points": [
+                  "Types first: to_numeric with coerce, then check NaN counts",
+                  "Categories: strip, title, map variants",
+                  "Gaps: keep, drop or fill — never zero by reflex",
+                  "Duplicates: define keys, inspect, drop",
+                  "Log every step"
+                ]
+              },
+              "narration": [
+                "To recap, we fixed types with pandas to numeric, standardised categories with strip, title and a mapping, and handled gaps by keeping, dropping or carefully filling them.",
+                "We removed duplicates only after inspecting them, and we recorded every step, which is exactly what your lab report on this dataset will ask you to show."
+              ]
+            }
+          ],
+          "dur": 6
+        },
+        {
+          "id": "c2-L5",
+          "type": "reading",
+          "title": "Worked example: a reproducible cleaning log",
+          "objectives": [
+            "Structure a cleaning script as a sequence of documented steps",
+            "Verify each cleaning step with a before-and-after check",
+            "Write a cleaning log suitable for a lab report"
+          ],
+          "chips": [
+            "What should a cleaning log include?",
+            "How do I check that a cleaning step did not break anything?",
+            "Should I clean data in Excel or in Python?"
+          ],
+          "body": "Cleaning data is not glamorous, but it is where most analytical mistakes are made — and where most marks in a lab report are won or lost. A good analyst cleans data in a way that is **deliberate**, **verified** and **reproducible**. This reading walks through a complete worked example on the synthetic tourism-arrivals file and shows how to turn your code into a cleaning log that a reader can follow. All numbers are illustrative.\n\n## Principles before code\n\nThree principles guide every decision:\n\n1. **Never touch the raw file.** Load it, clean a *copy* in code, and save the cleaned result under a new name, such as `arrivals_clean.csv`.\n2. **One problem, one step.** Each step fixes a single, named problem. That makes it easy to check, to explain and to undo.\n3. **Check before and after.** For every step, print a number that should change and a number that should not. If either surprises you, stop and investigate.\n\nCleaning in a spreadsheet by hand breaks all three principles: the raw data is overwritten, many fixes are made at once, and nothing records what was changed. That is why we clean in Python.\n\n## The worked example\n\nAfter the inspection routine from the earlier lecture, we listed five problems: `arrivals` stored as text; about 40 missing arrival counts; `999` used as a placeholder in `avg_stay`; inconsistent market names; and duplicate market–month rows. Here is the script, organised as numbered steps.\n\n```python\nimport pandas as pd\n\nraw = pd.read_csv('arrivals_raw.csv', parse_dates=['month'])\ndf = raw.copy()\nprint('start', df.shape)\n\n# Step 1: arrivals text -> numbers\nbefore = df['arrivals'].isna().sum()\ndf['arrivals'] = pd.to_numeric(\n    df['arrivals'].str.replace(',', ''), errors='coerce')\nprint('step1 NaN', before, '->', df['arrivals'].isna().sum())\n\n# Step 2: placeholder 999 -> missing\nprint('step2 999s', (df['avg_stay'] == 999).sum())\ndf['avg_stay'] = df['avg_stay'].mask(df['avg_stay'] == 999)\n\n# Step 3: standardise market names\ndf['market'] = df['market'].str.strip().str.title()\ndf['market'] = df['market'].replace({'Uk': 'United Kingdom',\n                                     'Réunion': 'Reunion'})\nprint('step3 markets', df['market'].nunique())\n\n# Step 4: duplicates on the key columns\nkeys = ['month', 'market']\nprint('step4 dups', df.duplicated(subset=keys).sum())\ndf = df.drop_duplicates(subset=keys)\n\n# Step 5: fill isolated gaps within each market, and flag them\ndf = df.sort_values(keys)\ndf['arrivals_filled'] = df['arrivals'].isna()\ndf['arrivals'] = (df.groupby('market')['arrivals']\n                    .transform(lambda s: s.interpolate(limit=1)))\nprint('end', df.shape, 'NaN left', df['arrivals'].isna().sum())\n\ndf.to_csv('arrivals_clean.csv', index=False)\n```\n\n### What the checks told us\n\n| Step | Check | Before | After | Comment |\n|---|---|---|---|---|\n| 1 | missing `arrivals` | 38 | 41 | 3 \"n/a\" cells became NaN — expected |\n| 2 | `avg_stay == 999` | 12 | 0 | placeholders now missing |\n| 3 | distinct markets | 31 | 20 | variants merged |\n| 4 | duplicate key rows | 24 | 0 | overlap between two files |\n| 5 | missing `arrivals` | 41 | 6 | 35 single gaps interpolated and flagged |\n\nNotice how each row of the table pairs a decision with evidence. In step 1, the rise from 38 to 41 is small and explained by the three \"n/a\" cells. If it had jumped to 900, `coerce` would have been silently wiping out good values — perhaps because some figures used a full stop as a thousands separator — and we would need to fix the parsing rather than carry on.\n\n> **Case box — the duplicate that was not a copy.** In step 4, two of the 24 duplicate rows had *different* arrival figures for the same market and month: one from a provisional release, one from a revised release. Dropping \"the first\" would have kept the provisional figure. The right decision was to keep the revised figure and say so in the log. Always look at duplicates before you drop them: `df[df.duplicated(subset=keys, keep=False)]`.\n\n## Justifying each decision\n\nCode shows *what* you did; the log must also say *why*. Good justifications are short and specific:\n\n- *Step 2:* \"999 is outside any plausible stay length (the next largest value is 28 nights) and matches the coding note in the source file, so it was treated as missing rather than as data.\"\n- *Step 5:* \"Single missing months were linearly interpolated within each market because arrivals change smoothly from month to month; longer gaps were left missing to avoid inventing data. Filled values are flagged in `arrivals_filled`.\"\n\nWeak justifications such as \"to clean the data\" or \"because it was wrong\" earn little credit. A reader should be able to disagree with your reasoning — that is a sign it is specific enough to be checked.\n\n## What a cleaning log looks like\n\nIn a lab report, the cleaning log is usually a short section with:\n\n1. **Source and version** of the raw data, and its starting shape.\n2. **A numbered list of problems found**, each with evidence (a count or an example value).\n3. **The action taken** for each problem and a one-sentence justification.\n4. **A before-and-after table** like the one above.\n5. **The final shape** and any remaining limitations, such as \"six arrival values remain missing; results for those markets in those months are excluded\".\n\nKeep the log honest about limitations. Every dataset has them, and acknowledging them builds trust rather than losing marks.\n\n## Common pitfalls\n\n- **Cleaning in the wrong order.** Converting types before fixing duplicates makes duplicates easier to detect; standardising names before grouping prevents \"France\" and \"france\" being counted separately.\n- **Chained, unchecked operations.** Long one-line pipelines are elegant but hide where things went wrong. Check between steps while developing.\n- **Filling with zero or the overall mean.** Both invent data; the overall mean also ignores differences between markets and seasons.\n- **Forgetting to save.** If the cleaned file is not written out, the next notebook silently uses the raw data.\n\n## Key takeaways\n\n- Keep the raw file untouched and clean a copy in code.\n- Fix one named problem per step, and check a number before and after each step.\n- Inspect duplicates and placeholders before removing or replacing them.\n- Fill gaps only when justified, never with zero by reflex, and flag filled values.\n- A cleaning log lists problems, evidence, actions, justifications and remaining limitations.\n\n## Check your understanding\n\n1. After `pd.to_numeric(..., errors='coerce')`, missing values jump from 38 to 900. What should you suspect?\n*Answer:* That many valid figures failed to parse — for example because of a different thousands separator — so the cleaning of the text needs fixing before conversion.\n2. Why add an `arrivals_filled` column when interpolating?\n*Answer:* So that estimated values can be distinguished from recorded ones, keeping the analysis transparent and allowing results to be checked with and without them.\n3. Give one reason why cleaning by hand in a spreadsheet is discouraged.\n*Answer:* It overwrites the raw data and leaves no record of what changed, so the work cannot be checked or reproduced.\n",
+          "dur": 9
+        },
+        {
+          "id": "c2-L6",
+          "type": "quiz",
+          "title": "Quiz 1: Loading, inspecting and cleaning data",
+          "dur": 15,
+          "quiz": {
+            "time": 15,
+            "weight": 5,
+            "questions": [
+              {
+                "q": "In a tidy version of the tourism arrivals data, what does one row represent?",
+                "o": [
+                  "All arrivals for one year",
+                  "Arrivals from one market in one month",
+                  "One column per month for each market",
+                  "A single tourist's passport record"
+                ],
+                "a": 1,
+                "ex": "Tidy data has one observation per row, and here an observation is one market in one month."
+              },
+              {
+                "q": "Which pandas command shows each column's data type together with its count of non-missing values?",
+                "o": [
+                  "df.head()",
+                  "df.shape",
+                  "df.info()",
+                  "df.describe()"
+                ],
+                "a": 2,
+                "ex": "info() lists every column's dtype and non-null count on one screen."
+              },
+              {
+                "q": "df.info() reports the arrivals column as object. What is the most likely cause?",
+                "o": [
+                  "Some cells contain commas or text such as 'n/a'",
+                  "The file is too large for memory",
+                  "The column has been sorted incorrectly",
+                  "The values are all whole numbers"
+                ],
+                "a": 0,
+                "ex": "A numeric column becomes object (text) when at least one value cannot be read as a number."
+              },
+              {
+                "q": "What does errors='coerce' do in pd.to_numeric?",
+                "o": [
+                  "Rounds every value to an integer",
+                  "Deletes rows that contain text",
+                  "Raises an error listing every bad value",
+                  "Turns values that cannot be parsed into NaN"
+                ],
+                "a": 3,
+                "ex": "coerce replaces unparseable entries with NaN instead of stopping the program, so you must count NaN before and after."
+              },
+              {
+                "q": "The avg_stay column has a maximum of 999 nights. What is the best action?",
+                "o": [
+                  "Keep it, because it is the real maximum",
+                  "Investigate; if it is a placeholder code, replace it with a missing value",
+                  "Replace it with 0",
+                  "Delete the whole avg_stay column"
+                ],
+                "a": 1,
+                "ex": "999 is implausible and typically a code for unknown, so it should become a true missing value after checking."
+              },
+              {
+                "q": "value_counts() on the market column shows 'France', 'france' and 'France '. Which fix is most appropriate?",
+                "o": [
+                  "df['market'].str.strip().str.title()",
+                  "df['market'].dropna()",
+                  "df['market'].astype(int)",
+                  "df.drop_duplicates()"
+                ],
+                "a": 0,
+                "ex": "strip removes stray spaces and title standardises capitalisation, merging the three variants."
+              },
+              {
+                "q": "A single month of arrivals is missing for one market in an otherwise smooth series. Which approach is most defensible?",
+                "o": [
+                  "Fill it with zero",
+                  "Fill it with the mean of all markets and months",
+                  "Interpolate within that market and flag the value as estimated",
+                  "Delete that market from the dataset"
+                ],
+                "a": 2,
+                "ex": "Interpolating within the market uses its neighbouring months, and flagging keeps the estimate transparent."
+              },
+              {
+                "q": "Before dropping duplicate market–month rows, why should you inspect them with keep=False?",
+                "o": [
+                  "Because drop_duplicates only works after sorting",
+                  "To check whether the copies conflict, for example provisional versus revised figures",
+                  "To convert them to the category type",
+                  "Because duplicates always indicate missing values"
+                ],
+                "a": 1,
+                "ex": "Duplicates with different values are conflicts that need a decision, not harmless copies."
+              }
+            ]
+          }
+        },
+        {
+          "id": "c2-L7",
+          "type": "assignment",
+          "title": "Lab report: Cleaning the tourism arrivals dataset",
+          "dur": 120,
+          "assessment": "as3"
+        }
+      ]
+    },
+    {
+      "id": "m3",
+      "title": "Module 3 · Describing and summarising data",
+      "items": [
+        {
+          "id": "c2-L8",
+          "type": "video",
+          "title": "Descriptive statistics: centre, spread and shape",
+          "objectives": [
+            "Calculate mean, median and mode with pandas",
+            "Measure spread with range, standard deviation and interquartile range",
+            "Choose the median and IQR when data is skewed or has outliers"
+          ],
+          "chips": [
+            "When should I report the median instead of the mean?",
+            "What does a standard deviation actually tell me?",
+            "How do I find outliers using the IQR rule?"
+          ],
+          "chapters": [
+            {
+              "title": "Summarising thousands of numbers",
+              "slide": {
+                "kind": "bullets",
+                "heading": "What a summary must tell us",
+                "points": [
+                  "Centre: what is a typical value?",
+                  "Spread: how much do values vary?",
+                  "Shape: symmetric or skewed?",
+                  "Unusual values: any outliers?"
+                ]
+              },
+              "narration": [
+                "Our cleaned arrivals table has about two thousand four hundred numbers in a single column. Nobody can read them all, so we summarise them.",
+                "A good summary answers four questions: what is a typical value, how much do values vary, is the distribution symmetric or lopsided, and are there any unusual values.",
+                "These are descriptive statistics. They describe the data we have; they do not, on their own, prove anything about causes or about the future.",
+                "Think of the difference between a weather report and a weather forecast. Today we are writing the report: a clear, honest account of what the numbers look like.",
+                "In pandas, almost every one of these statistics is a single method call on a column, so the hard part is not the code. The hard part is choosing which statistic tells the truth about your data."
+              ]
+            },
+            {
+              "title": "Measures of centre",
+              "slide": {
+                "kind": "code",
+                "heading": "Centre in pandas",
+                "lang": "python",
+                "code": "a = df['arrivals']\na.mean()             # about 4,100\na.median()           # about 1,800\ndf['purpose'].mode() # 'Leisure'",
+                "points": [
+                  "mean: total divided by count",
+                  "median: the middle value when sorted",
+                  "mode: the most frequent category"
+                ],
+                "note": {
+                  "tone": "info",
+                  "text": "Figures are illustrative, from the synthetic dataset."
+                }
+              },
+              "narration": [
+                "The mean is the total divided by the number of values. The median is the middle value once everything is sorted. The mode is the most frequent value, which is most useful for categories.",
+                "For monthly arrivals per market, our synthetic data gives a mean of about four thousand one hundred, but a median of only about one thousand eight hundred.",
+                "Why such a gap? A few large markets, such as France and Reunion, send many thousands of visitors each month, and those big values pull the mean upwards.",
+                "The median does not care how large the largest values are, only that they sit above the middle. So for skewed data like this, the median is the better description of a typical market.",
+                "For a categorical column such as purpose of visit, a mean makes no sense at all, so we report the mode, which here is leisure, followed by business and visiting friends and family."
+              ]
+            },
+            {
+              "title": "Measures of spread",
+              "slide": {
+                "kind": "formula",
+                "heading": "Spread: three common measures",
+                "formula": "IQR = Q3 − Q1    (the middle 50% of values)",
+                "points": [
+                  "Range = max − min: simple, but driven by extremes",
+                  "Standard deviation: typical distance from the mean",
+                  "IQR: robust to outliers; pair it with the median"
+                ]
+              },
+              "narration": [
+                "Centre alone is not enough. Two markets can both average two thousand visitors a month, but one is steady while the other swings wildly with the seasons.",
+                "The range is the maximum minus the minimum. It is easy to explain, but a single extreme month changes it completely.",
+                "The standard deviation measures the typical distance of values from the mean. In pandas it is simply the s t d method, and a larger value means more variation.",
+                "The interquartile range is the third quartile minus the first, which covers the middle half of the data. Like the median, it ignores the extremes, so we pair the two for skewed data.",
+                "For example, Reunion's arrivals might stay within a narrow band all year, while arrivals from a European market double in the winter months and halve in the summer."
+              ]
+            },
+            {
+              "title": "Outliers and the IQR rule",
+              "slide": {
+                "kind": "code",
+                "heading": "Flagging outliers",
+                "lang": "python",
+                "code": "q1, q3 = a.quantile([0.25, 0.75])\niqr = q3 - q1\nlow, high = q1 - 1.5*iqr, q3 + 1.5*iqr\noutliers = df[(a < low) | (a > high)]",
+                "points": [
+                  "1.5 × IQR beyond the quartiles is a common rule of thumb",
+                  "Investigate outliers before removing them"
+                ]
+              },
+              "narration": [
+                "A common rule of thumb flags a value as an outlier if it lies more than one and a half interquartile ranges below the first quartile or above the third.",
+                "In pandas we get the quartiles with the quantile method, compute the fences, and then filter the rows that fall outside them.",
+                "But an outlier is a question, not a verdict. A huge spike might be a typing error, or it might be a real event, such as a large international conference held in the island that month.",
+                "Likewise, a deep dip during a cyclone warning or a border closure is real and important. Investigate first, and only remove values you can show are errors.",
+                "If you do decide to exclude a value, report your results both with and without it, so that the reader can see how much difference that decision makes."
+              ]
+            },
+            {
+              "title": "Shape and skew",
+              "slide": {
+                "kind": "compare",
+                "heading": "Reading the shape",
+                "columns": [
+                  {
+                    "title": "Roughly symmetric",
+                    "points": [
+                      "mean ≈ median",
+                      "report mean and standard deviation"
+                    ]
+                  },
+                  {
+                    "title": "Right-skewed",
+                    "points": [
+                      "mean > median",
+                      "long tail of large values",
+                      "report median and IQR"
+                    ]
+                  }
+                ]
+              },
+              "narration": [
+                "Comparing the mean with the median is a quick test of shape. When they are close, the data is roughly symmetric. When the mean is well above the median, the data is right-skewed.",
+                "Counts, incomes and visitor numbers are very often right-skewed, because they cannot go below zero but can occasionally be very large.",
+                "We will see this shape directly next week with a histogram, but the numbers already warn us, and they tell us which pair of statistics to report.",
+                "You can check this in pandas with the skew method, where a positive number signals a long right tail, but simply comparing the mean and median is often enough for a first look.",
+                "Shape also affects what you tell a reader. Saying that the average market sends four thousand visitors a month would give a manager the wrong impression about most markets."
+              ]
+            },
+            {
+              "title": "Recap",
+              "slide": {
+                "kind": "bullets",
+                "heading": "Descriptive statistics recap",
+                "points": [
+                  "Centre: mean, median, mode",
+                  "Spread: range, standard deviation, IQR",
+                  "Skewed data: report median and IQR",
+                  "Outliers: flag with 1.5 × IQR, then investigate"
+                ]
+              },
+              "narration": [
+                "To recap, we describe data by its centre, its spread, its shape and its unusual values.",
+                "For symmetric data report the mean and standard deviation, for skewed data like tourist arrivals report the median and interquartile range, and always investigate outliers before you remove anything.",
+                "And whenever you report a statistic, say which one it is and what period it covers, so that your reader can interpret it correctly."
+              ]
+            }
+          ],
+          "dur": 6
+        },
+        {
+          "id": "c2-L9",
+          "type": "video",
+          "title": "Grouping and aggregating with groupby",
+          "objectives": [
+            "Explain the split, apply, combine pattern",
+            "Summarise a numeric column by one or more categories with groupby",
+            "Compute shares and month-by-month comparisons from grouped results"
+          ],
+          "chips": [
+            "What is the difference between groupby and a pivot table?",
+            "Why does groupby return a strange index?",
+            "How do I get each market's share of total arrivals?"
+          ],
+          "chapters": [
+            {
+              "title": "Questions that need groups",
+              "slide": {
+                "kind": "cards",
+                "heading": "Questions that need grouping",
+                "cards": [
+                  {
+                    "label": "By market",
+                    "text": "Which markets send the most visitors?"
+                  },
+                  {
+                    "label": "By month",
+                    "text": "Which months are busiest?"
+                  },
+                  {
+                    "label": "By region and year",
+                    "text": "Is Asia growing faster than Europe?"
+                  }
+                ]
+              },
+              "narration": [
+                "Most interesting questions about data are comparisons between groups. Which markets send the most visitors? Which months are the busiest? Is Asia growing faster than Europe?",
+                "A single mean for the whole table cannot answer those questions. We need one summary per group, and in pandas the tool for that is groupby.",
+                "In this lecture we will use groupby on the cleaned arrivals data to build the tables that later become our charts.",
+                "You could, of course, filter the table once for each market and compute a total twenty times, but that is slow, repetitive and very easy to get wrong.",
+                "Groupby does all of those calculations in one step, and it scales just as easily to two hundred groups as to twenty."
+              ]
+            },
+            {
+              "title": "Split, apply, combine",
+              "slide": {
+                "kind": "steps",
+                "heading": "How groupby works",
+                "steps": [
+                  {
+                    "title": "Split",
+                    "sub": "rows divided by market"
+                  },
+                  {
+                    "title": "Apply",
+                    "sub": "sum arrivals within each group"
+                  },
+                  {
+                    "title": "Combine",
+                    "sub": "one row per market in a new table"
+                  }
+                ]
+              },
+              "narration": [
+                "Groupby follows a pattern called split, apply, combine. First pandas splits the rows into groups, for example one group per market.",
+                "Then it applies a calculation to each group separately, such as adding up the arrivals.",
+                "Finally it combines the results into a new, much smaller table with one row per group. The group labels become the index of that table.",
+                "Think of sorting a pile of hotel registration cards into piles by country, counting each pile, and writing the totals on a single summary sheet.",
+                "The summary sheet is much smaller than the pile of cards, but it is also tidy: one row per country, one column per statistic, ready to sort or to plot."
+              ]
+            },
+            {
+              "title": "Your first groupby",
+              "slide": {
+                "kind": "code",
+                "heading": "Total arrivals by market",
+                "lang": "python",
+                "code": "by_market = (df.groupby('market')['arrivals']\n               .sum()\n               .sort_values(ascending=False))\nby_market.head(5)",
+                "points": [
+                  "groupby names the grouping column",
+                  "select the column to summarise",
+                  "sort to rank the groups"
+                ]
+              },
+              "narration": [
+                "Here is the basic pattern. We group by market, select the arrivals column, and take the sum. Then we sort the result from largest to smallest.",
+                "In our synthetic data the top five markets are France, Reunion, the United Kingdom, Germany and South Africa, which together account for well over half of all arrivals.",
+                "Notice that the result is a Series indexed by market name. If you would prefer an ordinary table with market as a column, add reset index at the end.",
+                "You can swap sum for any other summary, such as mean, median, count, minimum or maximum, and the pattern stays exactly the same.",
+                "One caution: sum quietly skips missing values, so a market with several missing months will look smaller than it really is. Check the count of values per group alongside the totals."
+              ]
+            },
+            {
+              "title": "Several statistics and several keys",
+              "slide": {
+                "kind": "code",
+                "heading": "agg and multiple keys",
+                "lang": "python",
+                "code": "summary = (df.groupby(['region', 'market'])\n             .agg(total=('arrivals', 'sum'),\n                  median_month=('arrivals', 'median'),\n                  avg_stay=('avg_stay', 'mean')))\n\nshare = by_market / by_market.sum() * 100",
+                "points": [
+                  "agg computes several statistics at once",
+                  "group by a list for nested groups",
+                  "divide by the total for percentage shares"
+                ]
+              },
+              "narration": [
+                "Often we want several statistics at once. The agg method lets us name each output, for example total arrivals, the median month, and the mean length of stay.",
+                "We can also group by more than one column by passing a list, such as region and then market, which gives a table nested by region.",
+                "Totals alone can mislead, so we often convert them to shares. Dividing each market's total by the grand total and multiplying by one hundred gives its percentage of all arrivals.",
+                "Shares make comparisons fair when the overall size changes, for example when comparing a quiet year with a record year.",
+                "In our synthetic data, for example, France provides roughly a quarter of all arrivals, and Europe as a whole provides more than half.",
+                "Remember to name your outputs clearly, because those names become the column headings that appear in your report tables."
+              ]
+            },
+            {
+              "title": "Seasonality: grouping by month",
+              "slide": {
+                "kind": "code",
+                "heading": "Which months are busiest?",
+                "lang": "python",
+                "code": "df['month_num'] = df['month'].dt.month\nseason = df.groupby('month_num')['arrivals'].mean()\nseason.idxmax(), season.idxmin()",
+                "points": [
+                  "dt.month extracts the month number from a date",
+                  "mean over years shows the typical seasonal pattern"
+                ]
+              },
+              "narration": [
+                "Because we parsed the month column as a date, we can extract the month number with the d t accessor and group by it.",
+                "Averaging across all years gives the typical seasonal pattern. In our synthetic data the peak falls in December, with the European winter holidays, and the low point falls in June.",
+                "This little table is exactly what a hotel manager wants to know, and next week it will become a clear line chart.",
+                "You can also group by year and region together, then compare how each region's total changes from one year to the next, which answers our question about Asia and Europe.",
+                "If you prefer a grid with months down the side and years across the top, the pivot table function produces exactly that layout from the same tidy data.",
+                "Because every year is averaged together, one unusual year, such as a year disrupted by a cyclone or a border closure, can shift the pattern, so it is worth checking each year separately too."
+              ]
+            },
+            {
+              "title": "Recap",
+              "slide": {
+                "kind": "bullets",
+                "heading": "Groupby recap",
+                "points": [
+                  "Split, apply, combine",
+                  "groupby + column + sum, mean or median",
+                  "agg for several named statistics",
+                  "Shares and seasonality from grouped results"
+                ]
+              },
+              "narration": [
+                "To recap, groupby splits rows into groups, applies a calculation to each, and combines the results into one tidy summary.",
+                "With agg, multiple keys, shares and the month number, you can answer most comparison questions about the arrivals data in just a few lines of code.",
+                "In the reading that follows, we take these grouped tables and ask a different question: which chart shows each of them most clearly to a reader?"
+              ]
+            }
+          ],
+          "dur": 5
+        },
+        {
+          "id": "c2-L10",
+          "type": "reading",
+          "title": "Choosing the right chart for your question",
+          "objectives": [
+            "Match common analytical questions to suitable chart types",
+            "Recognise misleading chart designs and how to avoid them",
+            "Justify a chart choice in one sentence"
+          ],
+          "chips": [
+            "When should I use a bar chart instead of a pie chart?",
+            "Why must a bar chart start at zero?",
+            "What chart shows a distribution best?"
+          ],
+          "body": "A chart is an answer to a question. If you choose the chart before you know the question, you will usually choose badly. This reading gives a simple method for matching questions to charts, works through examples on the synthetic tourism-arrivals data, and lists the most common ways charts mislead. All numbers are illustrative.\n\n## Start from the question\n\nMost analytical questions fall into one of five families. Identify the family first, and the chart nearly chooses itself.\n\n| Question family | Example from the arrivals data | Good default chart |\n|---|---|---|\n| **Change over time** | How have monthly arrivals changed since 2015? | Line chart |\n| **Comparison between categories** | Which markets send the most visitors? | Bar chart (sorted, often horizontal) |\n| **Distribution** | How are monthly arrival counts spread out? | Histogram or box plot |\n| **Relationship** | Do markets with more visitors have shorter stays? | Scatter plot |\n| **Part of a whole** | What share of visitors come from Europe? | Bar chart of shares, or a stacked bar |\n\nThese are defaults, not laws, but you should be able to explain any departure from them.\n\n## Why these defaults work\n\nPeople judge some visual properties far more accurately than others. **Position along a common scale** — the height of a point or the end of a bar — is read most accurately. **Length** comes next. **Angle and area**, which pie charts and bubble charts rely on, are judged poorly, and **colour intensity** worst of all.\n\nThat ranking explains the defaults. Line charts and scatter plots use position. Bar charts use length from a common baseline. Pie charts force readers to compare angles, which is why two slices of 23% and 27% look almost identical in a pie but clearly different as bars.\n\n## Worked examples\n\n> **Example 1 — seasonality.** *Question:* \"When is the high season?\" The family is change over time, so we draw a line chart of average arrivals for each calendar month. The December peak and June trough are visible instantly. A bar chart would also work, but a line emphasises the continuous rise and fall through the year.\n\n> **Example 2 — top markets.** *Question:* \"Which eight markets matter most?\" This is a comparison between categories. A horizontal bar chart, sorted from largest to smallest, keeps long names such as \"United Kingdom\" readable and makes the ranking obvious. A pie with eight slices would be hard to read and impossible to rank.\n\n> **Example 3 — typical month.** *Question:* \"Is a month with 20,000 arrivals from one market unusual?\" This is about distribution. A histogram of monthly arrivals per market shows a strongly right-skewed shape: most market–months are below 3,000, with a long tail of large values from a few big markets. Adding a box plot highlights the median and flags outliers.\n\n> **Example 4 — length of stay.** *Question:* \"Do visitors from far-away markets stay longer?\" We have two numeric variables per market — distance (or region) and average stay — so a scatter plot is right. If the points rise from left to right, there is a positive relationship. It is still only an association: long-haul visitors may stay longer because of flight costs, holiday patterns or package deals, and the chart alone cannot tell us which.\n\n## When the default needs adjusting\n\n- **Too many lines.** Twenty markets on one line chart is unreadable. Show the top three or four, or use *small multiples* — a grid of small charts with the same axes, one per market.\n- **Different scales.** Comparing France (tens of thousands) with Seychelles (hundreds) on one axis squashes the small series flat. Either index both series (for example, 2019 = 100) or plot them separately.\n- **Part of a whole over time.** Stacked areas are hard to read except for the bottom layer. A line chart of each region's *share* is often clearer.\n- **Two categories crossed.** For \"arrivals by region and purpose\", a grouped bar chart works for a few categories; a heat map (a coloured table) can work for many.\n\n## How charts mislead\n\nSome design choices distort the message, deliberately or not.\n\n1. **Truncated bar axes.** A bar chart whose axis starts at 18,000 instead of 0 can make 19,000 look twice as large as 18,500. Bars encode values by length, so **bar axes must start at zero**. Line charts may use a narrower range, provided it is clearly labelled.\n2. **Inconsistent intervals.** Plotting 2015, 2020, 2022, 2023 and 2024 evenly spaced hides the uneven gaps in time.\n3. **Dual axes.** Two different y-axes on one chart let the designer make any two lines appear to move together. Avoid them in introductory work.\n4. **Three-dimensional effects.** Perspective makes nearer slices and bars look larger. Never use 3-D for two-dimensional data.\n5. **Cherry-picked time windows.** Starting a chart in a crisis year, such as a year with border closures, makes any later growth look dramatic. Show enough history for context.\n\n> **Case box — the \"record growth\" chart.** A draft slide showed arrivals \"soaring\" with a bar axis starting at 90,000. Redrawn with the axis at zero, the growth was a modest 4%. The data had not changed; only the picture had. The honest chart is less exciting, but it is the one a decision-maker can rely on.\n\n## Writing a one-sentence justification\n\nIn your assignments, justify each chart in one sentence that names the question family and the visual property it uses. For example: \"A sorted horizontal bar chart was used because the question compares totals across categories, and bar length from a common zero baseline is read accurately.\" This habit forces you to think about the reader, and it earns marks.\n\n## Key takeaways\n\n- Identify the question family first: time, comparison, distribution, relationship or part of a whole.\n- Default charts: line, bar, histogram or box plot, scatter, and bars of shares.\n- Position and length are read accurately; angle, area and colour are not.\n- Bar axes start at zero; avoid 3-D, dual axes and cherry-picked windows.\n- Adjust defaults for many series or different scales, using small multiples or indexing.\n- Justify every chart in one sentence.\n\n## Check your understanding\n\n1. You want to show how arrivals from Germany changed month by month over five years. Which chart, and why?\n*Answer:* A line chart, because the question is about change over time and position along a common scale shows the trend clearly.\n2. Why is a pie chart a weak choice for comparing eight markets?\n*Answer:* Readers must compare angles and areas, which they judge poorly, and the slices cannot be ranked easily; a sorted bar chart is clearer.\n3. A bar chart's axis starts at 18,000. What is the problem?\n*Answer:* Bars encode value by length, so a non-zero baseline exaggerates the differences between bars and misleads the reader.\n",
+          "dur": 9
+        }
+      ]
+    },
+    {
+      "id": "m4",
+      "title": "Module 4 · Visualising and communicating findings",
+      "items": [
+        {
+          "id": "c2-L11",
+          "type": "video",
+          "title": "Making clear charts with matplotlib",
+          "objectives": [
+            "Create line, bar, histogram and scatter charts with matplotlib",
+            "Add titles, axis labels and units that a reader can understand",
+            "Remove clutter so that the chart supports a single message"
+          ],
+          "chips": [
+            "What is the difference between fig and ax in matplotlib?",
+            "How do I make bar labels readable when names are long?",
+            "How do I save a chart for my report?"
+          ],
+          "chapters": [
+            {
+              "title": "Figures and axes",
+              "slide": {
+                "kind": "code",
+                "heading": "The basic recipe",
+                "lang": "python",
+                "code": "import matplotlib.pyplot as plt\n\nfig, ax = plt.subplots(figsize=(8, 4))\nax.plot(season.index, season.values)\nax.set_title('Arrivals peak in December')\nax.set_xlabel('Month')\nax.set_ylabel('Average arrivals per market')\nfig.savefig('season.png', dpi=200)",
+                "points": [
+                  "fig is the whole image; ax is one chart inside it",
+                  "Every chart: title, axis labels, units"
+                ]
+              },
+              "narration": [
+                "Matplotlib is the standard plotting library in Python, and pandas works closely with it. We import its plotting module under the nickname p l t.",
+                "I recommend always starting with the subplots function, which gives you two objects: the figure, which is the whole image, and the axes, which is the chart you draw on.",
+                "We then call methods on the axes to draw and to label: plot for a line, set title for the title, and set x label and set y label for the axes.",
+                "Finally the figure's save fig method writes a picture file you can put straight into your report.",
+                "There is a quicker shortcut where you call plot directly on a pandas Series, and it is perfect for exploring. For report charts, though, the figure and axes approach gives you full control."
+              ]
+            },
+            {
+              "title": "Lines for change over time",
+              "slide": {
+                "kind": "bullets",
+                "heading": "Line charts",
+                "points": [
+                  "Use for a quantity changing over time",
+                  "Time on the horizontal axis, left to right",
+                  "Few lines: three or four at most",
+                  "Label lines directly instead of a distant legend"
+                ]
+              },
+              "narration": [
+                "A line chart is the natural choice when something changes over time, such as monthly arrivals across ten years. Time always runs left to right along the horizontal axis.",
+                "Our seasonal table from the groupby lecture becomes a line with a clear peak in December and a trough in June.",
+                "If you compare markets, keep it to three or four lines. Twenty overlapping lines produce what designers call a spaghetti chart, and nobody can follow it.",
+                "Where you can, label each line at its right-hand end rather than in a legend box, so the reader's eye does not have to jump back and forth.",
+                "For seasonality across several years, another neat option is to draw each year as a thin grey line and the latest year as a single bold coloured line."
+              ]
+            },
+            {
+              "title": "Bars for comparing categories",
+              "slide": {
+                "kind": "code",
+                "heading": "A ranked horizontal bar chart",
+                "lang": "python",
+                "code": "top = by_market.head(8).sort_values()\nfig, ax = plt.subplots(figsize=(7, 4))\nax.barh(top.index, top.values)\nax.set_xlabel('Total arrivals, 2015–2024')\nax.set_title('France and Reunion lead')",
+                "points": [
+                  "barh keeps long names readable",
+                  "Sort the bars so the ranking is obvious",
+                  "Bars must start at zero"
+                ]
+              },
+              "narration": [
+                "To compare categories, such as total arrivals by market, use a bar chart. Bar length is something people judge very accurately.",
+                "When the category names are long, use horizontal bars with b a r h, so the market names sit neatly on the left instead of overlapping under the axis.",
+                "Sort the bars by size so the ranking is obvious at a glance, and always start the value axis at zero, because a bar that starts at a higher number exaggerates the differences.",
+                "You may be tempted by a pie chart for market shares. With two or three slices it can work, but with eight markets readers cannot compare the angles, so bars are almost always clearer.",
+                "You can also write the value at the end of each bar, which lets a reader see exact figures without needing gridlines."
+              ]
+            },
+            {
+              "title": "Distributions and relationships",
+              "slide": {
+                "kind": "compare",
+                "heading": "Histogram or scatter?",
+                "columns": [
+                  {
+                    "title": "Histogram: ax.hist",
+                    "points": [
+                      "One numeric variable",
+                      "Shows shape, skew and outliers",
+                      "Try a few bin counts"
+                    ]
+                  },
+                  {
+                    "title": "Scatter: ax.scatter",
+                    "points": [
+                      "Two numeric variables",
+                      "Shows relationship and clusters",
+                      "Correlation is not causation"
+                    ]
+                  }
+                ]
+              },
+              "narration": [
+                "To see the shape of one numeric variable, use a histogram. For monthly arrivals it shows a tall pile of small values and a long tail to the right, the skew we measured last week.",
+                "Try a few different numbers of bins, because too few bins hide the shape and too many make it look noisy.",
+                "To see how two numeric variables relate, use a scatter plot, for instance average length of stay against arrivals for each market.",
+                "If long-haul markets show longer stays, that is an interesting pattern, but remember that a relationship in a scatter plot does not by itself prove that one thing causes the other.",
+                "A box plot is a compact alternative to the histogram when you want to compare distributions across several groups, such as arrivals in each region, side by side."
+              ]
+            },
+            {
+              "title": "Less clutter, one message",
+              "slide": {
+                "kind": "bullets",
+                "heading": "Decluttering checklist",
+                "points": [
+                  "Title states the finding, not just the topic",
+                  "Remove 3D effects, heavy gridlines and borders",
+                  "Use one highlight colour for what matters",
+                  "Write units and the data source"
+                ],
+                "note": {
+                  "tone": "warn",
+                  "text": "Never use colour as the only way to tell series apart."
+                }
+              },
+              "narration": [
+                "A good chart makes one point. Write a title that states the finding, such as arrivals peak in December, rather than a label like arrivals by month.",
+                "Remove anything that does not help: three dimensional effects, heavy gridlines, boxes and shadows. Matplotlib lets you hide the top and right borders with a single line.",
+                "Use grey for context and one strong colour for the thing you want the reader to notice, and never rely on colour alone, since some readers are colour blind.",
+                "Finally, write the units on the axis and the data source in a small note under the chart, for example synthetic arrivals data for teaching, twenty fifteen to twenty twenty-four.",
+                "A useful test is to show the chart to a friend for five seconds and ask what it says. If they cannot tell you the main point, the chart needs another round of simplifying."
+              ]
+            },
+            {
+              "title": "Recap",
+              "slide": {
+                "kind": "bullets",
+                "heading": "Plotting recap",
+                "points": [
+                  "fig, ax = plt.subplots()",
+                  "Line for time, bar for categories",
+                  "Histogram for one distribution, scatter for two variables",
+                  "Finding as title, labels with units, minimal clutter"
+                ]
+              },
+              "narration": [
+                "To recap, start with subplots, then choose a line for time, bars for categories, a histogram for one distribution and a scatter for two variables.",
+                "Give every chart a title that states the finding, label the axes with units, strip away the clutter, and save it at a good resolution for your report.",
+                "In the final reading of the course, we will take these charts and build them into a short, clear story for a reader who has never written a line of code."
+              ]
+            }
+          ],
+          "dur": 6
+        },
+        {
+          "id": "c2-L12",
+          "type": "reading",
+          "title": "Communicating findings to a non-technical audience",
+          "objectives": [
+            "Lead with the finding and its implication, not the method",
+            "Turn statistics into plain-language statements with context",
+            "Communicate uncertainty and limitations honestly",
+            "Structure a one-page summary for a decision-maker"
+          ],
+          "chips": [
+            "How do I explain a median to someone who is not technical?",
+            "How much of my method should a manager see?",
+            "How do I talk about uncertainty without sounding unsure?"
+          ],
+          "body": "An analysis that nobody understands has no effect. The final step of the data analytics workflow — communication — is where your cleaning, statistics and charts turn into decisions. This reading focuses on audiences without technical training: a hotel owner in Grand Baie, a ministry official, or a tourism board committee. We continue to use the synthetic arrivals dataset; all figures are illustrative.\n\n## Know who you are talking to\n\nBefore writing anything, answer three questions:\n\n1. **Who is the reader?** What do they already know, and what words do they use? A hotel manager talks about \"occupancy\" and \"high season\", not \"right-skewed distributions\".\n2. **What decision do they face?** Hiring seasonal staff, planning a marketing campaign, scheduling maintenance in the quiet months.\n3. **How much time do they have?** Usually less than you hope. Assume they will read the first two sentences and look at one chart.\n\nYour job is to give them what they need for *their* decision, not to show everything you did.\n\n## Lead with the answer\n\nTechnical reports often follow the order *data → method → results → conclusion*. Decision-makers need the reverse. Use an **inverted pyramid**:\n\n1. **The headline finding** in one sentence.\n2. **Why it matters** — the implication for the reader's decision.\n3. **The key evidence** — one or two numbers and one chart.\n4. **Caveats** — what could change the conclusion.\n5. **Method** — briefly, at the end or in an appendix.\n\n> **Worked example — the same finding, two ways.**\n> *Technical version:* \"A groupby on calendar month of mean arrivals per market across 2015–2024 shows a maximum in month 12 (mean ≈ 6,200) and a minimum in month 6 (≈ 2,900).\"\n> *Plain-language version:* \"December is the busiest month of the year, with roughly twice as many visitors as June. Hotels should plan extra staff from late November and schedule renovations for June.\"\n> Both are accurate. Only the second helps a hotel owner act.\n\n## Turning statistics into plain language\n\n- **Use round numbers.** \"About 2,900\" or \"nearly 3,000\" is easier to remember than \"2,893.4\". Keep exact figures in an appendix.\n- **Give comparisons, not isolated numbers.** \"Twice as many as June\" or \"one in four visitors\" means more than \"6,200\".\n- **Use natural frequencies.** \"About 1 in 4 visitors comes from France\" is easier than \"a 24.7% share\".\n- **Explain the median in everyday terms.** \"In a typical month, a market sends about 1,800 visitors; a few large markets send far more\" is clearer than \"the median is 1,800\".\n- **Name the unit and the period.** \"Visitors per month, average over 2015–2024\" prevents misunderstanding.\n- **Avoid jargon or translate it.** If you must say \"outlier\", add \"an unusually high month, caused by a large conference\".\n\n## Charts for non-technical readers\n\nThe chart principles from the previous reading matter even more here:\n\n- **Make the title the message**: \"December is the peak month\", not \"Mean arrivals by month\".\n- **Highlight one thing.** Draw the series of interest in a strong colour and the rest in grey.\n- **Annotate directly.** Add a short label at the important point — \"Cyclone warning, Feb\" — rather than explaining it in a paragraph below.\n- **One chart, one point.** If you need to make three points, use three simple charts.\n\n## Being honest about uncertainty and limitations\n\nNon-technical readers still deserve to know how solid the evidence is. Honesty builds trust; overclaiming destroys it the first time you are wrong.\n\n- **State limitations plainly**: \"Six monthly figures were missing and have been excluded; this does not affect the overall seasonal pattern.\"\n- **Separate patterns from causes.** \"Visitors from long-haul markets stay longer\" is an observed pattern. \"Long flights cause longer stays\" is a causal claim the data cannot prove. Say \"is associated with\" or \"tends to\", and suggest how to test a cause if it matters.\n- **Avoid false precision.** \"Arrivals will grow by 3.27% next year\" implies certainty you do not have. \"Growth has averaged around 3% a year; if that continues, expect roughly…\" is honest.\n- **Use confidence words consistently.** Reserve \"clearly\" for patterns visible in every year, and use \"suggests\" for weaker evidence.\n\n> **Case box — the brochure that backfired.** A draft briefing claimed that \"a new social-media campaign caused a 15% rise in visitors from India\". The rise began two months *before* the campaign, coinciding with a new direct flight route. The revised briefing said: \"Arrivals from India rose about 15%; the timing suggests the new flight route was the main driver, with the campaign possibly contributing.\" It was less dramatic and far more useful.\n\n## A one-page summary template\n\nFor your final assignment and for real briefings, this structure works well:\n\n1. **Headline** (one sentence, the main finding).\n2. **What this means for you** (two or three bullet points of implications or recommendations).\n3. **Evidence** (one chart with a message title, plus two or three key numbers in words).\n4. **What to keep in mind** (limitations and uncertainty, in plain language).\n5. **About the data** (source, period, cleaning in two lines; full method in an appendix).\n\nBefore sending, test it: give the page to a friend outside the course and ask them to tell you the main point in their own words. If they cannot, rewrite the headline.\n\n## Key takeaways\n\n- Start from the reader's decision, not from your analysis.\n- Lead with the finding and its implication; put the method last.\n- Use round numbers, comparisons and plain words; translate any jargon.\n- Give every chart a message title and highlight the one thing that matters.\n- Be honest about limitations and distinguish patterns from causes.\n\n## Check your understanding\n\n1. Rewrite \"The mean of monthly arrivals is 4,100 but the median is 1,800\" for a hotel owner.\n*Answer:* For example: \"In a typical month a market sends about 1,800 visitors; a few big markets such as France send far more, which pushes the average up to about 4,100.\"\n2. Why should the method usually come last in a briefing for a decision-maker?\n*Answer:* Because they need the finding and its implication first to act; the method supports credibility but is not what they read first.\n3. A colleague writes that a campaign \"caused\" a rise in arrivals. What should you check before agreeing?\n*Answer:* Whether other changes happened at the same time, such as new flights or events, and whether the timing fits; the data shows an association, not proof of cause.\n",
+          "dur": 9
+        },
+        {
+          "id": "c2-L13",
+          "type": "quiz",
+          "title": "Quiz 2: Statistics, charts and communication",
+          "dur": 15,
+          "quiz": {
+            "time": 15,
+            "weight": 5,
+            "questions": [
+              {
+                "q": "Monthly arrivals per market have a mean of about 4,100 and a median of about 1,800. What does this suggest?",
+                "o": [
+                  "The data is symmetric",
+                  "The data is right-skewed by a few large values",
+                  "The data contains no outliers",
+                  "The median has been calculated incorrectly"
+                ],
+                "a": 1,
+                "ex": "When the mean is well above the median, a long tail of large values is pulling the mean up."
+              },
+              {
+                "q": "For a strongly skewed variable, which pair of statistics best describes centre and spread?",
+                "o": [
+                  "Mean and standard deviation",
+                  "Mode and range",
+                  "Median and interquartile range",
+                  "Maximum and minimum"
+                ],
+                "a": 2,
+                "ex": "The median and IQR are robust to extreme values, unlike the mean and standard deviation."
+              },
+              {
+                "q": "With Q1 = 800 and Q3 = 3,000, above what value does the 1.5 × IQR rule flag an outlier?",
+                "o": [
+                  "3,000",
+                  "4,500",
+                  "5,200",
+                  "6,300"
+                ],
+                "a": 3,
+                "ex": "IQR = 2,200, so the upper fence is 3,000 + 1.5 × 2,200 = 6,300."
+              },
+              {
+                "q": "Which code gives total arrivals for each market?",
+                "o": [
+                  "df.groupby('market')['arrivals'].sum()",
+                  "df['arrivals'].sum('market')",
+                  "df.sort_values('market').sum()",
+                  "df.groupby('arrivals')['market'].count()"
+                ],
+                "a": 0,
+                "ex": "groupby splits by market, then sum is applied to the arrivals column within each group."
+              },
+              {
+                "q": "A manager asks: 'Which eight markets send us the most visitors?' Which chart is best?",
+                "o": [
+                  "A pie chart with eight slices",
+                  "A sorted horizontal bar chart",
+                  "A scatter plot",
+                  "A line chart of the eight markets"
+                ],
+                "a": 1,
+                "ex": "Comparing categories is best shown by bar length; sorting and horizontal bars make the ranking and long names readable."
+              },
+              {
+                "q": "Why must the value axis of a bar chart start at zero?",
+                "o": [
+                  "Because matplotlib requires it",
+                  "Because bars encode value by length, so a cut axis exaggerates differences",
+                  "Because it makes the chart smaller",
+                  "Because negative values are not allowed"
+                ],
+                "a": 1,
+                "ex": "Readers compare bar lengths, which are only proportional to the values if the baseline is zero."
+              },
+              {
+                "q": "A scatter plot shows that markets with longer flights have longer average stays. What is the most accurate statement?",
+                "o": [
+                  "Long flights cause longer stays",
+                  "There is no relationship",
+                  "Longer flights are associated with longer stays, but the chart does not prove cause",
+                  "The data must contain an error"
+                ],
+                "a": 2,
+                "ex": "A scatter plot shows association; other factors could explain the pattern."
+              },
+              {
+                "q": "Which opening sentence is best for a briefing to a hotel owner?",
+                "o": [
+                  "December is the busiest month, with about twice June's visitors, so plan extra staff from late November.",
+                  "We applied groupby to month_num and computed the mean.",
+                  "The dataset has 2,400 rows and 6 columns.",
+                  "Arrivals have a right-skewed distribution with several outliers."
+                ],
+                "a": 0,
+                "ex": "A non-technical reader needs the finding and its implication first, in plain language."
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -7,6 +7,8 @@ import { del, get, post } from '../../lib/api'
 import { useAuth } from '../../lib/auth'
 import { rel } from '../../lib/format'
 import { AnswerBubble, Pending, Turn, useAsk, useRate } from './assistantUi'
+import { Markdown, headings } from '../../components/Markdown'
+import { Lecture, LectureData } from './Lecture'
 import { errText, itemIcon, mmss } from './shared'
 
 type Line = { t: number; title?: string; sub?: string; text: string }
@@ -15,7 +17,7 @@ type NavItem = { id: string; title: string; type: string; link: string }
 type Lesson = {
   course: { id: string; code: string; title: string }
   item: { id: string; title: string; type: string; dur?: number; module: string; status: string; pos?: number; index: number }
-  media_url?: string | null; body?: string | null; presenter?: string | null; objectives: string[]; transcript: Line[]; chips: string[]
+  media_url?: string | null; body?: string | null; presenter?: string | null; objectives: string[]; transcript: Line[]; chips: string[]; lecture?: LectureData | null
   prev: NavItem | null; next: NavItem | null; notes: NoteRow[]; materials: { id: string; title: string; kind: string; uri?: string | null }[]; related: NavItem[]
 }
 
@@ -37,7 +39,7 @@ function Player({ course, item }: { course: string; item: string }) {
   const key = ['s-lesson', course, item]
   const q = useQuery({ queryKey: key, queryFn: () => get<Lesson>(`/api/student/lessons/${course}/${item}`) })
   const d = q.data
-  const total = (d?.item.dur || 10) * 60
+  const total = d?.lecture ? d.lecture.duration : (d?.item.dur || 10) * 60
   const [t, setT] = useState(0)
   const [playing, setPlaying] = useState(false)
   const [cc, setCc] = useState(me?.prefs?.captions !== false)
@@ -64,10 +66,10 @@ function Player({ course, item }: { course: string; item: string }) {
   useEffect(() => () => { if (opened.current && tRef.current > 0) post(`/api/student/lessons/${course}/${item}/progress`, { pos: Math.round(tRef.current) }).catch(() => { }) }, [course, item])
   // simulated playback (no media file): 24× speed so the demo is watchable
   useEffect(() => {
-    if (!playing || d?.media_url) return
+    if (!playing || d?.media_url || d?.lecture) return
     const id = setInterval(() => setT(x => { const n = Math.min(total, x + 6); if (n >= total) setPlaying(false); return n }), 250)
     return () => clearInterval(id)
-  }, [playing, total, d?.media_url])
+  }, [playing, total, d?.media_url, d?.lecture])
   const togglePlay = () => { if (playing) progress.mutate({ pos: Math.round(t) }); else if (t >= total) setT(0); setPlaying(p => !p) }
 
   const notes = useMutation({
@@ -93,7 +95,10 @@ function Player({ course, item }: { course: string; item: string }) {
         : <Link className="btn" to={`/s-course/${L.course.id}`}><Icon n="back" />Course</Link>}
         {L.next && <button className="btn" onClick={() => nav(L.next!.link)}>Next: {L.next.title.length > 28 ? L.next.title.slice(0, 26) + '…' : L.next.title}<Icon n="chev" /></button>}</>} />
     <div className="g g-31"><div className="stack">
-      {isVideo ? (L.media_url
+      {isVideo && L.lecture ? <Lecture data={L.lecture} title={L.item.title} startAt={L.item.pos || 0} captionsDefault={cc} reducedMotion={!!me?.prefs?.reducedMotion}
+        onPosition={(pos, live) => { setT(pos); if (!live) progress.mutate({ pos }); else post(`/api/student/lessons/${course}/${item}/progress`, { pos }).catch(() => { }) }}
+        onEnded={() => { if (!done) progress.mutate({ pos: Math.round(total), done: true }) }} />
+      : isVideo ? (L.media_url
         ? <video className="player" src={L.media_url} controls preload="metadata" style={{ width: '100%' }} onTimeUpdate={e => setT((e.target as HTMLVideoElement).currentTime)} onPause={() => progress.mutate({ pos: Math.round(t) })} />
         : <div className="player" aria-label="Lesson video (simulated)">
           <div className="scr"><div style={{ textAlign: 'center', maxWidth: '80%' }}>
@@ -109,16 +114,18 @@ function Player({ course, item }: { course: string; item: string }) {
             <button className="iconbtn" style={{ color: cc ? '#7FD8D2' : '#fff' }} onClick={() => setCc(x => !x)} aria-pressed={cc} aria-label="Captions"><Icon n="cc" /></button>
             <button className="iconbtn" style={{ color: '#fff' }} onClick={() => setMuted(x => !x)} aria-pressed={muted} aria-label={muted ? 'Unmute' : 'Mute'}><Icon n={muted ? 'mute' : 'vol'} /></button></div>
         </div>)
-        : <Card title={<><Icon n={itemIcon[L.item.type] || 'book'} /> Reading</>}>{L.body ? <div className="small" style={{ whiteSpace: 'pre-wrap', lineHeight: 1.6 }}>{L.body}</div>
+        : <Card title={<><Icon n={itemIcon[L.item.type] || 'book'} /> Reading</>} actions={L.body ? <span className="xs muted">{L.item.dur} min read</span> : undefined}>{L.body ? <>
+          {headings(L.body).length > 2 && <nav className="md-toc" aria-label="In this reading"><span className="eyebrow">In this reading</span>{headings(L.body).map(h => <a key={h.id} href={`#${h.id}`} onClick={e => { e.preventDefault(); document.getElementById(h.id)?.scrollIntoView({ behavior: 'smooth', block: 'start' }) }}>{h.text}</a>)}</nav>}
+          <Markdown src={L.body} /></>
           : <Note>The reading for this lesson is provided under <b>Materials</b> below. Mark it complete when you’ve finished.</Note>}</Card>}
       <div className="row">
         <button className={`btn ${done ? 'teal' : ''}`} disabled={done || progress.isPending} onClick={() => progress.mutate({ pos: Math.round(t), done: true })}><Icon n={done ? 'checkc' : 'check'} />{done ? 'Completed' : 'Mark as complete'}</button>
         {isVideo && <button className="btn ghost" disabled={notes.isPending} onClick={() => notes.mutate({ kind: 'bookmark', t: Math.round(t) })}><Icon n="bookmark" />Bookmark at {mmss(t)}</button>}
-        <span className="sp" />{isVideo && !L.media_url && <span className="xs muted">Video playback is simulated in this prototype</span>}</div>
+        <span className="sp" />{isVideo && !L.media_url && !L.lecture && <span className="xs muted">Video playback is simulated in this prototype</span>}</div>
       <div className="card"><div className="hd"><Tabs tabs={[['obj', 'Objectives'], ['tr', 'Transcript'], ['notes', `My notes (${L.notes.length})`], ['res', 'Materials']]} value={tab} onChange={setTab} /></div>
         {tab === 'obj' ? (L.objectives.length ? <ul className="small" style={{ margin: 0, paddingLeft: 18 }}>{L.objectives.map(o => <li key={o}>{o}</li>)}</ul> : <p className="small muted">Objectives haven’t been published for this lesson.</p>)
           : tab === 'tr' ? (L.transcript.length ? <div className="transcript" style={{ maxHeight: 'none' }}>{L.transcript.map((l, i) => <div className="ln" key={i}>
-            <button className="link-btn" onClick={() => setT(l.t)} aria-label={`Jump to ${mmss(l.t)}`}><b>{mmss(l.t)}</b></button><span>{l.text}</span></div>)}</div>
+            <button className="link-btn" onClick={() => !L.lecture && setT(l.t)} aria-label={`Jump to ${mmss(l.t)}`}><b>{mmss(l.t)}</b></button><span>{l.text}</span></div>)}</div>
             : <Empty icon="cc" title="Transcript not available">Captions and a transcript haven’t been published for this lesson yet.</Empty>)
             : tab === 'notes' ? <NotesTab notes={L.notes} pending={notes.isPending} onAdd={text => notes.mutate({ kind: 'note', text, t: Math.round(t) })} onDelete={id => delNote.mutate(id)} onJump={setT} />
               : (L.materials.length ? <div className="list">{L.materials.map(m => <div className="li" key={m.id}><div className="ic"><Icon n="file" /></div><div className="bd"><div className="tt">{m.title}</div><div className="ds">Approved course material</div></div>
@@ -129,7 +136,7 @@ function Player({ course, item }: { course: string; item: string }) {
       <div className="stack"><LessonAsk course={L.course} chips={L.chips} first={me?.first || ''} />
         <Card title="Related">{L.related.length ? <div className="list">{L.related.map(r => <a key={r.id} className="li" href={r.link} onClick={e => { e.preventDefault(); nav(r.link) }} style={{ color: 'inherit', textDecoration: 'none' }}>
           <div className="ic"><Icon n={itemIcon[r.type] || 'file'} /></div><div className="bd"><div className="tt">{r.title}</div></div></a>)}</div> : <p className="small muted">Nothing related yet.</p>}</Card>
-        <Card title="Lesson progress"><Bar v={done ? 100 : Math.round((t / total) * 100)} /><p className="xs muted" style={{ marginTop: 6 }}>{done ? 'You’ve completed this lesson.' : `Watched to ${mmss(t)} — your position is saved when you pause or leave.`}</p></Card>
+        <Card title="Lesson progress"><Bar v={done ? 100 : Math.round((t / total) * 100)} /><p className="xs muted" style={{ marginTop: 6 }}>{done ? 'You’ve completed this lesson.' : isVideo ? `Watched to ${mmss(t)} of ${mmss(total)} — your position is saved when you pause or leave.` : 'Mark the reading complete when you’ve finished.'}</p></Card>
       </div></div>
   </>
 }

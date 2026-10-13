@@ -1,0 +1,1557 @@
+{
+ "course": "c3",
+ "presenter": "nalini",
+ "modules": [
+  {
+   "id": "m1",
+   "title": "Module 1 · Platform business models",
+   "items": [
+    {
+     "id": "c3-L1",
+     "type": "virtual",
+     "title": "Platform business models: how digital platforms create value",
+     "dur": 20,
+     "objectives": [
+      "Distinguish a platform business from a traditional pipeline business",
+      "Explain cross-side network effects with a tourism platform example",
+      "Explain why platforms often subsidise one side and charge another"
+     ],
+     "chips": [
+      "Is a hotel's own booking website a platform?",
+      "What is a network effect in simple terms?",
+      "Why is sending money free on some mobile wallets?"
+     ],
+     "lesson": {
+      "summary": [
+       "Pipelines create value in a one-way chain; platforms create value by connecting groups who interact",
+       "Cross-side network effects: more participants on one side make the platform more valuable to the other side",
+       "Platforms often subsidise the side that is hardest to attract and charge the side that gains most from access"
+      ],
+      "segments": [
+       {
+        "id": "seg1",
+        "title": "Pipelines and platforms",
+        "slide": {
+         "kind": "compare",
+         "heading": "Two ways to create value",
+         "columns": [
+          {
+           "title": "Pipeline",
+           "points": [
+            "Makes or buys the product itself",
+            "Value flows one way: producer to customer",
+            "Example: a Grand Baie hotel selling its own rooms"
+           ]
+          },
+          {
+           "title": "Platform",
+           "points": [
+            "Connects two or more groups who transact",
+            "Value is created by their interactions",
+            "Example: LagoonStay, a hypothetical booking platform"
+           ]
+          }
+         ],
+         "note": {
+          "tone": "info",
+          "text": "LagoonStay and the other companies in this lesson are hypothetical."
+         }
+        },
+        "speech": [
+         "Let us begin with a simple question: how does a business create value? For most of the twentieth century the answer was a pipeline, where a firm designs a product, makes it, and pushes it along a chain to the customer.",
+         "Think of a hotel in Grand Baie. It owns the rooms, employs the staff, sets the price and sells nights directly to guests. Value flows in one direction, from the producer to the consumer.",
+         "A platform business works differently. It does not mainly make the product. Instead it connects two or more groups, such as guesthouse owners and travellers, and lets them find each other and transact.",
+         "Imagine a hypothetical Mauritian company called LagoonStay. It owns no rooms at all, yet it creates value by matching hundreds of small guesthouses with visitors, and by handling search, payment and reviews."
+        ],
+        "simpler": [
+         "Here is a simpler way to see it. A pipeline is like a bakery: it bakes the bread itself and sells it to you.",
+         "A platform is like the market in Port Louis: the market does not grow the vegetables, but it brings sellers and shoppers together in one place.",
+         "So a pipeline makes and sells, while a platform connects people who then trade with each other."
+        ],
+        "checkpoint": {
+         "id": "cp1",
+         "mandatory": true,
+         "maxAttempts": 3,
+         "question": "In your own words, what is the main difference between a pipeline business and a platform business?",
+         "concepts": [
+          {
+           "id": "pipeline",
+           "label": "A pipeline makes or owns the product and sells it along a one-way chain to customers",
+           "required": true,
+           "rx": [
+            {
+             "re": "\\bpipelines?\\b[^.]{0,80}\\b(make|makes|making|made|produc\\w*|creat\\w*|own|owns|sell|sells|selling|manufactur\\w*|linear|chain|step|controls?|bak\\w*)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(linear|one[- ]way|one direction|step[- ]by[- ]step|straight line)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(makes?|produces?|creates?|owns?|manufactures?|sells?)\\b[^.]{0,30}\\b(its own|itself|the product|their own|its products?|the goods)\\b",
+             "flags": "i"
+            }
+           ],
+           "ask": "how a pipeline business creates and sells its product"
+          },
+          {
+           "id": "connect",
+           "label": "A platform connects or matches two or more groups (e.g. hosts and guests) who interact",
+           "required": true,
+           "rx": [
+            {
+             "re": "\\b(connect|match|link|pair|bring|brings|bringing|introduc)\\w*\\b[^.]{0,60}\\b(buyers?|sellers?|users?|groups?|sides?|customers?|producers?|guests?|hosts?|consumers?|people|suppliers?|travell?ers?|tourists?|owners?|parties|drivers?|passengers?|vendors?|shoppers?|guesthouses?)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(two|multi|2|double)[- ]?sided\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(middle ?m[ae]n|intermediar\\w*|marketplace|matchmak\\w*)\\b",
+             "flags": "i"
+            }
+           ],
+           "ask": "what a platform does for the different groups that use it"
+          },
+          {
+           "id": "noown",
+           "label": "A platform does not need to own the product or assets",
+           "required": false,
+           "rx": [
+            {
+             "re": "\\b(doesn'?t|does not|don'?t|do not|without|no|not|never)\\b[^.]{0,20}\\b(own|owning|make|making|produc\\w*|stock|inventory|assets?)\\b",
+             "flags": "i"
+            }
+           ],
+           "ask": "whether a platform needs to own the product it helps to sell"
+          }
+         ],
+         "misconceptions": [
+          {
+           "id": "same",
+           "label": "They are not the same thing",
+           "rx": [
+            {
+             "re": "\\b(same thing|no difference|are identical|exactly the same|basically the same|interchangeabl\\w*)\\b",
+             "flags": "i"
+            }
+           ]
+          },
+          {
+           "id": "justapp",
+           "label": "A platform is not simply any business with a website or app",
+           "rx": [
+            {
+             "re": "\\bplatforms?\\b[^.]{0,20}\\b(is|are|means)\\s+(just|only|simply|basically)\\s+(an?\\s+)?(websites?|apps?|online)\\b",
+             "flags": "i"
+            }
+           ]
+          }
+         ],
+         "hints": [
+          "Here is a hint. Think about who actually makes the product in each case: the business itself, or someone else.",
+          "Another clue: picture the market in Port Louis. What does the market do for the sellers and the shoppers?",
+          "Let me be more direct. A pipeline makes and sells its own product in a one-way chain, while a platform connects groups such as hosts and guests. Can you put that in your own words?"
+         ],
+         "model": "A pipeline business makes or owns its product and sells it to customers in a one-way chain, like a hotel selling its own rooms. A platform business connects two or more groups, such as guesthouse owners and travellers, so they can transact with each other, often without owning the product itself.",
+         "reteach": "Let me try another picture. A taxi company that buys cars and employs drivers is a pipeline: it owns the means of producing the ride and sells it to you. A ride-hailing app that owns no cars is a platform: it simply connects independent drivers with passengers and takes a small fee for making the match.",
+         "calibration": [
+          {
+           "answer": "pipeline makes its own product and sells it to customers, platform connects buyers and sellers",
+           "expected": "correct"
+          },
+          {
+           "answer": "A pipeline is linear, the company produces then sells. A platform is a two-sided thing that matches hosts with guests.",
+           "expected": "correct"
+          },
+          {
+           "answer": "a hotel owns its own rooms and sells them but LagoonStay just links guesthouse owners and tourists, it doesnt own any rooms",
+           "expected": "correct"
+          },
+          {
+           "answer": "Pipeline = firm creates value step by step down a chain to the customer. Platform = intermediary that lets different groups interact and trade",
+           "expected": "correct"
+          },
+          {
+           "answer": "a platform connects travellers with guesthouses",
+           "expected": "partial"
+          },
+          {
+           "answer": "the pipeline business makes the product itself and sells it",
+           "expected": "partial"
+          },
+          {
+           "answer": "platforms are like a marketplace where people trade, pipelines are different i think",
+           "expected": "partial"
+          },
+          {
+           "answer": "a platform is just an app and a pipeline is a physical shop",
+           "expected": "incorrect"
+          },
+          {
+           "answer": "pipelines are bigger companies and platforms are smaller startups",
+           "expected": "incorrect"
+          },
+          {
+           "answer": "idk tbh",
+           "expected": "unclear"
+          }
+         ],
+         "ack": "Exactly: a pipeline makes and sells its own product in a one-way chain, while a platform connects groups who transact with each other."
+        }
+       },
+       {
+        "id": "seg2",
+        "title": "Network effects",
+        "slide": {
+         "kind": "steps",
+         "heading": "The cross-side network effect loop",
+         "steps": [
+          {
+           "title": "More hosts list",
+           "sub": "Guesthouses join LagoonStay"
+          },
+          {
+           "title": "More choice for guests",
+           "sub": "Better rooms, prices and dates"
+          },
+          {
+           "title": "More guests book",
+           "sub": "Demand on the platform grows"
+          },
+          {
+           "title": "Hosts earn more",
+           "sub": "Even more hosts want to join"
+          }
+         ]
+        },
+        "speech": [
+         "Why do some platforms grow so quickly once they get going? The answer is network effects: the value of the platform to each user depends on how many other users are on it.",
+         "A same-side effect is when more users on one side attract more of the same side, as when a messaging app becomes more useful because more of your friends have joined it.",
+         "A cross-side effect, sometimes called an indirect network effect, is when more participants on one side make the platform more valuable to the other side. More guesthouses on LagoonStay mean more choice for travellers, and more travellers mean more bookings for guesthouses.",
+         "This creates a virtuous loop, but also the famous chicken-and-egg problem. At launch there are no guests to attract hosts and no hosts to attract guests, so the platform must deliberately seed one side first."
+        ],
+        "simpler": [
+         "Think about a night market in Flacq. If many food stalls set up there, more families come to eat.",
+         "And because more families come, even more stall holders want a pitch there the following week.",
+         "That is a cross-side network effect: more of one group makes the place more attractive for the other group."
+        ],
+        "checkpoint": {
+         "id": "cp2",
+         "mandatory": true,
+         "maxAttempts": 3,
+         "question": "What is a cross-side network effect? Explain it using a holiday booking platform like LagoonStay.",
+         "concepts": [
+          {
+           "id": "more_one",
+           "label": "More participants join one side (for example more hosts or more guests)",
+           "required": true,
+           "rx": [
+            {
+             "re": "\\b(more|additional|extra|increas\\w*|grow\\w*|rise in|lots of|loads of|many more)\\s+(?!valu|attract|useful|appeal|benefic|choice|option)(\\w+\\s+){0,2}(users?|hosts?|guests?|sellers?|buyers?|listings?|participants?|people|members?|tourists?|travell?ers?|owners?|guesthouses?|guest houses?|properties|hotels?|rooms?|visitors?|customers?)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(number|amount|count)\\s+of\\s+(\\w+\\s+){0,1}(users?|hosts?|guests?|sellers?|buyers?|listings?|tourists?|travell?ers?|guesthouses?|visitors?|customers?)\\b[^.]{0,20}\\b(grows?|increases?|rises?|goes up)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(hosts?|guests?|users?|sellers?|buyers?|guesthouses?|travell?ers?|tourists?)\\s+(join|sign|grow|increase|list)\\w*",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(growth|grows?|increase)\\b[^.]{0,20}\\bon one side\\b",
+             "flags": "i"
+            }
+           ],
+           "ask": "what happens to the number of participants on one side of the platform"
+          },
+          {
+           "id": "other_value",
+           "label": "That makes the platform more valuable or attractive to the other side",
+           "required": true,
+           "rx": [
+            {
+             "re": "\\b(other|opposite|second)\\s+(side|group|party|users?)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(more|better|increas\\w*)\\s+(valu\\w*|attractive|useful|appeal\\w*|beneficial|choice|options|bookings?|demand|business|income)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(attract|draw|pull|benefit|help)\\w*\\b[^.]{0,30}\\b(guests?|hosts?|travell?ers?|tourists?|visitors?|guesthouses?|owners?|buyers?|sellers?)\\b",
+             "flags": "i"
+            }
+           ],
+           "ask": "how that growth affects the group on the other side"
+          },
+          {
+           "id": "loop",
+           "label": "The effect feeds back in both directions",
+           "required": false,
+           "rx": [
+            {
+             "re": "\\b(loop|cycle|snowball\\w*|virtuous|vice versa|both ways|each other|and so on|in turn)\\b",
+             "flags": "i"
+            }
+           ],
+           "ask": "how the effect feeds back in both directions"
+          }
+         ],
+         "misconceptions": [
+          {
+           "id": "scale",
+           "label": "Confusing network effects with economies of scale (lower costs)",
+           "rx": [
+            {
+             "re": "\\b(cheaper|lower (cost|price)s?|economies of scale|costs? (go|goes|going) down|reduc\\w* costs?)\\b",
+             "flags": "i"
+            }
+           ]
+          }
+         ],
+         "hints": [
+          "Here is a hint. A holiday booking platform has two sides. Who are they?",
+          "Now ask yourself: if many more guesthouses list on LagoonStay, what changes for the travellers searching there?",
+          "Let me be more direct. More hosts on one side means more choice, so the platform becomes more valuable to guests on the other side. Can you say that in your own words?"
+         ],
+         "model": "A cross-side network effect happens when more participants on one side of a platform make it more valuable to the other side. For example, as more guesthouses list on LagoonStay, travellers get more choice, so more travellers use it, which in turn attracts more guesthouses.",
+         "reteach": "Picture a new shopping mall. Shoppers only come if there are many shops, and shops only rent space if there are many shoppers. Each extra shop makes the mall more worthwhile for shoppers, and each extra shopper makes it more worthwhile for shops. That two-way pull between different groups is the cross-side network effect.",
+         "calibration": [
+          {
+           "answer": "when more hosts join LagoonStay the platform becomes more valuable to guests because they have more choice",
+           "expected": "correct"
+          },
+          {
+           "answer": "more guesthouses listed means more options for tourists, and that attracts more tourists, which then pulls in more guesthouses",
+           "expected": "correct"
+          },
+          {
+           "answer": "Its when growth on one side benefits the other side. eg more travellers = more bookings for the guest houses",
+           "expected": "correct"
+          },
+          {
+           "answer": "if lots of tourists use the app, hosts find it more attractive to list there",
+           "expected": "correct"
+          },
+          {
+           "answer": "it means the number of guests increases over time",
+           "expected": "partial"
+          },
+          {
+           "answer": "it makes the platform more valuable for the other users",
+           "expected": "partial"
+          },
+          {
+           "answer": "more hosts sign up on LagoonStay so it gets bigger",
+           "expected": "partial"
+          },
+          {
+           "answer": "it is when the platform gets cheaper because it is bigger, economies of scale",
+           "expected": "incorrect"
+          },
+          {
+           "answer": "network effect means the platform needs good wifi and internet connection",
+           "expected": "incorrect"
+          },
+          {
+           "answer": "not sure tbh",
+           "expected": "unclear"
+          }
+         ],
+         "ack": "That's right: more participants on one side make the platform more valuable to the other side, and the loop keeps feeding itself."
+        }
+       },
+       {
+        "id": "seg3",
+        "title": "How platforms make money",
+        "slide": {
+         "kind": "cards",
+         "heading": "Common platform revenue models",
+         "cards": [
+          {
+           "label": "Commission",
+           "text": "LagoonStay takes a share of each booking"
+          },
+          {
+           "label": "Transaction fee",
+           "text": "A mobile wallet charges merchants per payment"
+          },
+          {
+           "label": "Subscription",
+           "text": "SMEs pay monthly for a premium shop page"
+          },
+          {
+           "label": "Advertising",
+           "text": "Hotels pay to appear at the top of results"
+          }
+         ],
+         "note": {
+          "tone": "info",
+          "text": "All companies named are hypothetical."
+         }
+        },
+        "speech": [
+         "Once a platform connects people, how does it earn money? The most common answers are commissions on each transaction, fees for payments, subscriptions for premium features, and advertising.",
+         "The interesting design question is which side pays. Platforms often subsidise the side that is hardest to attract or most sensitive to price, and charge the side that gains most from reaching the other.",
+         "Consider a hypothetical mobile money service called IslandPay. Sending money to family is free for ordinary customers, which helps it sign up hundreds of thousands of users quickly.",
+         "Shops then pay a small fee on each payment, because they want access to all those wallet holders. The free side builds the network, and the paying side funds it."
+        ],
+        "simpler": [
+         "Think of a free newspaper handed out at a bus station.",
+         "Readers pay nothing, so lots of people pick it up, and that is exactly why advertisers are happy to pay.",
+         "Platforms do the same: make it free for the group you need first, and charge the group that benefits from them being there."
+        ],
+        "checkpoint": {
+         "id": "cp3",
+         "mandatory": false,
+         "maxAttempts": 2,
+         "question": "Optional check: Why might IslandPay let customers send money for free while charging merchants a fee on each payment?",
+         "concepts": [
+          {
+           "id": "attract",
+           "label": "Free use attracts users and builds the customer base or network",
+           "required": true,
+           "rx": [
+            {
+             "re": "\\b(attract|lure|draw|encourag|grow|build|onboard|win|incentivi[sz])\\w*\\b[^.]{0,40}\\b(users?|customers?|people|members?|base|network|adoption|uptake|signups?|sign[- ]ups?)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(sign(s|ing)? up|join|joining|adopt\\w*|uptake|download\\w*|critical mass|user base|customer base)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(get|gets|getting)\\s+(\\w+\\s+){0,2}(people|users|customers)\\s+(to\\s+)?(use|join|sign|on)\\w*",
+             "flags": "i"
+            }
+           ],
+           "ask": "what making transfers free does for the number of IslandPay users"
+          },
+          {
+           "id": "merchant_value",
+           "label": "Merchants pay because they gain access to many customers and sales",
+           "required": true,
+           "rx": [
+            {
+             "re": "\\bmerchants?\\b[^.]{0,80}\\b(access|reach\\w*|sales|sell|customers?|clients?|benefit\\w*|valu\\w*|gain\\w*|willing|afford)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(shops?|businesses|stores?|sellers?|traders?)\\b[^.]{0,60}\\b(access|reach\\w*|more sales|customers?|benefit\\w*|willing to pay|gain\\w*)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(access|reach)\\b[^.]{0,30}\\b(customers?|users?|wallet holders?|buyers?)\\b",
+             "flags": "i"
+            }
+           ],
+           "ask": "why merchants are willing to pay the fee"
+          }
+         ],
+         "misconceptions": [],
+         "hints": [
+          "Here is a hint. What does IslandPay need first, before shops will care about it?",
+          "Now think about the shops. Why would they happily pay a small fee?",
+          "Being free helps IslandPay sign up lots of users, and merchants pay because they gain access to all those customers. Try putting that together."
+         ],
+         "model": "Free transfers attract lots of ordinary users and build the network quickly. Merchants are willing to pay a fee because they gain access to all those wallet holders as customers.",
+         "reteach": "Think of a free newspaper handed out at the bus station in Port Louis. Readers pay nothing, so thousands pick it up, and advertisers pay well because they want to reach all those readers. IslandPay is the same: free for senders to build the crowd, paid for by merchants who want to reach that crowd.",
+         "calibration": [
+          {
+           "answer": "being free attracts lots of users, and merchants pay because they get access to all those customers",
+           "expected": "correct"
+          },
+          {
+           "answer": "so more people sign up and use it, then shops are willing to pay to reach those customers",
+           "expected": "correct"
+          },
+          {
+           "answer": "free = bigger user base. merchants benefit from having many customers with wallets so they can be charged",
+           "expected": "correct"
+          },
+          {
+           "answer": "to grow the network fast, and the merchants gain more sales from it",
+           "expected": "correct"
+          },
+          {
+           "answer": "because free stuff gets people to join the app",
+           "expected": "partial"
+          },
+          {
+           "answer": "merchants make more sales when they accept IslandPay so they dont mind paying",
+           "expected": "partial"
+          },
+          {
+           "answer": "shops benefit a lot from reaching wallet customers",
+           "expected": "partial"
+          },
+          {
+           "answer": "because the government says sending money must be free",
+           "expected": "incorrect"
+          },
+          {
+           "answer": "because merchants have more money than normal people",
+           "expected": "incorrect"
+          },
+          {
+           "answer": "no idea",
+           "expected": "unclear"
+          }
+         ],
+         "ack": "Spot on: free transfers build a big user base, and merchants pay because they gain access to all those customers."
+        }
+       }
+      ],
+      "closing": [
+       "Excellent work today, {name}.",
+       "Let me summarise. A pipeline makes and sells its own product, while a platform creates value by connecting groups who transact with each other.",
+       "Cross-side network effects mean that more participants on one side make the platform more valuable to the other, which is why platforms can grow so fast once they reach critical mass.",
+       "Because of those effects, platforms often subsidise one side and charge the side that gains most from access.",
+       "In the next lecture we will see how these ideas play out across a small-island economy, from tourism to payments."
+      ]
+     }
+    },
+    {
+     "id": "c3-L2",
+     "type": "video",
+     "title": "Digital platforms across a small-island economy",
+     "dur": 6,
+     "objectives": [
+      "Identify the main families of digital platform",
+      "Explain why small-island markets shape platform strategy",
+      "Compare how global and local platforms compete in Mauritius"
+     ],
+     "chips": [
+      "Why is critical mass harder in a small country?",
+      "Is a government e-services portal really a platform?",
+      "How can a local platform compete with a global giant?"
+     ],
+     "chapters": [
+      {
+       "title": "Why platforms matter for small islands",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Why platforms matter here",
+        "points": [
+         "Small domestic market, large visitor flows",
+         "Many micro, small and medium enterprises",
+         "Very high mobile phone use",
+         "Long distances to big markets"
+        ]
+       },
+       "narration": [
+        "In the last lesson we saw that a platform creates value by connecting groups rather than by making a product itself. Today I want to place that idea inside a small-island economy like ours.",
+        "Small islands share some features that matter a great deal for digital business. The domestic market is small, a large share of income comes from visitors, and much of the economy is made up of small firms.",
+        "At the same time, almost every adult carries a mobile phone, and many households already pay bills, chat with family abroad and follow the news through apps.",
+        "That combination creates a tension. Digital platforms can connect a small firm in Mahébourg with customers anywhere in the world, but the same platforms can also bring powerful global competitors straight into our local market.",
+        "Throughout this lecture I will use hypothetical companies, and any figures I mention are round illustrative numbers rather than official statistics."
+       ]
+      },
+      {
+       "title": "Four families of platforms",
+       "slide": {
+        "kind": "cards",
+        "heading": "Four families of platforms",
+        "cards": [
+         {
+          "label": "Marketplaces",
+          "text": "LagoonStay: guesthouses and travellers"
+         },
+         {
+          "label": "Payments",
+          "text": "IslandPay: consumers, merchants and banks"
+         },
+         {
+          "label": "Social and content",
+          "text": "Creators, audiences and advertisers"
+         },
+         {
+          "label": "Government",
+          "text": "An e-services portal: citizens, firms, ministries"
+         }
+        ],
+        "note": {
+         "tone": "info",
+         "text": "LagoonStay and IslandPay are hypothetical companies."
+        }
+       },
+       "narration": [
+        "It helps to sort platforms into a few families. The first is the marketplace, which matches buyers and sellers of goods or services, like our hypothetical LagoonStay, which matches guesthouses with travellers.",
+        "The second is the payment platform. A mobile wallet such as the hypothetical IslandPay connects people who pay, merchants who get paid, and the banks that hold the money.",
+        "The third family is social and content platforms, where creators, audiences and advertisers meet. A small hotel in Le Morne may win more bookings from one beautiful video than from any printed brochure.",
+        "The fourth family is often forgotten: government platforms. A national e-services portal that connects citizens, businesses and many ministries through one login is also, in a real sense, a platform.",
+        "Each family has different sides, different ways of earning money and different risks, so the first step in analysing any case is always to ask who the sides are.",
+        "Before we go further, notice that the sides are not always obvious. A tourism platform may also have restaurants, drivers and insurers as extra sides, each with its own reasons to join."
+       ]
+      },
+      {
+       "title": "Scale and the small-market problem",
+       "slide": {
+        "kind": "stat",
+        "heading": "Illustrative scale for a small island",
+        "stats": [
+         {
+          "value": "About 1.3 million",
+          "label": "residents"
+         },
+         {
+          "value": "About 1 million",
+          "label": "visitors in a good year"
+         },
+         {
+          "value": "Tens of thousands",
+          "label": "small firms"
+         }
+        ],
+        "note": {
+         "tone": "info",
+         "text": "Round illustrative figures, not official statistics."
+        }
+       },
+       "narration": [
+        "Platforms love scale, because network effects grow stronger with every extra user. That is exactly where small islands face a challenge.",
+        "With a population of only around a million people, a purely local platform may struggle to reach the critical mass it needs on both sides at once.",
+        "Visitors change the picture. If, in a good year, an island welcomes roughly as many tourists as it has residents, then a tourism platform can draw demand from abroad while its supply stays local.",
+        "This is why the most promising local platforms often sit where a global flow of customers meets a dense cluster of local suppliers, such as guesthouses, tour operators, taxi drivers or craft makers.",
+        "By contrast, a local copy of a global social network would compete for the same small pool of users against a rival with billions of them, which is a very hard fight to win."
+       ]
+      },
+      {
+       "title": "Global giants and local niches",
+       "slide": {
+        "kind": "compare",
+        "heading": "Global versus local platforms",
+        "columns": [
+         {
+          "title": "Global platforms",
+          "points": [
+           "Huge network effects",
+           "Strong brands and deep capital",
+           "Commission often leaves the island"
+          ]
+         },
+         {
+          "title": "Local platforms",
+          "points": [
+           "Local knowledge and trust",
+           "Local payments and languages",
+           "Serve niches the giants ignore"
+          ]
+         }
+        ]
+       },
+       "narration": [
+        "So how should a local platform compete with a global giant? Head-on competition rarely works. The smarter strategy is usually to find a niche where local knowledge gives a real advantage.",
+        "LagoonStay, for instance, might focus on small family guesthouses that global sites overlook, offer listings in Kreol, French and English, and accept payment through the local mobile wallet.",
+        "There is also an economic argument that matters for policy. When a visitor books through a global platform, a commission of perhaps fifteen percent may leave the island, while a local platform keeps more of that value at home.",
+        "However, local platforms must still match global standards on security, reviews and customer service, because travellers compare every experience with the best apps they use at home.",
+        "Many small firms therefore use both, listing on global platforms for reach while building direct relationships with returning guests and with the diaspora."
+       ]
+      },
+      {
+       "title": "Diaspora, crafts and export reach",
+       "slide": {
+        "kind": "cards",
+        "heading": "Reaching beyond the shoreline",
+        "cards": [
+         {
+          "label": "Diaspora",
+          "text": "Family abroad buying gifts and services at home"
+         },
+         {
+          "label": "Craft makers",
+          "text": "Selling to visitors before and after their trip"
+         },
+         {
+          "label": "Services",
+          "text": "Designers and developers serving clients overseas"
+         }
+        ]
+       },
+       "narration": [
+        "Tourism is not the only way to bring outside demand onto a local platform. Many small islands have large diaspora communities living in Europe, Australia or elsewhere who still buy for family at home.",
+        "Imagine a cousin in London ordering a birthday cake from a bakery in Quatre Bornes, paying online and having it delivered the same afternoon. That one order connects a global customer with a very local supplier.",
+        "Craft makers can do something similar. A visitor who bought a hand-woven basket on holiday may want to order another one a year later from home, if a platform makes that easy.",
+        "Professional services are a third route. Designers, accountants and software developers on the island can now sell their skills to clients overseas through freelance platforms, without ever leaving home.",
+        "In every case, the platform helps a small firm overcome distance, which has always been one of the biggest economic disadvantages of island life."
+       ]
+      },
+      {
+       "title": "Recap",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Key points",
+        "points": [
+         "Always ask first: who are the sides?",
+         "Small markets make critical mass hard",
+         "Tourism links global demand to local supply",
+         "Local platforms win through niches and trust"
+        ]
+       },
+       "narration": [
+        "Let me recap. Platforms come in families, from marketplaces and payments to social media and e-government, and every analysis starts by naming the sides.",
+        "Small islands make critical mass hard to reach, but tourism and diaspora flows can bring in demand from outside.",
+        "Local platforms rarely beat global giants head-on. They win by serving niches with local knowledge, trust and convenient payment options."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "c3-L3",
+     "type": "reading",
+     "title": "Network effects, multi-sided markets and the chicken-and-egg problem",
+     "dur": 10,
+     "objectives": [
+      "Define same-side and cross-side network effects",
+      "Explain why new platforms face a chicken-and-egg problem",
+      "Evaluate strategies a small-island platform can use to reach critical mass"
+     ],
+     "chips": [
+      "Can network effects be negative?",
+      "What is multi-homing?",
+      "How did LagoonStay reach critical mass?"
+     ],
+     "body": "Platforms are not simply businesses that happen to use the internet. What makes them distinctive is that their value depends on *who else* is using them. This reading explains the economics behind that idea: multi-sided markets, network effects, and the chicken-and-egg problem every new platform must solve. All companies mentioned are hypothetical and all figures are round, illustrative numbers.\n\n## Multi-sided markets\n\nA **multi-sided market** exists when a business serves two or more distinct groups of users who need each other, and when the business creates value mainly by enabling interactions between them. A newspaper serves readers and advertisers; a shopping mall serves shoppers and retailers; a mobile wallet serves payers, merchants and banks.\n\nThe key test is interdependence. If one group disappeared, would the other group still want the service? A guesthouse booking platform with no guesthouses is useless to travellers, and a platform with no travellers is useless to guesthouse owners. By contrast, a hotel's own booking website still has value to guests even if no other hotel exists, because the hotel itself supplies the rooms.\n\nPlatforms typically perform four jobs for their sides:\n\n1. **Matching** – helping the right buyer find the right seller (search, filters, recommendations).\n2. **Trust** – reducing the risk of dealing with strangers (reviews, verification, dispute resolution).\n3. **Transaction** – making exchange easy (payments, booking calendars, messaging).\n4. **Rules** – setting standards for quality and behaviour (cancellation policies, banned content).\n\n## Same-side and cross-side network effects\n\nA **network effect** exists when the value of a product to one user depends on the number of other users. There are two kinds.\n\n- **Same-side (direct) network effects** occur within one group. A messaging app is more useful the more of your friends use it.\n- **Cross-side (indirect) network effects** occur between groups. More guesthouses on a booking platform mean more choice for travellers; more travellers mean more bookings for guesthouses.\n\nNetwork effects can also be **negative**. On the same side, too many sellers can mean fierce competition and falling prices for each seller; too many users can create congestion, like a crowded beach. Across sides, too many advertisers can drive away the audience. Good platform design manages both positive and negative effects, for example by ranking listings by quality so that more sellers do not simply mean more noise.\n\n> **Case box – LagoonStay (hypothetical).** LagoonStay launched with 40 guesthouses in the south-east of Mauritius. After a year it had 600 listings across the island. Travellers now found rooms in every price range and every region, so visits to the site rose sharply. With more visitors, a typical guesthouse received about three times as many enquiries as in the first year, and owners told their neighbours to join. This is a positive cross-side loop. But LagoonStay also noticed a negative same-side effect: in popular villages, dozens of similar listings competed for the same guests, and some owners left. It responded by introducing \"village guides\" that highlighted different kinds of stay rather than just the lowest price.\n\n## The chicken-and-egg problem\n\nBecause each side only values the platform if the other side is already there, a new platform faces a **chicken-and-egg problem**: who joins first? Until the platform reaches **critical mass** – the point at which the network effects become self-sustaining – it must work hard to attract users who, at that moment, have little reason to come.\n\nCommon strategies include:\n\n- **Subsidise one side.** Make the platform free, or even pay users, on the side that is hardest to attract. Mobile wallets often make person-to-person transfers free and charge merchants.\n- **Seed supply yourself.** The platform temporarily acts as a supplier. A food delivery start-up might list restaurant menus and place orders itself before restaurants sign up.\n- **Start in a niche.** Concentrate on one small, dense community where critical mass is reachable: one region, one type of product, one customer group. LagoonStay began with family guesthouses in the south-east only.\n- **Piggyback on an existing network.** Bring users from somewhere they already gather, such as a community association, a hotel group or an existing social media following.\n- **Offer stand-alone value.** Give one side a useful tool even when the other side is absent – for example free booking-calendar software for guesthouses – so that they join for the tool and stay for the network.\n\n### Why this is harder on a small island\n\nCritical mass depends on absolute numbers. A city of ten million can support a dozen food delivery apps; an island of around a million people may support only one or two. Local platforms therefore often look outward for one side – tourists, the diaspora, export buyers – while recruiting the other side locally.\n\n## Multi-homing and competition\n\nUsers **multi-home** when they use several competing platforms at once. Guesthouse owners commonly list on two or three booking sites; many shoppers carry several payment apps. Multi-homing weakens any single platform's grip and makes \"winner-takes-all\" outcomes less likely. Where switching is costly – because your reviews, followers or transaction history cannot be moved – users tend to single-home, and the leading platform becomes very powerful.\n\nThis has consequences for policy. Regulators may require **interoperability** (for example, one national QR standard for all wallets) or **data portability** (letting users take their data with them) to keep markets contestable. For small economies, such rules can help local platforms compete with global giants on more equal terms.\n\n| Factor | Pushes towards one dominant platform | Pushes towards several platforms |\n|---|---|---|\n| Network effects | Strong cross-side effects | Weak or negative effects |\n| Multi-homing | Costly, rare | Cheap, common |\n| User needs | Similar across users | Varied, niche needs |\n| Regulation | No portability rules | Interoperability required |\n\n## Key takeaways\n\n- A multi-sided platform serves distinct groups who need each other and creates value by enabling their interactions.\n- Same-side network effects operate within a group; cross-side effects operate between groups and drive most platform growth.\n- Network effects can be negative, so platforms must curate quality, not just maximise numbers.\n- Every new platform faces a chicken-and-egg problem; subsidies, seeding, niche focus and stand-alone value help reach critical mass.\n- Small markets make critical mass harder, so island platforms often draw one side from abroad.\n- Multi-homing, interoperability and data portability limit winner-takes-all outcomes.\n\n## Check your understanding\n\n1. Explain the difference between a same-side and a cross-side network effect, using a mobile wallet as your example.\n*Answer:* A same-side effect would be friends finding the wallet more useful because more friends use it to send money to each other; a cross-side effect is that more wallet users make the wallet more valuable to merchants, and more accepting merchants make it more valuable to users.\n2. A new platform wants to connect smallholder vegetable growers in Mauritius with hotel kitchens. Suggest two strategies to solve its chicken-and-egg problem.\n*Answer:* For example, start in one region with a few committed hotels (niche focus), and give growers free tools such as a harvest-planning app (stand-alone value) or guaranteed first orders (subsidy).\n3. Why does widespread multi-homing make a winner-takes-all outcome less likely?\n*Answer:* Because if users can cheaply use several platforms at once, no single platform captures the whole network, so rivals can still attract enough users on both sides."
+    }
+   ]
+  },
+  {
+   "id": "m2",
+   "title": "Module 2 · Digital money and digital government",
+   "items": [
+    {
+     "id": "c3-L4",
+     "type": "video",
+     "title": "Mobile money and digital payments",
+     "dur": 6,
+     "objectives": [
+      "Explain how a mobile money platform works",
+      "Identify the sides of a payment platform and how each benefits",
+      "Assess the benefits and risks of mobile payments for small firms"
+     ],
+     "chips": [
+      "How is a mobile wallet different from a bank account?",
+      "Why do merchants accept paying a fee?",
+      "What does interoperability mean for payments?"
+     ],
+     "chapters": [
+      {
+       "title": "Money moves to the phone",
+       "slide": {
+        "kind": "bullets",
+        "heading": "What mobile money does",
+        "points": [
+         "Stores value in a wallet on your phone",
+         "Sends money to family and friends",
+         "Pays shops, taxis and bills by QR code",
+         "Cash in and cash out at agents"
+        ]
+       },
+       "narration": [
+        "Few digital innovations have changed everyday life in developing and small economies as much as mobile money. The basic idea is simple: your phone becomes a wallet that can store, send and receive money.",
+        "In several African countries, mobile money spread fastest among people with no bank account at all, because a network of small shop agents let them turn cash into digital value and back again.",
+        "In an economy like Mauritius, where most adults already have a bank account, the story is a little different. Here mobile payments mainly compete with cash and cards on convenience, speed and cost.",
+        "Today we will use a hypothetical service called IslandPay as our running case. Remember that IslandPay and the figures I use are illustrative, not descriptions of any real company."
+       ]
+      },
+      {
+       "title": "The sides of a payment platform",
+       "slide": {
+        "kind": "cards",
+        "heading": "Who is on IslandPay?",
+        "cards": [
+         {
+          "label": "Consumers",
+          "text": "Pay and send money from their phones"
+         },
+         {
+          "label": "Merchants",
+          "text": "Accept QR payments at the till"
+         },
+         {
+          "label": "Banks",
+          "text": "Hold funds and settle accounts"
+         },
+         {
+          "label": "Billers and government",
+          "text": "Collect utility bills, fees and taxes"
+         }
+        ]
+       },
+       "narration": [
+        "A payment platform is multi-sided. On one side are consumers who want to pay quickly and safely. On another are merchants, from supermarkets in Port Louis to a dholl puri stall in Rose Hill, who want to get paid.",
+        "Behind them sit banks, which hold the money and settle balances, and billers such as electricity, water and telephone companies, or government departments collecting fees.",
+        "Each side brings value to the others. Consumers will not download a wallet that no shop accepts, and shops will not display a QR code that no customer uses. That is the chicken-and-egg problem again.",
+        "IslandPay's answer, like that of many wallets, is to make person-to-person transfers free so that consumers join quickly, and then to charge merchants a small percentage on each sale.",
+        "For a merchant, a fee of around one percent may still be cheaper than handling cash, which must be counted, guarded, carried to the bank and is sometimes lost or stolen.",
+        "This is the same logic we met with LagoonStay: subsidise the side you need first, and charge the side that gains most from the network."
+       ]
+      },
+      {
+       "title": "How a payment flows",
+       "slide": {
+        "kind": "steps",
+        "heading": "One QR payment, step by step",
+        "steps": [
+         {
+          "title": "Scan",
+          "sub": "Customer scans the shop's QR code"
+         },
+         {
+          "title": "Authorise",
+          "sub": "Customer confirms with PIN or fingerprint"
+         },
+         {
+          "title": "Debit and credit",
+          "sub": "IslandPay moves value between wallets"
+         },
+         {
+          "title": "Settle",
+          "sub": "Bank pays the merchant account, often same day"
+         }
+        ]
+       },
+       "narration": [
+        "Let us follow a single payment. A customer buys a coffee and some gateaux piments at a café, scans the café's QR code with the IslandPay app, and enters the amount.",
+        "She confirms with a PIN or her fingerprint. Within a second, IslandPay debits her wallet and credits the café's merchant wallet, and both phones show a confirmation.",
+        "At the end of the day, the partner bank settles the café's balance into its business account, minus IslandPay's fee. The café owner never has to touch cash.",
+        "Notice that every step generates data: what was bought, where, when and by whom. That data is valuable for credit scoring and marketing, but it also raises serious questions about privacy and consent."
+       ]
+      },
+      {
+       "title": "Benefits, risks and interoperability",
+       "slide": {
+        "kind": "compare",
+        "heading": "Mobile payments for small firms",
+        "columns": [
+         {
+          "title": "Benefits",
+          "points": [
+           "Faster and safer than cash",
+           "Digital sales record helps with loans",
+           "No card terminal needed"
+          ]
+         },
+         {
+          "title": "Risks",
+          "points": [
+           "Fees on thin margins",
+           "Fraud and phishing",
+           "Lock-in to one wallet",
+           "Outages after cyclones"
+          ]
+         }
+        ]
+       },
+       "narration": [
+        "For small firms the benefits are real. Payments are faster and safer, and a digital record of sales can help a small business prove its income when it applies for a loan.",
+        "But there are risks. Fees eat into thin margins, scams and phishing messages target new users, and a power or network outage can stop trade entirely, which matters a great deal after a cyclone.",
+        "There is also the risk of lock-in. If the café must display five different QR codes for five different wallets, the experience becomes confusing for everyone.",
+        "That is why regulators often push for interoperability, meaning that a payment from one wallet or bank can reach any other through a shared national switch, so that one code works for all.",
+        "Interoperability weakens the network effects of any single wallet, but it strengthens the payment system as a whole, which is usually better for consumers and small businesses."
+       ]
+      },
+      {
+       "title": "Data, trust and regulation",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Keeping mobile money trustworthy",
+        "points": [
+         "Licensing and safeguarding of customer funds",
+         "Know-your-customer identity checks",
+         "Data protection and consent",
+         "Clear complaint and refund processes"
+        ]
+       },
+       "narration": [
+        "Money only works if people trust it, so payment platforms are among the most tightly regulated digital businesses. The central bank usually licenses wallet providers and sets rules for how customer funds are protected.",
+        "One key rule is that customer money must be safeguarded, for example held in a separate trust account at a bank, so that it is protected even if the wallet company itself fails.",
+        "Wallets must also check who their customers are, which is called know your customer, to reduce fraud and money laundering. Linking sign-up to a national digital identity makes these checks faster.",
+        "Data protection law adds another layer. IslandPay must explain clearly what payment data it collects, ask for consent before using it for marketing, and keep it secure.",
+        "For a small merchant, these rules may feel distant, but they are what allows a customer to scan a code and trust that the money will really arrive."
+       ]
+      },
+      {
+       "title": "Recap",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Key points",
+        "points": [
+         "Mobile money is a multi-sided platform",
+         "Free for senders, fees for merchants",
+         "Payments create valuable, sensitive data",
+         "Interoperability serves the whole system"
+        ]
+       },
+       "narration": [
+        "To recap, mobile money turns the phone into a wallet and connects consumers, merchants, banks and billers on one platform.",
+        "Wallets usually subsidise consumers and charge merchants, and every payment leaves a trail of data that brings both opportunity and responsibility.",
+        "Finally, interoperability limits the power of any single wallet but builds a stronger payment system for the whole island."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "c3-L5",
+     "type": "reading",
+     "title": "E-government as a digital platform",
+     "dur": 9,
+     "objectives": [
+      "Explain e-government using the platform lens",
+      "Describe the stages of e-government maturity",
+      "Identify benefits and risks of digital public services for citizens and SMEs"
+     ],
+     "chips": [
+      "What is the once-only principle?",
+      "Why does digital identity matter for e-government?",
+      "How does e-government help small businesses?"
+     ],
+     "body": "When we think of digital platforms we usually think of private firms. Yet one of the most important platforms in any economy is run by the state. Every citizen and every business must deal with government – to register a company, pay tax, apply for a permit or renew an identity document. **E-government** means delivering these public services through digital channels. This reading looks at e-government through the platform lens introduced earlier in the course, using illustrative examples from a small-island context. Systems and figures described are hypothetical.\n\n## Government as a platform\n\nThe phrase **government as a platform** describes an approach in which the state builds shared digital building blocks – identity, payments, notifications, data registries – that many public services (and sometimes private firms) can reuse. Instead of every ministry building its own login, its own payment page and its own database, there is one trusted foundation.\n\nSeen this way, a national e-services portal is a multi-sided platform:\n\n- **Citizens** apply for services, pay fees and receive documents.\n- **Businesses** register, file returns, apply for licences and bid for public contracts.\n- **Ministries and agencies** publish services and process applications.\n- **Third parties** such as banks, notaries or accountants act on behalf of users, using secure interfaces.\n\nAs with private platforms, there are cross-side effects. The more services are online, the more useful the portal is to citizens; the more citizens use it, the more pressure there is on remaining agencies to join.\n\n## Stages of e-government maturity\n\nA widely used way of describing progress has four stages:\n\n1. **Information** – websites publish forms, opening hours and rules. The citizen still queues at a counter.\n2. **Interaction** – forms can be downloaded or filled in online, and simple enquiries are answered by email or chat.\n3. **Transaction** – the whole service, including payment and the final document, is completed online.\n4. **Integration** – services are joined up across agencies around life events (\"starting a business\", \"having a baby\"), and data is shared so the citizen provides it only once.\n\nMost countries have services at every stage at the same time. The aim is not to digitise each form one by one, but to redesign services around the user.\n\n> **Case box – registering \"Bel Ombre Kayak Tours\" (hypothetical).** Priya wants to start a small kayak-tour business on the south coast. In an *interaction*-stage system she downloads five forms, prints them, and visits the company registry, the tax office, the municipal council and the tourism authority separately, presenting her identity card and proof of address each time. It takes about three weeks. In an *integrated* system she logs in once with her digital identity, completes a single \"start a business\" journey, pays all fees in one transaction with a mobile wallet, and the registry automatically shares her company number with the tax office and tourism authority. The licence arrives as a digital certificate with a QR code that a tourist or inspector can verify. The illustrative time falls to a few days, and Priya spends that time finding customers rather than queueing.\n\n## The building blocks\n\nThree shared components make integration possible.\n\n### Digital identity\n\nA secure way for people and firms to prove who they are online, such as a national identity card with a chip or a mobile-based login. Without trusted identity, every service must invent its own checks, and fraud risk rises.\n\n### Interoperable data and the once-only principle\n\nThe **once-only principle** says citizens and businesses should provide the same information to government only once; agencies then share it, with proper legal safeguards. This requires common data standards and secure exchange between systems.\n\n### Digital payments\n\nFees, fines and taxes paid by card, bank transfer or mobile wallet, with instant receipts. Linking government payments to national payment systems also encourages wider adoption of digital money – if you pay your driving licence by wallet, you are more likely to pay shops that way too.\n\n## Benefits and risks\n\n| | Benefits | Risks |\n|---|---|---|\n| Citizens | Fewer trips and queues; services at any hour | Exclusion of people without skills, devices or connectivity |\n| Businesses | Faster registration and licences; lower compliance cost | Outages halt critical processes; new skills needed |\n| Government | Better data for policy; lower processing cost; less scope for corruption | Cyber-attacks; large failed IT projects; privacy concerns |\n\nTwo risks deserve special attention in small-island states.\n\n**The digital divide.** Older citizens, people with disabilities and those in remote areas or outer islands may lack devices, skills or reliable connections. Good e-government keeps assisted channels – a counter, a phone line, a help desk at the post office – and designs digital services to be simple, accessible and multilingual.\n\n**Resilience and security.** A cyclone that damages power and telecoms, or a ransomware attack on a central database, can stop many services at once. Integration concentrates risk as well as value, so backups, offline procedures and strong cyber-security are essential.\n\n## Why e-government matters for digital business\n\nFor SMEs, the quality of e-government is part of the business environment. Fast online registration lowers the cost of starting a firm; digital tax filing reduces compliance time; open data – for example on tourist arrivals or land use – lets entrepreneurs spot opportunities. When the state publishes reusable components such as identity and payment interfaces, private platforms can build on them, just as a tourism platform might verify a guide's licence instantly through a government interface.\n\n## Key takeaways\n\n- E-government delivers public services through digital channels and can be analysed as a multi-sided platform.\n- Maturity moves from information to interaction, transaction and finally integration around life events.\n- Digital identity, interoperable data and digital payments are the shared building blocks of integrated services.\n- The once-only principle reduces burden on citizens and businesses but requires strong data protection.\n- Inclusion and resilience are critical risks, especially in small-island states exposed to cyclones.\n- Good e-government lowers costs for SMEs and creates foundations that private platforms can build on.\n\n## Check your understanding\n\n1. Why can a national e-services portal be described as a multi-sided platform?\n*Answer:* Because it connects distinct groups – citizens, businesses, agencies and third parties – who need each other, and its value to each group rises as the other groups use it.\n2. In the kayak-tour case, which feature of the integrated system most reduced the time to start the business?\n*Answer:* Applying the once-only principle: a single journey with one digital identity and automatic sharing of data between agencies, instead of separate visits to each.\n3. Give one way an e-government programme can reduce the risk of excluding older citizens.\n*Answer:* Keep assisted channels such as counters or help desks alongside simple, accessible, multilingual online services."
+    },
+    {
+     "id": "c3-L6",
+     "type": "quiz",
+     "title": "Quiz 1: Platforms, payments and e-government",
+     "dur": 15,
+     "quiz": {
+      "time": 15,
+      "weight": 5,
+      "questions": [
+       {
+        "q": "Which of the following is the best example of a platform business rather than a pipeline business?",
+        "o": [
+         "A hotel in Grand Baie that sells its own rooms",
+         "A booking site that matches independent guesthouses with travellers",
+         "A bakery that bakes and sells bread",
+         "A sugar mill that processes cane into sugar"
+        ],
+        "a": 1,
+        "ex": "The booking site creates value by connecting two groups who transact, without owning the rooms itself."
+       },
+       {
+        "q": "As more merchants accept a mobile wallet, more consumers find it worth downloading. This is an example of…",
+        "o": [
+         "economies of scale",
+         "a same-side network effect",
+         "a cross-side network effect",
+         "vertical integration"
+        ],
+        "a": 2,
+        "ex": "Growth on one side (merchants) increases the value of the platform to the other side (consumers)."
+       },
+       {
+        "q": "A new local food delivery app has no restaurants and no customers. Which strategy directly addresses its chicken-and-egg problem?",
+        "o": [
+         "Launching in one dense neighbourhood and offering restaurants free listings at first",
+         "Raising prices for both sides to signal quality",
+         "Waiting until both sides join on their own",
+         "Building a larger head office"
+        ],
+        "a": 0,
+        "ex": "Niche focus plus subsidising the harder side helps the platform reach critical mass."
+       },
+       {
+        "q": "Why do many mobile wallets let consumers send money free while charging merchants a fee?",
+        "o": [
+         "Merchants are legally required to pay all payment costs",
+         "Consumers are the side that gains most from access",
+         "Sending money costs the platform nothing to provide",
+         "Free use attracts consumers, and merchants pay to reach them"
+        ],
+        "a": 3,
+        "ex": "Platforms subsidise the side that builds the network and charge the side that values access to it."
+       },
+       {
+        "q": "A guesthouse owner lists her rooms on three different booking platforms at once. This behaviour is called…",
+        "o": [
+         "single-homing",
+         "multi-homing",
+         "disintermediation",
+         "interoperability"
+        ],
+        "a": 1,
+        "ex": "Multi-homing means using several competing platforms simultaneously, which weakens any one platform's grip."
+       },
+       {
+        "q": "In e-government, the once-only principle means that…",
+        "o": [
+         "each citizen may use an online service only once a year",
+         "citizens and businesses provide the same information to government only once, and agencies share it",
+         "only one ministry may offer services online",
+         "a single counter replaces all online services"
+        ],
+        "a": 1,
+        "ex": "Once-only reduces burden by letting agencies reuse data already supplied, with legal safeguards."
+       },
+       {
+        "q": "A citizen can download a licence form online but must still print it and submit it at a counter. Which e-government stage is this?",
+        "o": [
+         "Integration",
+         "Transaction",
+         "Interaction",
+         "Transformation"
+        ],
+        "a": 2,
+        "ex": "Interaction allows downloading or filling forms online, but the service is not completed end-to-end online."
+       },
+       {
+        "q": "Which policy most directly reduces lock-in to a single mobile wallet for small shops?",
+        "o": [
+         "A national interoperable QR standard that works with any wallet",
+         "Banning card payments",
+         "Raising merchant fees",
+         "Allowing each wallet to use its own QR format"
+        ],
+        "a": 0,
+        "ex": "Interoperability lets one code accept payments from any wallet, so merchants are not tied to one provider."
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "m3",
+   "title": "Module 3 · Digital transformation",
+   "items": [
+    {
+     "id": "c3-L7",
+     "type": "video",
+     "title": "What digital transformation really means",
+     "dur": 5,
+     "objectives": [
+      "Distinguish digitisation, digitalisation and digital transformation",
+      "Explain why transformation depends on strategy and people, not only technology",
+      "Identify common barriers facing small-island SMEs"
+     ],
+     "chips": [
+      "Is buying new laptops digital transformation?",
+      "Why do so many transformation projects fail?",
+      "Where should a small firm start its transformation?"
+     ],
+     "chapters": [
+      {
+       "title": "Three words that get confused",
+       "slide": {
+        "kind": "compare",
+        "heading": "Three different ideas",
+        "columns": [
+         {
+          "title": "Digitisation",
+          "points": [
+           "Analogue to digital format",
+           "Scanning paper invoices"
+          ]
+         },
+         {
+          "title": "Digitalisation",
+          "points": [
+           "Digital tools improve a process",
+           "An online order form"
+          ]
+         },
+         {
+          "title": "Digital transformation",
+          "points": [
+           "Rethinks the business model",
+           "New customers, offer or revenue"
+          ]
+         }
+        ]
+       },
+       "narration": [
+        "Digital transformation is one of the most overused phrases in business today, so let us start by separating it from two words that sound almost the same.",
+        "Digitisation means converting something analogue into digital form, such as scanning paper invoices or typing customer cards into a spreadsheet. Nothing about the business changes except the format.",
+        "Digitalisation means using digital tools to improve an existing process, such as letting customers order through a web form instead of phoning. The process is faster, but the business model is the same.",
+        "Digital transformation goes further. It means rethinking how the organisation creates, delivers and captures value because of what digital technology makes possible.",
+        "A useful test is to ask whether the firm's customers, its offer or its revenue model have changed. If only the tools have changed, it is probably digitalisation rather than transformation.",
+        "Keep this distinction in mind, because in your assignment you will need to judge which of the three a real case actually shows."
+       ]
+      },
+      {
+       "title": "A Curepipe bakery case",
+       "slide": {
+        "kind": "steps",
+        "heading": "Ti Pain: from shop counter to platform",
+        "steps": [
+         {
+          "title": "Digitise",
+          "sub": "Recipes and orders in a spreadsheet"
+         },
+         {
+          "title": "Digitalise",
+          "sub": "Orders by messaging app and website"
+         },
+         {
+          "title": "Transform",
+          "sub": "Breakfast subscription boxes for offices"
+         },
+         {
+          "title": "Extend",
+          "sub": "Open ordering to other small bakers"
+         }
+        ],
+        "note": {
+         "tone": "info",
+         "text": "Ti Pain is a hypothetical bakery."
+        }
+       },
+       "narration": [
+        "Let me illustrate with a hypothetical family bakery in Curepipe that I will call Ti Pain. For thirty years it sold bread and cakes over the counter and kept special orders in a notebook.",
+        "First, the owner's daughter moved orders and recipes into a spreadsheet. That is digitisation. Then the bakery began taking orders by messaging app and through a simple website. That is digitalisation.",
+        "The transformation came when Ti Pain noticed that offices in Ebène kept ordering breakfast for meetings. It launched a weekly subscription box, delivered before nine and paid automatically by mobile wallet.",
+        "Now the bakery has a new customer segment, a new channel and a recurring revenue model. Its value proposition has shifted from fresh bread at the counter to a reliable breakfast for busy teams.",
+        "In a later stage it could even open its ordering system to other small bakers, turning itself from a pipeline into a small platform."
+       ]
+      },
+      {
+       "title": "It is not about the technology",
+       "slide": {
+        "kind": "bullets",
+        "heading": "What transformation really needs",
+        "points": [
+         "A clear customer problem",
+         "Committed leadership",
+         "New skills and routines",
+         "Data used in decisions",
+         "Small experiments, then scale"
+        ]
+       },
+       "narration": [
+        "Notice that the technology in the Ti Pain story is quite ordinary: a spreadsheet, a messaging app and a payment link. The hard part was seeing a new customer need and changing how the business works.",
+        "This is a consistent finding in studies of transformation. Projects fail far more often because of people, culture and unclear strategy than because the software did not work.",
+        "Staff need new skills, new routines and a good reason to change. The bakers at Ti Pain had to start work earlier, plan production around subscription numbers and handle delivery problems.",
+        "Leadership matters too. If the owner treats the new channel as a side project, it will be starved of time and money as soon as the shop gets busy.",
+        "Good transformations start small, test an idea with real customers, measure the results, and only then invest to scale."
+       ]
+      },
+      {
+       "title": "Barriers for small-island SMEs",
+       "slide": {
+        "kind": "cards",
+        "heading": "Common barriers for SMEs",
+        "cards": [
+         {
+          "label": "Skills",
+          "text": "Few staff with digital or data skills"
+         },
+         {
+          "label": "Cash",
+          "text": "Upfront costs compete with daily needs"
+         },
+         {
+          "label": "Resilience",
+          "text": "Outages, especially after cyclones"
+         },
+         {
+          "label": "Market size",
+          "text": "A small home market limits scale"
+         },
+         {
+          "label": "Trust",
+          "text": "Customers wary of online fraud"
+         }
+        ]
+       },
+       "narration": [
+        "Small and medium enterprises in island economies face particular barriers. Many owners manage everything themselves and have little time to learn new tools.",
+        "Cash is tight, so a monthly software subscription competes directly with paying suppliers. Skilled digital staff are scarce and often leave for larger firms or for jobs abroad.",
+        "Infrastructure is generally good, but outages after a cyclone remind us that a fully digital business needs a plan for the day the network goes down.",
+        "Government support schemes, shared digital services and partnerships with platforms can lower these barriers, but the decision to transform still has to come from inside the firm."
+       ]
+      },
+      {
+       "title": "Measuring progress",
+       "slide": {
+        "kind": "cards",
+        "heading": "How do we know it is working?",
+        "cards": [
+         {
+          "label": "Customers",
+          "text": "New segments, repeat orders, satisfaction"
+         },
+         {
+          "label": "Revenue mix",
+          "text": "Share of sales from new channels"
+         },
+         {
+          "label": "Efficiency",
+          "text": "Time and cost per order"
+         },
+         {
+          "label": "Resilience",
+          "text": "Ability to trade during disruption"
+         }
+        ]
+       },
+       "narration": [
+        "How can a business tell whether its transformation is actually working? The honest answer is that it must decide what success looks like before it starts, and then measure it.",
+        "For Ti Pain, sensible measures might include the number of office subscribers, how many renew each month, and what share of total revenue now comes from subscriptions rather than the counter.",
+        "Efficiency measures matter too, such as the time taken to prepare and deliver each box, and the cost of delivery compared with the price customers pay.",
+        "Finally, a small-island firm should measure resilience. During a cyclone warning, could the bakery still take orders and inform customers, or did everything stop?",
+        "Numbers like these turn transformation from a slogan into something that can be managed, learned from and improved."
+       ]
+      },
+      {
+       "title": "Recap",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Key points",
+        "points": [
+         "Digitisation changes the format",
+         "Digitalisation improves a process",
+         "Transformation changes the business model",
+         "People and strategy matter more than tools"
+        ]
+       },
+       "narration": [
+        "To recap, digitisation changes the format, digitalisation improves a process, and digital transformation changes the business model itself.",
+        "The Ti Pain case shows that transformation begins with a customer insight and depends on people, leadership and small experiments more than on technology.",
+        "In the reading that follows, you will learn a step-by-step framework for analysing a transformation case, which you will use in your assignment."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "c3-L8",
+     "type": "reading",
+     "title": "Analysing a digital transformation case: a six-step framework",
+     "dur": 9,
+     "objectives": [
+      "Apply a six-step framework to a digital transformation case",
+      "Compare a business model before and after transformation",
+      "Evaluate outcomes and risks using evidence"
+     ],
+     "chips": [
+      "What is the difference between a push and a pull trigger?",
+      "How do I show analysis rather than description?",
+      "Was Coral Coast's change really transformation?"
+     ],
+     "body": "In your assignment you will analyse a real-world-style digital transformation case. Students often describe *what happened* in a case but struggle to *analyse* it. This reading gives you a six-step framework that turns a story into an argument, followed by a fully worked example. The company in the example is hypothetical, and its figures are illustrative.\n\n## Why you need a framework\n\nA good case analysis answers three questions: **Why** did the organisation change? **What** actually changed in its business model? **Did it work**, and what can others learn? A framework stops you from writing a chronological summary and pushes you to make judgements supported by evidence.\n\n## The six-step framework\n\n1. **Context** – Describe the organisation and its environment before the change: sector, size, customers, competitors, and relevant features of the small-island setting (market size, tourism dependence, infrastructure, regulation).\n2. **Trigger** – Identify what forced or enabled change: a new competitor, a crisis (such as a pandemic or cyclone), a new technology, a regulation, or a new leader. Distinguish *push* factors (threats) from *pull* factors (opportunities).\n3. **Business model change** – Use the business model canvas to compare *before* and *after*. Which blocks changed? Was this digitisation, digitalisation or genuine transformation? Did the firm become, join or compete with a platform?\n4. **Capabilities and people** – Analyse what the organisation had to build or acquire: skills, data, partners, technology, culture, leadership. Who resisted, and why?\n5. **Outcomes** – Evaluate results using evidence: revenue mix, customer numbers, costs, customer satisfaction, resilience. Separate short-term from long-term outcomes, and note what evidence is missing.\n6. **Risks and lessons** – Assess remaining risks (platform dependence, cyber-security, data protection, lock-in, exclusion) and draw transferable lessons for similar firms.\n\n> **Tip:** Steps 3 and 5 are where most marks are won. A clear before-and-after comparison and a balanced evaluation of outcomes show analysis rather than description.\n\n## Worked example: Coral Coast Excursions (hypothetical)\n\n### Step 1 – Context\n\nCoral Coast Excursions is a family-run tour operator based in the east of Mauritius with 25 staff, four boats and two minibuses. Before 2020 it sold catamaran trips and island tours almost entirely through hotel activity desks and two inbound travel agencies, which took commissions of around 25%. Bookings were taken by phone and recorded in a paper diary; customers paid cash on the day. The business was entirely dependent on tourist arrivals.\n\n### Step 2 – Trigger\n\nThe trigger was a combination of push and pull factors. The push factor was a collapse in tourist arrivals during border closures, which removed almost all revenue overnight. The pull factors were growing smartphone use, the spread of mobile wallets among residents, and the success of local \"staycation\" offers promoted on social media.\n\n### Step 3 – Business model change\n\n| Canvas block | Before | After |\n|---|---|---|\n| Customer segments | International tourists only | Tourists **plus** resident families, companies, schools |\n| Value proposition | Lagoon trips sold through hotels | Flexible, bookable experiences incl. team-building days |\n| Channels | Hotel desks, travel agencies | Own website and app, social media, global booking platforms |\n| Revenue streams | Per-trip price, cash | Online prepayment, gift vouchers, corporate packages |\n| Key partners | Hotels, two agencies | Wallet provider, booking platforms, local restaurants |\n| Key resources | Boats, skippers | Boats, skippers, **customer database and reviews** |\n\nThis is genuine **transformation**: new segments, new channels and new revenue streams, not just a digital diary. Coral Coast also became a *multi-homer*, listing on two global experience platforms while building its own direct channel.\n\n### Step 4 – Capabilities and people\n\nThe owner's son, who had studied marketing, led the change. The firm trained two office staff in social media and online booking software, and paid a freelance photographer. Skippers initially resisted fixed online time slots, because they were used to waiting for groups to fill a boat; management responded by sharing a small bonus linked to customer reviews. The firm had to learn data protection basics when it began storing customer emails.\n\n### Step 5 – Outcomes\n\nWithin two years, illustratively, about 40% of revenue came from residents and corporate clients, compared with almost none before. Direct online bookings carried no agency commission, improving the margin on those trips. Prepayment reduced no-shows. When tourism recovered, the firm kept its local segments, which made it less dependent on a single market. However, evidence is incomplete: we do not know the cost of the software and marketing, or whether resident demand will last once foreign travel is easy again.\n\n### Step 6 – Risks and lessons\n\nRemaining risks include dependence on global booking platforms, whose commissions and ranking rules Coral Coast cannot control; vulnerability of an online-only booking system during cyclone outages; and responsibilities for the personal data it now holds. Transferable lessons: a crisis can be a powerful trigger; diversifying customer segments builds resilience; the technology was simple, while the real work was in people and processes.\n\n## Common mistakes to avoid\n\n- **Describing instead of analysing.** Every paragraph should make a point and support it with evidence from the case.\n- **Treating technology as the transformation.** Buying software is not transformation unless the business model changes.\n- **Ignoring the small-island context.** Market size, tourism dependence, cyclones and connectivity shape what is possible.\n- **One-sided evaluation.** Weigh benefits against costs and risks, and admit where evidence is missing.\n- **No lessons.** End with recommendations or lessons that another firm could actually use.\n\n## Key takeaways\n\n- A case analysis should explain why the organisation changed, what changed in its business model, and whether it worked.\n- The six steps are context, trigger, business model change, capabilities and people, outcomes, and risks and lessons.\n- A before-and-after canvas comparison is the clearest way to show whether change was genuine transformation.\n- People, skills and leadership usually matter more than the technology itself.\n- Good evaluation is balanced, evidence-based and honest about missing evidence.\n\n## Check your understanding\n\n1. In the Coral Coast case, identify one push factor and one pull factor that triggered the change.\n*Answer:* Push: the collapse in tourist arrivals during border closures. Pull: widespread smartphones and mobile wallets among residents, and the success of staycation offers.\n2. Why is the Coral Coast change classified as transformation rather than digitalisation?\n*Answer:* Because the business model itself changed – new customer segments, channels and revenue streams – not just the tools used for existing processes.\n3. Name two risks that remain after the transformation.\n*Answer:* For example, dependence on global booking platforms' commissions and rankings, and vulnerability of online booking during cyclone outages (or data protection responsibilities)."
+    }
+   ]
+  },
+  {
+   "id": "m4",
+   "title": "Module 4 · Designing digital business models",
+   "items": [
+    {
+     "id": "c3-L9",
+     "type": "video",
+     "title": "The business model canvas, block by block",
+     "dur": 6,
+     "objectives": [
+      "Name and explain the nine blocks of the business model canvas",
+      "Link value propositions to specific customer segments",
+      "Adapt the canvas to show the sides of a platform business"
+     ],
+     "chips": [
+      "Which block should I fill in first?",
+      "How do I show two customer sides on one canvas?",
+      "What is the difference between channels and customer relationships?"
+     ],
+     "chapters": [
+      {
+       "title": "Why a canvas?",
+       "slide": {
+        "kind": "bullets",
+        "heading": "The business model canvas",
+        "points": [
+         "One page, nine building blocks",
+         "Shows how value is created, delivered and captured",
+         "Quick to sketch, test and change",
+         "Used by start-ups and large firms alike"
+        ]
+       },
+       "narration": [
+        "A business model describes how an organisation creates, delivers and captures value. That sounds abstract, so practitioners like to draw it on a single page, and the most popular tool for doing so is the business model canvas.",
+        "The canvas, popularised by Alexander Osterwalder and Yves Pigneur, divides a business model into nine building blocks arranged on one sheet.",
+        "Its strength is that it is visual and quick. A team can sketch a canvas on a whiteboard in an hour, argue about it, and then test the riskiest assumptions with real customers.",
+        "Today I will walk through the nine blocks using a hypothetical Mauritian start-up called Kaz Artisan, an online marketplace that connects local craft makers with tourists and overseas buyers."
+       ]
+      },
+      {
+       "title": "The customer side",
+       "slide": {
+        "kind": "cards",
+        "heading": "Right side: the customer",
+        "cards": [
+         {
+          "label": "Customer segments",
+          "text": "Tourists, diaspora buyers and craft makers"
+         },
+         {
+          "label": "Value propositions",
+          "text": "Authentic, verified local crafts"
+         },
+         {
+          "label": "Channels",
+          "text": "App, website, QR displays in hotels"
+         },
+         {
+          "label": "Customer relationships",
+          "text": "Self-service, maker stories, reviews"
+         },
+         {
+          "label": "Revenue streams",
+          "text": "Commission of about twelve percent per sale"
+         }
+        ],
+        "note": {
+         "tone": "info",
+         "text": "Kaz Artisan is a hypothetical start-up."
+        }
+       },
+       "narration": [
+        "The right-hand side of the canvas is about the customer. We start with customer segments, the groups we serve. For a platform like Kaz Artisan there are at least two: buyers, such as tourists and Mauritians living abroad, and sellers, the craft makers.",
+        "Next comes the value proposition, the bundle of benefits that solves a problem for each segment. Buyers get authentic, verified local crafts delivered to their hotel or home, and makers reach customers they could never meet from a village workshop.",
+        "Channels describe how we reach and deliver to customers, such as the app, the website and QR displays in hotel lobbies. Customer relationships describe the kind of relationship we build, from self-service to personal help.",
+        "Finally, revenue streams show how money comes in. Kaz Artisan might take a commission of about twelve percent on each sale and charge makers a small fee for professional photography.",
+        "Notice that the two sides here have very different needs, which is exactly why a platform canvas must treat each of them separately."
+       ]
+      },
+      {
+       "title": "The infrastructure side",
+       "slide": {
+        "kind": "cards",
+        "heading": "Left side: the infrastructure",
+        "cards": [
+         {
+          "label": "Key resources",
+          "text": "Platform software, maker network, brand"
+         },
+         {
+          "label": "Key activities",
+          "text": "Verifying makers, marketing, logistics"
+         },
+         {
+          "label": "Key partners",
+          "text": "Couriers, hotels, wallet provider"
+         },
+         {
+          "label": "Cost structure",
+          "text": "Developers, marketing, delivery"
+         }
+        ]
+       },
+       "narration": [
+        "The left-hand side of the canvas is about how we make the value proposition possible. Key resources are the assets we need, such as the platform software, the network of verified makers and the brand.",
+        "Key activities are the most important things we must do well. For Kaz Artisan these include recruiting and verifying makers, marketing to tourists, and organising reliable delivery.",
+        "Key partners are the outside organisations we rely on, such as couriers, hotels that display our QR codes, and the mobile wallet that processes payments.",
+        "The cost structure brings it all together by listing the main costs, such as developers' salaries, marketing and delivery. A healthy model has revenue streams that more than cover these costs as volumes grow."
+       ]
+      },
+      {
+       "title": "Drawing a platform canvas",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Tips for platform canvases",
+        "points": [
+         "One colour of sticky note per side",
+         "A value proposition for every side",
+         "Mark who is subsidised and who pays",
+         "Treat the network as a key resource"
+        ]
+       },
+       "narration": [
+        "Platforms need a little extra care on the canvas. Because there are several customer sides, I suggest using a different colour of sticky note for each side and following that colour across every block.",
+        "Each side needs its own value proposition. If you can only write a value proposition for buyers, you have not yet explained why makers would bother to join.",
+        "Mark which side is subsidised and which side pays. In Kaz Artisan's case buyers browse for free while makers pay through commission, so the revenue block should carry the makers' colour.",
+        "Finally, the network itself is a key resource. A thousand active makers and fifty thousand buyers form an asset that is very hard for a competitor to copy."
+       ]
+      },
+      {
+       "title": "Pipeline versus platform canvas",
+       "slide": {
+        "kind": "compare",
+        "heading": "Same canvas, different logic",
+        "columns": [
+         {
+          "title": "Pipeline canvas",
+          "points": [
+           "One main customer segment",
+           "Key resources are owned assets",
+           "Costs rise with production"
+          ]
+         },
+         {
+          "title": "Platform canvas",
+          "points": [
+           "Two or more interdependent segments",
+           "Key resource is the network",
+           "Costs centre on matching and trust"
+          ]
+         }
+        ]
+       },
+       "narration": [
+        "It is useful to compare the canvas of a pipeline with that of a platform. Imagine a craft shop at the Caudan Waterfront that buys baskets from makers and resells them at a markup.",
+        "Its canvas has one main customer segment, the shoppers, and its key resources are owned assets such as stock and a shop lease. Its costs rise directly with the amount it buys and sells.",
+        "Kaz Artisan's canvas looks different. It has two interdependent segments, its key resource is the network of makers and buyers, and its main costs are about matching, trust and delivery rather than stock.",
+        "Neither model is automatically better. The shop controls quality and earns a higher margin per item, while the platform can grow faster with less capital but must work hard to build trust.",
+        "When you analyse a case, drawing both canvases side by side is often the quickest way to show what really changed."
+       ]
+      },
+      {
+       "title": "Testing the canvas and recap",
+       "slide": {
+        "kind": "steps",
+        "heading": "From canvas to test",
+        "steps": [
+         {
+          "title": "Sketch",
+          "sub": "Fill all nine blocks quickly"
+         },
+         {
+          "title": "Spot",
+          "sub": "Find the riskiest assumption"
+         },
+         {
+          "title": "Test",
+          "sub": "Run a small, cheap experiment"
+         },
+         {
+          "title": "Revise",
+          "sub": "Update the canvas with evidence"
+         }
+        ]
+       },
+       "narration": [
+        "A canvas is a set of hypotheses, not a finished plan. After sketching it, pick the riskiest assumption, perhaps that tourists will trust a new app enough to buy crafts online, and test it cheaply.",
+        "To recap, the right side of the canvas covers segments, value propositions, channels, relationships and revenue, while the left side covers resources, activities, partners and costs.",
+        "For platforms, show every side clearly, give each its own value proposition, and make visible who pays and who is subsidised."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "c3-L10",
+     "type": "reading",
+     "title": "Worked example: building a business model canvas for a platform",
+     "dur": 9,
+     "objectives": [
+      "Build a business model canvas for a two-sided platform",
+      "Write a distinct value proposition for each side",
+      "Identify and plan tests for the riskiest assumptions"
+     ],
+     "chips": [
+      "Why do growers join FreshLink for free?",
+      "What makes a good value proposition?",
+      "How would I test a canvas cheaply?"
+     ],
+     "body": "The video on the business model canvas introduced the nine blocks. This reading shows how to build a canvas from scratch for a two-sided platform, step by step, so that you can do the same for your own ideas and in your assignment. The start-up, its partners and its figures are entirely hypothetical.\n\n## The idea: FreshLink\n\nHotels and restaurants on the island buy large quantities of vegetables, herbs and fruit, often through several intermediaries. Meanwhile, hundreds of smallholder growers sell at low prices to middlemen at the farm gate. **FreshLink** is a proposed platform that lets hotel kitchens order directly from verified smallholders, with consolidated delivery each morning.\n\nBecause FreshLink connects two groups who need each other, it is a **two-sided platform**: growers on the supply side and hotel and restaurant kitchens on the demand side.\n\n## Step-by-step method\n\n### Step 1 – Start with customer segments\n\nList every group the business serves, and be specific. \"Hotels\" is too broad. For FreshLink:\n\n- **Buyers:** purchasing managers and head chefs at mid-sized hotels and restaurants on the east and north coasts.\n- **Sellers:** smallholder growers with up to two hectares, producing vegetables and herbs.\n\nUse one colour for each side and keep it through every block.\n\n### Step 2 – Write a value proposition for each side\n\nA value proposition describes the problem solved and the benefit gained, not the features.\n\n- **For kitchens:** fresher, traceable local produce, ordered on one app by 8 p.m. and delivered by 7 a.m., with one invoice a week.\n- **For growers:** fairer prices than the farm gate, predictable weekly demand, and fast payment into a mobile wallet.\n\n### Step 3 – Channels and customer relationships\n\nHow will each side hear about FreshLink, buy, receive and get support?\n\n- Kitchens: direct sales visits to chefs, a web dashboard, and a WhatsApp-style support line.\n- Growers: field officers who visit farmers' groups, a very simple mobile app in Kreol, and a call centre.\n\nRelationships differ by side: dedicated account managers for large hotels, community-based support for growers.\n\n### Step 4 – Revenue streams: who pays?\n\nFreshLink earns a commission of about 10% on each order, paid by **buyers** as a service fee. Growers join free, because they are the harder side to attract and the most price-sensitive. A later stream could be a paid analytics service showing hotels the carbon footprint and origin of their produce.\n\n### Step 5 – Key resources, activities and partners\n\n- **Key resources:** the ordering app, the network of verified growers, a small cold-chain van fleet (leased), and quality data on each grower.\n- **Key activities:** recruiting and training growers, quality checks, matching demand forecasts to harvests, and morning logistics.\n- **Key partners:** a farmers' cooperative, the mobile wallet provider, a van leasing firm, and agricultural extension services.\n\n### Step 6 – Cost structure\n\nMain costs are logistics (vans, drivers, fuel), field officers' salaries, software development and hosting, and quality control. The model is **logistics-heavy**: unlike a pure digital marketplace, each extra order adds real delivery cost, so FreshLink must keep routes dense.\n\n## The completed canvas\n\n| Block | FreshLink (illustrative) |\n|---|---|\n| Key partners | Farmers' cooperative; mobile wallet provider; van leasing firm; extension services |\n| Key activities | Grower recruitment and training; quality checks; demand matching; morning delivery |\n| Key resources | Ordering app; verified grower network; leased cold-chain vans; quality data |\n| Value propositions | Kitchens: fresh, traceable produce, one app, one invoice. Growers: fair prices, steady demand, fast payment |\n| Customer relationships | Account managers for hotels; community support for growers |\n| Channels | Sales visits, web dashboard (kitchens); field officers, Kreol app (growers) |\n| Customer segments | Mid-sized hotels and restaurants; smallholder growers |\n| Cost structure | Logistics; field staff; software; quality control |\n| Revenue streams | About 10% service fee paid by buyers; future analytics subscription |\n\n## Testing the canvas\n\nA canvas is a set of **hypotheses**. FreshLink's riskiest assumptions are:\n\n1. Chefs will trust smallholder quality enough to switch from existing suppliers.\n2. Growers can supply consistent volumes, even after heavy rain or a cyclone.\n3. Delivery costs per order can fall below the 10% fee once routes are dense.\n\nA cheap first test might be a four-week pilot with three hotels and twenty growers in one district, using a spreadsheet and phone orders instead of a finished app. The team would measure repeat orders, rejected crates, on-time delivery and cost per drop, then revise the canvas.\n\n> **Case reflection.** Suppose the pilot shows chefs love the produce, but 30% of deliveries are late because growers harvest at different times. The team might add a new key activity (a collection point where growers drop produce by 5 a.m.) and a new key resource (a small chilled store). Notice how evidence from a test flows directly into specific canvas blocks.\n\n## Common pitfalls\n\n- Writing features (\"an app\") instead of benefits in the value proposition.\n- Describing only one side of a platform.\n- Forgetting to state who pays and who is subsidised.\n- Listing every possible partner rather than the critical few.\n- Treating the canvas as finished instead of testing it.\n\n## Key takeaways\n\n- Build the canvas from the customer side first: segments, then a value proposition for each segment.\n- For platforms, use one colour per side and show every side in every relevant block.\n- Make the revenue logic explicit: who pays, who is subsidised, and why.\n- Check that the cost structure follows from the key activities and resources.\n- Identify the riskiest assumptions and test them cheaply before investing heavily.\n\n## Check your understanding\n\n1. Why does FreshLink charge buyers rather than growers?\n*Answer:* Growers are the harder, more price-sensitive side to attract, so they are subsidised; kitchens gain most from access to fresh local produce and can afford the fee.\n2. Why must FreshLink pay close attention to route density?\n*Answer:* Because it is logistics-heavy: each order adds real delivery cost, so costs per order only fall below the fee if deliveries are clustered efficiently.\n3. Which block(s) would you change if a pilot showed growers could not supply consistent volumes?\n*Answer:* Key activities and key resources (for example adding collection points or storage), and possibly key partners such as a cooperative that pools supply."
+    },
+    {
+     "id": "c3-L11",
+     "type": "quiz",
+     "title": "Quiz 2: Digital transformation and the business model canvas",
+     "dur": 15,
+     "quiz": {
+      "time": 15,
+      "weight": 5,
+      "questions": [
+       {
+        "q": "A family bakery scans its paper recipe cards into PDF files. This is best described as…",
+        "o": [
+         "digital transformation",
+         "digitisation",
+         "digitalisation",
+         "platformisation"
+        ],
+        "a": 1,
+        "ex": "Converting analogue information into digital format without changing processes is digitisation."
+       },
+       {
+        "q": "Which change most clearly indicates digital transformation rather than digitalisation?",
+        "o": [
+         "Replacing a paper diary with booking software",
+         "Accepting card payments at the counter",
+         "Launching a subscription service for a new customer segment with recurring revenue",
+         "Sending invoices by email instead of post"
+        ],
+        "a": 2,
+        "ex": "Transformation changes the business model itself, such as new segments and revenue streams."
+       },
+       {
+        "q": "According to studies of digital transformation, projects most often fail because of…",
+        "o": [
+         "people, culture and unclear strategy",
+         "slow computers",
+         "too much customer demand",
+         "excessively low software prices"
+        ],
+        "a": 0,
+        "ex": "Technology is rarely the main obstacle; skills, leadership and strategy usually are."
+       },
+       {
+        "q": "On the business model canvas, 'verifying craft makers and organising delivery' belongs in which block?",
+        "o": [
+         "Key partners",
+         "Customer relationships",
+         "Value propositions",
+         "Key activities"
+        ],
+        "a": 3,
+        "ex": "Key activities are the most important things the firm must do to deliver its value proposition."
+       },
+       {
+        "q": "When drawing a canvas for a two-sided platform, which practice is most important?",
+        "o": [
+         "Showing only the paying side",
+         "Writing a separate value proposition for each side",
+         "Leaving the revenue block empty until launch",
+         "Combining all partners into one sticky note"
+        ],
+        "a": 1,
+        "ex": "Each side must have a reason to join, so each needs its own value proposition."
+       },
+       {
+        "q": "In a case analysis, a tour operator changed because tourist arrivals collapsed. In the six-step framework this is…",
+        "o": [
+         "a pull trigger",
+         "an outcome",
+         "a push trigger",
+         "a key resource"
+        ],
+        "a": 2,
+        "ex": "A threat that forces change is a push trigger; opportunities that attract change are pull triggers."
+       },
+       {
+        "q": "FreshLink's riskiest assumption is that chefs will trust smallholder produce. What is the best next step?",
+        "o": [
+         "Run a small pilot with a few hotels and growers and measure repeat orders",
+         "Build the full app before speaking to chefs",
+         "Buy a fleet of vans immediately",
+         "Remove the value proposition for chefs"
+        ],
+        "a": 0,
+        "ex": "A canvas is a set of hypotheses; the riskiest one should be tested cheaply before heavy investment."
+       },
+       {
+        "q": "A strong case analysis evaluation should…",
+        "o": [
+         "list events in chronological order",
+         "focus only on the technology purchased",
+         "praise every outcome of the change",
+         "weigh benefits against costs and risks and note missing evidence"
+        ],
+        "a": 3,
+        "ex": "Balanced, evidence-based judgement is what distinguishes analysis from description."
+       }
+      ]
+     }
+    },
+    {
+     "id": "c3-L12",
+     "type": "assignment",
+     "title": "Case analysis: A platform business in a small-island economy",
+     "dur": 180,
+     "assessment": "as4"
+    }
+   ]
+  }
+ ]
+}

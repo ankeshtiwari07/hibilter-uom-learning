@@ -11,8 +11,9 @@ export const ROUTES: R[] = [
   // student
   { path: '/s-dash', roles: S, crumbs: ['Dashboard'], C: lz(() => import('./pages/student/Dashboard')) },
   { path: '/s-catalogue', roles: S, crumbs: ['Course catalogue'], C: lz(() => import('./pages/student/Catalogue')) },
-  { path: '/s-course', roles: S, crumbs: ['My course'], C: lz(() => import('./pages/student/Course')) },
-  { path: '/s-course/:courseId', roles: S, crumbs: ['My course'], C: lz(() => import('./pages/student/Course')) },
+  { path: '/s-courses', roles: S, crumbs: ['My courses'], C: lz(() => import('./pages/student/MyCourses')) },
+  { path: '/s-course', roles: S, crumbs: ['My courses'], C: lz(() => import('./pages/student/Course')) },
+  { path: '/s-course/:courseId', roles: S, crumbs: ['My courses', 'Course'], C: lz(() => import('./pages/student/Course')) },
   { path: '/s-lesson', roles: S, crumbs: ['Lesson player'], C: lz(() => import('./pages/student/LessonPlayer')) },
   { path: '/s-ai', roles: S, crumbs: ['AI study assistant'], C: lz(() => import('./pages/student/Assistant')) },
   { path: '/s-assign', roles: S, crumbs: ['Assignments'], C: lz(() => import('./pages/student/Assignments')) },

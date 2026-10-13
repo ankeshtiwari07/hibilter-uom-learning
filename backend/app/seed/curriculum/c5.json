@@ -1,0 +1,1674 @@
+{
+ "course": "c5",
+ "presenter": "elena",
+ "modules": [
+  {
+   "id": "m1",
+   "title": "Module 1 · Ocean and Climate Data Foundations",
+   "items": [
+    {
+     "id": "c5-L1",
+     "type": "video",
+     "title": "Why Sea Temperature Matters: The Indian Ocean Around Mauritius",
+     "dur": 6,
+     "objectives": [
+      "Explain why sea-surface temperature is a key climate variable for small islands",
+      "Name the main ways sea-surface temperature is measured",
+      "Describe how scattered observations become a gridded dataset",
+      "Recognise the seasonal temperature cycle of a Mauritian lagoon"
+     ],
+     "chips": [
+      "Why is sea-surface temperature so important for coral reefs?",
+      "How do satellites measure the temperature of the sea?",
+      "What does it mean to put data on a grid?"
+     ],
+     "chapters": [
+      {
+       "title": "The ocean as the island's thermostat",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Why sea-surface temperature matters",
+        "points": [
+         "The ocean stores far more heat than the atmosphere",
+         "Warm water fuels cyclones in the south-west Indian Ocean",
+         "Reef corals live close to their upper temperature limit",
+         "Fisheries, tourism and coastal protection depend on healthy reefs"
+        ]
+       },
+       "narration": [
+        "Stand on the beach at Blue Bay on a February afternoon and the water feels almost like a warm bath. That warmth is not just pleasant for swimmers; it is one of the most important numbers in climate science.",
+        "The upper few metres of the ocean hold more heat than the entire atmosphere above them, so the sea acts as a giant thermostat for an island like Mauritius.",
+        "Warm surface water supplies the energy and moisture that allow tropical cyclones to grow as they cross the south-west Indian Ocean during our summer season.",
+        "It also matters for the reef. The corals that build our lagoons live only a degree or two below the temperature at which they become stressed.",
+        "So in this course we will learn to read, plot and interpret sea-surface temperature data, and then use it to understand when our reefs are in danger."
+       ]
+      },
+      {
+       "title": "What we mean by sea-surface temperature",
+       "slide": {
+        "kind": "cards",
+        "heading": "How sea-surface temperature is measured",
+        "cards": [
+         {
+          "label": "Ships",
+          "text": "Engine-intake and bucket readings since the 1800s"
+         },
+         {
+          "label": "Drifting buoys",
+          "text": "Thermometers floating just below the surface"
+         },
+         {
+          "label": "Argo floats",
+          "text": "Robotic profilers that surface every ten days"
+         },
+         {
+          "label": "Satellites",
+          "text": "Infrared and microwave sensors seeing the skin of the sea"
+         }
+        ]
+       },
+       "narration": [
+        "Sea-surface temperature, which we will often shorten to SST, is the temperature of the water near the top of the ocean, usually within the first metre or so.",
+        "For more than a century, ships measured it by hauling up buckets or reading the temperature of water drawn into their engines. Those records are precious but patchy.",
+        "Today drifting buoys and robotic Argo floats give accurate readings in the water itself, but there are only a few thousand of them for the whole global ocean.",
+        "Satellites fill the gaps. Infrared sensors measure the heat radiated by the thin skin of the sea, and microwave sensors can even see through clouds, though with coarser detail.",
+        "Each method has strengths and weaknesses, which is why the best datasets combine all of them.",
+        "When we later compare a grid value with a logger on the reef, keep in mind that each instrument sees the water in a slightly different way."
+       ]
+      },
+      {
+       "title": "From scattered points to a grid",
+       "slide": {
+        "kind": "steps",
+        "heading": "Building a gridded SST product",
+        "steps": [
+         {
+          "title": "Collect",
+          "sub": "Ship, buoy, float and satellite observations"
+         },
+         {
+          "title": "Quality-control",
+          "sub": "Remove spikes, duplicates and bad sensors"
+         },
+         {
+          "title": "Correct biases",
+          "sub": "Adjust satellites against in-water readings"
+         },
+         {
+          "title": "Interpolate",
+          "sub": "Estimate values on a regular latitude-longitude grid"
+         },
+         {
+          "title": "Publish",
+          "sub": "One value per grid cell per time step"
+         }
+        ]
+       },
+       "narration": [
+        "Raw observations are scattered in space and time. A ship crosses the Mascarene Basin on Tuesday, a satellite passes overhead on Wednesday, and a buoy drifts past Rodrigues on Friday.",
+        "To make that useful, scientists first check the data for errors, then correct the satellite values against the more trustworthy buoy readings.",
+        "Finally they use statistical interpolation to estimate the temperature at every point of a regular grid, for example every quarter of a degree of latitude and longitude, once per day.",
+        "The result is a gridded dataset. Each number is the best estimate of the average temperature over one grid cell at one time step, not a single thermometer reading.",
+        "That idea, one value per cell per time step, is the key to everything we do with climate data in this course."
+       ]
+      },
+      {
+       "title": "A year in the lagoon",
+       "slide": {
+        "kind": "stat",
+        "heading": "Seasonal cycle near Mauritius (illustrative)",
+        "stats": [
+         {
+          "value": "about 23 °C",
+          "label": "Typical late-winter minimum, around August"
+         },
+         {
+          "value": "about 28 °C",
+          "label": "Typical late-summer maximum, around March"
+         },
+         {
+          "value": "about 5 °C",
+          "label": "Seasonal range"
+         }
+        ],
+        "note": {
+         "tone": "info",
+         "text": "Round illustrative figures for teaching, not official measurements."
+        }
+       },
+       "narration": [
+        "If we pick the grid cell closest to Mauritius and plot its values month by month, we see a strong seasonal cycle.",
+        "In round illustrative numbers, the sea cools to about twenty-three degrees Celsius in late winter, around August, and warms to about twenty-eight degrees in late summer, around March.",
+        "Shallow lagoons heat up and cool down faster than the open ocean, so on calm sunny days the water over the reef flat can be noticeably warmer than the offshore value.",
+        "This seasonal swing is several times larger than the long-term warming trend, which is why, later in the course, we will remove it by calculating anomalies.",
+        "An anomaly asks a sharper question: not how warm is the sea, but how much warmer is it than normal for this time of year."
+       ]
+      },
+      {
+       "title": "Why a small island needs big data",
+       "slide": {
+        "kind": "cards",
+        "heading": "Who uses ocean temperature data?",
+        "cards": [
+         {
+          "label": "Reef managers",
+          "text": "Early warning of coral bleaching"
+         },
+         {
+          "label": "Meteorologists",
+          "text": "Cyclone intensity forecasts"
+         },
+         {
+          "label": "Fisheries",
+          "text": "Where tuna and reef fish are likely to be"
+         },
+         {
+          "label": "Planners",
+          "text": "Coastal protection and tourism decisions"
+         }
+        ]
+       },
+       "narration": [
+        "Mauritius is a small island, but its exclusive economic zone stretches across a vast area of the Indian Ocean, far larger than the island itself.",
+        "No country could place thermometers across all of that water, so freely available gridded datasets are an extraordinary resource for a small island state.",
+        "Reef managers use them to anticipate bleaching, meteorologists use them to judge how strong an approaching cyclone might become, and fisheries scientists use them to understand where fish are likely to gather.",
+        "Hotel owners and coastal planners care too, because healthy reefs break the waves that would otherwise erode our beaches during storms.",
+        "Throughout this course you will be working with the same kinds of data these professionals rely on, so the skills you build are directly useful beyond the classroom."
+       ]
+      },
+      {
+       "title": "Recap",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Key points",
+        "points": [
+         "SST is a key climate variable for islands and reefs",
+         "Ships, buoys, floats and satellites each measure it differently",
+         "Gridded products give one value per cell per time step",
+         "Anomalies remove the seasonal cycle to reveal unusual warmth"
+        ]
+       },
+       "narration": [
+        "To recap, sea-surface temperature controls cyclones, rainfall and the health of our reefs, and it is measured by ships, buoys, floats and satellites.",
+        "Along the way, remember that every gridded value is an estimate with uncertainty, built from many imperfect measurements.",
+        "Gridded datasets blend those observations into one value per cell per time step, and next we will learn how to open and read such a dataset ourselves."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "c5-L2",
+     "type": "virtual",
+     "title": "Reading Gridded Climate Data",
+     "dur": 20,
+     "objectives": [
+      "Explain what a single value in a gridded SST dataset represents",
+      "Select a location from a grid by coordinate label with the nearest method",
+      "Handle land and missing values correctly when averaging"
+     ],
+     "chips": [
+      "What exactly is a grid cell?",
+      "Why does sel need method nearest?",
+      "Why are there NaN values around the island?"
+     ],
+     "lesson": {
+      "summary": [
+       "Each gridded value is an average for one cell, located by latitude and longitude, at one time step",
+       "Select by label with sel, using method nearest when your point is not on the grid",
+       "NaN marks land or missing data; leave it out of averages rather than counting it as zero"
+      ],
+      "segments": [
+       {
+        "id": "seg1",
+        "title": "What is a gridded dataset?",
+        "slide": {
+         "kind": "cards",
+         "heading": "Three dimensions of a gridded SST field",
+         "cards": [
+          {
+           "label": "Time",
+           "text": "One map per day or month"
+          },
+          {
+           "label": "Latitude",
+           "text": "Rows, from south to north or north to south"
+          },
+          {
+           "label": "Longitude",
+           "text": "Columns, from west to east"
+          },
+          {
+           "label": "Value",
+           "text": "Average SST over one cell at one time step"
+          }
+         ]
+        },
+        "speech": [
+         "Imagine the south-west Indian Ocean covered by an enormous sheet of graph paper, with Mauritius sitting in one of the little squares.",
+         "A gridded dataset stores one sea-surface temperature value for every square, and then repeats the whole map for every day or every month, so the data has three dimensions: time, latitude and longitude.",
+         "Each value is not a reading from one thermometer. It is the best estimate of the average temperature over the whole square, blended from ships, buoys and satellites.",
+         "So to say what a number means, you must know which square it belongs to and which time step it comes from."
+        ],
+        "simpler": [
+         "Let me say it more simply. Think of a spreadsheet of the ocean, where every cell is a patch of sea.",
+         "There is one spreadsheet for each month, stacked like the pages of a calendar.",
+         "To find one temperature you need the page, which is the date, and the cell, which is the latitude and longitude."
+        ],
+        "checkpoint": {
+         "id": "cp1",
+         "mandatory": true,
+         "maxAttempts": 3,
+         "question": "Pick one number from a gridded sea-surface temperature file. What do you need to know to say exactly what that number describes?",
+         "ack": "Exactly: every value belongs to one grid cell, fixed by latitude and longitude, at one time step, and it is an average over that cell.",
+         "concepts": [
+          {
+           "id": "location",
+           "label": "Its location: the grid cell given by latitude and longitude",
+           "required": true,
+           "ask": "where on the map that number belongs",
+           "rx": [
+            {
+             "re": "\\b(lat(itude)?s?|lon(gitude)?s?|locations?|positions?|places?|where|grid[- ]?(cell|box|point|square)s?|cells?|coordinates?|coords?)\\b",
+             "flags": "i"
+            }
+           ]
+          },
+          {
+           "id": "time",
+           "label": "Its time: the time step, such as the day or month",
+           "required": true,
+           "ask": "which moment in time that number refers to",
+           "rx": [
+            {
+             "re": "\\b(times?|dates?|days?|months?|years?|when|time[- ]?steps?|timestamps?|monthly|daily|period)\\b",
+             "flags": "i"
+            }
+           ]
+          },
+          {
+           "id": "area",
+           "label": "It is an average over the whole cell, not a single point reading",
+           "required": false,
+           "ask": "whether the number is a single thermometer reading or something broader",
+           "rx": [
+            {
+             "re": "\\b(averag\\w*|mean)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(whole|entire)\\s+(cell|box|square|area)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\bnot\\b[^.]{0,20}\\b(single|one|exact)\\s+(point|spot|reading)",
+             "flags": "i"
+            }
+           ]
+          },
+          {
+           "id": "units",
+           "label": "Its units, such as degrees Celsius or Kelvin",
+           "required": false,
+           "ask": "what units the temperature is stored in",
+           "rx": [
+            {
+             "re": "\\b(units?|celsius|kelvin|deg ?c)\\b",
+             "flags": "i"
+            }
+           ]
+          }
+         ],
+         "misconceptions": [
+          {
+           "id": "buoy",
+           "label": "A grid value is not one buoy or ship measurement",
+           "rx": [
+            {
+             "re": "\\b(measured|reading|recorded|taken)\\b[^.]{0,30}\\b(by|from|at)\\s+(a|one|the)\\s+(single\\s+)?(buoy|thermometer|ship)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(which|what|the)\\s+(buoy|ship|thermometer)\\b",
+             "flags": "i"
+            }
+           ]
+          }
+         ],
+         "hints": [
+          "Think of a map that changes every month. To point at one number, what two things would you have to tell me?",
+          "One of them is about place and the other is about time. How do we describe a place on a grid?",
+          "Here it is almost in full: you need the latitude and longitude of the grid cell, and one more thing about when. Can you finish that?"
+         ],
+         "model": "A single value is the average temperature over one grid cell, identified by its latitude and longitude, for one time step such as a particular day or month.",
+         "reteach": "Picture a cinema film of a weather map. Each frame is one time step, and each frame is divided into squares like a chessboard. To find one number you must say which frame, that is the date, and which square, that is the latitude and longitude, and the number tells you the average for that whole square.",
+         "calibration": [
+          {
+           "answer": "you need its latitude and longitude and the time step it belongs to",
+           "expected": "correct"
+          },
+          {
+           "answer": "where it is on the grid (which cell) and what date or month its for",
+           "expected": "correct"
+          },
+          {
+           "answer": "The coordinates of the grid cell plus the time, and its an average over that whole cell not one point",
+           "expected": "correct"
+          },
+          {
+           "answer": "need the lat lon and the month, also units like degrees celsius",
+           "expected": "correct"
+          },
+          {
+           "answer": "its latitude and longitude",
+           "expected": "partial"
+          },
+          {
+           "answer": "which month or day the value is for",
+           "expected": "partial"
+          },
+          {
+           "answer": "the units, like kelvin or celsius, and the location",
+           "expected": "partial"
+          },
+          {
+           "answer": "how deep the ocean is there and how salty it is",
+           "expected": "incorrect"
+          },
+          {
+           "answer": "you need to know which buoy took the reading",
+           "expected": "incorrect"
+          },
+          {
+           "answer": "idk tbh",
+           "expected": "unclear"
+          }
+         ]
+        }
+       },
+       {
+        "id": "seg2",
+        "title": "Selecting Mauritius by label",
+        "slide": {
+         "kind": "code",
+         "heading": "Select by label, not by position",
+         "lang": "python",
+         "code": "import xarray as xr\nds = xr.open_dataset('sst_swio_monthly.nc')\n\nmru = ds['sst'].sel(lat=-20.2, lon=57.5, method='nearest')\nprint(mru.lat.values, mru.lon.values)   # the cell you got\nmru.plot()",
+         "points": [
+          "sel uses coordinate values, isel uses positions",
+          "method='nearest' returns the closest grid cell"
+         ]
+        },
+        "speech": [
+         "Now let us find Mauritius in the grid using Python and the xarray library. Instead of counting rows and columns, we ask for the latitude and longitude we want, using a method called sel.",
+         "The centre of our island is at about twenty point two degrees south and fifty-seven point five degrees east, so we ask for latitude minus twenty point two and longitude fifty-seven point five.",
+         "But our grid only has points every half degree, and minus twenty point two is not one of them. An exact request would fail with an error.",
+         "So we add method equals nearest, and xarray hands us the closest grid cell. It is good practice to print the latitude and longitude it returned, so you know exactly which cell you are using."
+        ],
+        "simpler": [
+         "Here is a simpler way to see it. The grid is like a row of bus stops, and our island lies between two stops.",
+         "If you ask the bus to stop exactly at your door, it cannot, because there is no stop there.",
+         "Nearest means walk to the closest stop instead. You still get where you need to be, just at the nearest available point."
+        ],
+        "checkpoint": {
+         "id": "cp2",
+         "mandatory": true,
+         "maxAttempts": 3,
+         "question": "When you select the grid point for Mauritius with method set to 'nearest', what does that option do, and why is it needed?",
+         "ack": "Right: nearest returns the closest grid cell, which we need because our exact latitude and longitude usually do not sit on a grid point.",
+         "concepts": [
+          {
+           "id": "closest",
+           "label": "It returns the grid cell closest to the requested coordinates",
+           "required": true,
+           "ask": "which grid cell xarray actually gives back to you",
+           "rx": [
+            {
+             "re": "\\b(closest|nearest|nearby|neighbou?ring)\\b[^.]{0,40}\\b(grid|points?|cells?|values?|coordinates?|lat|lon|locations?|ones?|match)",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(grid|points?|cells?|values?)\\b[^.]{0,40}\\b(closest|nearest|nearby|neighbou?ring)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(choose|chooses|choosing|pick|picks|picking|select|selects|takes?|gets?|returns?|uses?|finds?|snaps?|rounds?)\\b[^.]{0,20}\\b(closest|nearest|nearby|neighbou?ring)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\bsnaps?\\b",
+             "flags": "i"
+            }
+           ]
+          },
+          {
+           "id": "notexact",
+           "label": "The exact coordinates are usually not on the grid, so an exact match would fail",
+           "required": true,
+           "ask": "why an exact match on those coordinates usually fails",
+           "rx": [
+            {
+             "re": "\\b(not|isn'?t|doesn'?t|don'?t|won'?t|may not|might not|never|no)\\b[^.]{0,40}\\b(exact\\w*|exist\\w*|precisely|on the grid|in the grid|match\\w*)",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(exact|precise)\\w*\\b[^.]{0,40}\\b(not|isn'?t|doesn'?t|won'?t|rarely|unlikely)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(only|just)\\b[^.]{0,30}\\b(every|at|each)\\b[^.]{0,25}\\b(degrees?|0\\.\\d+|intervals?|spacing)",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(between|in between)\\b[^.]{0,30}\\b(grid|points|cells)",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(error|keyerror|fail\\w*|crash\\w*)\\b",
+             "flags": "i"
+            }
+           ]
+          },
+          {
+           "id": "resolution",
+           "label": "Grid points are spaced at a fixed resolution",
+           "required": false,
+           "ask": "how the spacing of the grid points causes the problem",
+           "rx": [
+            {
+             "re": "\\b(resolution|spacing|spaced)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b0\\.(25|5)\\b",
+             "flags": "i"
+            }
+           ]
+          }
+         ],
+         "misconceptions": [
+          {
+           "id": "interp",
+           "label": "Nearest does not interpolate or average neighbouring cells",
+           "rx": [
+            {
+             "re": "\\b(averag|interpolat|smooth|blend)\\w*",
+             "flags": "i"
+            }
+           ]
+          }
+         ],
+         "hints": [
+          "Think about the word itself. If you ask for a spot on a chessboard that is not the centre of any square, what would be a sensible thing to hand you?",
+          "Our grid has points only every quarter or half degree. Is minus twenty point two likely to be one of them?",
+          "Nearly there: the option gives you the closest grid cell, because your exact coordinates are not usually on the grid. Say why that matters."
+         ],
+         "model": "It makes xarray return the grid cell closest to the requested latitude and longitude, which is needed because those exact coordinates are usually not on the grid, so an exact match would fail.",
+         "reteach": "Think of a bus route with fixed stops. If you live between two stops, the driver will not stop at your front door, so you walk to the nearest stop. The grid only has stops every fraction of a degree, and nearest simply walks you to the closest one instead of refusing to take you anywhere.",
+         "calibration": [
+          {
+           "answer": "it picks the closest grid point to -20.2, 57.5 because that exact coordinate might not exist in the grid",
+           "expected": "correct"
+          },
+          {
+           "answer": "Nearest snaps to the nearest cell. we need it since the grid only has values every 0.25 degrees",
+           "expected": "correct"
+          },
+          {
+           "answer": "Without it you get an error because the lat lon isnt one of the grid coordinates, so it chooses the closest one instead",
+           "expected": "correct"
+          },
+          {
+           "answer": "gets the value from the nearest grid cell, since mauritius doesnt fall exactly on a grid point",
+           "expected": "correct"
+          },
+          {
+           "answer": "it chooses the closest point",
+           "expected": "partial"
+          },
+          {
+           "answer": "because the coordinates might not exist exactly in the dataset",
+           "expected": "partial"
+          },
+          {
+           "answer": "it rounds to the nearest grid value i think",
+           "expected": "partial"
+          },
+          {
+           "answer": "it averages all the cells around mauritius to make it smoother",
+           "expected": "incorrect"
+          },
+          {
+           "answer": "it makes the code run faster on big files",
+           "expected": "incorrect"
+          },
+          {
+           "answer": "not sure",
+           "expected": "unclear"
+          }
+         ]
+        }
+       },
+       {
+        "id": "seg3",
+        "title": "Land, gaps and NaN",
+        "slide": {
+         "kind": "compare",
+         "heading": "Treating missing values",
+         "columns": [
+          {
+           "title": "Right",
+           "points": [
+            "NaN means land or no data",
+            "Skip it: mean() ignores NaN by default",
+            "Average only ocean cells"
+           ]
+          },
+          {
+           "title": "Wrong",
+           "points": [
+            "Filling NaN with zero",
+            "Averaging land as cold water",
+            "A box mean far too low"
+           ]
+          }
+         ],
+         "note": {
+          "tone": "warn",
+          "text": "One land cell set to zero can drag a small box average down by several degrees."
+         }
+        },
+        "speech": [
+         "When you plot a single month of our dataset, you will see blank cells where Mauritius, Réunion and Madagascar sit.",
+         "Those cells hold a special value called NaN, which stands for not a number. It means there is no sea-surface temperature there, usually because the cell is land.",
+         "When we average a box around the island, those cells must be left out. xarray's mean does this automatically, because it skips NaN by default.",
+         "The mistake to avoid is filling them with zero. A zero next to twenty-eight degree water would drag the average down dramatically and make the island look like an ice cube."
+        ],
+        "simpler": [
+         "Simply put, NaN is an empty box on the form, not a zero.",
+         "If a student is absent from a test, you do not give them zero when working out the class average; you leave them out.",
+         "Land cells are absent students, so we average only the sea."
+        ],
+        "checkpoint": {
+         "id": "cp3",
+         "mandatory": false,
+         "maxAttempts": 2,
+         "question": "Optional check: Some grid cells around Mauritius contain NaN. What do they usually mean, and how should they be treated when you average the region?",
+         "ack": "Well done: NaN marks land or missing data, and those cells should be left out of the average, never counted as zero.",
+         "concepts": [
+          {
+           "id": "missing",
+           "label": "NaN means missing data, usually land with no sea temperature",
+           "required": true,
+           "ask": "what a NaN cell represents in the grid",
+           "rx": [
+            {
+             "re": "\\b(land|island|coast\\w*|missing|masked|mask|empty|blank)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\bno\\s+(ocean|sea|water|data|values?|measurements?|observations?|temperature)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\bnot\\s+a\\s+number\\b",
+             "flags": "i"
+            }
+           ]
+          },
+          {
+           "id": "skip",
+           "label": "They should be skipped, not included in the average",
+           "required": true,
+           "ask": "what should happen to those cells when you take the mean",
+           "rx": [
+            {
+             "re": "\\b(skip|ignor|exclud|drop|remov|omit|disregard)\\w*",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(leave|leaving|left)\\s+(them\\s+|it\\s+)?out\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(not|don'?t|do not|shouldn'?t)\\s+(count|includ|use)\\w*",
+             "flags": "i"
+            },
+            {
+             "re": "\\bskipna\\b",
+             "flags": "i"
+            }
+           ]
+          },
+          {
+           "id": "notzero",
+           "label": "They must not be treated as zero",
+           "required": false,
+           "ask": "why replacing them with zero would be a mistake",
+           "rx": [
+            {
+             "re": "\\b(not|never|don'?t|do not|shouldn'?t|should not|rather than|instead of|instead|avoid)\\b[^.]{0,30}\\b(zero|0)\\b",
+             "flags": "i"
+            }
+           ]
+          }
+         ],
+         "misconceptions": [
+          {
+           "id": "zero",
+           "label": "Missing cells must not be filled with zero",
+           "rx": [
+            {
+             "re": "^(?!.*\\b(not|never|don'?t|do not|shouldn'?t|should not|rather than|instead of|instead|avoid)\\b).*\\b(replace|fill|set|treat|count|make)\\w*\\b[^.]{0,20}\\b(zero|0)\\b",
+             "flags": "i"
+            }
+           ]
+          }
+         ],
+         "hints": [
+          "Look at a map of the grid. Where do the blank cells appear, and is there any sea there?",
+          "If a cell has no ocean temperature at all, should it pull the regional average up, down or not at all?",
+          "Here is most of it: NaN cells are usually land or missing data. Now tell me what you should do with them when averaging."
+         ],
+         "model": "NaN cells near Mauritius are usually land or other missing data with no ocean temperature, so they should be ignored and excluded from the average rather than counted as zero.",
+         "reteach": "Imagine taking the average mark of a class where two students were absent. You would not give them zero, because that would drag the class average down unfairly; you would leave them out. Land cells are absent students: they have no sea temperature, so the average should be taken over the ocean cells only.",
+         "calibration": [
+          {
+           "answer": "they're land cells, the island itself, so you ignore them when you take the mean",
+           "expected": "correct"
+          },
+          {
+           "answer": "NaN means missing data, usually land, and you should skip them with skipna not count them as zero",
+           "expected": "correct"
+          },
+          {
+           "answer": "the nan values are where there is no ocean so they get excluded from the average",
+           "expected": "correct"
+          },
+          {
+           "answer": "masked land points, leave them out of the average otherwise the mean is wrong",
+           "expected": "correct"
+          },
+          {
+           "answer": "they are land",
+           "expected": "partial"
+          },
+          {
+           "answer": "you should drop them before averaging",
+           "expected": "partial"
+          },
+          {
+           "answer": "it means missing values, replace them with zero",
+           "expected": "partial"
+          },
+          {
+           "answer": "they are really hot spots where bleaching happens",
+           "expected": "incorrect"
+          },
+          {
+           "answer": "it means the satellite was broken so the file is useless",
+           "expected": "incorrect"
+          },
+          {
+           "answer": "no idea",
+           "expected": "unclear"
+          }
+         ]
+        }
+       }
+      ],
+      "closing": [
+       "Excellent work today, {name}.",
+       "Let me summarise what we covered.",
+       "Every value in a gridded dataset is an average for one cell, located by latitude and longitude, at one time step.",
+       "We select places by label with sel, and the nearest option gives us the closest grid cell when our point is not on the grid, while NaN cells are land or gaps that we leave out of averages.",
+       "For revision, read the next item on what is inside a NetCDF file, and then we will start slicing and averaging real regions. Well done."
+      ]
+     }
+    },
+    {
+     "id": "c5-L3",
+     "type": "reading",
+     "title": "Inside a NetCDF File: Dimensions, Coordinates and Metadata",
+     "dur": 9,
+     "objectives": [
+      "Identify dimensions, coordinates, variables and attributes in a NetCDF file",
+      "Check units, latitude order and time range before analysis",
+      "Explain how missing values and land are represented",
+      "Judge what a grid resolution can and cannot resolve"
+     ],
+     "chips": [
+      "What are the CF conventions?",
+      "Why is Mauritius showing up as NaN?",
+      "How big is a 0.25 degree grid cell near Mauritius?"
+     ],
+     "body": "Almost every climate dataset you will meet in this course arrives as a **NetCDF** file, usually with the extension `.nc`. NetCDF (Network Common Data Form) is a self-describing format: the numbers and the information needed to interpret them travel together in the same file. This reading walks through what is inside such a file and how to inspect it with xarray before you start any analysis.\n\n## Dimensions, coordinates and variables\n\nA NetCDF file is built from three kinds of object.\n\n- **Dimensions** are the named axes of the data, such as `time`, `lat` and `lon`. Each has a length, for example 408 months or 81 latitude points.\n- **Coordinates** are the labels along each dimension: the actual dates, latitudes and longitudes. They let you say \"give me March 2024 at 20° S\" instead of \"give me element 398, 41\".\n- **Data variables** hold the measurements themselves, such as `sst`, defined over one or more dimensions.\n\nA gridded sea-surface temperature (SST) variable therefore looks like a stack of maps, one per time step. Each number is the estimated *average* temperature over one grid cell for one time step. It is not a reading from a single thermometer, and it is worth keeping that in mind when you compare a grid value with a temperature logger on the reef at Blue Bay.\n\n## Metadata and the CF conventions\n\nMost climate files follow the **Climate and Forecast (CF) conventions**, a community agreement on how to describe data. Under CF, each variable carries *attributes* such as:\n\n| Attribute | Example | Why it matters |\n|---|---|---|\n| `units` | `degC` or `K` | Kelvin values are about 273 higher than Celsius |\n| `long_name` | `Sea surface temperature` | Human-readable description |\n| `_FillValue` | `-999.0` | Marks missing values such as land |\n| `scale_factor`, `add_offset` | `0.01`, `0` | Used to store numbers compactly as integers |\n\nxarray reads these attributes and applies fill values, scale factors and offsets automatically when you open the file, so missing values become `NaN` (not a number) and packed integers become real temperatures. It also decodes the time coordinate, which is often stored as \"days since 1800-01-01\", into proper dates.\n\n## Worked example: inspecting a south-west Indian Ocean file\n\nSuppose the course team gives you `sst_swio_monthly.nc`, an illustrative monthly SST file covering 30° S to 0° and 40° E to 80° E on a 0.5° grid. Here is a sensible first session.\n\n```python\nimport xarray as xr\n\nds = xr.open_dataset(\"sst_swio_monthly.nc\")\nprint(ds)                       # overview of dims, coords, variables\nsst = ds[\"sst\"]\nprint(sst.attrs)                # units, long_name, ...\nprint(ds.lat.values[:3], ds.lat.values[-3:])   # ascending or descending?\nprint(ds.time.values[0], ds.time.values[-1])   # period covered\n```\n\nWhen you print the dataset you might see something like `Dimensions: (time: 408, lat: 61, lon: 81)`. That tells you the file holds 408 monthly maps (34 years), each 61 by 81 cells. With a 0.5° spacing the latitudes go from -30.0 to 0.0 and the longitudes from 40.0 to 80.0.\n\nNow ask three questions before going further.\n\n1. **What are the units?** If `sst.attrs[\"units\"]` is `K`, convert with `sst - 273.15` before plotting.\n2. **Which way does latitude run?** If the first value is 0.0 and the last is -30.0, latitude is descending, and slices must be written from north to south.\n3. **Where are the missing values?** Plot one time step with `sst.isel(time=0).plot()`. Mauritius, Réunion and Madagascar should appear as blank cells.\n\nFinally, pick the grid cell for Mauritius with `sst.sel(lat=-20.2, lon=57.5, method=\"nearest\")`. On a 0.5° grid, -20.2 is not a coordinate value, so `method=\"nearest\"` returns the closest cell, centred on -20.0. Print the selected cell's `lat` and `lon` to see exactly which cell you received.\n\n> **Case box: the island is a hole in the grid.** On a fine grid, the cells covering Mauritius are land and contain `NaN`. If you select the exact centre of the island you may get a column of missing values. Choose a nearby ocean point, or average a small box, and remember that xarray's `mean()` skips `NaN` by default.\n\n## Resolution: what a grid can and cannot see\n\nThe **resolution** of a grid is the spacing between cell centres. At the latitude of Mauritius one degree of latitude is about 111 km, and one degree of longitude is about 104 km (it shrinks with the cosine of latitude). So a 0.25° grid has cells roughly 26 by 28 km, and a 1° grid has cells about 100 km across.\n\nThe whole island of Mauritius is only around 60 km long. A 1° cell therefore blends lagoon, reef and open ocean (and, if it is not masked, land) into one number. That is fine for studying the Indian Ocean Dipole, but it cannot tell you about a single lagoon in the south-east. Shallow lagoons often warm more on calm, sunny days than the grid value suggests, so treat grid SST as the *offshore* conditions the reef is bathed in, and use in-water loggers where you need lagoon detail.\n\nTemporal resolution matters too. A monthly mean hides a ten-day heat spike; daily data shows it. For coral heat-stress indicators we normally want daily data, while monthly data is enough for long-term trends.\n\n## Key takeaways\n\n- NetCDF files are self-describing: dimensions, coordinates, variables and attributes travel together.\n- A gridded SST value is an area average for one cell and one time step, identified by latitude, longitude and time.\n- Always check units, the direction of the latitude coordinate and the time range before analysis.\n- `sel` with `method=\"nearest\"` picks the closest cell when your location is not exactly on the grid.\n- Land and other gaps appear as `NaN`; xarray skips them in means by default.\n- Grid resolution limits what you can say about small features such as a single lagoon.\n\n## Check your understanding\n\n1. A file's `sst` variable has dimensions `(time: 120, lat: 40, lon: 60)`. How many maps does it contain, and what does one value represent?\n*Answer:* It contains 120 maps, one per time step; each value is the average SST over one grid cell (one latitude and longitude) at one time step.\n2. You select `sst.sel(lat=slice(-22, -18))` and get an empty array. What is the most likely cause?\n*Answer:* The latitude coordinate is descending (north to south), so the slice must be written `slice(-18, -22)`.\n3. Why might a 1° grid cell underestimate the temperature in a shallow Mauritian lagoon on a calm summer day?\n*Answer:* The cell averages about 100 km of mostly open ocean, which warms less than a shallow, sheltered lagoon, so local lagoon heating is smoothed away.\n"
+    }
+   ]
+  },
+  {
+   "id": "m2",
+   "title": "Module 2 · Working with Sea-Surface Temperature",
+   "items": [
+    {
+     "id": "c5-L4",
+     "type": "video",
+     "title": "Slicing and Averaging SST with xarray",
+     "dur": 5,
+     "objectives": [
+      "Open a NetCDF sea-surface temperature file with xarray",
+      "Select a point, a region and a time period by coordinate labels",
+      "Compute a time mean and an area-weighted regional mean",
+      "Explain why grid cells must be weighted by the cosine of latitude"
+     ],
+     "chips": [
+      "What is the difference between sel and isel?",
+      "Why do I need to weight by latitude?",
+      "How do I pick a box around Mauritius?"
+     ],
+     "chapters": [
+      {
+       "title": "Opening the file",
+       "slide": {
+        "kind": "code",
+        "heading": "Open and inspect a dataset",
+        "lang": "python",
+        "code": "import xarray as xr\n\nds = xr.open_dataset('sst_swio_monthly.nc')\nprint(ds)\nsst = ds['sst']          # a DataArray\nprint(sst.dims)          # ('time', 'lat', 'lon')\nprint(sst.attrs['units'])  # 'degC'",
+        "points": [
+         "A Dataset holds variables; a DataArray is one variable",
+         "Always check dimensions and units first"
+        ]
+       },
+       "narration": [
+        "Today we move from ideas to code. We will use a Python library called xarray, which was designed exactly for labelled, multi-dimensional data like gridded climate fields.",
+        "We open the file with one line, open dataset, and then print it. Before doing anything else, read that printout carefully, because it tells you the dimensions, the coordinates and the units.",
+        "Our example file covers the south-west Indian Ocean with monthly values. Its sea-surface temperature variable has three dimensions: time, latitude and longitude.",
+        "Notice that we pull out one variable into its own object, called a data array. Most of our analysis works on data arrays rather than on the whole dataset.",
+        "One habit I want you to form from day one is to check the units attribute. Some products store temperature in Kelvin, and forgetting that will give you very strange plots."
+       ]
+      },
+      {
+       "title": "Selecting by label",
+       "slide": {
+        "kind": "code",
+        "heading": "Select a point and a period",
+        "lang": "python",
+        "code": "# nearest grid cell to Mauritius\nmru = sst.sel(lat=-20.2, lon=57.5, method='nearest')\n\n# a time window\nrecent = mru.sel(time=slice('2015-01', '2024-12'))\n\n# by position, rarely needed\nfirst = sst.isel(time=0)",
+        "points": [
+         "sel uses coordinate values; isel uses integer positions",
+         "method='nearest' picks the closest grid cell"
+        ]
+       },
+       "narration": [
+        "The real power of xarray is that we select data by its coordinate labels rather than by counting rows and columns.",
+        "To get the time series for Mauritius we ask for latitude minus twenty point two and longitude fifty-seven point five, with the method set to nearest.",
+        "We need the nearest option because our exact position is unlikely to fall precisely on a grid point, so xarray hands us the closest cell instead of raising an error.",
+        "We can also select a time window by giving a slice from January twenty fifteen to December twenty twenty-four. The dates are written as plain text and xarray understands them.",
+        "There is a second method, isel, which selects by integer position. It is occasionally useful, but label-based selection makes your code far easier to read and much harder to get wrong."
+       ]
+      },
+      {
+       "title": "Selecting a region",
+       "slide": {
+        "kind": "code",
+        "heading": "A box around Mauritius",
+        "lang": "python",
+        "code": "box = sst.sel(lat=slice(-22, -18), lon=slice(55, 60))\nprint(box.shape)   # (time, lat, lon)\n\n# if latitude runs north to south, reverse it:\n# box = sst.sel(lat=slice(-18, -22), lon=slice(55, 60))",
+        "points": [
+         "A slice keeps every cell between two labels",
+         "Check whether latitude is ascending or descending"
+        ]
+       },
+       "narration": [
+        "Often a single cell is too noisy, and we want a small region instead, for example a box from twenty-two to eighteen degrees south and from fifty-five to sixty degrees east.",
+        "We pass a slice for latitude and another for longitude, and xarray returns every grid cell inside the box, still keeping the time dimension.",
+        "There is one classic trap. Some datasets store latitude from south to north, others from north to south. If your slice runs the wrong way, you silently get an empty array.",
+        "So always print the latitude coordinate first, and if it runs from north to south, write your slice from minus eighteen to minus twenty-two instead."
+       ]
+      },
+      {
+       "title": "Averaging over time and space",
+       "slide": {
+        "kind": "formula",
+        "heading": "Area-weighted regional mean",
+        "formula": "regional mean = Σ (w × SST) / Σ w,  with w = cos(latitude)",
+        "points": [
+         "Grid cells shrink towards the poles",
+         "box.weighted(np.cos(np.deg2rad(box.lat))).mean(('lat','lon'))",
+         "Missing land cells are skipped automatically"
+        ]
+       },
+       "narration": [
+        "Now let us average. Taking the mean over the time dimension gives a map of the average temperature at each grid cell, which is a nice first look at a region.",
+        "Averaging over latitude and longitude gives a single time series for the box, but here we must be careful, because grid cells are not all the same size.",
+        "On a regular latitude and longitude grid, the cells get narrower as you move towards the poles. A cell's area is roughly proportional to the cosine of its latitude.",
+        "So we weight each cell by the cosine of its latitude before averaging. Near Mauritius the effect is small, but for large regions or global means it matters a great deal.",
+        "xarray makes this easy with its weighted method, and it skips missing land cells for us, so the island itself does not drag the average down."
+       ]
+      },
+      {
+       "title": "Checking what you selected",
+       "slide": {
+        "kind": "code",
+        "heading": "Quick checks and annual means",
+        "lang": "python",
+        "code": "print(mru.lat.values, mru.lon.values)   # which cell?\nmru.plot()                              # quick look\n\nannual = mru.resample(time='YS').mean()\nannual.plot(marker='o')",
+        "points": [
+         "Always print the coordinates you actually received",
+         "resample turns monthly data into annual means"
+        ]
+       },
+       "narration": [
+        "Before you trust any result, check what you actually selected. Print the latitude and longitude of the cell that came back, and make a quick plot.",
+        "If the selected cell is over land, you will see a flat line of missing values, and you should move your point slightly offshore or use a small box instead.",
+        "A quick plot also reveals obvious problems, such as a sudden jump that might come from a change of satellite or a value stored in the wrong units.",
+        "Once you are happy, you can change the time resolution. The resample method with the code for year start averages each calendar year, turning twelve values a year into one.",
+        "Annual means are smoother than monthly values and are a good first step when you want to see whether the sea around Mauritius has warmed over several decades."
+       ]
+      },
+      {
+       "title": "Recap",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Key points",
+        "points": [
+         "Open with xr.open_dataset and inspect dims and units",
+         "Use sel with labels, slices and method='nearest'",
+         "Watch the direction of the latitude coordinate",
+         "Weight regional means by the cosine of latitude"
+        ]
+       },
+       "narration": [
+        "To recap, we open a file, check its dimensions and units, and select points, regions and periods by label using sel.",
+        "Above all, check what you selected before you analyse it, because a silent mistake in selection spoils everything that follows.",
+        "When we average over an area we weight each cell by the cosine of latitude, and in the next reading we will turn these averages into climatologies and anomalies."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "c5-L5",
+     "type": "reading",
+     "title": "Climatologies, Baselines and Anomalies",
+     "dur": 9,
+     "objectives": [
+      "Define a climatology and a baseline period",
+      "Calculate an SST anomaly by hand and in xarray",
+      "Explain how the choice of baseline changes anomaly values",
+      "Avoid common mistakes when removing the seasonal cycle"
+     ],
+     "chips": [
+      "Why is 1991 to 2020 used as the baseline?",
+      "What does groupby time.month actually do?",
+      "Can an anomaly be positive in winter?"
+     ],
+     "body": "Raw sea-surface temperature (SST) near Mauritius swings by around 5 °C between August and March (illustrative). Climate change, by contrast, has added warming that is a fraction of a degree per decade. To see that smaller signal, and to spot unusually warm months that matter to corals, we compare each value with what is *normal*. That comparison is an **anomaly**, and \"normal\" is a **climatology** calculated over a **baseline** period.\n\n## Climatology: defining normal\n\nA climatology is the long-term average for each part of the seasonal cycle. With monthly data it is twelve maps: the average of all Januaries, the average of all Februaries, and so on. With daily data it is usually 365 or 366 maps, one per day of the year, often smoothed so that a single odd year does not create a spike.\n\nThe **baseline period** is the set of years used to compute the climatology. The World Meteorological Organization recommends 30-year periods, and many products now use **1991–2020**; older studies often use 1961–1990 or 1971–2000. The choice matters:\n\n- A later baseline already contains recent warming, so anomalies relative to 1991–2020 are *smaller* than anomalies relative to 1961–1990 for the same month.\n- Comparisons between two figures or two papers are only valid if they use the same baseline, or if you convert between them.\n\nAlways write the baseline on your figures and in your reports.\n\n## Anomaly: departure from normal\n\nAn anomaly is simply\n\n> **anomaly = observed value − climatological mean for the same time of year**\n\nA positive anomaly means warmer than normal for that month, and a negative anomaly means cooler. Because each month is compared with its own normal, the seasonal cycle disappears, and a warm July can show up just as clearly as a warm March.\n\nAnomalies have a second advantage: they vary much more smoothly in space than raw temperatures. A +0.8 °C anomaly is often spread over hundreds of kilometres, which makes averaging regions and comparing places far easier.\n\n## Worked example: an illustrative lagoon-adjacent cell\n\nImagine the grid cell offshore from Blue Bay has the following illustrative 1991–2020 monthly climatology and observed values for early 2024:\n\n| Month | Climatology (°C) | Observed 2024 (°C) | Anomaly (°C) |\n|---|---|---|---|\n| January | 27.4 | 28.1 | +0.7 |\n| February | 27.9 | 28.9 | +1.0 |\n| March | 28.0 | 29.2 | +1.2 |\n| April | 27.3 | 27.6 | +0.3 |\n\nTwo things stand out. First, the raw values peak in March, as the seasonal cycle predicts, so a raw plot would tell us little. Second, the anomalies show that February and March were around a degree warmer than normal. For corals already living near their summer maximum, that is a serious warning sign, which we will quantify in Module 4.\n\nNote what the anomaly does **not** say: 29.2 °C in March is not dangerous merely because it is high, but because it is 1.2 °C above what the reef usually experiences in its warmest month.\n\n## Doing it in xarray\n\nxarray's `groupby` makes climatologies and anomalies short and readable.\n\n```python\nimport xarray as xr\nds = xr.open_dataset(\"sst_swio_monthly.nc\")\nsst = ds[\"sst\"]\n\nbase = sst.sel(time=slice(\"1991-01\", \"2020-12\"))\nclim = base.groupby(\"time.month\").mean(\"time\")      # 12 maps\nanom = sst.groupby(\"time.month\") - clim             # same shape as sst\n\nmru = anom.sel(lat=-20.2, lon=57.5, method=\"nearest\")\nprint(mru.sel(time=\"2024-03\").values)\n```\n\nThe line `sst.groupby(\"time.month\") - clim` matches every January in the full record with the January climatology, every February with the February climatology, and so on. The result has exactly the same dimensions as the original data.\n\nFor a regional anomaly, compute the anomaly first and then take an area-weighted mean over your box, weighting by the cosine of latitude, as shown in the lecture. Averaging raw temperatures over a box and then subtracting a box climatology gives the same answer only if the same cells are present at every time step, so the anomaly-first approach is safer when there are gaps.\n\n## Common pitfalls\n\n- **Mixing baselines.** Comparing an anomaly from one source (1991–2020) with another (1961–1990) can create a false difference of several tenths of a degree.\n- **Too short a baseline.** A ten-year baseline is strongly influenced by individual warm or cool years such as an El Niño.\n- **Forgetting units.** If the data are in Kelvin, the anomaly is still correct in size (a difference of 1 K equals 1 °C), but the climatology values will look strange.\n- **Subtracting the annual mean.** Subtracting one single average from every month leaves the seasonal cycle in place; you must subtract the mean for the *same month*.\n\n## Key takeaways\n\n- A climatology is the long-term mean for each month (or day) of the year over a stated baseline period.\n- An anomaly is the observed value minus the climatology for the same time of year.\n- Anomalies remove the seasonal cycle and reveal unusually warm or cool periods and long-term change.\n- The baseline period changes the size of anomalies, so always state it and compare like with like.\n- In xarray, `groupby(\"time.month\")` builds the climatology and subtracts it month by month.\n\n## Check your understanding\n\n1. The March climatology for a cell is 28.0 °C and March 2024 measured 29.2 °C. What is the anomaly?\n*Answer:* +1.2 °C, meaning March 2024 was 1.2 °C warmer than the March average for the baseline period.\n2. Why do anomalies relative to 1991–2020 tend to be smaller than those relative to 1961–1990?\n*Answer:* The 1991–2020 baseline already includes some of the recent warming, so its \"normal\" is warmer and recent values sit less far above it.\n3. A student subtracts the overall 30-year mean from every month. What is wrong with this?\n*Answer:* The seasonal cycle remains in the result; each month must be compared with the climatology for the same calendar month.\n"
+    },
+    {
+     "id": "c5-L6",
+     "type": "quiz",
+     "title": "Quiz 1: Gridded Data, Selection and Anomalies",
+     "dur": 15,
+     "quiz": {
+      "time": 15,
+      "weight": 5,
+      "questions": [
+       {
+        "q": "In a gridded SST dataset with dimensions (time, lat, lon), what does a single value represent?",
+        "o": [
+         "The temperature measured by the nearest buoy",
+         "The average SST over one grid cell at one time step",
+         "The maximum SST ever recorded in that cell",
+         "The SST at the exact centre of the island"
+        ],
+        "a": 1,
+        "ex": "Gridded products blend many observations into an estimate of the average over each cell for each time step."
+       },
+       {
+        "q": "You run sst.sel(lat=-20.2, lon=57.5) on a 0.5° grid and get a KeyError. What is the best fix?",
+        "o": [
+         "Use isel with the same numbers",
+         "Convert the data to Kelvin",
+         "Add method='nearest' so xarray returns the closest grid cell",
+         "Round the coordinates to whole degrees"
+        ],
+        "a": 2,
+        "ex": "The exact coordinates are not on the grid, and method='nearest' selects the closest available cell."
+       },
+       {
+        "q": "sst.sel(lat=slice(-22, -18)) returns an empty array, but the region is definitely in the file. What is the most likely reason?",
+        "o": [
+         "Latitude is stored from north to south, so the slice must be reversed",
+         "The file uses Kelvin",
+         "Slices only work on the time dimension",
+         "The region is entirely land"
+        ],
+        "a": 0,
+        "ex": "If the latitude coordinate is descending, a south-to-north slice selects nothing and must be written slice(-18, -22)."
+       },
+       {
+        "q": "Why are grid cells weighted by the cosine of latitude when computing a regional mean?",
+        "o": [
+         "To convert Kelvin to Celsius",
+         "Because cells cover less area towards the poles",
+         "To remove the seasonal cycle",
+         "Because satellites see higher latitudes less often"
+        ],
+        "a": 1,
+        "ex": "On a regular latitude-longitude grid, cell area is roughly proportional to the cosine of latitude."
+       },
+       {
+        "q": "The March climatology (1991–2020) for a cell is 28.0 °C and March 2024 measured 29.2 °C. What is the anomaly?",
+        "o": [
+         "−1.2 °C",
+         "+29.2 °C",
+         "+0.2 °C",
+         "+1.2 °C"
+        ],
+        "a": 3,
+        "ex": "Anomaly = observed − climatology for the same month = 29.2 − 28.0 = +1.2 °C."
+       },
+       {
+        "q": "A student subtracts a single 30-year overall mean from every month of data. What will the result still contain?",
+        "o": [
+         "The seasonal cycle",
+         "No information at all",
+         "Only the long-term trend",
+         "Only land values"
+        ],
+        "a": 0,
+        "ex": "Each month must be compared with its own monthly climatology; one overall mean leaves the seasonal cycle in place."
+       },
+       {
+        "q": "Why might anomalies computed against a 1991–2020 baseline be smaller than against 1961–1990?",
+        "o": [
+         "Older baselines used less accurate satellites only",
+         "The later baseline already includes some recent warming",
+         "Anomalies always shrink over time",
+         "1991–2020 uses fewer months"
+        ],
+        "a": 1,
+        "ex": "A warmer baseline raises 'normal', so recent values sit less far above it."
+       },
+       {
+        "q": "Several cells inside your box around Mauritius are NaN. How should they be handled when computing the box mean?",
+        "o": [
+         "Replace them with 0 °C",
+         "Replace them with the global average",
+         "Leave them out of the average, as xarray does by default",
+         "Delete the whole time step"
+        ],
+        "a": 2,
+        "ex": "NaN marks land or missing data, which should be excluded rather than counted as a temperature."
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "m3",
+   "title": "Module 3 · Anomalies, Variability and Honest Figures",
+   "items": [
+    {
+     "id": "c5-L7",
+     "type": "video",
+     "title": "Plotting SST Anomaly Maps and Time Series",
+     "dur": 5,
+     "objectives": [
+      "Plot an SST anomaly time series with a zero reference line",
+      "Draw an anomaly map with a diverging, zero-centred colour scale",
+      "Add a smoothed curve and a linear trend to a time series",
+      "Label units and baselines so a figure can stand alone"
+     ],
+     "chips": [
+      "Why should the colour scale be centred on zero?",
+      "What does a rolling mean do to my time series?",
+      "How do I add a trend line in Python?"
+     ],
+     "chapters": [
+      {
+       "title": "Why plot anomalies",
+       "slide": {
+        "kind": "compare",
+        "heading": "Raw SST versus anomaly",
+        "columns": [
+         {
+          "title": "Raw temperature",
+          "points": [
+           "Dominated by the seasonal cycle",
+           "Trend hard to see",
+           "Values around 23 to 28 °C"
+          ]
+         },
+         {
+          "title": "Anomaly",
+          "points": [
+           "Seasonal cycle removed",
+           "Unusual warmth stands out",
+           "Values around minus 1 to plus 1.5 °C"
+          ]
+         }
+        ]
+       },
+       "narration": [
+        "Last week we calculated anomalies, the difference between each month and the long-term average for that calendar month. Today we learn to plot them well.",
+        "If you plot raw temperature for Mauritius, you see a beautiful wave rising every summer and falling every winter, and very little else.",
+        "Once the seasonal cycle is removed, the anomaly series hovers around zero, and the months that were unusually warm or cool jump out immediately.",
+        "That is exactly what a reef manager needs to see, because corals respond to water that is warmer than they are used to, not simply to water that is warm.",
+        "In other words, an anomaly lets us compare a warm July with a warm March on the same footing, because each is measured against its own normal."
+       ]
+      },
+      {
+       "title": "A clear anomaly time series",
+       "slide": {
+        "kind": "code",
+        "heading": "Time series with smoothing",
+        "lang": "python",
+        "code": "import matplotlib.pyplot as plt\n\nfig, ax = plt.subplots(figsize=(9, 3.5))\nanom_box.plot(ax=ax, lw=0.8, color='grey', label='monthly')\nanom_box.rolling(time=12, center=True).mean().plot(\n    ax=ax, lw=2, color='firebrick', label='12-month mean')\nax.axhline(0, color='black', lw=0.8)\nax.set_ylabel('SST anomaly (°C)')\nax.set_title('Box around Mauritius, vs 1991–2020 baseline')\nax.legend()",
+        "points": [
+         "A zero line shows what normal means",
+         "Say which baseline the anomaly is measured against"
+        ]
+       },
+       "narration": [
+        "Let us start with a time series of the regional average anomaly for our box around Mauritius.",
+        "The monthly values are quite jumpy, so I plot them as a thin grey line and add a thick red line showing a twelve-month rolling mean, centred on each month.",
+        "The rolling mean smooths out short wiggles and lets the slower changes, such as several warm years in a row, become visible.",
+        "Two small details make a big difference. Draw a horizontal line at zero, so the eye knows what normal looks like, and write the baseline period in the title or the axis label.",
+        "An anomaly of plus one degree means nothing unless the reader knows what it is measured against, so never leave the baseline out.",
+        "Keeping the monthly values visible in grey matters, because it shows the reader how much the smoothed line has simplified."
+       ]
+      },
+      {
+       "title": "Mapping anomalies",
+       "slide": {
+        "kind": "code",
+        "heading": "Anomaly map for one month",
+        "lang": "python",
+        "code": "m = anom.sel(time='2024-03')\nm.plot(cmap='RdBu_r', vmin=-2, vmax=2,\n       cbar_kwargs={'label': 'SST anomaly (°C)'})\nplt.scatter(57.5, -20.2, marker='*', color='k')\nplt.title('SST anomaly, March 2024 (illustrative)')",
+        "points": [
+         "Diverging colour map: blue cool, red warm, white normal",
+         "Symmetric limits keep zero in the middle"
+        ],
+        "note": {
+         "tone": "warn",
+         "text": "Never use a rainbow map for anomalies; it hides where zero is."
+        }
+       },
+       "narration": [
+        "A map answers a different question: where is the water unusually warm this month?",
+        "For anomalies we use a diverging colour map, here red and blue, where white sits exactly at zero, blue shows cooler than normal and red shows warmer than normal.",
+        "The crucial step is to set symmetric limits, for example minus two to plus two degrees, so that zero really does fall in the middle of the colour bar.",
+        "If you let the software choose the limits, a mostly warm month might put pale blue on water that is actually above average, and your reader will be misled.",
+        "I also like to mark Mauritius with a small star, so the viewer can find the island instantly among all that blue water."
+       ]
+      },
+      {
+       "title": "Trends and honest reading",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Adding a trend",
+        "points": [
+         "Fit a straight line with polyfit on the time coordinate",
+         "Express the slope per decade, e.g. °C per decade",
+         "A trend over a short record is uncertain",
+         "Natural variability can mimic or mask a trend"
+        ]
+       },
+       "narration": [
+        "Finally, you may want to add a linear trend. xarray's polyfit method fits a straight line through the anomalies, and we usually express the slope in degrees per decade.",
+        "Be cautious with short records. Ten years of data can show a steep slope simply because a warm event happened near the end.",
+        "Natural swings in the Indian Ocean, which we will meet in the next lecture, can make a decade look warmer or cooler than the long-term trend.",
+        "A good habit is to report the trend together with the period it covers and to look at the smoothed curve before trusting any single number.",
+        "In practice I also mark the colour bar with a clear label, such as sea-surface temperature anomaly in degrees Celsius relative to the nineteen ninety-one to twenty twenty baseline."
+       ]
+      },
+      {
+       "title": "Is this year unusual for the season?",
+       "slide": {
+        "kind": "code",
+        "heading": "This year against the climatology",
+        "lang": "python",
+        "code": "clim_m = clim.sel(lat=-20.2, lon=57.5, method='nearest')\nthis = mru.sel(time='2024').groupby('time.month').mean()\n\nfig, ax = plt.subplots()\nclim_m.plot(ax=ax, color='k', label='1991–2020 mean')\nthis.plot(ax=ax, color='firebrick', label='2024')\nax.set_ylabel('SST (°C)')\nax.legend()",
+        "points": [
+         "Overlay one year on the average seasonal cycle",
+         "Gaps between the lines are the anomalies"
+        ]
+       },
+       "narration": [
+        "Sometimes the clearest figure keeps the seasonal cycle on purpose. A seasonal comparison plot shows the average year as a black line, from January to December.",
+        "On top of it we draw the current year in red. Wherever the red line rises above the black one, the sea is warmer than normal for that month.",
+        "This kind of plot is very intuitive for non-specialists, because it shows real temperatures they can relate to, while still revealing the anomaly as the gap between the two lines.",
+        "You can make it richer by shading the range between the coolest and warmest year in the baseline, so viewers can see whether this year has broken out of the usual range.",
+        "For a reef manager in late summer, a red line climbing above that shaded band is exactly the kind of early signal that should prompt closer monitoring of the lagoon."
+       ]
+      },
+      {
+       "title": "Recap",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Key points",
+        "points": [
+         "Plot anomalies to remove the seasonal cycle",
+         "Add a zero line and state the baseline",
+         "Use a diverging colour map with symmetric limits",
+         "Treat trends from short records with caution"
+        ]
+       },
+       "narration": [
+        "To recap, good anomaly figures show a zero line, name their baseline and use a diverging colour scale centred on zero.",
+        "And remember that a seasonal comparison plot can be the most intuitive choice when your audience is not made up of scientists.",
+        "Smoothing helps the eye, and trends need a stated period and healthy caution, which brings us neatly to the natural variability of the Indian Ocean."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "c5-L8",
+     "type": "video",
+     "title": "Indian Ocean Variability and Marine Heatwaves",
+     "dur": 5,
+     "objectives": [
+      "Describe the Indian Ocean Dipole and how its index is calculated",
+      "Explain how El Niño can warm the Indian Ocean months later",
+      "Define a marine heatwave using a percentile threshold",
+      "Separate natural variability from long-term warming in a time series"
+     ],
+     "chips": [
+      "What is the Indian Ocean Dipole?",
+      "Does El Niño affect Mauritius?",
+      "How is a marine heatwave different from a normal warm summer?"
+     ],
+     "chapters": [
+      {
+       "title": "The ocean is never still",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Sources of variability",
+        "points": [
+         "Seasonal cycle: summer to winter",
+         "Year-to-year modes: Indian Ocean Dipole, El Niño",
+         "Short extremes: marine heatwaves lasting weeks",
+         "Long-term warming underneath it all"
+        ]
+       },
+       "narration": [
+        "When you look at an anomaly time series, you see bumps and dips that last for months or years. These are not noise in the data; they are the climate system breathing.",
+        "Today we meet the main patterns that shape the Indian Ocean around Mauritius, so that you can recognise them in your own plots.",
+        "We will look at the Indian Ocean Dipole, at the remote influence of El Niño in the Pacific, and at short, intense events called marine heatwaves.",
+        "All of these ride on top of a slow warming trend, and learning to tell them apart is a core skill of a climate data scientist.",
+        "If we only looked at the long-term trend, we would miss the very events that cause the most damage to reefs, so we need to understand both."
+       ]
+      },
+      {
+       "title": "The Indian Ocean Dipole",
+       "slide": {
+        "kind": "formula",
+        "heading": "Dipole Mode Index",
+        "formula": "DMI = SST anomaly (west box) − SST anomaly (east box)",
+        "points": [
+         "West box: 50–70°E, 10°S–10°N",
+         "East box: 90–110°E, 10°S–0°",
+         "Positive phase: west warmer than east"
+        ]
+       },
+       "narration": [
+        "The Indian Ocean Dipole is a see-saw in sea-surface temperature between the western and eastern tropical Indian Ocean.",
+        "We measure it with an index: the average anomaly in a western box near East Africa minus the average anomaly in an eastern box off Sumatra.",
+        "In a positive phase the west is warmer than usual and the east cooler, which tends to bring heavy rain to East Africa and drought to parts of Indonesia and Australia.",
+        "Notice that this index is built from exactly the skills you already have: selecting two boxes, computing area-weighted mean anomalies, and subtracting one from the other.",
+        "Dipole events usually develop in the southern winter and peak around September to November, then fade away.",
+        "For Mauritius, which lies south of both boxes, the Dipole's influence is indirect, but it shapes rainfall and winds across the whole basin."
+       ]
+      },
+      {
+       "title": "El Niño's long reach",
+       "slide": {
+        "kind": "steps",
+        "heading": "How El Niño warms the Indian Ocean",
+        "steps": [
+         {
+          "title": "Pacific warms",
+          "sub": "El Niño peaks around December"
+         },
+         {
+          "title": "Atmosphere shifts",
+          "sub": "Fewer clouds, weaker winds over the Indian Ocean"
+         },
+         {
+          "title": "More sunshine",
+          "sub": "Less wind mixing and evaporation"
+         },
+         {
+          "title": "Basin warms",
+          "sub": "Indian Ocean warm a few months later"
+         }
+        ]
+       },
+       "narration": [
+        "El Niño happens in the tropical Pacific, thousands of kilometres from Mauritius, yet its effects reach us.",
+        "During and after an El Niño, changes in the atmosphere bring clearer skies and lighter winds over much of the tropical Indian Ocean.",
+        "With more sunshine and less wind to mix and cool the surface, the whole basin tends to warm, typically a few months after El Niño peaks.",
+        "That delay is important. It means an El Niño at Christmas can raise the risk of unusually warm water around the Mascarene Islands in the following late summer, just when the lagoon is already at its warmest.",
+        "Remember that correlation is not the same as cause. A matching bump is a clue that we then test with physical reasoning and more data.",
+        "So when you see a warm late summer in your anomaly series, one of the first things to check is whether an El Niño occurred in the months before."
+       ]
+      },
+      {
+       "title": "Marine heatwaves",
+       "slide": {
+        "kind": "cards",
+        "heading": "A common marine heatwave definition",
+        "cards": [
+         {
+          "label": "Threshold",
+          "text": "Above the 90th percentile for that day of the year"
+         },
+         {
+          "label": "Duration",
+          "text": "Lasting at least five days in a row"
+         },
+         {
+          "label": "Intensity",
+          "text": "How far above the climatology at the peak"
+         },
+         {
+          "label": "Impact",
+          "text": "Bleaching, fish kills, seagrass loss"
+         }
+        ]
+       },
+       "narration": [
+        "A marine heatwave is a prolonged period of unusually warm water. A widely used definition says the temperature must exceed the ninetieth percentile for that day of the year for at least five consecutive days.",
+        "Using a percentile for each calendar day means a heatwave is judged against what is normal for that season, so a warm spell in winter can count too.",
+        "Scientists describe each event by its duration, its peak intensity and how much heat it accumulates over time.",
+        "For reefs, the summer heatwaves are the dangerous ones, because they push water that is already close to the corals' limit beyond it.",
+        "In our final module we will see how this idea of accumulated heat becomes the main early-warning tool for coral bleaching."
+       ]
+      },
+      {
+       "title": "Reading a real time series",
+       "slide": {
+        "kind": "steps",
+        "heading": "Attributing the bumps in a series",
+        "steps": [
+         {
+          "title": "Smooth",
+          "sub": "Apply a 12-month rolling mean"
+         },
+         {
+          "title": "Compare",
+          "sub": "Line up with the Dipole and El Niño indices"
+         },
+         {
+          "title": "Detect extremes",
+          "sub": "Flag days above the 90th percentile"
+         },
+         {
+          "title": "Separate trend",
+          "sub": "Fit a long-term line over decades"
+         }
+        ]
+       },
+       "narration": [
+        "Let us put these ideas together. Suppose you have an anomaly series for the box around Mauritius covering more than thirty years.",
+        "First, smooth it with a twelve-month rolling mean, so that individual months do not distract you from the slower swings.",
+        "Next, plot the Dipole index and an El Niño index beside it. If a warm bump in your series follows an El Niño by a few months, that is a strong clue about its cause.",
+        "Then switch to daily data and flag the days above the ninetieth percentile threshold. Clusters of five or more such days are your marine heatwaves.",
+        "Finally, fit a trend over the whole record. The trend tells you about long-term warming, while the bumps around it tell you about natural variability and extremes."
+       ]
+      },
+      {
+       "title": "Recap",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Key points",
+        "points": [
+         "The Dipole index is west minus east box anomaly",
+         "El Niño warms the Indian Ocean with a lag of months",
+         "Marine heatwaves use a percentile threshold and duration",
+         "All variability sits on top of long-term warming"
+        ]
+       },
+       "narration": [
+        "To recap, the Indian Ocean Dipole and El Niño produce year-to-year swings, and marine heatwaves are shorter, intense extremes defined by a percentile threshold.",
+        "As the background warms, the same natural swings push the water past dangerous thresholds more often, which is why both matter.",
+        "Reading a time series well means asking which of these processes, or the long-term warming beneath them, explains each bump you see."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "c5-L9",
+     "type": "reading",
+     "title": "Designing Honest Climate Figures",
+     "dur": 9,
+     "objectives": [
+      "Match a figure type to a scientific question",
+      "Choose sequential or diverging colour maps appropriately",
+      "Label units, baselines and regions so figures stand alone",
+      "Recognise misleading axis ranges and cherry-picked periods"
+     ],
+     "chips": [
+      "Why is the rainbow colour map a bad idea?",
+      "How do I centre my colour bar on zero?",
+      "What should a figure caption include?"
+     ],
+     "body": "A climate figure is often the only part of a report that people actually look at. A reef manager at a marine park, a journalist in Port Louis or a minister's adviser will glance at your plot for a few seconds and draw a conclusion. This reading sets out how to make sea-surface temperature (SST) figures that are clear, honest and hard to misread.\n\n## Choose the right figure for the question\n\nEach common figure type answers a different question.\n\n| Question | Best figure | Watch out for |\n|---|---|---|\n| How has this place changed over time? | Time series of anomalies | Missing baseline, unlabelled smoothing |\n| Where is it unusually warm right now? | Anomaly map | Colour scale not centred on zero |\n| Is this year unusual for the season? | Seasonal cycle with this year overlaid | Comparing different baselines |\n| How do two variables relate? | Scatter plot | Implying causation from correlation |\n\nStart by writing the question as a sentence, then pick the figure. If you cannot write the question, the figure is not ready.\n\n## Colour: diverging versus sequential\n\n**Sequential** colour maps (light to dark in one hue, such as `viridis` or `Blues`) suit quantities that run from low to high, like raw SST or Degree Heating Weeks. **Diverging** colour maps (two hues meeting at a pale midpoint, such as `RdBu_r`) suit quantities with a meaningful centre, like anomalies, where zero means normal.\n\nFor anomaly maps, two rules matter most:\n\n1. Use a diverging map with the pale colour at zero.\n2. Set **symmetric limits** such as `vmin=-2, vmax=2`, so zero sits in the centre of the colour bar.\n\nAvoid rainbow (`jet`) colour maps. They create false boundaries where the hue changes abruptly, they hide the location of zero, and they are hard to read for people with colour-vision deficiency. Perceptually uniform maps such as `viridis` or `cividis`, and diverging maps such as `RdBu`, are much safer.\n\n## Axes, labels and context\n\nA figure must stand alone. Before you share it, check that it shows:\n\n- **Units** on every axis and colour bar, for example \"SST anomaly (°C)\".\n- **The baseline period** for any anomaly, for example \"relative to 1991–2020\".\n- **The region or point**, for example \"box 22–18° S, 55–60° E\" or a star marking Mauritius.\n- **The data source and resolution**, in a caption or small note.\n- **What any smoothing means**, for example \"thick line: 12-month centred rolling mean\".\n\nY-axis limits deserve thought. For anomaly time series, include zero and keep the range roughly symmetric. Stretching a 0.3 °C change to fill the entire axis can make it look catastrophic; squashing a 1.5 °C change into a tiny band can hide it. Neither is honest.\n\n## Worked example: improving a weak figure\n\nA student produces a plot titled \"SST Mauritius\" showing monthly raw temperature from 1991 to 2024 in a rainbow colour, with no axis label and a y-axis from 22.5 to 29.5. The seasonal cycle fills the frame and nothing else can be seen. Here is how we improve it step by step.\n\n```python\nfig, ax = plt.subplots(figsize=(9, 3.5))\nmru_anom.plot(ax=ax, color=\"0.6\", lw=0.7, label=\"monthly\")\nmru_anom.rolling(time=12, center=True).mean().plot(\n    ax=ax, color=\"firebrick\", lw=2, label=\"12-month mean\")\nax.axhline(0, color=\"k\", lw=0.8)\nax.set_ylim(-1.5, 1.5)\nax.set_ylabel(\"SST anomaly (°C, vs 1991–2020)\")\nax.set_title(\"Grid cell nearest Mauritius (20° S, 57.5° E) – illustrative data\")\nax.legend(loc=\"upper left\")\n```\n\nThe changes are: plot anomalies instead of raw values, so the seasonal cycle disappears; add a zero line; add a smoothed curve while keeping the monthly data visible in grey; give symmetric y-limits; label units and baseline; and name the location. The same data now tells a clear story about warm and cool years and the slow upward drift.\n\n> **Case box: one figure, two stories.** Suppose a hotel group's brochure shows only 2014–2016 for the lagoon and says \"no warming\". A scientist shows 1991–2024 and says \"clear warming\". Both may be plotting correct numbers. Short windows can be dominated by natural variability, so honest figures state their period and avoid cherry-picking start and end dates.\n\n## Uncertainty and limitations\n\nEvery gridded product has uncertainty, which is larger where observations are sparse and in earlier decades. Where the provider gives an uncertainty field, you can shade a band around the time series with `ax.fill_between`. Where it does not, say so in the caption. Also note the spatial scale: a 0.25° grid value represents offshore water, not the temperature over a particular reef flat.\n\nFinally, describe what you see in plain words beneath the figure: \"Anomalies were above +1 °C from February to April 2024, the warmest late-summer period in this record.\" A one-sentence reading guide prevents most misinterpretations.\n\n## Key takeaways\n\n- Decide the question first, then choose a time series, map, seasonal plot or scatter plot.\n- Use diverging colour maps with symmetric limits for anomalies and sequential maps for one-directional quantities.\n- Avoid rainbow colour maps; prefer perceptually uniform, colour-blind-friendly options.\n- Label units, baseline, region, source and smoothing so the figure stands alone.\n- Choose axis ranges and time windows honestly, and add a plain-language caption.\n\n## Check your understanding\n\n1. Which colour map would you choose for a map of Degree Heating Weeks, and why?\n*Answer:* A sequential map, because Degree Heating Weeks run from zero upwards and have no meaningful midpoint.\n2. An anomaly map uses `vmin=-0.5, vmax=2.5`. What problem does this cause?\n*Answer:* Zero is not at the centre of the diverging scale, so near-normal water appears coloured and readers may misjudge which areas are warm or cool.\n3. Why should a time series of anomalies always state its baseline period?\n*Answer:* The size of each anomaly depends on the baseline, so without it readers cannot interpret or compare the values.\n"
+    }
+   ]
+  },
+  {
+   "id": "m4",
+   "title": "Module 4 · Coral Reefs under Heat Stress",
+   "items": [
+    {
+     "id": "c5-L10",
+     "type": "video",
+     "title": "Coral Bleaching: Biology and Heat-Stress Indicators",
+     "dur": 5,
+     "objectives": [
+      "Explain the coral and algae symbiosis and why heat breaks it",
+      "Define the maximum monthly mean, HotSpots and the bleaching threshold",
+      "Calculate and interpret Degree Heating Weeks",
+      "Relate alert levels to likely ecological impacts"
+     ],
+     "chips": [
+      "Why do corals turn white?",
+      "What exactly is a Degree Heating Week?",
+      "Can a bleached coral recover?"
+     ],
+     "chapters": [
+      {
+       "title": "A partnership under pressure",
+       "slide": {
+        "kind": "bullets",
+        "heading": "The coral symbiosis",
+        "points": [
+         "Coral polyps host microscopic algae in their tissue",
+         "The algae photosynthesise and share sugars with the coral",
+         "Heat and bright light make the algae produce harmful compounds",
+         "The coral expels them and its white skeleton shows through"
+        ]
+       },
+       "narration": [
+        "A reef-building coral is a partnership. The animal, a tiny polyp, lives together with microscopic algae inside its own tissue.",
+        "The algae photosynthesise in the bright tropical sunlight and pass most of the sugars they make to the coral. They also give healthy corals much of their colour.",
+        "When the water stays too warm for too long, especially under strong sunlight, the algae's photosynthesis goes wrong and starts producing damaging chemicals.",
+        "The coral responds by expelling the algae. Without them its tissue becomes transparent and the white limestone skeleton shows through. That is bleaching.",
+        "A bleached coral is not yet dead, but it is starving. If the heat eases within a few weeks it can regain its algae; if not, it may die and be overgrown by seaweed.",
+        "Bleaching can also be triggered by unusually cold water or by fresh water after heavy rain, but heat stress is by far the most important cause worldwide."
+       ]
+      },
+      {
+       "title": "Defining normal for a reef",
+       "slide": {
+        "kind": "formula",
+        "heading": "Bleaching threshold",
+        "formula": "Threshold = MMM + 1 °C",
+        "points": [
+         "MMM: maximum monthly mean, the climatology of the warmest month",
+         "HotSpot = SST − MMM, counted only when positive",
+         "Example (illustrative): MMM 28.0 °C, threshold 29.0 °C"
+        ]
+       },
+       "narration": [
+        "To build an early-warning system, we first need to know what is normal for a particular reef.",
+        "Satellite monitoring programmes use the maximum monthly mean, the long-term average temperature of the warmest month of the year at that location.",
+        "For a Mauritian lagoon, in round illustrative numbers, the warmest month might average about twenty-eight degrees, so that would be our maximum monthly mean.",
+        "The amount by which today's temperature exceeds that value is called a HotSpot. Corals start to become stressed once the HotSpot reaches one degree, so the bleaching threshold is the maximum monthly mean plus one degree.",
+        "Because the maximum monthly mean is specific to each location, a reef that normally lives at twenty-seven degrees will have a lower threshold than one that normally reaches twenty-nine."
+       ]
+      },
+      {
+       "title": "Degree Heating Weeks",
+       "slide": {
+        "kind": "code",
+        "heading": "Computing DHW from daily SST",
+        "lang": "python",
+        "code": "hotspot = (sst_daily - mmm).clip(min=0)\nstress = hotspot.where(hotspot >= 1, 0)\n\n# sum over the last 12 weeks (84 days), in °C-weeks\ndhw = stress.rolling(time=84, min_periods=84).sum() / 7\n\ndhw.sel(lat=-20.4, lon=57.7, method='nearest').plot()",
+        "points": [
+         "Only HotSpots of 1 °C or more are counted",
+         "Units are degree Celsius weeks"
+        ]
+       },
+       "narration": [
+        "Corals are damaged not by a single hot day but by heat that builds up over weeks. Degree Heating Weeks capture that accumulation.",
+        "We add up all HotSpots of at least one degree over the previous twelve weeks. One week spent one degree above the maximum monthly mean contributes one degree heating week.",
+        "So four weeks at one degree above normal gives four degree heating weeks, and so does two weeks at two degrees above normal. Intensity and duration trade off against each other.",
+        "With daily data, we sum the daily HotSpots over the last eighty-four days and divide by seven to convert days into weeks, exactly as you see in the code on the slide.",
+        "This also means a short, very intense spike and a long, moderate warm spell can carry the same risk, which a simple maximum temperature would never tell you."
+       ]
+      },
+      {
+       "title": "From numbers to alerts",
+       "slide": {
+        "kind": "stat",
+        "heading": "Heat-stress alert levels",
+        "stats": [
+         {
+          "value": "0 to 4",
+          "label": "Degree Heating Weeks: bleaching watch or warning"
+         },
+         {
+          "value": "4 or more",
+          "label": "Significant bleaching likely"
+         },
+         {
+          "value": "8 or more",
+          "label": "Severe bleaching and significant mortality likely"
+         }
+        ],
+        "note": {
+         "tone": "info",
+         "text": "Thresholds follow widely used satellite monitoring practice; local reefs vary."
+        }
+       },
+       "narration": [
+        "Monitoring programmes translate Degree Heating Weeks into alert levels that reef managers can act on.",
+        "Below four degree heating weeks we are on watch or warning. At four or more, significant bleaching is likely, and at eight or more, severe bleaching with widespread coral death becomes likely.",
+        "These numbers are guides, not laws of nature. Corals that have survived earlier heatwaves, or those in naturally variable shallow lagoons, may tolerate a little more.",
+        "That is why satellite indicators must always be checked against reef surveys in the water, which is precisely what you will do in your assignment.",
+        "Field teams record the percentage of colonies that are pale, bleached or recently dead, and those observations are what give the satellite numbers their meaning."
+       ]
+      },
+      {
+       "title": "Recovery, resilience and management",
+       "slide": {
+        "kind": "bullets",
+        "heading": "What can be done locally?",
+        "points": [
+         "Reduce sediment and nutrient run-off from land",
+         "Protect grazing fish that keep seaweed in check",
+         "Limit physical damage from anchors and trampling",
+         "Use coral nurseries and restoration with care"
+        ]
+       },
+       "narration": [
+        "Global warming can only be tackled globally, but local action still makes a real difference to how well reefs survive and recover from bleaching.",
+        "Corals recover best in clean water. Reducing sediment and fertiliser run-off from land, for example from construction sites and agricultural fields, helps them regain their algae.",
+        "Grazing fish such as parrotfish keep seaweed under control, so protecting them in marine parks gives young corals space to settle after a bleaching event.",
+        "Simple measures matter too, such as mooring buoys that stop boats dropping anchors on the reef, and guidance for snorkellers not to stand on corals.",
+        "Coral nurseries and restoration projects can help, but they work best alongside these protections and are always guided by monitoring data like the indicators we have just learned."
+       ]
+      },
+      {
+       "title": "Recap",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Key points",
+        "points": [
+         "Bleaching is the loss of symbiotic algae under heat stress",
+         "Threshold = maximum monthly mean + 1 °C",
+         "DHW sums HotSpots of 1 °C or more over 12 weeks",
+         "4 DHW: significant bleaching likely; 8 DHW: severe"
+        ]
+       },
+       "narration": [
+        "To recap, bleaching happens when prolonged heat breaks the partnership between coral and algae, and we track that heat with HotSpots above the maximum monthly mean.",
+        "Finally, satellite indicators are most powerful when they guide local action and are checked against what divers see in the water.",
+        "Degree Heating Weeks accumulate those HotSpots over twelve weeks, and values of four and eight mark the thresholds for significant and severe bleaching."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "c5-L11",
+     "type": "reading",
+     "title": "Degree Heating Weeks in Practice: A Lagoon Case Study",
+     "dur": 9,
+     "objectives": [
+      "Work through a Degree Heating Week calculation step by step",
+      "Compute DHW from daily SST with xarray",
+      "Explain why DHW stays high after the water cools",
+      "Weigh satellite indicators against field survey evidence"
+     ],
+     "chips": [
+      "Why do only HotSpots of 1 degree or more count?",
+      "Why is DHW still high after the sea cools down?",
+      "How do field surveys confirm bleaching?"
+     ],
+     "body": "Degree Heating Weeks (DHW) are the most widely used satellite indicator of coral bleaching risk. In the lecture you saw how they are defined. This reading works through a complete, illustrative example for a Mauritian lagoon, shows how to compute the indicator in Python, and discusses how to interpret it alongside what divers and reef surveyors see in the water.\n\n## Recap of the building blocks\n\nFour quantities make up the method used by satellite reef-monitoring programmes:\n\n1. **Maximum monthly mean (MMM).** The long-term average temperature of the warmest month at a location, computed from a baseline climatology. It represents the upper end of what the local corals normally experience.\n2. **HotSpot.** The amount by which today's SST exceeds the MMM: `HotSpot = SST − MMM`, set to zero when negative.\n3. **Bleaching threshold.** MMM + 1 °C. Only HotSpots of at least 1 °C are considered stressful.\n4. **Degree Heating Weeks.** The sum of daily HotSpots of 1 °C or more over the previous 12 weeks (84 days), divided by 7. Units are °C-weeks.\n\nAlert levels commonly used with DHW are: below 4 °C-weeks, watch or warning; 4 or more, significant bleaching likely; 8 or more, severe bleaching and significant mortality likely.\n\n## Worked example: an illustrative summer in a south-east lagoon\n\nAssume the offshore grid cell near a south-east Mauritian lagoon has an MMM of **28.0 °C**, giving a bleaching threshold of **29.0 °C**. The table shows illustrative weekly-average SST for part of a hot summer.\n\n| Week | Weekly SST (°C) | HotSpot (°C) | Counts? | Running DHW (°C-weeks) |\n|---|---|---|---|---|\n| 1 | 28.6 | 0.6 | No | 0.0 |\n| 2 | 29.1 | 1.1 | Yes | 1.1 |\n| 3 | 29.4 | 1.4 | Yes | 2.5 |\n| 4 | 29.6 | 1.6 | Yes | 4.1 |\n| 5 | 29.5 | 1.5 | Yes | 5.6 |\n| 6 | 29.0 | 1.0 | Yes | 6.6 |\n| 7 | 28.7 | 0.7 | No | 6.6 |\n\nReading the table:\n\n- In week 1 the water is above the MMM but by less than 1 °C, so nothing accumulates. This is a **watch** situation.\n- From week 2 onwards each week above the threshold adds its full HotSpot to the total. By week 4, DHW passes 4: **significant bleaching is likely**.\n- In week 7 the HotSpot drops below 1 °C, so DHW stops rising, but it does **not** fall back to zero. It only declines as the hot weeks drop out of the 12-week window, about three months later.\n\nThat last point is important. DHW is a memory of recent heat. A reef can still be bleaching, or dying, weeks after the water has started to cool.\n\n## Computing DHW in Python\n\nWith daily data the calculation is a short xarray pipeline.\n\n```python\nmmm = clim_monthly.max(\"month\")                 # warmest-month mean per cell\nhotspot = (sst_daily - mmm).clip(min=0)\nstress = hotspot.where(hotspot >= 1.0, 0.0)\ndhw = stress.rolling(time=84, min_periods=84).sum() / 7.0\n\nsite = dhw.sel(lat=-20.4, lon=57.7, method=\"nearest\")\nprint(float(site.max()), site.idxmax().values)  # peak DHW and its date\n```\n\nNotice that `mmm` is a single map, not a time series: every day is compared with the same warmest-month value. This differs from the anomaly, which compares each day with its own season. Strict operational products compute the MMM with a specific method and baseline, so your values will differ slightly from official ones; for this course an illustrative MMM is fine as long as you state how you obtained it.\n\n## Interpreting DHW wisely\n\nDHW is a **risk** indicator, not an observation of bleaching. Several local factors change how a reef responds:\n\n- **Lagoon versus offshore water.** Shallow, sheltered lagoons can be warmer than the offshore grid cell on calm days, so stress may be underestimated. Channels with strong exchange may be cooler.\n- **Light and clouds.** Heat combined with strong sunlight is worse than heat under cloudy skies, which is one reason a cyclone's clouds and mixing can sometimes relieve heat stress.\n- **Coral species and history.** Branching corals tend to bleach sooner than massive, boulder-shaped corals, and reefs that survived earlier heatwaves may differ in tolerance.\n- **Other stresses.** Sediment and nutrient run-off from land, for example after heavy rain on cane fields, can make corals less resilient.\n\n> **Case box: ground-truthing.** Suppose a dive team surveys the illustrative lagoon in week 6 and records 35 % of colonies as pale or bleached, mostly branching *Acropora*, with massive corals largely unaffected. That matches the \"significant bleaching likely\" alert. If the survey had found almost no bleaching, possible explanations would include more tolerant corals, local upwelling or cloud cover, or a grid cell that did not represent the lagoon. Satellite indicators and field surveys are partners, not rivals.\n\n## Key takeaways\n\n- MMM is the warmest-month climatology; the bleaching threshold is MMM + 1 °C.\n- HotSpots of 1 °C or more accumulate over a rolling 12-week window to give DHW in °C-weeks.\n- DHW of 4 suggests significant bleaching is likely, and 8 suggests severe bleaching and mortality.\n- DHW keeps a memory of heat: it stays high for weeks after temperatures fall.\n- Local factors such as lagoon heating, light, species and pollution mean DHW must be checked against field surveys.\n\n## Check your understanding\n\n1. A reef has an MMM of 28.5 °C. What is its bleaching threshold, and does a day at 29.3 °C add to DHW?\n*Answer:* The threshold is 29.5 °C; the HotSpot on that day is 0.8 °C, which is below 1 °C, so it does not add to DHW.\n2. Three weeks at 2 °C above the MMM give how many Degree Heating Weeks, and what alert level is that?\n*Answer:* 6 °C-weeks, which is in the \"significant bleaching likely\" level (4 or more, but below 8).\n3. SST has dropped below the threshold, yet the DHW value is still 7. Why?\n*Answer:* DHW sums heat over the previous 12 weeks, so earlier hot weeks remain in the window until they are more than 12 weeks old.\n"
+    },
+    {
+     "id": "c5-L12",
+     "type": "quiz",
+     "title": "Quiz 2: Anomaly Figures, Variability and Coral Bleaching",
+     "dur": 15,
+     "quiz": {
+      "time": 15,
+      "weight": 5,
+      "questions": [
+       {
+        "q": "Which colour map choice is most appropriate for a map of SST anomalies?",
+        "o": [
+         "A rainbow map with automatic limits",
+         "A diverging map with symmetric limits centred on zero",
+         "A sequential map from white to dark blue",
+         "Greyscale with limits from 20 to 30 °C"
+        ],
+        "a": 1,
+        "ex": "Anomalies have a meaningful centre at zero, so a diverging map with symmetric limits shows warm and cool honestly."
+       },
+       {
+        "q": "Which item is essential on an anomaly time series so that readers can interpret the values?",
+        "o": [
+         "The baseline period the anomaly is measured against",
+         "A 3-D effect",
+         "The software version",
+         "A rainbow background"
+        ],
+        "a": 0,
+        "ex": "Anomaly size depends on the baseline, so it must be stated."
+       },
+       {
+        "q": "The Dipole Mode Index of the Indian Ocean Dipole is calculated as:",
+        "o": [
+         "SST in the Pacific minus SST in the Indian Ocean",
+         "The average SST of the whole Indian Ocean",
+         "The number of cyclones per season",
+         "The western box SST anomaly minus the eastern box SST anomaly"
+        ],
+        "a": 3,
+        "ex": "The DMI compares anomalies in a western box near East Africa with an eastern box off Sumatra."
+       },
+       {
+        "q": "An El Niño peaks in the Pacific in December. When is the Indian Ocean around Mauritius most likely to show related warming?",
+        "o": [
+         "Immediately, on the same day",
+         "Never; the oceans are not connected",
+         "A few months later, in the following late summer",
+         "Exactly ten years later"
+        ],
+        "a": 2,
+        "ex": "Atmospheric changes after El Niño warm the Indian Ocean with a lag of a few months."
+       },
+       {
+        "q": "What physically happens when a coral bleaches?",
+        "o": [
+         "It expels its symbiotic algae and its white skeleton shows through tissue",
+         "Its skeleton dissolves in acidic water",
+         "Sunlight bleaches the limestone white",
+         "It is covered by white sand"
+        ],
+        "a": 0,
+        "ex": "Heat stress disrupts the algae's photosynthesis and the coral expels them, losing colour and most of its food supply."
+       },
+       {
+        "q": "A reef has a maximum monthly mean (MMM) of 28.0 °C. What is its bleaching threshold?",
+        "o": [
+         "27.0 °C",
+         "28.0 °C",
+         "29.0 °C",
+         "30.0 °C"
+        ],
+        "a": 2,
+        "ex": "The bleaching threshold is MMM + 1 °C."
+       },
+       {
+        "q": "Two weeks at 2 °C above the MMM and two weeks at 1.5 °C above it give how many Degree Heating Weeks?",
+        "o": [
+         "3.5",
+         "7",
+         "4",
+         "14"
+        ],
+        "a": 1,
+        "ex": "DHW = 2×2 + 2×1.5 = 7 °C-weeks, since all HotSpots are at least 1 °C."
+       },
+       {
+        "q": "A lagoon's DHW reaches 9 °C-weeks, but a dive survey finds little bleaching. Which is the most reasonable interpretation?",
+        "o": [
+         "DHW is meaningless and should be ignored",
+         "The survey must be wrong",
+         "Local factors such as tolerant species, cloud or a non-representative grid cell may explain the difference",
+         "The reef has already died and turned white again"
+        ],
+        "a": 2,
+        "ex": "DHW indicates risk; local conditions and coral history mean satellite indicators must be checked against field surveys."
+       }
+      ]
+     }
+    },
+    {
+     "id": "c5-L13",
+     "type": "assignment",
+     "title": "Assignment: Heat-Stress Report for a Mauritian Lagoon",
+     "dur": 120,
+     "assignment": {
+      "weight": 25,
+      "max": 100,
+      "brief": "You are a junior analyst asked by a (fictional) marine park committee to assess heat stress on a Mauritian lagoon reef. Data provided on the course page (synthetic, illustrative): (1) sst_swio_monthly.nc, monthly SST for 30° S–0°, 40–80° E, 1991–2024, 0.5° grid; (2) sst_mru_daily_2023_2024.nc, daily SST for a 2° box around Mauritius; (3) reef_survey_2024.csv, percentage of bleached colonies at six lagoon sites in April 2024. Tasks: (a) open and describe the datasets (dimensions, units, resolution, gaps); (b) compute a 1991–2020 monthly climatology and an area-weighted anomaly time series for a box of your choice around Mauritius, with a 12-month rolling mean and a stated trend; (c) map the SST anomaly for the warmest month of 2024 with a correctly centred diverging colour scale; (d) compute the MMM, HotSpots and Degree Heating Weeks for the 2023–24 summer at the grid cell nearest the lagoon, identify the peak DHW and alert level; (e) compare the DHW result with the reef survey and discuss at least two reasons why satellite and field evidence might differ. Deliverables: a Jupyter notebook that runs top to bottom, and a report of no more than 1,500 words with three to four labelled figures and a plain-language summary of 150 words for the committee. State every baseline, unit and assumption; all figures are illustrative and must be described as such.",
+      "rubric": [
+       {
+        "criterion": "Data handling and code",
+        "max": 20,
+        "desc": "Notebook runs cleanly; files inspected; correct use of sel/nearest, slices, cosine-latitude weighting and NaN handling; code is commented and reproducible."
+       },
+       {
+        "criterion": "Climatology and anomalies",
+        "max": 20,
+        "desc": "Correct 1991–2020 monthly climatology and anomalies; regional mean properly weighted; trend reported with its period and appropriate caution."
+       },
+       {
+        "criterion": "Figure quality",
+        "max": 20,
+        "desc": "Figures answer clear questions; diverging zero-centred scale for anomalies; units, baseline, region and smoothing labelled; honest axis ranges."
+       },
+       {
+        "criterion": "Heat-stress indicators",
+        "max": 25,
+        "desc": "MMM, threshold, HotSpots and DHW computed correctly; peak DHW and alert level identified; interpretation linked convincingly to the reef survey with well-reasoned explanations for differences."
+       },
+       {
+        "criterion": "Communication",
+        "max": 15,
+        "desc": "Clear, well-structured report within the word limit; accurate plain-language summary suitable for non-specialists; limitations and assumptions stated."
+       }
+      ]
+     }
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,1637 @@
+{
+ "course": "c7",
+ "presenter": "arjun",
+ "modules": [
+  {
+   "id": "m1",
+   "title": "Module 1 · Seeing crops from above",
+   "items": [
+    {
+     "id": "c7-L1",
+     "type": "video",
+     "title": "Why precision agriculture? Variability in Mauritian fields",
+     "dur": 6,
+     "objectives": [
+      "Explain what precision agriculture means and why within-field variability matters",
+      "Describe the observe–decide–act–evaluate cycle of site-specific management",
+      "Identify where satellites, drones and ground sensors fit in that cycle",
+      "Relate precision agriculture to sugar cane, tea and vegetable growing in Mauritius"
+     ],
+     "chips": [
+      "Is precision agriculture only for big estates?",
+      "Why not just treat the whole field the same way?",
+      "When would I use a drone instead of a satellite?"
+     ],
+     "chapters": [
+      {
+       "title": "One field, many conditions",
+       "slide": {
+        "kind": "bullets",
+        "heading": "No field is uniform",
+        "points": [
+         "Soil depth and stoniness change within metres",
+         "Slopes shed water; hollows stay wet",
+         "Pests and weeds arrive in patches",
+         "Old ratoons and gaps lower plant density"
+        ],
+        "note": {
+         "tone": "info",
+         "text": "Uniform management treats the average spot, which may not exist."
+        }
+       },
+       "narration": [
+        "Picture a twenty-hectare sugar cane field on the plains of the north. From the road it looks like one even sheet of green, but walk through it and the story changes.",
+        "Near the boundary wall the soil is shallow and full of basalt stones, in the low corner water sits after heavy rain, and in the middle the cane is taller and darker than anywhere else.",
+        "Traditional management treats the whole field the same way. The same fertiliser rate, the same irrigation schedule and the same herbicide dose go on every square metre.",
+        "That means some parts receive more than they can use, which wastes money and can wash nitrogen into rivers and lagoons, while other parts receive too little and lose yield.",
+        "Precision agriculture starts from a simple idea: measure how the field varies, and then manage each part according to what it actually needs.",
+        "Agronomists call this within-field variability, and in Mauritius it is often dramatic, because volcanic soils, rocky outcrops and steep rainfall gradients can change conditions over just a few dozen metres."
+       ]
+      },
+      {
+       "title": "The precision agriculture cycle",
+       "slide": {
+        "kind": "steps",
+        "heading": "Site-specific management cycle",
+        "steps": [
+         {
+          "title": "Observe",
+          "sub": "Imagery, soil samples, yield records"
+         },
+         {
+          "title": "Interpret",
+          "sub": "Turn data into maps of zones and problems"
+         },
+         {
+          "title": "Decide",
+          "sub": "Choose rates, timing and places to act"
+         },
+         {
+          "title": "Act",
+          "sub": "Variable-rate inputs, targeted scouting"
+         },
+         {
+          "title": "Evaluate",
+          "sub": "Did yield or cost improve? Repeat next season"
+         }
+        ]
+       },
+       "narration": [
+        "It helps to think of precision agriculture as a cycle rather than a gadget. The first step is to observe the field with imagery, soil samples, weather data and records of past yields.",
+        "Next we interpret those observations, turning raw numbers into maps that show management zones, stressed patches or areas that keep underperforming season after season.",
+        "Then we decide what to do, such as applying more nitrogen to a weak zone, sending a scout to check a suspicious patch, or replanting gaps in an old ratoon.",
+        "We act, sometimes with variable-rate machinery and sometimes simply by walking to the right spot with a knapsack sprayer.",
+        "Finally, and this step is often forgotten, we evaluate whether the change paid off, and the answer feeds straight into the next season's observations.",
+        "None of this is new to good farmers, who have always noticed their best and worst corners. What is new is that sensors and maps let us measure those differences consistently and act on them at scale."
+       ]
+      },
+      {
+       "title": "Where remote sensing fits",
+       "slide": {
+        "kind": "compare",
+        "heading": "Three ways to observe a crop",
+        "columns": [
+         {
+          "title": "Satellite",
+          "points": [
+           "Wide area, regular revisits",
+           "Free data such as Sentinel-2",
+           "Clouds can block the view"
+          ]
+         },
+         {
+          "title": "Drone",
+          "points": [
+           "Centimetre detail",
+           "Flies under clouds",
+           "Small areas, needs a pilot"
+          ]
+         },
+         {
+          "title": "Ground sensors",
+          "points": [
+           "Soil moisture, weather, leaf readings",
+           "Very precise at one point",
+           "Needed to check the imagery"
+          ]
+         }
+        ]
+       },
+       "narration": [
+        "Remote sensing means measuring something without touching it, and in this course it mostly means measuring crops with cameras that look down from satellites or drones.",
+        "Satellites such as the European Sentinel-2 mission photograph the whole of Mauritius every few days, and the data are free, which makes them ideal for large areas and regular monitoring.",
+        "Drones carry smaller cameras much closer to the crop, so they can see individual plants, and they can fly beneath a cloud layer, but each flight only covers a modest area.",
+        "Ground sensors and field visits remain essential, because they tell us what the imagery really means. A dark patch on a map could be disease, waterlogging or simply a different variety.",
+        "The skill we want to build is combining these sources sensibly, rather than trusting any single one blindly.",
+        "A good rule of thumb is to start from the question, not the technology. Ask what decision you need to make, how much detail it needs and how quickly, and only then choose the sensor."
+       ]
+      },
+      {
+       "title": "Three Mauritian crops, three different problems",
+       "slide": {
+        "kind": "cards",
+        "heading": "Precision farming in Mauritius",
+        "cards": [
+         {
+          "label": "Sugar cane",
+          "text": "Large fields, ratoon cycles, yield forecasting before harvest"
+         },
+         {
+          "label": "Tea",
+          "text": "Cool, wet uplands; frequent plucking; cloud is the main obstacle"
+         },
+         {
+          "label": "Vegetables",
+          "text": "Small plots, short cycles, high value per hectare"
+         }
+        ],
+        "note": {
+         "tone": "info",
+         "text": "Examples are illustrative teaching cases, not data from specific farms."
+        }
+       },
+       "narration": [
+        "Let us ground this in three crops grown here. Sugar cane covers much of the agricultural land, in fields that are large enough for satellite pixels to describe well.",
+        "For cane, the big questions are where growth is lagging, which fields are ready to harvest, and how many tonnes the season will deliver, which is exactly the yield question we tackle later.",
+        "Tea grows in the cooler, wetter uplands of the central plateau, where clouds are frequent. Here the challenge is getting enough clear images, so timing and drones become more important.",
+        "Vegetable growers often farm plots of half a hectare or less, with crops like tomato, cabbage or potato that are harvested within a few months. Small plots need fine resolution and quick decisions.",
+        "The same principles apply to all three, but the right tool, the right resolution and the right timing change from crop to crop.",
+        "For a small island with limited land, water and money for imported fertiliser, getting more from every hectare while losing less to the environment is not a luxury. It is a practical necessity."
+       ]
+      },
+      {
+       "title": "Recap",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Key ideas",
+        "points": [
+         "Fields vary; uniform management wastes inputs",
+         "Precision agriculture is an observe–decide–act cycle",
+         "Satellites, drones and ground data complement each other",
+         "Crop and plot size decide which tool fits"
+        ]
+       },
+       "narration": [
+        "To recap, precision agriculture is about recognising that fields vary and managing each part according to its needs, in a repeating cycle of observing, deciding, acting and evaluating.",
+        "Remote sensing gives us the observations, with satellites for wide regular coverage, drones for fine detail, and ground data to keep everything honest.",
+        "Next, we look at the physics that makes all of this possible: how leaves reflect light, and how that turns into a vegetation index called NDVI."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "c7-L2",
+     "type": "virtual",
+     "title": "How leaves reflect light: understanding NDVI",
+     "dur": 20,
+     "objectives": [
+      "Explain why healthy vegetation absorbs red and reflects near-infrared light",
+      "Calculate and interpret NDVI from Sentinel-2 red and near-infrared bands",
+      "Recognise the limits of NDVI, including saturation over dense canopies"
+     ],
+     "chips": [
+      "Why is NDVI always between minus one and one?",
+      "Which Sentinel-2 bands do I use for NDVI?",
+      "Why does NDVI stop increasing in dense cane?"
+     ],
+     "lesson": {
+      "summary": [
+       "Chlorophyll absorbs red; leaf cells reflect near-infrared",
+       "NDVI = (NIR − Red) / (NIR + Red), from −1 to +1",
+       "NDVI saturates over dense canopy, so combine it with other evidence"
+      ],
+      "segments": [
+       {
+        "id": "seg1",
+        "title": "Why leaves are dark in red and bright in near-infrared",
+        "slide": {
+         "kind": "compare",
+         "heading": "What a healthy leaf does with light",
+         "columns": [
+          {
+           "title": "Red light, about 665 nm",
+           "points": [
+            "Absorbed by chlorophyll",
+            "Drives photosynthesis",
+            "Leaf looks dark"
+           ]
+          },
+          {
+           "title": "Near-infrared, about 840 nm",
+           "points": [
+            "Not useful to chlorophyll",
+            "Scattered by spongy mesophyll",
+            "Leaf looks very bright"
+           ]
+          }
+         ],
+         "note": {
+          "tone": "info",
+          "text": "Our eyes cannot see near-infrared, but Sentinel-2 band 8 can."
+         }
+        },
+        "speech": [
+         "Every surface reflects some wavelengths of sunlight and absorbs others, and the pattern of reflectance across wavelengths is called its spectral signature.",
+         "A healthy sugar cane leaf absorbs most of the red light that reaches it, because chlorophyll uses red light as energy for photosynthesis. In a red image, healthy cane looks dark.",
+         "Near-infrared light, just beyond what our eyes can see, is no use to chlorophyll. It passes into the leaf and is scattered by the spongy mesophyll cells and the air spaces between them, so around half of it is reflected back.",
+         "So a healthy leaf has a striking contrast: low reflectance in red and high reflectance in near-infrared. A stressed or dying leaf loses that contrast, and that is the signal we exploit."
+        ],
+        "simpler": [
+         "Let me put it simply. A leaf is hungry for red light, so it eats almost all of it and gives very little back.",
+         "Near-infrared light is food the leaf does not want, so it bounces around inside the leaf and most of it comes back out.",
+         "It is like a sponge in a bucket of water and oil: it soaks up the water it likes and leaves the rest behind. The camera sees what is left behind."
+        ],
+        "checkpoint": {
+         "id": "cp1",
+         "mandatory": true,
+         "maxAttempts": 3,
+         "question": "Why does a healthy sugar cane leaf look dark in the red band but bright in the near-infrared band?",
+         "concepts": [
+          {
+           "id": "red_absorb",
+           "label": "Chlorophyll absorbs red light for photosynthesis",
+           "required": true,
+           "ask": "what happens to red light when it hits a healthy leaf",
+           "rx": [
+            {
+             "re": "\\b(chlorophyll|pigments?)\\b[^.]{0,60}\\b(absorb|soak|take|takes|use|uses|used|capture|trap)\\w*",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(absorb|soak|soaks|soaked|capture|captures|trap|traps)\\w*\\b[^.]{0,30}\\b(the\\s+)?red\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\bred\\b[^.]{0,40}\\b(absorb\\w*|soaked up|taken up|used (up|for|in|by)|captured)",
+             "flags": "i"
+            },
+            {
+             "re": "\\bred\\b[^.]{0,40}\\bphotosynth\\w*",
+             "flags": "i"
+            },
+            {
+             "re": "\\bphotosynth\\w*\\b[^.]{0,40}\\bred\\b",
+             "flags": "i"
+            }
+           ]
+          },
+          {
+           "id": "nir_reflect",
+           "label": "The leaf's internal structure strongly reflects near-infrared",
+           "required": true,
+           "ask": "why the leaf looks so bright in the near-infrared",
+           "rx": [
+            {
+             "re": "\\b(nir|near[- ]?infra-?red|infra-?red)\\b[^.]{0,50}\\b(reflect|scatter|bounc|sent back|thrown back)\\w*",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(reflect|scatter|bounc)\\w*\\s+(\\w+\\s+){0,3}(nir|near[- ]?infra-?red|infra-?red)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(nir|near[- ]?infra-?red|infra-?red)\\b[^.]{0,30}\\b(bright|high|strong)\\b",
+             "flags": "i"
+            }
+           ]
+          },
+          {
+           "id": "structure",
+           "label": "Reflection comes from spongy mesophyll cells and air spaces",
+           "required": false,
+           "ask": "which part of the leaf does the reflecting",
+           "rx": [
+            {
+             "re": "\\b(mesophyll|spongy|air spaces?|cell walls?|internal structure|leaf structure|cells?)\\b",
+             "flags": "i"
+            }
+           ]
+          }
+         ],
+         "misconceptions": [
+          {
+           "id": "reversed",
+           "label": "Reversed: healthy leaves absorb NIR and reflect red",
+           "rx": [
+            {
+             "re": "\\babsorbs?\\s+(the\\s+|most\\s+)?(nir|near[- ]?infra-?red|infra-?red)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\breflects?\\s+(the\\s+|most\\s+)?red\\b(?![- ]?edge)",
+             "flags": "i"
+            }
+           ]
+          },
+          {
+           "id": "heat",
+           "label": "Near-infrared brightness is not the leaf's heat",
+           "rx": [
+            {
+             "re": "\\b(hot|heat|warm|temperature)\\w*\\b",
+             "flags": "i"
+            }
+           ]
+          }
+         ],
+         "hints": [
+          "Think about what the leaf needs red light for.",
+          "Red light is used by a green pigment inside the leaf. What happens to near-infrared light, which the leaf cannot use?",
+          "Chlorophyll absorbs red light for photosynthesis, while the leaf's internal cells scatter near-infrared back out. Can you say that in your own words?"
+         ],
+         "model": "Chlorophyll absorbs most of the red light to power photosynthesis, so the leaf looks dark in red, while the spongy cells inside the leaf scatter and reflect most of the near-infrared, so it looks bright in NIR.",
+         "ack": "Exactly: chlorophyll soaks up red light for photosynthesis, while the leaf's internal cells reflect near-infrared strongly.",
+         "reteach": "Think of the leaf as a solar panel with a mirror behind it. The panel, which is the chlorophyll, eats the red light because that is the energy it wants. Near-infrared is useless to it, so it passes into the leaf and bounces around the air spaces between the cells until most of it comes back out.",
+         "calibration": [
+          {
+           "answer": "Chlorophyll absorbs the red light to use for photosynthesis, and the cell structure inside the leaf reflects the near infrared so it looks bright.",
+           "expected": "correct"
+          },
+          {
+           "answer": "red is absorbed by the plant for photosynthesis but NIR gets reflected by the leaf",
+           "expected": "correct"
+          },
+          {
+           "answer": "because healthy leaves soak up red light with their chlorophyll and the spongy mesophyll scatters infrared back to the sensor",
+           "expected": "correct"
+          },
+          {
+           "answer": "the pigments take red light for photosyntheis, while near-infrared is strongly reflected",
+           "expected": "correct"
+          },
+          {
+           "answer": "Chlorophyll absorbs the red light so the leaf is dark in red",
+           "expected": "partial"
+          },
+          {
+           "answer": "the leaf reflects a lot of near infrared because of its cells",
+           "expected": "partial"
+          },
+          {
+           "answer": "NIR is high for healthy plants, thats why its bright",
+           "expected": "partial"
+          },
+          {
+           "answer": "because the leaf reflects red light and absorbs the infrared",
+           "expected": "incorrect"
+          },
+          {
+           "answer": "the leaf is hot in the sun so it glows in infrared",
+           "expected": "incorrect"
+          },
+          {
+           "answer": "idk tbh",
+           "expected": "unclear"
+          }
+         ]
+        }
+       },
+       {
+        "id": "seg2",
+        "title": "From two bands to one index: NDVI",
+        "slide": {
+         "kind": "formula",
+         "heading": "Normalised Difference Vegetation Index",
+         "formula": "NDVI = (NIR − Red) / (NIR + Red)   ·   Sentinel-2: (B8 − B4) / (B8 + B4)",
+         "points": [
+          "Range −1 to +1",
+          "Water below 0; bare soil about 0.1 to 0.2",
+          "Young cane about 0.3 to 0.5; full canopy 0.7 to 0.9"
+         ],
+         "note": {
+          "tone": "info",
+          "text": "Typical values are illustrative and vary with sensor, soil and date."
+         }
+        },
+        "speech": [
+         "To turn that contrast into a single number we use the Normalised Difference Vegetation Index, or NDVI. It equals near-infrared minus red, divided by near-infrared plus red.",
+         "On Sentinel-2, near-infrared is band 8 and red is band 4, both at ten-metre resolution. Dividing by the sum normalises the index, so a field in sunshine and the same field under thin haze give similar values.",
+         "Because of the way the fraction is built, NDVI always lies between minus one and plus one. Open water is usually negative, bare soil sits around zero point one to zero point two, and a closed cane canopy reaches zero point seven to zero point nine.",
+         "For example, if a pixel reflects forty per cent of near-infrared and five per cent of red, NDVI is thirty-five divided by forty-five, which is about zero point seven eight, a healthy, dense crop."
+        ],
+        "simpler": [
+         "Simply put, NDVI asks one question: how much brighter is this spot in near-infrared than in red?",
+         "We take the gap between the two and divide it by the total, so the answer is always a score between minus one and one.",
+         "Think of it like a mark out of ten for greenness. Water scores below zero, bare soil scores about one or two, and a thick, healthy cane field scores seven, eight or nine."
+        ],
+        "checkpoint": {
+         "id": "cp2",
+         "mandatory": true,
+         "maxAttempts": 3,
+         "question": "How is NDVI calculated, and what would a high value such as 0.8 tell you about a field?",
+         "concepts": [
+          {
+           "id": "formula",
+           "label": "NDVI = (NIR − Red) / (NIR + Red)",
+           "required": true,
+           "ask": "how the near-infrared and red values are combined in the formula",
+           "rx": [
+            {
+             "re": "(nir|b8|infra-?red)\\s*[-−–]\\s*(the\\s+)?(red|b4)\\b[^.]{0,40}(\\+|plus|sum|add)",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(minus|difference|subtract\\w*|take away)\\b[^.]{0,80}\\b(sum|plus|added|total)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(minus|difference|subtract\\w*|take away)\\b[^.]{0,80}\\+",
+             "flags": "i"
+            }
+           ]
+          },
+          {
+           "id": "dense",
+           "label": "A high value means dense, healthy, green vegetation",
+           "required": true,
+           "ask": "what a value close to one says about the crop",
+           "rx": [
+            {
+             "re": "\\b(dense|healthy|vigorous|lush|thick|full|green|strong|good|lots of|a lot of|plenty of|loads of|closed)\\b[^.]{0,30}\\b(veg\\w*|canopy|crops?|cane|plants?|leaf|leaves|biomass|growth|chlorophyll|cover)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(veg\\w*|canopy|crops?|cane|plants?|growth)\\b[^.]{0,30}\\b(dense|healthy|vigorous|lush|thick|closed|green|growing well|doing well)\\b",
+             "flags": "i"
+            }
+           ]
+          },
+          {
+           "id": "range",
+           "label": "NDVI runs from −1 to +1",
+           "required": false,
+           "ask": "what range of values NDVI can take",
+           "rx": [
+            {
+             "re": "[-−]\\s*1\\s*(to|and|-)\\s*\\+?\\s*1\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(minus|negative) one\\b",
+             "flags": "i"
+            }
+           ]
+          }
+         ],
+         "misconceptions": [
+          {
+           "id": "highbad",
+           "label": "A high NDVI does not mean water, bare soil or stress",
+           "rx": [
+            {
+             "re": "\\b(high|0\\.8|big)\\b[^.]{0,30}\\b(means?|indicates?|shows?)\\b[^.]{0,20}\\b(water|bare|dry|stress\\w*|sick|unhealthy|dead)\\b",
+             "flags": "i"
+            }
+           ]
+          }
+         ],
+         "hints": [
+          "NDVI uses two Sentinel-2 bands: near-infrared and red. One operation goes on top of the fraction and another on the bottom.",
+          "The top of the fraction is a difference and the bottom is a sum. Now, what kind of surface gives a big difference between NIR and red?",
+          "NDVI equals NIR minus red, divided by NIR plus red, and values near one come from thick, healthy canopy. Try putting both parts together."
+         ],
+         "model": "NDVI is near-infrared minus red divided by near-infrared plus red; a value of about 0.8 means a dense, healthy green canopy that reflects lots of NIR and absorbs most of the red.",
+         "ack": "That's it: NDVI is NIR minus red over NIR plus red, and a value around 0.8 means dense, healthy green vegetation.",
+         "reteach": "Imagine two scores for every pixel: how much near-infrared it throws back and how much red it throws back. Healthy leaves have a huge gap between those scores. NDVI takes the gap, NIR minus red, and divides it by the total, NIR plus red, so the answer always lands between minus one and plus one, and the bigger it is, the greener and denser the crop.",
+         "calibration": [
+          {
+           "answer": "NDVI = (NIR - Red) / (NIR + Red). A value of 0.8 means really dense healthy vegetation.",
+           "expected": "correct"
+          },
+          {
+           "answer": "you take NIR minus red and divide by their sum, high values mean lots of green leaves",
+           "expected": "correct"
+          },
+          {
+           "answer": "its the difference between near infrared and red divided by the total of the two, and 0.8 tells you the cane canopy is dense and healthy",
+           "expected": "correct"
+          },
+          {
+           "answer": "(b8-b4)/(b8+b4), near 0.8 = healthy crop, it goes from -1 to 1",
+           "expected": "correct"
+          },
+          {
+           "answer": "NIR minus red over NIR plus red",
+           "expected": "partial"
+          },
+          {
+           "answer": "a high value like 0.8 means the field has dense healthy vegetation",
+           "expected": "partial"
+          },
+          {
+           "answer": "it shows the crop is healthy and green, values go -1 to 1",
+           "expected": "partial"
+          },
+          {
+           "answer": "you divide red by blue and a high value means there is water in the field",
+           "expected": "incorrect"
+          },
+          {
+           "answer": "it's just the infrared brightness, high means hot dry soil",
+           "expected": "incorrect"
+          },
+          {
+           "answer": "not sure",
+           "expected": "unclear"
+          }
+         ]
+        }
+       },
+       {
+        "id": "seg3",
+        "title": "Where NDVI falls short",
+        "slide": {
+         "kind": "bullets",
+         "heading": "Limits of NDVI",
+         "points": [
+          "Saturates once leaf cover is complete",
+          "Soil background inflates or lowers sparse-crop values",
+          "Clouds and shadows give false low values",
+          "Measures canopy greenness, not stalk weight or sugar"
+         ],
+         "note": {
+          "tone": "warn",
+          "text": "NDVI is evidence about the canopy, not a yield measurement on its own."
+         }
+        },
+        "speech": [
+         "NDVI is powerful, but it has limits that every agronomist should know. The most important is saturation: once leaves completely cover the ground, extra biomass hardly changes the index.",
+         "That matters for sugar cane, where most of the yield sits in heavy stalks hidden under the canopy. Two mature fields can both read zero point eight five while one carries far more cane.",
+         "To get around saturation we combine NDVI with other evidence: the red-edge bands of Sentinel-2, the shape of the NDVI curve across the whole season, and ground measurements or mill records."
+        ],
+        "simpler": [
+         "Here is the simple version. NDVI is like a glass that fills up quickly.",
+         "Once the leaves cover the ground, the glass is full, and more cane cannot push the number much higher. So we need other clues to see the difference."
+        ],
+        "checkpoint": {
+         "id": "cp3",
+         "mandatory": false,
+         "maxAttempts": 2,
+         "question": "Optional check: Two mature cane fields both show an NDVI of about 0.85, yet one yields far more. Why can NDVI miss this, and what extra information would help?",
+         "concepts": [
+          {
+           "id": "saturation",
+           "label": "NDVI saturates once the canopy is dense",
+           "required": true,
+           "ask": "what happens to NDVI once the canopy is already very dense",
+           "rx": [
+            {
+             "re": "\\bsaturat\\w*",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(plateau\\w*|levels? off|levelled off|leveled off|max(es)? out|maxed|tops? out|ceiling|flattens?)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\bstops? (increasing|rising|going up|changing|growing)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\bcan'?t (go|get|rise) (any )?(higher|up)\\b",
+             "flags": "i"
+            }
+           ]
+          },
+          {
+           "id": "extra",
+           "label": "Add other evidence: red-edge, time series or ground data",
+           "required": true,
+           "ask": "what extra information you could add to separate the two fields",
+           "rx": [
+            {
+             "re": "\\bred[- ]?edge\\b|\\bndre\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\btime[- ]?series\\b|\\b(over|across|through(out)?)\\s+(the\\s+)?(whole\\s+)?(season|time|months|year)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(ground|field)[- ]?(data|truth|sampl\\w*|measure\\w*|records?|visits?|checks?)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(several|multiple|many|more)\\s+(dates|images|scenes)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(yield|harvest|mill)\\s+(records?|data|history)\\b|\\bpast yields?\\b",
+             "flags": "i"
+            }
+           ]
+          },
+          {
+           "id": "hidden",
+           "label": "Yield sits in stalks and sugar that the canopy hides",
+           "required": false,
+           "ask": "where most of the cane yield is stored",
+           "rx": [
+            {
+             "re": "\\b(stalks?|stems?|sucrose|sugar content|underneath|beneath)\\b",
+             "flags": "i"
+            }
+           ]
+          }
+         ],
+         "misconceptions": [
+          {
+           "id": "direct",
+           "label": "NDVI is not a direct measure of yield",
+           "rx": [
+            {
+             "re": "\\bndvi\\b[^.]{0,15}\\b(measures?|is|equals)\\b\\s+(the\\s+)?yield\\b",
+             "flags": "i"
+            }
+           ]
+          }
+         ],
+         "hints": [
+          "Think about what happens to NDVI once the leaves already cover the ground completely.",
+          "NDVI levels off at high leaf cover. What other bands, dates or measurements could still tell the fields apart?"
+         ],
+         "model": "NDVI saturates once the canopy is dense, so both fields hit about 0.85 even though one has much heavier stalks; adding red-edge bands, a time series over the season or ground and mill yield data would separate them.",
+         "ack": "Right: NDVI saturates over dense canopy, so we add red-edge bands, a seasonal time series or ground data to tell the fields apart.",
+         "reteach": "NDVI is like a cup that is already full: once the leaves cover the ground, adding more cane does not make the number go up much. The extra tonnes are in the stalks under the canopy, so we look for other clues, such as how long the field stayed green over the season, the red-edge bands, or weighed samples from the field.",
+         "calibration": [
+          {
+           "answer": "NDVI saturates at high biomass so both fields look the same; you'd need ground data like sample cuttings to tell them apart",
+           "expected": "correct"
+          },
+          {
+           "answer": "because ndvi plateaus when canopy is full, use a time series across the season instead of one image",
+           "expected": "correct"
+          },
+          {
+           "answer": "NDVI stops increasing once the leaves cover everything. Red edge bands or past yield records would help.",
+           "expected": "correct"
+          },
+          {
+           "answer": "it maxes out for dense cane, the extra yield is in the stalks, so combine with field measurements",
+           "expected": "correct"
+          },
+          {
+           "answer": "NDVI saturates when the cane is very dense",
+           "expected": "partial"
+          },
+          {
+           "answer": "we should use the red-edge band as well",
+           "expected": "partial"
+          },
+          {
+           "answer": "the yield is in the stalks so you need field measurements",
+           "expected": "partial"
+          },
+          {
+           "answer": "one of the images must just be wrong, the satellite made an error",
+           "expected": "incorrect"
+          },
+          {
+           "answer": "because ndvi is yield so they should be equal really",
+           "expected": "incorrect"
+          },
+          {
+           "answer": "no idea",
+           "expected": "unclear"
+          }
+         ]
+        }
+       }
+      ],
+      "closing": [
+       "Excellent work today, {name}.",
+       "Let me summarise what we covered. Healthy leaves absorb red light with chlorophyll and reflect near-infrared from their internal cells.",
+       "NDVI captures that contrast as near-infrared minus red, divided by near-infrared plus red, giving a value between minus one and plus one, with dense healthy cane near zero point eight.",
+       "We also saw that NDVI saturates over dense canopies, so for yield we combine it with red-edge bands, time series and ground data.",
+       "For revision, read the next item on light, leaves and sensors, and then we will meet the Sentinel-2 satellite in detail. Well done."
+      ]
+     }
+    },
+    {
+     "id": "c7-L3",
+     "type": "reading",
+     "title": "Light, leaves and sensors: the basics of remote sensing",
+     "dur": 9,
+     "objectives": [
+      "Describe the parts of the electromagnetic spectrum used in crop monitoring",
+      "Compare the spectral signatures of vegetation, soil and water",
+      "Distinguish spatial, spectral, temporal and radiometric resolution",
+      "Choose a suitable platform for a given farm size and question"
+     ],
+     "chips": [
+      "What is the difference between spatial and spectral resolution?",
+      "Why does water look black in near-infrared?",
+      "Is a drone always better than a satellite?"
+     ],
+     "body": "Remote sensing is the science of learning about an object from the energy it reflects or emits, without touching it. In agriculture, that object is usually a crop canopy, and the energy is sunlight that has bounced off leaves, soil and water before reaching a camera on a satellite or a drone. This reading sets out the physical basics you need before working with real images: the spectrum, spectral signatures, the four kinds of resolution, and how to match a platform to a farming question.\n\n## The electromagnetic spectrum in agriculture\n\nSunlight contains a continuous range of wavelengths. Our eyes detect only the **visible** part, from about 400 to 700 nanometres (nm): blue, green and red. Crop sensors also use wavelengths we cannot see:\n\n- **Red edge** (about 700–750 nm): the steep transition between low red and high near-infrared reflectance. Its exact position shifts with chlorophyll content, which makes it sensitive to nitrogen status.\n- **Near-infrared, NIR** (about 750–1,000 nm): strongly reflected by healthy leaves because of their internal cell structure.\n- **Shortwave infrared, SWIR** (about 1,500–2,300 nm): absorbed by water, so it responds to leaf and soil moisture.\n- **Thermal infrared** (about 8,000–14,000 nm): emitted heat rather than reflected sunlight. Useful for crop water stress, but not carried by Sentinel-2.\n\nThe quantity we usually work with is **reflectance**: the fraction of incoming light that a surface reflects at a given wavelength, from 0 (absorbs everything) to 1 (reflects everything). Reflectance is a property of the surface, so it can be compared between dates and places, unlike raw brightness, which also depends on the sun angle and the atmosphere.\n\n## Spectral signatures: vegetation, soil and water\n\nPlot reflectance against wavelength and you get a **spectral signature**. Three surfaces dominate farm images.\n\n| Surface | Red reflectance | NIR reflectance | SWIR reflectance | Typical NDVI |\n|---|---|---|---|---|\n| Healthy cane canopy | very low (~0.04) | high (~0.45) | moderate | 0.75–0.9 |\n| Bare, dry soil | moderate (~0.20) | moderate (~0.28) | high | 0.1–0.2 |\n| Reservoir water | low (~0.03) | very low (~0.01) | near zero | below 0 |\n\n*Values are rounded and illustrative; real values vary with soil type, moisture and sensor.*\n\nHealthy vegetation is unique in having a deep dip in the red, caused by chlorophyll absorption, followed by a sharp rise into a high NIR plateau, caused by scattering in the spongy mesophyll. Soil rises gently and steadily with wavelength; the dark, iron-rich soils common on Mauritian basalt are darker than pale coral sands on the coast. Water absorbs almost all NIR and SWIR, which is why reservoirs and lagoons look black in infrared images.\n\nWhen a crop becomes stressed by drought, disease or nutrient shortage, chlorophyll breaks down, so red reflectance rises, and the internal leaf structure collapses, so NIR reflectance falls. The contrast between red and NIR shrinks, which is the change vegetation indices are designed to detect.\n\n## The four resolutions\n\nEvery sensor makes trade-offs, described by four kinds of resolution.\n\n1. **Spatial resolution** is the ground size of one pixel. Sentinel-2's finest bands have 10 m pixels, so one pixel covers 100 m²; a drone flown at 100 m might give 3 cm pixels.\n2. **Spectral resolution** is the number and width of wavebands. A normal camera has three broad bands; Sentinel-2 has thirteen; hyperspectral sensors have hundreds of narrow ones.\n3. **Temporal resolution** is how often the same place is imaged. Sentinel-2 revisits every five days with two satellites; a drone flies whenever you send it, weather permitting.\n4. **Radiometric resolution** is how finely brightness is recorded. Sentinel-2 records 12-bit values, giving 4,096 levels, enough to separate subtle differences in canopy colour.\n\nNo sensor wins on all four. Fine spatial detail usually means small coverage and fewer bands; frequent revisits usually mean coarser pixels.\n\n> **Mixed pixels.** A 10 m pixel at the edge of a field may contain half cane, half road. Its reflectance is a blend, so field statistics should exclude a buffer of one pixel around field boundaries.\n\n## Worked example: matching a platform to the question\n\n**Case A — a cane estate.** A grower manages about 500 hectares of sugar cane in fields of 10 to 30 hectares and wants to compare growth across fields every fortnight. At 10 m, a 20-hectare field contains about 2,000 pixels, plenty for robust statistics. Sentinel-2 is free, revisits every five days, and covers the whole estate in one tile. *Choice: satellite.*\n\n**Case B — a vegetable plot.** A grower near the central plateau has a 0.3-hectare plot of tomatoes and suspects a disease patch in one corner. At 10 m, the plot holds only about 30 pixels, and many are mixed with paths and hedges. The question needs plant-level detail within days. *Choice: a drone with a multispectral camera, plus a field visit.*\n\n**Case C — a tea garden.** A tea grower on the wet uplands wants monthly vigour maps. Sentinel-2 resolution is adequate for blocks of a few hectares, but persistent cloud means many scenes are unusable. *Choice: satellite as the backbone, with a drone flight when several months pass without a clear scene.*\n\nThe lesson is that the platform follows the question: field size, the detail needed, how often you need it, and what the weather allows.\n\n## Platforms compared\n\n- **Satellites** offer consistent, calibrated, wide-area data, often free, but are limited by cloud and fixed overpass times.\n- **Drones** offer very fine detail and flexible timing, but cover small areas, require a trained pilot and permissions from the civil aviation authority, and need careful calibration with reference panels.\n- **Handheld and ground sensors**, such as chlorophyll meters and soil moisture probes, give precise readings at points and are essential for checking what images show.\n\n## Key takeaways\n\n- Healthy leaves absorb red light and reflect near-infrared strongly; stress reduces that contrast.\n- Reflectance, not raw brightness, is the comparable quantity across dates and places.\n- Soil, water and vegetation have distinct spectral signatures that let us separate them.\n- Spatial, spectral, temporal and radiometric resolution trade off against each other.\n- Choose the platform from the question: field size, required detail, frequency and cloud conditions.\n\n## Check your understanding\n\n1. Why does a reservoir appear almost black in a near-infrared image?\n*Answer:* Water absorbs nearly all near-infrared and shortwave infrared light, so very little is reflected back to the sensor.\n2. A 0.5-hectare cabbage plot is imaged by Sentinel-2 at 10 m. About how many pixels cover it, and is that enough?\n*Answer:* About 50 pixels (5,000 m² ÷ 100 m²); after removing mixed edge pixels very few remain, so a drone is better for within-plot detail.\n3. Which kind of resolution improves when a second identical satellite joins the first in the same orbit?\n*Answer:* Temporal resolution, because the same place is revisited twice as often."
+    }
+   ]
+  },
+  {
+   "id": "m2",
+   "title": "Module 2 · Sentinel-2 and the satellite scene",
+   "items": [
+    {
+     "id": "c7-L4",
+     "type": "video",
+     "title": "Sentinel-2: the satellite, its bands and its pixels",
+     "dur": 5,
+     "objectives": [
+      "Describe the Sentinel-2 mission, its revisit time and data access",
+      "Identify the main Sentinel-2 bands and their resolutions",
+      "Select appropriate bands for vegetation, moisture and harvest questions",
+      "Estimate how many pixels describe a field of a given size"
+     ],
+     "chips": [
+      "Why are some bands 20 metres and others 10 metres?",
+      "What is band 8A used for?",
+      "How often can I get a clear image of Mauritius?"
+     ],
+     "chapters": [
+      {
+       "title": "Meet Sentinel-2",
+       "slide": {
+        "kind": "stat",
+        "heading": "Sentinel-2 at a glance",
+        "stats": [
+         {
+          "value": "13",
+          "label": "spectral bands"
+         },
+         {
+          "value": "10 m",
+          "label": "finest pixel size"
+         },
+         {
+          "value": "5 days",
+          "label": "revisit with two satellites"
+         },
+         {
+          "value": "290 km",
+          "label": "swath width"
+         }
+        ],
+        "note": {
+         "tone": "info",
+         "text": "Mission figures rounded; data are free under the European Copernicus programme."
+        }
+       },
+       "narration": [
+        "Sentinel-2 is the satellite mission we will use most in this course. It is part of the European Copernicus programme, and its images are free for anyone to download and use.",
+        "The mission flies two identical satellites in the same orbit, half an orbit apart. Together they photograph every land area, including Mauritius and Rodrigues, roughly every five days.",
+        "Each satellite carries a multispectral instrument that sweeps a strip of ground about two hundred and ninety kilometres wide, so the whole of Mauritius fits comfortably in a single pass.",
+        "The images are delivered as tiles of one hundred by one hundred kilometres, in a map projection called Universal Transverse Mercator. For Mauritius, that is zone forty south.",
+        "Free, frequent, multispectral data at field scale is what made satellite-based precision agriculture practical for ordinary farms rather than just research projects.",
+        "Because the satellites cross the equator at about half past ten in the morning local time, images are taken under similar light each visit, before the afternoon clouds have usually built up over the interior."
+       ]
+      },
+      {
+       "title": "Thirteen bands across the spectrum",
+       "slide": {
+        "kind": "cards",
+        "heading": "Sentinel-2 band families",
+        "cards": [
+         {
+          "label": "Visible: B2, B3, B4",
+          "text": "Blue, green and red at 10 m"
+         },
+         {
+          "label": "Red edge: B5, B6, B7",
+          "text": "Chlorophyll-sensitive bands at 20 m"
+         },
+         {
+          "label": "NIR: B8 and B8A",
+          "text": "B8 broad at 10 m; B8A narrow at 20 m"
+         },
+         {
+          "label": "SWIR: B11, B12",
+          "text": "Moisture and dry residue at 20 m"
+         },
+         {
+          "label": "Atmosphere: B1, B9, B10",
+          "text": "Aerosols, water vapour, cirrus at 60 m"
+         }
+        ]
+       },
+       "narration": [
+        "The instrument records thirteen spectral bands, numbered from one to twelve, with an extra one called eight A. It helps to group them into families.",
+        "Bands two, three and four are blue, green and red. Combine them and you get a natural colour image, much like a photograph from an aeroplane.",
+        "Bands five, six and seven sit on the red edge, the steep slope between red and near-infrared. They are especially sensitive to chlorophyll and nitrogen in the leaves.",
+        "Band eight is a broad near-infrared band, and band eight A is a narrower one. Then bands eleven and twelve sit in the shortwave infrared, where water absorbs strongly.",
+        "Finally, bands one, nine and ten are mainly for the atmosphere, measuring aerosols, water vapour and thin cirrus cloud. We use them to correct images rather than to study crops directly.",
+        "You do not need to memorise every wavelength. What matters is knowing which family a band belongs to and therefore what it is likely to tell you about a crop, a soil or the atmosphere."
+       ]
+      },
+      {
+       "title": "Three pixel sizes",
+       "slide": {
+        "kind": "compare",
+        "heading": "Spatial resolution by band",
+        "columns": [
+         {
+          "title": "10 m",
+          "points": [
+           "B2, B3, B4, B8",
+           "Field mapping and NDVI",
+           "100 m² per pixel"
+          ]
+         },
+         {
+          "title": "20 m",
+          "points": [
+           "B5, B6, B7, B8A, B11, B12",
+           "Red edge and moisture",
+           "400 m² per pixel"
+          ]
+         },
+         {
+          "title": "60 m",
+          "points": [
+           "B1, B9, B10",
+           "Atmospheric correction",
+           "3,600 m² per pixel"
+          ]
+         }
+        ]
+       },
+       "narration": [
+        "Not every band has the same pixel size. The four most-used bands, blue, green, red and broad near-infrared, have ten-metre pixels, so each pixel covers one hundred square metres.",
+        "The red-edge, narrow near-infrared and shortwave infrared bands have twenty-metre pixels, which cover four hundred square metres each. The atmospheric bands are coarser still, at sixty metres.",
+        "Let us apply that. A one-hectare vegetable plot is ten thousand square metres, so it contains about one hundred ten-metre pixels but only about twenty-five twenty-metre pixels.",
+        "A twenty-hectare cane field, by contrast, holds about two thousand ten-metre pixels, which is plenty for reliable averages, even after we drop the mixed pixels along its edges.",
+        "When we combine bands of different sizes, for example red edge with red, we first resample them onto a common grid, usually ten metres, so that pixels line up exactly.",
+        "Resampling never adds real detail. A twenty-metre band shown on a ten-metre grid still only carries twenty-metre information, so be careful not to over-interpret fine patterns in those bands."
+       ]
+      },
+      {
+       "title": "Choosing bands for the job",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Which bands answer which question?",
+        "points": [
+         "Vigour and canopy cover: NDVI from B8 and B4",
+         "Chlorophyll and nitrogen: red-edge index from B8A and B5",
+         "Crop and soil moisture: B8A with B11",
+         "Harvested versus standing cane: sharp drop in NIR, rise in SWIR"
+        ]
+       },
+       "narration": [
+        "The art of remote sensing is choosing the right bands for your question. For general vigour and canopy cover, NDVI from band eight and band four is the reliable starting point.",
+        "If you suspect a nitrogen problem in cane that already has a full canopy, red-edge bands are more useful, because they keep responding to chlorophyll after NDVI has saturated.",
+        "For moisture, combine near-infrared with shortwave infrared band eleven. A drought-stressed tea block or a field that needs irrigation shows up as lower values of that moisture index.",
+        "And to detect harvest, look for the moment a cane field's near-infrared collapses and its shortwave infrared jumps, as the green canopy is replaced by dry trash and bare soil.",
+        "Whatever bands you choose, the same rule applies: make sure you are comparing like with like, using the same bands, the same processing level and, ideally, similar dates across seasons."
+       ]
+      },
+      {
+       "title": "Recap",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Key ideas",
+        "points": [
+         "Free data, five-day revisit, thirteen bands",
+         "Pixels of 10, 20 and 60 m depending on band",
+         "NDVI uses B8 and B4 at 10 m",
+         "Pick bands to match the question"
+        ]
+       },
+       "narration": [
+        "To recap, Sentinel-2 gives us free images of Mauritius about every five days, in thirteen bands at ten, twenty or sixty metres.",
+        "We use the ten-metre red and near-infrared bands for NDVI, the red-edge bands for chlorophyll in dense crops, and shortwave infrared for moisture and harvest.",
+        "Next, we look at what has to happen to a scene before we can trust those numbers: processing levels, reflectance scaling and cloud masking."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "c7-L5",
+     "type": "reading",
+     "title": "Preparing a Sentinel-2 scene: levels, reflectance and clouds",
+     "dur": 9,
+     "objectives": [
+      "Distinguish Sentinel-2 Level-1C and Level-2A products",
+      "Convert stored digital numbers to surface reflectance",
+      "Use the Scene Classification Layer to mask clouds and shadows",
+      "Plan a cloud-aware image search for a Mauritian site"
+     ],
+     "chips": [
+      "Should I always use Level-2A?",
+      "What does the 10,000 scale factor mean?",
+      "Which SCL classes should I mask out?"
+     ],
+     "body": "Downloading a Sentinel-2 image is easy; trusting the numbers inside it takes a little more care. Before computing any index, you need to know which processing level you have, how reflectance is stored, and which pixels are hidden by cloud. This reading walks through those steps, using a sugar cane area on the eastern plains as a running example.\n\n## Processing levels: 1C and 2A\n\nThe European Space Agency distributes Sentinel-2 data at two main levels.\n\n| Level | What it contains | When to use it |\n|---|---|---|\n| **Level-1C** | Top-of-atmosphere reflectance, orthorectified onto a map grid | Older archives; custom atmospheric correction |\n| **Level-2A** | Bottom-of-atmosphere (surface) reflectance, plus a Scene Classification Layer | Almost all crop monitoring |\n\n**Top-of-atmosphere** reflectance is what the satellite sees, including the effect of haze, water vapour and aerosols between the ground and space. **Bottom-of-atmosphere** reflectance estimates what the ground itself reflects, after an atmospheric correction model has removed that effect. Because the atmosphere changes from day to day, especially in humid, salty coastal air, only surface reflectance gives values that are comparable between dates. For this course, **always choose Level-2A** unless you have a specific reason not to.\n\n## From stored numbers to reflectance\n\nTo save space, reflectance is stored as whole numbers called digital numbers (DN). Two pieces of information convert them back:\n\n- a **quantification value** of 10,000, so a DN of 4,000 means a reflectance of 0.40;\n- since early 2022, an **offset** of −1,000 added to Level-2A values, so that very dark surfaces are not clipped at zero.\n\nFor recent Level-2A products the conversion is therefore:\n\n```python\nreflectance = (dn - 1000) / 10000\n```\n\nFor older products without the offset, simply divide by 10,000. Always check the product metadata (the `BOA_ADD_OFFSET` field) rather than guessing. A value of 0 is reserved for *no data*, typically outside the swath, and must be excluded before any arithmetic.\n\n> **Why it matters for NDVI.** NDVI is a ratio, so a pure scale factor cancels out. An offset does *not* cancel. Forgetting the −1,000 offset makes every NDVI value slightly wrong, and makes old and new scenes inconsistent in a time series.\n\n### Worked example: one cane pixel\n\nA pixel in a recent Level-2A scene has DN 1,450 in band 4 (red) and DN 5,600 in band 8 (NIR).\n\n1. Red reflectance = (1,450 − 1,000) ÷ 10,000 = 0.045.\n2. NIR reflectance = (5,600 − 1,000) ÷ 10,000 = 0.46.\n3. NDVI = (0.46 − 0.045) ÷ (0.46 + 0.045) = 0.415 ÷ 0.505 ≈ **0.82**, a dense, healthy canopy.\n\nHad you forgotten the offset, you would compute (5,600 − 1,450) ÷ (5,600 + 1,450) ≈ 0.59, which suggests a thin or stressed crop. The same field, a very different story.\n\n## Clouds, shadows and the Scene Classification Layer\n\nMauritius is a cloudy place to do remote sensing. Trade-wind cumulus builds over the central plateau most afternoons, and the summer cyclone season brings long cloudy spells. Clouds are bright in every band and give NDVI values near zero; their shadows are dark and also corrupt the index.\n\nLevel-2A products include a **Scene Classification Layer (SCL)** at 20 m, which labels every pixel. The classes you will meet most often are:\n\n| SCL value | Meaning | Keep? |\n|---|---|---|\n| 0, 1 | No data, saturated or defective | No |\n| 3 | Cloud shadow | No |\n| 4 | Vegetation | Yes |\n| 5 | Not vegetated (bare soil, roads) | Yes |\n| 6 | Water | Yes, but not for crop statistics |\n| 7 | Unclassified | Usually yes, with caution |\n| 8, 9 | Cloud, medium and high probability | No |\n| 10 | Thin cirrus | No |\n| 11 | Snow or ice | Not relevant in Mauritius |\n\nA sensible mask keeps classes 4, 5, 6 and 7 and removes the rest. The SCL is automated and imperfect: thin cloud edges and haze are sometimes labelled as vegetation, so many analysts also *dilate* the cloud mask by one or two pixels, removing a ring around each cloud. Because the SCL is 20 m, it must be resampled to 10 m, using nearest-neighbour resampling so class codes are not averaged, before being applied to band 4 and band 8.\n\n## Searching for a usable scene\n\nEvery product carries a scene-wide cloud percentage, but that figure covers the whole 100 × 100 km tile, much of which is ocean around Mauritius. A tile reported as 40% cloudy may be clear over your fields, and one reported at 5% may have its only cloud sitting on your estate. Good practice is:\n\n1. Search by date range and tile, keeping scenes below a generous threshold, say 60%.\n2. Clip each candidate to your area of interest and compute the fraction of *your* pixels that are cloud-free.\n3. Keep scenes where at least, say, 80% of field pixels are clear.\n\nThe thresholds are illustrative; tune them to your site and season. The upland tea areas typically need a far longer search window than the drier western and northern plains.\n\n## Projections and alignment\n\nSentinel-2 tiles over Mauritius use UTM zone 40 south (EPSG code 32740), with coordinates in metres. Field boundaries from a farm GIS or GPS survey are often stored in latitude and longitude (EPSG 4326). Before clipping or computing field statistics, reproject the boundaries to the raster's coordinate system, never the other way round, so the satellite pixels are not resampled unnecessarily.\n\n## Key takeaways\n\n- Use Level-2A surface reflectance for crop monitoring; it is comparable between dates.\n- Convert DN to reflectance with the scale factor of 10,000 and, for recent products, the −1,000 offset.\n- Treat 0 as no data and exclude it before calculating indices.\n- Mask clouds, shadows and cirrus with the Scene Classification Layer, ideally with a small buffer.\n- Judge cloudiness over your own fields, not from the scene-wide percentage.\n- Reproject vector boundaries to the raster's UTM zone 40 south grid before clipping.\n\n## Check your understanding\n\n1. Why does forgetting the −1,000 offset change NDVI, while forgetting the 10,000 scale factor does not?\n*Answer:* NDVI is a ratio, so multiplying both bands by the same factor cancels out, but subtracting a constant changes the ratio between them.\n2. A scene is reported as 35% cloudy. Is it suitable for your cane estate?\n*Answer:* You cannot tell from the tile percentage; clip the SCL to your fields and check what fraction of their pixels are clear.\n3. Which resampling method should you use to bring the 20 m SCL to 10 m, and why?\n*Answer:* Nearest neighbour, because SCL values are class codes and averaging them would create meaningless classes."
+    },
+    {
+     "id": "c7-L6",
+     "type": "quiz",
+     "title": "Quiz 1: NDVI, sensors and Sentinel-2 scenes",
+     "dur": 15,
+     "quiz": {
+      "time": 15,
+      "weight": 5,
+      "questions": [
+       {
+        "q": "Why does healthy vegetation reflect strongly in the near-infrared?",
+        "o": [
+         "Chlorophyll emits near-infrared light",
+         "The spongy mesophyll cells and air spaces scatter it",
+         "The leaf is warmer than the soil",
+         "Water in the leaf reflects near-infrared"
+        ],
+        "a": 1,
+        "ex": "Near-infrared is not absorbed by chlorophyll and is scattered by the internal cell structure of the leaf."
+       },
+       {
+        "q": "Which Sentinel-2 bands are normally used to compute NDVI at 10 m?",
+        "o": [
+         "B4 and B8",
+         "B2 and B3",
+         "B5 and B8A",
+         "B11 and B12"
+        ],
+        "a": 0,
+        "ex": "Band 4 is red and band 8 is the broad near-infrared band, both at 10 m."
+       },
+       {
+        "q": "A pixel has red reflectance 0.05 and NIR reflectance 0.45. What is its NDVI?",
+        "o": [
+         "0.40",
+         "0.90",
+         "0.80",
+         "0.11"
+        ],
+        "a": 2,
+        "ex": "(0.45 − 0.05) ÷ (0.45 + 0.05) = 0.40 ÷ 0.50 = 0.80."
+       },
+       {
+        "q": "Which surface would most likely give a negative NDVI?",
+        "o": [
+         "A mature cane field",
+         "A ploughed field of dry soil",
+         "A tea block after pruning",
+         "A water reservoir"
+        ],
+        "a": 3,
+        "ex": "Open water absorbs near-infrared more than red, so NIR minus red is negative."
+       },
+       {
+        "q": "A grower wants to find a disease patch in a 0.3-hectare tomato plot this week. Which approach fits best?",
+        "o": [
+         "Sentinel-2 60 m bands",
+         "A multispectral drone flight plus a field visit",
+         "A monthly Sentinel-2 composite",
+         "The scene-wide cloud percentage"
+        ],
+        "a": 1,
+        "ex": "A small plot needs centimetre detail and quick timing, which a drone provides; the field visit confirms the cause."
+       },
+       {
+        "q": "Why is Level-2A preferred over Level-1C for crop time series?",
+        "o": [
+         "It has finer pixels",
+         "It contains thermal bands",
+         "It is corrected to surface reflectance, so dates are comparable",
+         "It has no clouds"
+        ],
+        "a": 2,
+        "ex": "Level-2A removes most atmospheric effects, giving bottom-of-atmosphere reflectance that can be compared between dates."
+       },
+       {
+        "q": "In the Scene Classification Layer, which set of classes should be masked out before computing field NDVI?",
+        "o": [
+         "3, 8, 9 and 10",
+         "4 and 5",
+         "6 and 7",
+         "4, 5, 6 and 7"
+        ],
+        "a": 0,
+        "ex": "Class 3 is cloud shadow, 8 and 9 are cloud and 10 is thin cirrus."
+       },
+       {
+        "q": "A recent Level-2A pixel has DN 3,000 in band 8. With the −1,000 offset and 10,000 scale, what is its reflectance?",
+        "o": [
+         "0.30",
+         "0.40",
+         "0.20",
+         "0.03"
+        ],
+        "a": 2,
+        "ex": "(3,000 − 1,000) ÷ 10,000 = 0.20."
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "m3",
+   "title": "Module 3 · Processing and analysing imagery",
+   "items": [
+    {
+     "id": "c7-L7",
+     "type": "video",
+     "title": "Processing a Sentinel-2 scene in Python",
+     "dur": 5,
+     "objectives": [
+      "Outline the steps from scene search to field statistics",
+      "Load Sentinel-2 bands with rasterio and convert them to reflectance",
+      "Apply a cloud mask from the Scene Classification Layer",
+      "Compute NDVI, save it as a GeoTIFF and summarise it per field"
+     ],
+     "chips": [
+      "What is rasterio and why not use a normal image library?",
+      "How do I handle the 20 metre SCL band?",
+      "Why use NaN instead of zero for masked pixels?"
+     ],
+     "chapters": [
+      {
+       "title": "From download to answer",
+       "slide": {
+        "kind": "steps",
+        "heading": "Scene processing pipeline",
+        "steps": [
+         {
+          "title": "Find",
+          "sub": "Level-2A scene, date, clouds over your fields"
+         },
+         {
+          "title": "Load",
+          "sub": "Read B4, B8 and SCL; check CRS"
+         },
+         {
+          "title": "Scale and mask",
+          "sub": "DN to reflectance; remove clouds and no-data"
+         },
+         {
+          "title": "Compute",
+          "sub": "NDVI per pixel; save GeoTIFF"
+         },
+         {
+          "title": "Summarise",
+          "sub": "Mean NDVI per field polygon"
+         }
+        ]
+       },
+       "narration": [
+        "In this video we take one Sentinel-2 scene of a cane-growing area and turn it into a table of NDVI values, one row per field. That is the core skill of this course.",
+        "The pipeline has five steps: find a suitable scene, load the bands we need, convert them to reflectance and mask out bad pixels, compute NDVI, and summarise it for each field.",
+        "We will use Python, because it is free, widely used in agricultural research, and has excellent libraries for geographic data. The key one is rasterio, which reads satellite images together with their map coordinates.",
+        "An ordinary photo library would load the pixel values but throw away the georeferencing, and without coordinates we could never line pixels up with field boundaries.",
+        "Along the way we will also use numpy for array arithmetic, geopandas for the field boundaries, and a small library called rasterstats to calculate statistics inside each field."
+       ]
+      },
+      {
+       "title": "Loading bands and scaling to reflectance",
+       "slide": {
+        "kind": "code",
+        "heading": "Read red and NIR as reflectance",
+        "lang": "python",
+        "code": "import numpy as np\nimport rasterio\ndef read_reflectance(path, offset=1000):\n    with rasterio.open(path) as src:\n        dn = src.read(1).astype('float32')\n        profile = src.profile\n    refl = (dn - offset) / 10000.0\n    refl[dn == 0] = np.nan          # 0 = no data\n    return refl, profile\n\nred, profile = read_reflectance('scene_B04_10m.jp2')\nnir, _ = read_reflectance('scene_B08_10m.jp2')",
+        "points": [
+         "Convert to float before arithmetic",
+         "Offset 1,000 for products since 2022",
+         "No-data becomes NaN"
+        ],
+        "note": {
+         "tone": "info",
+         "text": "File names are illustrative; check the offset in each product's metadata."
+        }
+       },
+       "narration": [
+        "Each band of a Level-2A product is a separate image file. We open the red band, band four, and the near-infrared band, band eight, both at ten metres.",
+        "The first thing the function does is convert the stored whole numbers to floating-point numbers, because we are about to divide, and integer division would quietly ruin our results.",
+        "Next it subtracts the offset of one thousand and divides by ten thousand, which turns the stored digital numbers into surface reflectance between zero and one.",
+        "Finally, any pixel that was zero in the original file is no data, so we set it to a special value called not a number. That way it is ignored rather than treated as a black pixel.",
+        "We also keep the profile, which records the coordinate system, pixel size and position, so that we can save our result later with the correct georeferencing.",
+        "Wrapping these steps in a small function is good practice, because you will repeat them for dozens of scenes across a season, and a function guarantees each scene is treated in exactly the same way."
+       ]
+      },
+      {
+       "title": "Masking clouds with the Scene Classification Layer",
+       "slide": {
+        "kind": "code",
+        "heading": "Cloud mask from SCL",
+        "lang": "python",
+        "code": "from rasterio.enums import Resampling\n\nwith rasterio.open('scene_SCL_20m.jp2') as src:\n    scl = src.read(1, out_shape=red.shape,\n                   resampling=Resampling.nearest)\n\nKEEP = [4, 5, 6, 7]\nclear = np.isin(scl, KEEP)\nred[~clear] = np.nan\nnir[~clear] = np.nan\nprint(f'clear pixels: {clear.mean():.0%}')",
+        "points": [
+         "Read SCL straight onto the 10 m grid",
+         "Nearest neighbour keeps class codes intact",
+         "Report the clear fraction"
+        ]
+       },
+       "narration": [
+        "Now we deal with clouds. The Scene Classification Layer labels every pixel, but it comes at twenty metres, while our red and near-infrared bands are at ten.",
+        "So we ask rasterio to read it directly onto the ten-metre grid, using nearest-neighbour resampling. That copies class codes instead of averaging them, because the average of a cloud and a field is meaningless.",
+        "We keep vegetation, bare soil, water and unclassified pixels, which are classes four to seven, and set everything else, including cloud, cloud shadow and cirrus, to not a number.",
+        "Printing the clear fraction is a good habit. If only a third of your area is clear, you should probably look for a better date rather than carry on with a patchy image.",
+        "Keep a record of the clear fraction for every scene you process. Later, when you build a time series, that record tells you which dates to trust and which to treat with caution."
+       ]
+      },
+      {
+       "title": "Computing NDVI and field statistics",
+       "slide": {
+        "kind": "code",
+        "heading": "NDVI, GeoTIFF and per-field means",
+        "lang": "python",
+        "code": "ndvi = (nir - red) / (nir + red)\n\nprofile.update(driver='GTiff', dtype='float32',\n               count=1, nodata=np.nan)\nwith rasterio.open('ndvi.tif', 'w', **profile) as dst:\n    dst.write(ndvi.astype('float32'), 1)\n\nimport geopandas as gpd\nfrom rasterstats import zonal_stats\nfields = gpd.read_file('fields.gpkg').to_crs(profile['crs'])\nfields['ndvi'] = [z['mean'] for z in\n    zonal_stats(fields.buffer(-10), 'ndvi.tif', stats='mean')]",
+        "points": [
+         "NDVI is one line of array arithmetic",
+         "Save with the original georeferencing",
+         "Shrink fields by 10 m to drop mixed edge pixels"
+        ]
+       },
+       "narration": [
+        "With clean reflectance arrays, NDVI is a single line of code: near-infrared minus red, divided by near-infrared plus red, calculated for millions of pixels at once.",
+        "We save the result as a GeoTIFF using the same profile, updated for a single floating-point band, so it opens correctly in desktop mapping software and lines up with other layers.",
+        "Then we load the field boundaries with geopandas, reproject them to the image's coordinate system, and shrink each polygon by ten metres, one pixel, to avoid mixed edge pixels.",
+        "Zonal statistics then calculates the mean NDVI inside each field. The result is a simple table, one row per field, which is exactly what an agronomist or a yield model needs.",
+        "A quick sanity check is worthwhile: values should mostly fall between about zero point one and zero point nine, and any field with no value probably sat under cloud.",
+        "It is worth opening the saved NDVI map in a desktop mapping package and laying the field boundaries over it. A visual check catches misaligned layers far faster than any table of numbers."
+       ]
+      },
+      {
+       "title": "Recap",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Key ideas",
+        "points": [
+         "rasterio keeps pixels and coordinates together",
+         "Scale, offset and mask before computing indices",
+         "Resample class layers with nearest neighbour",
+         "Summarise per field with a one-pixel inward buffer"
+        ]
+       },
+       "narration": [
+        "To recap, processing a scene means loading the bands with their coordinates, converting them to reflectance, masking clouds and no data, and only then computing NDVI.",
+        "We save the index with correct georeferencing and summarise it per field, after trimming edge pixels, to get a clean table for analysis.",
+        "In the next reading we go beyond NDVI to other indices, and see how the same pipeline serves tea and vegetable growers as well as cane."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "c7-L8",
+     "type": "reading",
+     "title": "Beyond NDVI: other indices and field-level statistics",
+     "dur": 9,
+     "objectives": [
+      "Compute and interpret NDRE, NDMI and SAVI from Sentinel-2 bands",
+      "Choose an index suited to the crop, growth stage and question",
+      "Summarise indices per field and per management zone",
+      "Apply indices to cane, tea and vegetable examples"
+     ],
+     "chips": [
+      "When should I use NDRE instead of NDVI?",
+      "What does the L in SAVI do?",
+      "How do I split a field into management zones?"
+     ],
+     "body": "NDVI is the workhorse of crop remote sensing, but it is not the only index, and it is not always the best one. In this reading we add three more indices to your toolkit, see how to choose between them, and practise summarising indices at the level where farm decisions are actually made: the field and the management zone.\n\n## Three useful indices\n\nAll three follow the same *normalised difference* pattern as NDVI: the difference between two bands, divided by their sum, giving a value between −1 and +1.\n\n| Index | Sentinel-2 formula | Responds to | Best used when |\n|---|---|---|---|\n| **NDVI** | (B8 − B4) / (B8 + B4) | Green canopy cover | Early and mid growth; general vigour |\n| **NDRE** (red-edge) | (B8A − B5) / (B8A + B5) | Leaf chlorophyll, nitrogen | Dense canopies where NDVI saturates |\n| **NDMI** (moisture) | (B8A − B11) / (B8A + B11) | Canopy water content | Drought stress, irrigation scheduling |\n| **SAVI** (soil-adjusted) | 1.5 × (B8 − B4) / (B8 + B4 + 0.5) | Green cover over bright soil | Young or sparse crops |\n\n### NDRE: seeing past saturation\n\nThe red-edge band B5 sits on the steep slope between red and NIR. As chlorophyll increases, absorption widens and B5 reflectance keeps falling even after the canopy has closed. NDRE therefore keeps changing in a mature cane field where NDVI has flattened near 0.85. It is the index to watch for nitrogen differences in cane after about four or five months of growth. Note that B5 and B8A are 20 m bands, so NDRE maps are coarser than NDVI maps.\n\n### NDMI: water in the canopy\n\nShortwave infrared band B11 is absorbed by water in leaves. A well-watered canopy absorbs strongly at B11, so NDMI is high; as plants dry out, B11 reflectance rises and NDMI falls. NDMI often signals water stress several days before NDVI does, because leaves lose water before they lose chlorophyll. It is valuable on the drier western side of the island, where irrigation decisions matter most.\n\n### SAVI: correcting for soil\n\nWhen a crop covers only part of the ground, the soil between plants contributes much of the signal, and bright soils inflate NDVI differently from dark ones. SAVI adds a constant *L*, usually 0.5, to the denominator, which reduces the soil influence. Use it for newly planted cane, freshly transplanted vegetables or recently pruned tea.\n\n## Choosing an index: a decision guide\n\n1. **What stage is the crop at?** Sparse cover → SAVI. Mid-season → NDVI. Full, dense canopy → NDRE.\n2. **What is the question?** Overall vigour → NDVI. Nutrient status → NDRE. Water → NDMI.\n3. **How small is the field?** If the field is under a hectare, prefer the 10 m indices (NDVI, SAVI); 20 m bands give too few clean pixels.\n\nNo index is \"the truth\". Each is a proxy, and any pattern it reveals should be checked in the field before you act on it.\n\n## From pixels to fields and zones\n\nFarmers manage fields and parts of fields, not pixels. Two levels of summary are common.\n\n- **Field statistics.** For each field polygon, after trimming one pixel from the edge, compute the mean, median, standard deviation and number of clear pixels. The median is robust to a few leftover cloud pixels; a large standard deviation flags an uneven field worth scouting.\n- **Management zones.** Within a large field, group pixels into two to four zones (for example low, medium and high vigour) using thresholds or a clustering method such as k-means applied to several dates. Zones that persist across seasons usually reflect soil differences, so they can guide variable-rate fertiliser or targeted soil sampling.\n\n```python\nimport numpy as np\nfrom rasterstats import zonal_stats\n\nstats = zonal_stats(fields.buffer(-10), \"ndre.tif\",\n                    stats=[\"median\", \"std\", \"count\"])\nfor f, s in zip(fields[\"field_id\"], stats):\n    flag = \"scout\" if s[\"std\"] and s[\"std\"] > 0.08 else \"\"\n    print(f, round(s[\"median\"], 2), s[\"count\"], flag)\n```\n\n*The 0.08 threshold is illustrative; set it from your own fields' typical variability.*\n\n## Case box: three crops, three indices\n\n**Sugar cane, eastern plains.** In month seven, all fields read NDVI 0.83–0.87, no help. NDRE ranges from 0.38 to 0.52, and the three lowest fields share a history of late fertiliser application. Leaf samples confirm lower nitrogen. *Index: NDRE.*\n\n**Tea, central uplands.** After a dry spell, NDMI over several blocks drops from about 0.35 to 0.20 while NDVI barely moves. The grower brings forward irrigation on the blocks with shallow soils. *Index: NDMI.* Clear scenes are rare here, so the grower uses the first cloud-free date in three weeks and confirms with a field walk.\n\n**Vegetables, a two-hectare holding.** Three weeks after transplanting cabbage, the crop covers about a third of the ground on pale soil. SAVI shows a weak strip along the lower edge, where waterlogging is later confirmed. *Index: SAVI, at 10 m.*\n\nAll values in these cases are illustrative.\n\n## Key takeaways\n\n- Most crop indices share the normalised-difference form and range from −1 to +1.\n- NDRE stays sensitive to chlorophyll in dense canopies where NDVI saturates.\n- NDMI tracks canopy water and often warns of drought stress before NDVI.\n- SAVI reduces soil influence for young or sparse crops.\n- Summarise per field with median, spread and pixel count; use persistent zones for variable-rate decisions.\n- Always confirm an index pattern on the ground before acting.\n\n## Check your understanding\n\n1. All cane fields on an estate show NDVI around 0.85 in month eight. Which index would you compute to look for nitrogen differences, and why?\n*Answer:* NDRE, because the red-edge band keeps responding to chlorophyll after NDVI has saturated in a closed canopy.\n2. Why is SAVI more appropriate than NDVI one month after transplanting vegetables?\n*Answer:* The crop covers little ground, so soil dominates the signal; SAVI's L term reduces that soil influence.\n3. A field has median NDVI 0.70 but a standard deviation of 0.15. What should the agronomist do?\n*Answer:* Treat the field as uneven: map where the low values are and scout those areas before deciding on any management change."
+    },
+    {
+     "id": "c7-L9",
+     "type": "video",
+     "title": "Watching crops through the season: time series and crop calendars",
+     "dur": 5,
+     "objectives": [
+      "Explain why a time series is more informative than a single image",
+      "Describe the typical NDVI curve of a sugar cane crop cycle",
+      "Contrast the seasonal patterns of cane, tea and vegetables",
+      "Handle cloud gaps and detect events such as harvest or cyclone damage"
+     ],
+     "chips": [
+      "How do I fill gaps caused by clouds?",
+      "How can I tell a field has been harvested?",
+      "Why does tea NDVI look so flat?"
+     ],
+     "chapters": [
+      {
+       "title": "A snapshot versus a film",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Why time series?",
+        "points": [
+         "One image shows a moment; a series shows growth",
+         "Separates late planting from poor growth",
+         "Reveals events: harvest, replanting, storm damage",
+         "Seasonal totals relate better to yield"
+        ]
+       },
+       "narration": [
+        "A single satellite image is a snapshot. It tells you how green a field looks on one day, but not whether that field is early, late, recovering or declining.",
+        "Imagine two cane fields that both read zero point five in March. One was harvested last October and is growing normally; the other was harvested in July and is struggling. A single date cannot separate them.",
+        "A time series, the same field measured every few days or weeks through the season, turns the snapshot into a film. The shape of the curve tells us far more than any single point.",
+        "Because Sentinel-2 revisits every five days, even after losing many dates to cloud we can usually build a useful curve for each field across a season.",
+        "Think of it the way a doctor reads a growth chart for a child. One measurement of height says little, but a line of measurements over months shows clearly whether growth is on track."
+       ]
+      },
+      {
+       "title": "The sugar cane NDVI curve",
+       "slide": {
+        "kind": "steps",
+        "heading": "A typical cane cycle, illustrative",
+        "steps": [
+         {
+          "title": "Harvest and regrowth",
+          "sub": "NDVI drops to about 0.2, then ratoon shoots appear"
+         },
+         {
+          "title": "Tillering",
+          "sub": "Rapid rise as the canopy closes"
+         },
+         {
+          "title": "Grand growth",
+          "sub": "NDVI 0.8 or more through the wet summer"
+         },
+         {
+          "title": "Maturity",
+          "sub": "Slight decline in cooler, drier months"
+         },
+         {
+          "title": "Harvest",
+          "sub": "Sudden fall; the cycle restarts"
+         }
+        ]
+       },
+       "narration": [
+        "Sugar cane in Mauritius is usually harvested in the cooler, drier months, roughly from June to December, and most fields are ratoons, meaning the cane regrows from the stubble left after cutting.",
+        "Straight after harvest, the field is mostly dry trash and soil, so NDVI drops to around zero point two. As the new shoots tiller and the canopy closes, NDVI climbs steeply over a few months.",
+        "Through the hot, wet summer, the crop is in its grand growth phase, and NDVI sits on a high plateau, often above zero point eight. This is where saturation hides differences in stalk growth.",
+        "As the weather cools and the cane ripens, NDVI often eases down a little. Then harvest causes a sudden collapse, which is easy to detect as a sharp drop between two clear dates.",
+        "From each curve we can extract useful features, such as the date of harvest, how fast the canopy closed, the peak value, and the area under the curve across the season.",
+        "Of all these features, the area under the curve is often the most useful, because it combines how quickly the canopy developed with how long it stayed green, and both affect the final harvest."
+       ]
+      },
+      {
+       "title": "Tea and vegetables follow different rhythms",
+       "slide": {
+        "kind": "compare",
+        "heading": "Seasonal patterns compared",
+        "columns": [
+         {
+          "title": "Sugar cane",
+          "points": [
+           "One cycle of about 12 months",
+           "Big drop at harvest",
+           "Peak in summer"
+          ]
+         },
+         {
+          "title": "Tea",
+          "points": [
+           "Evergreen bush, plucked often",
+           "Fairly flat NDVI",
+           "Dips after pruning"
+          ]
+         },
+         {
+          "title": "Vegetables",
+          "points": [
+           "Cycles of 2 to 4 months",
+           "Several crops per year",
+           "Bare soil between crops"
+          ]
+         }
+        ]
+       },
+       "narration": [
+        "Tea is an evergreen bush kept as a flat-topped plucking table, and the young shoots are picked every week or two. Because the canopy is always there, its NDVI curve is fairly flat.",
+        "The interesting signals in tea are the dips: pruning, which removes much of the canopy every few years, and dry spells or frost-like cold snaps on the highest ground, which reduce vigour for a while.",
+        "Vegetables are the opposite. A tomato, potato or cabbage crop may last only two to four months, so a single field can show three or four short green peaks in one year, separated by bare soil.",
+        "For vegetables we therefore need frequent clear images and fine resolution, and we often use the curve simply to map which plots are planted, and when, across a growing area.",
+        "On a mixed farm, these rhythms can even be used to classify crops automatically, because a cane field, a tea block and a vegetable plot trace such different shapes through the year."
+       ]
+      },
+      {
+       "title": "Clouds, gaps and sudden events",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Working with imperfect series",
+        "points": [
+         "Mask clouds first, then fill gaps",
+         "Monthly median composites smooth noise",
+         "Interpolate or smooth between clear dates",
+         "Compare before and after an event for damage"
+        ],
+        "note": {
+         "tone": "warn",
+         "text": "Never interpolate across a harvest: the drop is real, not a gap."
+        }
+       },
+       "narration": [
+        "Clouds leave gaps in every series, especially in summer. A simple remedy is to build monthly composites, taking the median of all clear observations for each pixel in each month.",
+        "Another is to interpolate between clear dates and smooth the curve. That works well during steady growth, but be careful never to smooth away a harvest, because that drop is real.",
+        "Time series also help after extreme events. When a cyclone passes close to the island, comparing the last clear image before with the first clear image after can map lodged or shredded cane.",
+        "The key is to compare like with like: the same field, similar sun angles, and ideally the change relative to neighbouring fields, so that seasonal decline is not mistaken for damage.",
+        "Always keep a note of which values were observed and which were filled in. A filled value is an informed guess, and it should never carry the same weight as a clear observation."
+       ]
+      },
+      {
+       "title": "Recap",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Key ideas",
+        "points": [
+         "A time series turns snapshots into a growth story",
+         "Cane: regrowth, plateau, maturity, harvest drop",
+         "Tea is flat with dips; vegetables are short peaks",
+         "Fill cloud gaps carefully and detect events"
+        ]
+       },
+       "narration": [
+        "To recap, a time series reveals what a single image cannot: when a crop was planted or harvested, how fast it grew, and how it responded to stress or storms.",
+        "Cane, tea and vegetables each have their own seasonal signature, and features from the cane curve, such as peak NDVI and the area under the curve, are exactly what we will feed into a yield model next."
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "m4",
+   "title": "Module 4 · From imagery to yield",
+   "items": [
+    {
+     "id": "c7-L10",
+     "type": "video",
+     "title": "Estimating sugar cane yield from imagery",
+     "dur": 5,
+     "objectives": [
+      "Explain how an empirical model links NDVI to yield",
+      "Calibrate a simple regression with ground-truth yield records",
+      "Validate a yield model using held-out fields and RMSE",
+      "Communicate a yield estimate with its uncertainty and limitations"
+     ],
+     "chips": [
+      "Why peak NDVI and not the NDVI on harvest day?",
+      "How many fields do I need to calibrate a model?",
+      "What does an RMSE of 8 tonnes per hectare mean?"
+     ],
+     "chapters": [
+      {
+       "title": "The yield question",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Why estimate yield early?",
+        "points": [
+         "Plan harvest order and transport to the mill",
+         "Spot underperforming fields while there is time to act",
+         "Inform growers, millers and planners",
+         "Measured in tonnes of cane per hectare"
+        ]
+       },
+       "narration": [
+        "Every season, growers and millers want to know one thing well before the cane is cut: how many tonnes will each field deliver?",
+        "An early estimate helps plan harvest order, lorries and mill capacity. It also points out fields that are falling behind, so an agronomist can visit them and find out why.",
+        "We measure cane yield in tonnes of cane per hectare. Throughout this video I will use round illustrative figures, with typical fields producing somewhere between fifty and ninety tonnes per hectare.",
+        "Satellites cannot weigh cane, but they can measure how much healthy canopy a field built up over the season, and canopy is closely linked to how much sugar the plants could produce.",
+        "That link is not perfect, of course, but across many fields a stronger, longer-lasting canopy generally means more stalk growth, and that is the relationship we are going to exploit."
+       ]
+      },
+      {
+       "title": "An empirical model",
+       "slide": {
+        "kind": "formula",
+        "heading": "A simple linear yield model",
+        "formula": "Yield (t/ha) = a + b × NDVI feature",
+        "points": [
+         "Feature: peak NDVI or seasonal NDVI sum",
+         "a and b fitted from fields with known yield",
+         "Illustrative fit: Yield = 15 + 80 × peak NDVI"
+        ],
+        "note": {
+         "tone": "info",
+         "text": "Coefficients are illustrative, not a published model."
+        }
+       },
+       "narration": [
+        "The simplest approach is an empirical model, a statistical relationship fitted from fields where we already know the yield. We do not try to simulate the plant's biology; we let the data speak.",
+        "We pick a feature from each field's NDVI time series. Peak NDVI is a good start; the sum of NDVI across the growing season, sometimes called integrated NDVI, is often better because it captures how long the canopy stayed green.",
+        "Then we fit a straight line: yield equals a plus b times the feature. The intercept a and the slope b are found by least-squares regression from fields with known yields.",
+        "Suppose our fit gives yield equals fifteen plus eighty times peak NDVI. A field with a peak of zero point eight would then be estimated at fifteen plus sixty-four, or seventy-nine tonnes per hectare.",
+        "A straight line may look too simple, but with a few dozen fields it is often the most reliable choice. More complex models can easily fit noise in a small dataset and then fail on new fields."
+       ]
+      },
+      {
+       "title": "Calibration with ground truth",
+       "slide": {
+        "kind": "code",
+        "heading": "Fit and test a yield model",
+        "lang": "python",
+        "code": "import pandas as pd\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.metrics import mean_squared_error\n\ndf = pd.read_csv('fields_2025.csv')   # ndvi_peak, yield_tha\nX, y = df[['ndvi_peak']], df['yield_tha']\nXtr, Xte, ytr, yte = train_test_split(X, y, test_size=0.3, random_state=1)\nm = LinearRegression().fit(Xtr, ytr)\nrmse = mean_squared_error(yte, m.predict(Xte)) ** 0.5\nprint(m.intercept_, m.coef_[0], rmse)",
+        "points": [
+         "Ground truth: weighed deliveries per field",
+         "Hold back about 30% of fields for testing",
+         "RMSE is the typical error in tonnes per hectare"
+        ]
+       },
+       "narration": [
+        "The model is only as good as its ground truth. For cane, the best source is the weight of cane delivered to the mill from each field, divided by the field's area.",
+        "We need enough fields to be confident in the relationship, ideally a few dozen, covering good and poor fields, different soils and different ratoon ages.",
+        "Crucially, we never judge a model only on the fields used to fit it. We hold back around thirty per cent of fields, fit the line on the rest, and test predictions on the held-back fields.",
+        "The test error is summarised as the root mean square error, or RMSE. An RMSE of eight tonnes per hectare means our estimates are typically about eight tonnes away from the true yield.",
+        "It also pays to plot predicted against observed yields. Points scattered evenly around the one-to-one line are reassuring; a curve or a cluster of large errors tells you something is missing from the model."
+       ]
+      },
+      {
+       "title": "From field estimate to estate total",
+       "slide": {
+        "kind": "stat",
+        "heading": "Worked example, illustrative",
+        "stats": [
+         {
+          "value": "0.78",
+          "label": "peak NDVI of field 12"
+         },
+         {
+          "value": "77 t/ha",
+          "label": "estimated yield"
+         },
+         {
+          "value": "12 ha",
+          "label": "field area"
+         },
+         {
+          "value": "≈ 930 t",
+          "label": "estimated field total"
+         }
+        ],
+        "note": {
+         "tone": "info",
+         "text": "All numbers are invented for teaching."
+        }
+       },
+       "narration": [
+        "Let us put it together. Field twelve has a peak NDVI of zero point seven eight. Using our illustrative model, fifteen plus eighty times zero point seven eight gives about seventy-seven tonnes per hectare.",
+        "The field covers twelve hectares, so the estimated total is about nine hundred and thirty tonnes of cane. Repeat that for every field and you have an estate-level forecast.",
+        "With an RMSE of eight tonnes per hectare, an honest statement is that field twelve will probably yield between about sixty-nine and eighty-five tonnes per hectare.",
+        "Over many fields, individual errors partly cancel out, so estate totals are usually more reliable than any single field estimate, as long as the model has no systematic bias.",
+        "Remember that these figures assume the season continues normally. A cyclone or a severe drought before harvest would change the outcome, so forecasts should be updated as new images arrive."
+       ]
+      },
+      {
+       "title": "Limits and good practice",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Using yield models responsibly",
+        "points": [
+         "NDVI saturates; add red-edge or seasonal features",
+         "Recalibrate each season and for each region",
+         "Variety, ratoon age and irrigation matter",
+         "Report uncertainty, not just a single number"
+        ],
+        "note": {
+         "tone": "warn",
+         "text": "A model fitted on one estate may not transfer to another."
+        }
+       },
+       "narration": [
+        "Remember the limits. Because NDVI saturates over dense cane, a model based only on peak NDVI struggles to separate good fields from excellent ones. Red-edge indices and seasonal sums help.",
+        "Relationships also change with variety, ratoon age, irrigation, rainfall and cyclone damage, so a model should be recalibrated each season and checked before being applied to a new area.",
+        "To recap, we link an NDVI feature to known yields with a simple regression, test it on held-back fields, and report every estimate with its uncertainty.",
+        "In the assignment you will build exactly this kind of model for a set of cane fields and explain how far its estimates can be trusted."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "c7-L11",
+     "type": "quiz",
+     "title": "Quiz 2: Processing, time series and yield estimation",
+     "dur": 15,
+     "quiz": {
+      "time": 15,
+      "weight": 5,
+      "questions": [
+       {
+        "q": "Why should the 20 m Scene Classification Layer be resampled to 10 m with nearest-neighbour resampling?",
+        "o": [
+         "It is faster than any other method",
+         "It preserves class codes instead of averaging them",
+         "It improves the cloud detection accuracy",
+         "It converts DN to reflectance"
+        ],
+        "a": 1,
+        "ex": "SCL values are categories; averaging a cloud code and a vegetation code would produce a meaningless class."
+       },
+       {
+        "q": "In the processing pipeline, why are field polygons shrunk inward by about 10 m before zonal statistics?",
+        "o": [
+         "To remove mixed pixels along field edges",
+         "To convert them to UTM zone 40 south",
+         "To reduce the file size",
+         "To match the 60 m atmospheric bands"
+        ],
+        "a": 0,
+        "ex": "Edge pixels mix cane with roads or neighbouring fields, so dropping one pixel gives cleaner field statistics."
+       },
+       {
+        "q": "All cane fields on an estate show NDVI of about 0.85 in month eight. Which index best reveals nitrogen differences?",
+        "o": [
+         "SAVI",
+         "NDMI",
+         "NDRE",
+         "Natural colour from B2, B3, B4"
+        ],
+        "a": 2,
+        "ex": "The red-edge index keeps responding to chlorophyll after NDVI has saturated in a closed canopy."
+       },
+       {
+        "q": "A field's NDVI series reads 0.82, 0.80, then 0.21 on the next clear date in August. What is the most likely explanation?",
+        "o": [
+         "A gap that should be interpolated away",
+         "Normal maturity decline",
+         "Sensor calibration drift",
+         "The field was harvested"
+        ],
+        "a": 3,
+        "ex": "A sudden collapse during the harvest season is the classic harvest signal and should not be smoothed away."
+       },
+       {
+        "q": "Which NDVI pattern is most typical of a vegetable-growing plot over one year?",
+        "o": [
+         "Several short peaks separated by bare-soil lows",
+         "A flat line near 0.8 all year",
+         "One long peak lasting twelve months",
+         "Values that are always negative"
+        ],
+        "a": 0,
+        "ex": "Vegetable crops last two to four months, so a plot can carry several short crops each year."
+       },
+       {
+        "q": "Using the illustrative model Yield = 15 + 80 × peak NDVI, what is the estimate for a field with peak NDVI 0.70?",
+        "o": [
+         "56 t/ha",
+         "71 t/ha",
+         "85 t/ha",
+         "95 t/ha"
+        ],
+        "a": 1,
+        "ex": "15 + 80 × 0.70 = 15 + 56 = 71 tonnes per hectare."
+       },
+       {
+        "q": "Why is a yield model tested on held-back fields rather than the fields used to fit it?",
+        "o": [
+         "Held-back fields always have higher yields",
+         "It makes the RMSE smaller",
+         "It shows how well the model predicts fields it has not seen",
+         "Regression cannot be run on all fields at once"
+        ],
+        "a": 2,
+        "ex": "Testing on unseen fields gives an honest estimate of real-world prediction error."
+       },
+       {
+        "q": "A model has an RMSE of 8 t/ha and estimates a field at 77 t/ha. Which statement communicates this best?",
+        "o": [
+         "The field will yield exactly 77 t/ha",
+         "The field will yield at least 85 t/ha",
+         "The model is useless because it has error",
+         "The yield is probably roughly 69 to 85 t/ha"
+        ],
+        "a": 3,
+        "ex": "Reporting the estimate with a range based on the typical error is honest and useful for planning."
+       }
+      ]
+     }
+    },
+    {
+     "id": "c7-L12",
+     "type": "assignment",
+     "title": "Assignment: Sentinel-2 yield estimation for sugar cane fields",
+     "dur": 120,
+     "assignment": {
+      "weight": 25,
+      "max": 100,
+      "brief": "You are advising a (fictional) cane-growing estate on the eastern plains of Mauritius that wants an early yield forecast for the coming harvest. Data provided on the course page (synthetic, for teaching only): (1) a set of Sentinel-2 Level-2A subsets for the estate covering one growing season, with bands B04, B05, B08, B8A and SCL; (2) a GeoPackage of 40 field boundaries with area, cane variety and ratoon age; (3) last season's mill-weighed yields (tonnes of cane per hectare) for 30 of those fields. Tasks: (a) process the scenes — convert to reflectance, mask clouds with the SCL, compute NDVI and NDRE, and extract a per-field time series using a one-pixel inward buffer; (b) derive at least two yield features per field (for example peak NDVI, seasonal NDVI sum, peak NDRE); (c) fit a simple regression model on the 30 fields with known yields, validating it on held-back fields or by cross-validation and reporting RMSE; (d) estimate yield, with an uncertainty range, for the 10 fields without records and give an estate total; (e) discuss limitations — saturation, cloud gaps, variety and ratoon effects — and recommend which fields an agronomist should visit first and why. Deliverables: a Jupyter notebook that runs from top to bottom on the provided data, plus a report of no more than 1,500 words with at least one NDVI map, one time-series chart and one predicted-versus-observed plot. Cite any external sources; treat all figures as illustrative.",
+      "rubric": [
+       {
+        "criterion": "Scene processing",
+        "max": 25,
+        "desc": "Correct reflectance scaling including offset, sound cloud masking with nearest-neighbour SCL, correct CRS handling and edge buffering; notebook runs cleanly."
+       },
+       {
+        "criterion": "Feature extraction and time series",
+        "max": 20,
+        "desc": "Clean per-field series with sensible gap handling; at least two well-justified features, including one that addresses NDVI saturation."
+       },
+       {
+        "criterion": "Yield model and validation",
+        "max": 25,
+        "desc": "Appropriate regression fitted on known fields, honest validation on unseen fields, RMSE reported and interpreted, predictions with uncertainty and an estate total."
+       },
+       {
+        "criterion": "Interpretation and recommendations",
+        "max": 20,
+        "desc": "Clear discussion of limitations and their likely effect on the estimates; practical, prioritised field-visit recommendations linked to evidence."
+       },
+       {
+        "criterion": "Communication",
+        "max": 10,
+        "desc": "Well-structured report within the word limit; maps and charts labelled with units, legends and dates; sources cited."
+       }
+      ]
+     }
+    }
+   ]
+  }
+ ]
+}

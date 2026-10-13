@@ -12,7 +12,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from ..core.audit import audit
 from ..core.db import get_db
 from ..core.deps import require
-from ..models import (Announcement, AnnouncementRead, Assessment, Avatar, CalendarEvent, Course, Enrolment, Event,
+from ..models import (Announcement, AnnouncementRead, Assessment, Avatar, LearningItem, MediaClip, CalendarEvent, Course, Enrolment, Event,
                       Faculty, Lesson, Programme, Source, Submission, SupportTicket, User, VFAttempt, VFSession)
 from ._student_util import (DONE_SUB, GRADED, enrolled_ids, enrolments, iso, item_states, now, require_enrolled, staff_names,
                             sync_progress, visible_announcements)
@@ -262,6 +262,33 @@ async def my_courses(db: AsyncSession = Depends(get_db), user: User = Depends(st
     return [course_card(courses[e.course_id], fac, lec, e.progress, True) for e in ens if e.course_id in courses]
 
 
+@router.get("/my-courses")
+async def my_courses_overview(db: AsyncSession = Depends(get_db), user: User = Depends(student)):
+    """S04a: every enrolled course with its table-of-contents summary and the next thing to do."""
+    ens = await enrolments(db, user)
+    cids = [e.course_id for e in ens]
+    courses = {c.id: c for c in (await db.execute(select(Course).where(Course.id.in_(cids or ["-"])))).scalars()}
+    fac = await _faculties(db)
+    lec = await staff_names(db, [c.lecturer_id for c in courses.values()])
+    st = await item_states(db, user, cids)
+    out = []
+    for e in ens:
+        c = courses.get(e.course_id)
+        if not c:
+            continue
+        items = st["items"].get(c.id, [])
+        mods = list(dict.fromkeys(x["module_id"] for x in items))
+        nxt = next((x for x in items if x["link"] and x["status"] == "progress"), None) or next((x for x in items if x["link"] and x["status"] != "done"), None)
+        mins_left = sum(int(x.get("dur") or 0) for x in items if x["status"] != "done" and x["type"] not in ("assignment",))
+        card = course_card(c, fac, lec, max(e.progress or 0, st["progress"].get(c.id, 0)), True)
+        card.update({"modules": len(mods), "done": sum(1 for x in items if x["status"] == "done"), "total": len(items), "minutes_left": mins_left,
+                     "counts": {t: sum(1 for x in items if x["type"] == t) for t in ("virtual", "video", "reading", "quiz", "assignment")},
+                     "next": {"id": nxt["id"], "title": nxt["title"], "type": nxt["type"], "link": nxt["link"], "module": nxt["module"],
+                              "status": nxt["status"]} if nxt else None})
+        out.append(card)
+    return out
+
+
 @router.get("/courses/{course_id}")
 async def course_detail(course_id: str, db: AsyncSession = Depends(get_db), user: User = Depends(student)):
     c, en = await require_enrolled(db, user, course_id)
@@ -342,6 +369,11 @@ async def lesson_item(course_id: str, item_id: str, db: AsyncSession = Depends(g
     from ..models import Module
     raw = next((x for m in (await db.execute(select(Module).where(Module.id == it["module_id"]))).scalars() for x in (m.items or []) if x.get("id") == item_id), {})
     demo = DEMO_PLAYER.get((c.id, item_id), {})
+    li = await db.get(LearningItem, item_id)
+    if li is not None and li.course_id == c.id and li.status == "published":
+        raw = {**raw, **(li.content or {})}
+        demo = {}
+    lecture = await _lecture(db, li) if li is not None and li.type == "video" else None
     lec = await staff_names(db, [c.lecturer_id])
     notes = (await db.execute(select(Event).where(Event.actor_id == user.id, Event.type == "note", Event.course_id == c.id).order_by(Event.id.desc()))).scalars()
     nav = [x for x in items if x["link"]]
@@ -350,15 +382,55 @@ async def lesson_item(course_id: str, item_id: str, db: AsyncSession = Depends(g
     related = [x for x in items if x["id"] != item_id and x["link"] and (x["module_id"] == it["module_id"] or x["vf"] or x["type"] == "quiz")][:3]
     return {"course": {"id": c.id, "code": c.code, "title": c.title}, "item": {**it, "index": i + 1},
             "media_url": raw.get("url") or raw.get("video_url"), "body": raw.get("body"),
-            "presenter": raw.get("presenter") or demo.get("presenter") or (lec[c.lecturer_id].name if c.lecturer_id in lec else None),
+            "presenter": (lecture["avatar"]["name"] if lecture else None) or raw.get("presenter") or demo.get("presenter") or (lec[c.lecturer_id].name if c.lecturer_id in lec else None),
             "objectives": raw.get("objectives") or demo.get("objectives") or [],
-            "transcript": raw.get("transcript") or demo.get("transcript") or [],
-            "chips": demo.get("chips") or [f"Explain “{it['title'].split(':')[-1].strip()}” simply", "Give me 3 revision questions"],
+            "transcript": (lecture["transcript"] if lecture else None) or raw.get("transcript") or demo.get("transcript") or [],
+            "lecture": lecture, "version": li.version if li is not None else None,
+            "chips": raw.get("chips") or demo.get("chips") or [f"Explain “{it['title'].split(':')[-1].strip()}” simply", "Give me 3 revision questions"],
             "prev": nav[j - 1] if j > 0 else None, "next": nav[j + 1] if 0 <= j < len(nav) - 1 else None,
             "notes": [{"id": n.id, "kind": (n.payload or {}).get("kind", "note"), "text": (n.payload or {}).get("text", ""), "t": (n.payload or {}).get("t"),
                        "at": iso(n.ts)} for n in notes if (n.payload or {}).get("item_id") == item_id],
             "materials": [{"id": s.id, "title": s.title, "kind": s.kind, "uri": s.uri} for s in sources],
             "related": related}
+
+
+WPS = 2.55  # spoken words per second, used until a line's audio has been rendered
+
+
+async def _lecture(db: AsyncSession, li: LearningItem) -> dict:
+    """A narrated lecture: chapters → slides + spoken lines, each line with its rendered clip (audio, lip envelope, full-body video)."""
+    from ..classroom.lines import line_hash
+    av = await db.get(Avatar, li.presenter) if li.presenter else None
+    chapters = (li.content or {}).get("chapters", [])
+    hashes = {}
+    for ch in chapters:
+        for t in ch.get("narration", []):
+            t = " ".join(t.split())
+            hashes[line_hash(av.id, t) if av else t] = t
+    clips = {m.hash: m for m in (await db.execute(select(MediaClip).where(MediaClip.hash.in_(list(hashes) or ["-"])))).scalars()} if av else {}
+    out, transcript, t0, ready = [], [], 0.0, 0
+    for ci, ch in enumerate(chapters):
+        lines = []
+        start = t0
+        for text in ch.get("narration", []):
+            text = " ".join(text.split())
+            h = line_hash(av.id, text) if av else text
+            m = clips.get(h)
+            has_audio = bool(m and m.audio_url and m.duration)
+            ready += has_audio
+            dur = float(m.duration) if has_audio else round(len(text.split()) / WPS + 0.35, 2)
+            lines.append({"hash": h, "text": text, "t": round(t0, 2), "dur": round(dur, 2),
+                          "audio_url": m.audio_url if has_audio else None, "envelope": m.envelope if has_audio else None,
+                          "video_url": m.video_url if m and m.status == "ready" else None})
+            transcript.append({"t": int(t0), "title": ch.get("title") if not lines[:-1] else None, "text": text})
+            t0 += dur + 0.45  # natural pause between sentences
+        t0 += 0.8  # pause between chapters
+        out.append({"i": ci, "title": ch.get("title", ""), "slide": ch.get("slide"), "t": round(start, 2), "lines": lines})
+    total_lines = sum(len(c["lines"]) for c in out)
+    avatar = {"id": av.id, "name": av.name, "portrait": av.portrait, "listen_portrait": av.listen_portrait, "calib": av.calib,
+              "voice_hint": (av.calib or {}).get("voiceHint")} if av else None
+    return {"avatar": avatar, "chapters": out, "duration": round(t0, 1), "lines": total_lines, "ready": ready,
+            "transcript": [{"t": x["t"], "title": x["title"], "text": x["text"]} for x in transcript]}
 
 
 class ProgressIn(BaseModel):

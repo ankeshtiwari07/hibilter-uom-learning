@@ -8,7 +8,7 @@ import { NotificationsButton } from './Notifications'
 type NavItem = [string, string, string, string?]
 export const NAV: Record<Role, [string, NavItem[]][]> = {
   student: [
-    ['Learn', [['/s-dash', 'home', 'Dashboard'], ['/s-classroom', 'cap', 'Virtual classroom', 'hero'], ['/s-catalogue', 'grid', 'Course catalogue'], ['/s-course', 'book', 'My course'], ['/s-lesson', 'play', 'Lesson player'], ['/s-ai', 'ai', 'AI study assistant']]],
+    ['Learn', [['/s-dash', 'home', 'Dashboard'], ['/s-classroom', 'cap', 'Virtual classroom', 'hero'], ['/s-catalogue', 'grid', 'Course catalogue'], ['/s-courses', 'book', 'My courses'], ['/s-lesson', 'play', 'Lesson player'], ['/s-ai', 'ai', 'AI study assistant']]],
     ['Assess', [['/s-assign', 'clip', 'Assignments'], ['/s-quiz', 'checkc', 'Quizzes'], ['/s-progress', 'line', 'My progress']]],
     ['Campus', [['/s-cal', 'cal', 'Timetable'], ['/s-news', 'mega', 'Announcements'], ['/s-support', 'help', 'Support'], ['/s-profile', 'user', 'Profile & settings']]],
   ],
@@ -42,7 +42,7 @@ export function Shell({ crumbs, children }: { crumbs: string[]; children: ReactN
           <div className="x"><span>×</span><img src="/brand/hibilter.png" alt="" /><b>Hibilter</b> AI Learning Platform</div></div>
         <nav className="nav">{NAV[me.role].map(([g, items]) => <div key={g} style={{ display: 'contents' }}>
           <div className="grp">{g}</div>
-          {items.map(([to, ic, label, hero]) => <NavLink key={to} to={to} className={({ isActive }) => `${isActive || loc.pathname.startsWith(to + '/') ? 'on' : ''} ${hero || ''}`}>
+          {items.map(([to, ic, label, hero]) => <NavLink key={to} to={to} className={({ isActive }) => `${isActive || loc.pathname.startsWith(to + '/') || (to === '/s-courses' && loc.pathname.startsWith('/s-course/')) ? 'on' : ''} ${hero || ''}`}>
             <Icon n={ic} /><span>{label}</span>{to === '/s-classroom' && <span className="pill">AI</span>}</NavLink>)}
         </div>)}</nav>
         <div className="foot">Concept platform with synthetic data — not an official University system. Logo use subject to University permission.</div>

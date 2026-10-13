@@ -94,6 +94,23 @@ class Module(Base):
     items: Mapped[list] = mapped_column(JSON, default=list)  # [{id,type,title,dur,lesson_id?}]
 
 
+class LearningItem(Base):
+    """Content of a video (narrated lecture) or reading item in a module. Virtual-faculty items live in Lesson;
+    quizzes/assignments in Assessment. Module.items stays the lightweight table of contents."""
+    __tablename__ = "learning_items"
+    id: Mapped[str] = mapped_column(String(32), primary_key=True)
+    course_id: Mapped[str] = mapped_column(ForeignKey("courses.id"), index=True)
+    module_id: Mapped[str | None] = mapped_column(String(32))
+    type: Mapped[str] = mapped_column(String(16))  # video | reading
+    title: Mapped[str] = mapped_column(String(300))
+    presenter: Mapped[str | None] = mapped_column(ForeignKey("avatars.id"))
+    content: Mapped[dict] = mapped_column(JSON)  # {objectives, chips, chapters | body}
+    version: Mapped[int] = mapped_column(Integer, default=1)
+    digest: Mapped[str] = mapped_column(String(64), default="")
+    status: Mapped[str] = mapped_column(String(16), default="published")
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
+
+
 # ---------- Virtual faculty lessons ----------
 class Lesson(TS, Base):
     __tablename__ = "lessons"

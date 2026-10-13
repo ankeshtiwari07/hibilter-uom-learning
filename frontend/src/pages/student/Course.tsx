@@ -21,10 +21,7 @@ export default function Course() {
   const { courseId } = useParams()
   const mine = useQuery({ queryKey: ['s-courses'], queryFn: () => get<CourseCard[]>('/api/student/courses') })
   if (!courseId) {
-    if (mine.isLoading) return <Loading />
-    if (mine.error) return <ErrorBox error={mine.error} retry={() => mine.refetch()} />
-    if (!mine.data?.length) return <Empty icon="book" title="You’re not enrolled in any course yet"><Link to="/s-catalogue">Browse the catalogue</Link></Empty>
-    return <Navigate replace to={`/s-course/${mine.data[0].id}`} />
+    return <Navigate replace to="/s-courses" />
   }
   return <CourseView id={courseId} mine={mine.data || []} />
 }
@@ -40,10 +37,15 @@ function CourseView({ id, mine }: { id: string; mine: CourseCard[] }) {
   const d = q.data!, c = d.course
   const vfFirst = d.modules.flatMap(m => m.items).find(i => i.vf && i.link && i.status !== 'done') || d.modules.flatMap(m => m.items).find(i => i.vf && i.link)
   const go = (i: Item) => i.link && nav(i.link)
+  const all = d.modules.flatMap(m => m.items)
+  const upNext = all.find(i => i.link && i.status === 'progress') || all.find(i => i.link && i.status !== 'done')
+  const kind = (i: Item) => i.vf ? 'Virtual lesson · interactive' : ({ video: 'Lecture', reading: 'Reading', quiz: 'Quiz', assignment: 'Assignment' } as Record<string, string>)[i.type] || i.type
+  const mins = (n: number) => n >= 60 ? `${Math.floor(n / 60)} h ${n % 60 ? `${n % 60} min` : ''}`.trim() : `${n} min`
   return <>
-    {mine.length > 1 && <div className="row sb"><label className="small muted" htmlFor="co-sw">Switch course</label>
+    <div className="row sb"><Link to="/s-courses" className="small"><Icon n="back" /> All my courses</Link>
+    {mine.length > 1 && <span className="row" style={{ gap: 8 }}><label className="small muted" htmlFor="co-sw">Switch course</label>
       <select id="co-sw" className="inp" style={{ width: 'auto', maxWidth: '100%' }} value={id} onChange={e => nav(`/s-course/${e.target.value}`)}>
-        {mine.map(m => <option key={m.id} value={m.id}>{m.code} · {m.title}</option>)}</select></div>}
+        {mine.map(m => <option key={m.id} value={m.id}>{m.code} · {m.title}</option>)}</select></span>}</div>
     <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
       <div className={cover(c.cover)} style={{ padding: '22px 24px', color: '#fff', display: 'flex', gap: 16, flexWrap: 'wrap', alignItems: 'flex-end' }}>
         <div style={{ flex: 1, minWidth: 0 }}><div className="mono" style={{ opacity: .8 }}>{c.code} · {c.faculty_name}</div>
@@ -60,12 +62,15 @@ function CourseView({ id, mine }: { id: string; mine: CourseCard[] }) {
     </div>
 
     <div className="g g-21"><div className="stack">
-      <Card title="Modules" actions={<span className="xs muted">{d.modules.length} modules · {d.done}/{d.total} done</span>}>
-        {d.modules.length ? <div className="col">{d.modules.map((m, mi) => <details key={m.id} open={mi < 2} className="spec">
-          <summary><span className="n">M{mi + 1}</span><b>{m.title}</b><span className="xs muted">{m.items.filter(i => i.status === 'done').length}/{m.items.length} done</span></summary>
-          <div style={{ padding: '6px 14px' }}>{m.items.map(i => {
+      <Card title="Course content" actions={<span className="xs muted">{d.modules.length} modules · {d.done}/{d.total} done · {mins(all.reduce((a, i) => a + (i.type === 'assignment' ? 0 : i.dur || 0), 0))}</span>}>
+        {upNext && <div className="mc-next" style={{ marginBottom: 10 }}><Icon n={itemIcon[upNext.type] || 'file'} /><div style={{ flex: 1, minWidth: 0 }}>
+          <div className="xs muted">{upNext.status === 'progress' ? 'Continue where you left off' : 'Up next'}</div><div className="small tt">{upNext.title}</div></div>
+          <button className="btn sm teal" onClick={() => go(upNext)}>{upNext.status === 'progress' ? 'Resume' : 'Start'}</button></div>}
+        {d.modules.length ? <div className="col">{d.modules.map((m, mi) => <details key={m.id} open={m.items.some(i => i.id === upNext?.id) || (!upNext && mi === 0)} className="spec">
+          <summary><span className="n">M{mi + 1}</span><b>{m.title}</b><span className="xs muted">{m.items.filter(i => i.status === 'done').length}/{m.items.length} done · {mins(m.items.reduce((a, i) => a + (i.type === 'assignment' ? 0 : i.dur || 0), 0))}</span></summary>
+          <div style={{ padding: '6px 14px' }}>{m.items.map((i, ii) => {
             const inner = <><div className={`ic ${i.vf ? 'teal' : ''}`}><Icon n={itemIcon[i.type] || 'file'} /></div>
-              <div className="bd"><div className="tt">{i.title}</div><div className="ds">{i.vf ? 'Virtual faculty · interactive · ' : `${i.type.charAt(0).toUpperCase() + i.type.slice(1)} · `}{i.dur ? `${i.dur} min` : ''}</div></div>
+              <div className="bd"><div className="tt"><span className="mono xs muted" style={{ marginRight: 6 }}>{mi + 1}.{ii + 1}</span>{i.title}</div><div className="ds">{kind(i)}{i.dur ? ` · ${i.type === 'assignment' ? 'about ' + mins(i.dur) + ' of work' : mins(i.dur)}` : ''}{i.id === upNext?.id ? ' · up next' : ''}</div></div>
               <StatusBadge s={i.status} /></>
             return i.link ? <a key={i.id} className="li" href={i.link} onClick={e => { e.preventDefault(); go(i) }} style={{ textDecoration: 'none', color: 'inherit', alignItems: 'center' }}>{inner}</a>
               : <div key={i.id} className="li" style={{ alignItems: 'center', opacity: .7 }} title="Not available yet">{inner}</div>

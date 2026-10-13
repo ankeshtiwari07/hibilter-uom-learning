@@ -1,6 +1,7 @@
 import { Icon } from '../components/Icon'
+import { SlideBody, isSlideSpec } from '../components/SlideView'
 
-type Seg = { title: string; slide?: string }
+type Seg = { title: string; slide?: unknown }
 
 function Frame({ i, total, title, course, children }: { i: number; total: number; title: string; course?: string; children: React.ReactNode }) {
   return <div className="slide"><div className="sh"><Icon n="file" /><span>Slide {i} of {total} · {title}</span><span className="sp" /><span className="xs">Approved material · {course || 'course'} notes</span></div><div className="sb">{children}</div></div>
@@ -11,12 +12,15 @@ export function Slide({ state, seg, segIndex, segCount, lesson }: { state: strin
   if (state === 'IDLE' || state === 'WELCOME') return <Frame i={1} total={total} title="Today’s lesson" course={lesson.course_code}>
     <h3>{lesson.title}</h3><p className="muted small">{lesson.module} · about {lesson.dur} minutes · {segCount} checkpoints</p>
     <ul>{(lesson.objectives || []).map((o: string) => <li key={o}>{o}</li>)}</ul></Frame>
+  if (state === 'COMPLETED' && lesson.summary?.length) return <Frame i={total} total={total} title="Summary" course={lesson.course_code}>
+    <h3>Key ideas</h3><ul>{lesson.summary.map((x: string) => <li key={x}>{x}</li>)}</ul></Frame>
   if (state === 'COMPLETED') return <Frame i={total} total={total} title="Summary" course={lesson.course_code}>
     <h3>Key ideas</h3><ul><li><b>AI</b> is the broad field; <b>ML</b> is the subset that learns patterns from data.</li>
       <li><b>Supervised learning</b> uses labels — the correct answers — to check and correct predictions.</li>
       <li><b>Biased data</b> leads to less accurate or unfair outcomes; humans stay in the loop.</li></ul></Frame>
   if (!seg) return null
   const i = segIndex + 2
+  if (isSlideSpec(seg.slide)) return <Frame i={i} total={total} title={seg.title} course={lesson.course_code}><SlideBody s={seg.slide} /></Frame>
   if (seg.slide === 'nested') return <Frame i={i} total={total} title={seg.title} course={lesson.course_code}>
     <h3>AI ⊃ Machine learning ⊃ Deep learning</h3>
     <svg className="dg" viewBox="0 0 420 200" role="img" aria-label="Nested circles: AI contains machine learning, which contains deep learning">

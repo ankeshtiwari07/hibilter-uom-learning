@@ -1,0 +1,1802 @@
+{
+ "course": "c6",
+ "presenter": "elena",
+ "modules": [
+  {
+   "id": "m1",
+   "title": "Module 1 · How AI Assistants Work, and Where They Fail",
+   "items": [
+    {
+     "id": "c6-L1",
+     "type": "virtual",
+     "title": "Using AI Assistants Safely: How They Work, What to Share, Who Is Accountable",
+     "dur": 18,
+     "objectives": [
+      "Explain in plain words how an AI assistant produces its answers",
+      "Decide what information must be removed before using an AI tool",
+      "Recognise that the human user stays accountable for AI-assisted work"
+     ],
+     "chips": [
+      "Why does the chatbot sound so sure when it is wrong?",
+      "Can I paste a customer email into ChatGPT at work?",
+      "If AI writes my report, who is responsible for errors?"
+     ],
+     "lesson": {
+      "summary": [
+       "AI assistants predict plausible text; they do not check facts",
+       "Remove personal details and use only approved tools",
+       "You stay accountable: verify every draft before it goes out"
+      ],
+      "segments": [
+       {
+        "id": "seg1",
+        "title": "How an AI assistant writes its answers",
+        "slide": {
+         "kind": "steps",
+         "heading": "From your prompt to its answer",
+         "steps": [
+          {
+           "title": "Your prompt",
+           "sub": "The words you type become the starting text"
+          },
+          {
+           "title": "Pattern matching",
+           "sub": "Learnt from huge amounts of text during training"
+          },
+          {
+           "title": "Predict next word",
+           "sub": "Picks a likely word, then the next, and the next"
+          },
+          {
+           "title": "Fluent answer",
+           "sub": "Sounds right, but nothing has been fact-checked"
+          }
+         ],
+         "note": {
+          "tone": "warn",
+          "text": "Confidence is a writing style, not a guarantee of accuracy."
+         }
+        },
+        "speech": [
+         "An AI assistant such as a chatbot has been trained on enormous amounts of text, and from that text it has learnt the patterns of how words usually follow one another.",
+         "When you type a request, it writes the answer one word at a time, each time choosing a word that is likely to come next given everything before it.",
+         "That is why the answers are so fluent. But notice what is missing: at no point does the assistant stop to check whether a sentence is actually true.",
+         "So it can state an invented regulation, a wrong interest rate or a non-existent report with exactly the same confident tone as a correct fact."
+        ],
+        "simpler": [
+         "Let me put it more simply. Think of the autocomplete on your phone, but enormously more powerful.",
+         "It is brilliant at guessing what words should come next, so the result reads beautifully.",
+         "But a good guess about words is not the same as knowing the facts, so you always need to check."
+        ],
+        "checkpoint": {
+         "id": "cp1",
+         "mandatory": true,
+         "maxAttempts": 3,
+         "question": "In your own words, why can an AI assistant give a confident answer that is completely wrong?",
+         "concepts": [
+          {
+           "id": "predict",
+           "label": "It generates text by predicting likely words from patterns",
+           "required": true,
+           "ask": "how an AI assistant actually produces the words of its answer",
+           "rx": [
+            {
+             "re": "\\b(predict|guess|generat|autocomplet|auto-complet)\\w*",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(likely|probable|plausible|statistic)\\w*\\b[^.]{0,40}\\b(words?|text|answers?|next|sentences?|tokens?)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(next|following)\\s+(word|token)s?\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\bpatterns?\\b[^.]{0,40}\\b(text|words|language|data|training)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(sounds?|looks?)\\s+(right|correct|good|convincing|plausible|believable)\\b",
+             "flags": "i"
+            }
+           ]
+          },
+          {
+           "id": "nocheck",
+           "label": "It does not check facts or know what is true",
+           "required": true,
+           "ask": "whether the assistant checks its answer against the facts",
+           "rx": [
+            {
+             "re": "\\b(not|never|no|without|cannot|can'?t|doesn'?t|don'?t|isn'?t|won'?t|unable to)\\b[^.]{0,30}\\b(check|verif|fact|know|understand|look\\w* (it )?up|truth|true|real|correct|source|accura)\\w*",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(lacks?|no)\\s+(real\\s+)?(understanding|knowledge|idea|concept)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\bjust\\s+(words|text|language)\\b",
+             "flags": "i"
+            }
+           ]
+          },
+          {
+           "id": "confident",
+           "label": "Fluent, confident tone is not evidence of accuracy",
+           "required": false,
+           "ask": "why a confident tone is not proof that an answer is right",
+           "rx": [
+            {
+             "re": "\\b(confiden|fluent|convinc|authoritativ|polished)\\w*",
+             "flags": "i"
+            }
+           ]
+          },
+          {
+           "id": "training",
+           "label": "Training data can be outdated or have gaps",
+           "required": false,
+           "ask": "what role the training data plays",
+           "rx": [
+            {
+             "re": "\\b(train|trained|training)\\b[^.]{0,30}\\b(data|text|material)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(outdated|out of date|old data|cut-?off|gaps?)\\b",
+             "flags": "i"
+            }
+           ]
+          }
+         ],
+         "misconceptions": [
+          {
+           "id": "lookup",
+           "label": "It is not simply searching the internet and copying a wrong website",
+           "rx": [
+            {
+             "re": "\\b(it|they|chatbots?|ai|assistants?)\\s+(searches|looks up|copies|googles|reads)\\b[^.]{0,30}\\b(internet|web|google|database|websites?|sites?)\\b",
+             "flags": "i"
+            }
+           ]
+          }
+         ],
+         "hints": [
+          "Here is a hint. Think about what the assistant is really doing when it writes a sentence, one word after another.",
+          "Another clue: it chooses words that are likely to fit. Does choosing likely words mean it has checked the facts?",
+          "Let me be more direct. The assistant predicts plausible text from patterns, and it does not verify whether that text is true. Can you put that in your own words?"
+         ],
+         "model": "An AI assistant generates text by predicting the most likely next words from patterns in its training data; it does not check facts or know what is true, so a fluent, confident answer can still be wrong.",
+         "ack": "Exactly: the assistant predicts plausible words from patterns and never checks them against the facts, so sounding confident is not the same as being right.",
+         "reteach": "Let me try another picture. Imagine a very well-read parrot that has heard millions of office conversations. It can produce a perfectly phrased answer about leave rules or exchange rates, but it is matching the sound of answers it has heard, not checking a rulebook, so the polish of the sentence tells you nothing about whether it is true.",
+         "calibration": [
+          {
+           "answer": "Because it just predicts the most likely next words, it doesn't actually check whether the facts are true.",
+           "expected": "correct"
+          },
+          {
+           "answer": "it generates text that sounds plausible based on patterns but it has no understanding of what is true",
+           "expected": "correct"
+          },
+          {
+           "answer": "AI guesses words from patterns in its training data. It never verifies anything so it can be wrong while sounding confident",
+           "expected": "correct"
+          },
+          {
+           "answer": "its basically autocomplete, it cant know if the answer is real or not",
+           "expected": "correct"
+          },
+          {
+           "answer": "because it predicts the next word",
+           "expected": "partial"
+          },
+          {
+           "answer": "It doesn't fact check what it says.",
+           "expected": "partial"
+          },
+          {
+           "answer": "The AI was trained on old data so it may be outdated and sound confident.",
+           "expected": "partial"
+          },
+          {
+           "answer": "Because it searches the internet and sometimes reads the wrong websites",
+           "expected": "incorrect"
+          },
+          {
+           "answer": "because the computer has a virus or a bug in the system",
+           "expected": "incorrect"
+          },
+          {
+           "answer": "idk tbh",
+           "expected": "unclear"
+          }
+         ]
+        }
+       },
+       {
+        "id": "seg2",
+        "title": "What you should never paste in",
+        "slide": {
+         "kind": "compare",
+         "heading": "Before you paste: what goes in, what stays out",
+         "columns": [
+          {
+           "title": "Usually fine",
+           "points": [
+            "Public information and published policies",
+            "Your own generic draft text",
+            "Anonymised examples with names removed"
+           ]
+          },
+          {
+           "title": "Keep out of unapproved tools",
+           "points": [
+            "Names, ID card and account numbers",
+            "Health, salary or disciplinary details",
+            "Confidential contracts, tenders and strategy"
+           ]
+          }
+         ],
+         "note": {
+          "tone": "info",
+          "text": "Your organisation's AI policy and approved tools come first."
+         }
+        },
+        "speech": [
+         "The second idea is about what you put into the tool. Anything you type into a public chatbot leaves your organisation and may be stored by the provider, and depending on the settings it may even be used to improve the service.",
+         "In Mauritius, personal data about customers, citizens and staff is protected by the Data Protection Act 2017, and confidentiality duties apply in banking, the public service and many other sectors.",
+         "So before you paste, ask two questions. Can I remove or disguise anything that identifies a person or reveals confidential business? And is this a tool my organisation has approved for this kind of work?",
+         "Often you can get exactly the same help by replacing the customer's name with Customer A and leaving out account numbers entirely."
+        ],
+        "simpler": [
+         "Simply put: treat a public chatbot like a stranger at a bus stop in Port Louis.",
+         "You might happily ask them to help you word a polite letter, but you would never read out a customer's name and account number to them.",
+         "So take out the personal details first, and use the tools your employer has said are safe."
+        ],
+        "checkpoint": {
+         "id": "cp2",
+         "mandatory": true,
+         "maxAttempts": 3,
+         "question": "A bank officer wants to paste a customer's complaint letter into a free public chatbot to get a quick summary. What should she do to protect the customer?",
+         "concepts": [
+          {
+           "id": "remove",
+           "label": "Remove or anonymise the customer's personal details first",
+           "required": true,
+           "ask": "what should happen to the customer's name and account details",
+           "rx": [
+            {
+             "re": "\\b(remov|delet|strip|redact|anonymi[sz]|pseudonymi[sz]|mask|hid|blank|take out|cut out|replac|black out)\\w*\\b[^.]{0,60}\\b(names?|personal|details|identif\\w*|account|info\\w*|numbers?|id)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\banonymi[sz]",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(not|never|no|without|cannot|can'?t|doesn'?t|don'?t|isn'?t|won'?t|unable to)\\b[^.]{0,30}\\b(paste|share|include|put|enter|upload|give)\\w*\\b[^.]{0,40}\\b(names?|personal|details|account|identif\\w*|private info\\w*)\\b",
+             "flags": "i"
+            }
+           ]
+          },
+          {
+           "id": "approved",
+           "label": "Use only an approved tool, in line with the bank's policy",
+           "required": true,
+           "ask": "which kind of AI tool she is allowed to use at the bank",
+           "rx": [
+            {
+             "re": "\\b(approved|authori[sz]ed|official|enterprise|internal|company|bank'?s?|in-?house|sanctioned|secure|work)\\b[^.]{0,30}\\b(tool|ai|system|version|platform|chatbot|assistant|software|account|bot)s?\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(check|follow|read|consult|ask|look at|confirm)\\w*\\b[^.]{0,40}\\b(polic(y|ies)|rules|guidelines|compliance|manager|supervisor|dpo|data protection officer|it team|it department|it dept)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(polic(y|ies)|compliance|guidelines)\\b",
+             "flags": "i"
+            }
+           ]
+          },
+          {
+           "id": "lawful",
+           "label": "Customer data needs a lawful basis and security under data protection law",
+           "required": false,
+           "ask": "how data protection law applies here",
+           "rx": [
+            {
+             "re": "\\b(consent|lawful|data protection act|dpa|confidential\\w*|secrecy)\\b",
+             "flags": "i"
+            }
+           ]
+          }
+         ],
+         "misconceptions": [
+          {
+           "id": "public_ok",
+           "label": "A free public tool is not automatically safe for customer data",
+           "rx": [
+            {
+             "re": "\\bjust\\s+(paste|copy|upload|put)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(free|public)\\b[^.]{0,20}\\b(is|are)\\s+(safe|fine|ok|okay|private|secure)\\b",
+             "flags": "i"
+            }
+           ]
+          }
+         ],
+         "hints": [
+          "Here is a hint. Think about what in that letter could identify the customer, and whether it needs to leave the bank at all.",
+          "Another clue: free consumer chatbots may keep what you type. Does the bank have rules about which tools staff may use?",
+          "Let me be more direct. She should strip out personal details like name and account number, and only use a tool the bank has approved. Can you say that in your own words?"
+         ],
+         "model": "She should remove or anonymise personal details such as the customer's name and account number, and only use an approved, bank-sanctioned AI tool in line with the bank's policy.",
+         "ack": "That is right: take out anything that identifies the customer, and only use a tool your organisation has approved under its policy.",
+         "reteach": "Think of it like photocopying a customer file at a public copy shop. You would not hand over the original with names and account numbers on it, and you would first ask whether the bank even allows files to leave the building. Pasting into a public chatbot is the same decision: strip the identifiers and use the channel the bank has approved.",
+         "calibration": [
+          {
+           "answer": "She should remove the customer's name and account number first and only use the bank's approved AI tool.",
+           "expected": "correct"
+          },
+          {
+           "answer": "Anonymise the letter and check the bank's policy before using any chatbot",
+           "expected": "correct"
+          },
+          {
+           "answer": "dont put personal details in a public bot, use the internal company AI instead or ask compliance",
+           "expected": "correct"
+          },
+          {
+           "answer": "Redact identifying info like names and ID numbers, and follow the data protection guidelines at work",
+           "expected": "correct"
+          },
+          {
+           "answer": "she should take out the names and account details",
+           "expected": "partial"
+          },
+          {
+           "answer": "Ask her manager or IT team whether the tool is allowed",
+           "expected": "partial"
+          },
+          {
+           "answer": "Make sure she has the customer's consent first",
+           "expected": "partial"
+          },
+          {
+           "answer": "Just paste it, free chatbots delete everything anyway",
+           "expected": "incorrect"
+          },
+          {
+           "answer": "She should make the summary shorter and more polite.",
+           "expected": "incorrect"
+          },
+          {
+           "answer": "not sure",
+           "expected": "unclear"
+          }
+         ]
+        }
+       },
+       {
+        "id": "seg3",
+        "title": "You stay accountable",
+        "slide": {
+         "kind": "steps",
+         "heading": "Draft with AI, decide as a professional",
+         "steps": [
+          {
+           "title": "AI drafts",
+           "sub": "Fast first version to work from"
+          },
+          {
+           "title": "You verify",
+           "sub": "Check facts, figures, names and dates against sources"
+          },
+          {
+           "title": "You edit",
+           "sub": "Fix tone, remove errors, add what only you know"
+          },
+          {
+           "title": "You sign off",
+           "sub": "Your name, your responsibility"
+          }
+         ]
+        },
+        "speech": [
+         "The final idea ties the first two together. When an AI-assisted email, report or reply goes out, it goes out under your name and your organisation's name.",
+         "Customers, guests and citizens will never accept that the chatbot made a mistake. The professional who pressed send is the one who is accountable.",
+         "So the habit to build is simple: treat every AI output as a draft, then verify facts, figures, names and dates against a reliable source before you use it.",
+         "Used this way, AI can save you real time while your judgement keeps the quality and the trust."
+        ],
+        "simpler": [
+         "Here is the simple version: AI is your fast assistant, not your replacement.",
+         "Imagine a new intern who writes quickly but sometimes makes things up. You would always read their work before it goes out.",
+         "Do the same with AI. Check it, fix it, and then it is your work."
+        ],
+        "checkpoint": {
+         "id": "cp3",
+         "mandatory": false,
+         "maxAttempts": 2,
+         "question": "Optional check: A hotel manager emails guests an AI-drafted notice about new check-in times, and it contains a mistake. Who is responsible, and what should the manager have done before sending it?",
+         "concepts": [
+          {
+           "id": "accountable",
+           "label": "The human sender remains responsible, not the AI",
+           "required": true,
+           "ask": "who carries the responsibility when an AI-drafted message goes out",
+           "rx": [
+            {
+             "re": "\\b(manager|sender|human|person|employee|staff|hotel|user|she|he|they|you|i|we|people)s?\\b[^.]{0,30}\\b(is|are|remains?|stays?|am|was)\\b[^.]{0,15}\\b(responsible|accountable|liable|to blame|at fault)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(responsib|accountab|liab)\\w*\\b[^.]{0,30}\\b(manager|sender|human|person|hotel|user|them|her|him)s?\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(whoever|the one who|person who)\\b[^.]{0,30}\\b(responsib|accountab|liab)",
+             "flags": "i"
+            },
+            {
+             "re": "\\b(the|it'?s|its)\\s+(manager|hotel)'?s?\\s+(fault|responsibility)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\bnot\\s+the\\s+(ai|chatbot|tool|machine)\\b",
+             "flags": "i"
+            }
+           ]
+          },
+          {
+           "id": "review",
+           "label": "Check the draft against the real facts before sending",
+           "required": true,
+           "ask": "what the manager should have done with the draft before pressing send",
+           "rx": [
+            {
+             "re": "\\b(check|review|proof-?read|verif|double[- ]?check|confirm|fact[- ]?check)\\w*",
+             "flags": "i"
+            },
+            {
+             "re": "\\bread (it |the email |the draft )?(through|over|carefully)\\b",
+             "flags": "i"
+            }
+           ]
+          },
+          {
+           "id": "source",
+           "label": "Compare against the official source, such as the actual schedule",
+           "required": false,
+           "ask": "what the draft should be compared against",
+           "rx": [
+            {
+             "re": "\\b(source|official|actual|real|correct)\\b[^.]{0,30}\\b(times?|schedule|information|policy|records?|details)\\b",
+             "flags": "i"
+            }
+           ]
+          }
+         ],
+         "misconceptions": [
+          {
+           "id": "blame_ai",
+           "label": "The AI or its maker is not the one accountable to guests",
+           "rx": [
+            {
+             "re": "\\b(ai|chatbot|tool|machine|computer|software|developer)s?\\b[^.]{0,20}\\b(is|are)\\s+(responsible|to blame|accountable|liable|at fault)\\b",
+             "flags": "i"
+            },
+            {
+             "re": "\\bblame the (ai|chatbot|tool)\\b",
+             "flags": "i"
+            }
+           ]
+          }
+         ],
+         "hints": [
+          "Here is a hint. The guests received the email from the hotel. Whose name and reputation is on it?",
+          "Another clue: an AI draft is a starting point. What would a careful professional always do with a draft before it goes out?",
+          "Let me be more direct. The manager stays responsible, and should have checked the times against the real schedule before sending. Can you put that in your own words?"
+         ],
+         "model": "The manager who sends the email remains responsible, not the AI; before sending, she should have checked the times and details against the hotel's official schedule.",
+         "ack": "Well put: the person who sends it owns it, so every AI draft gets checked against the real facts before it leaves your hands.",
+         "reteach": "Think of the AI as a new intern who writes quickly but sometimes makes things up. If an intern's letter goes out under your signature with the wrong times, the guests hold you and the hotel responsible, not the intern. So you read it, compare it with the real schedule, and only then sign it off.",
+         "calibration": [
+          {
+           "answer": "The manager is responsible, not the AI. She should have checked the times against the hotel's actual schedule before sending.",
+           "expected": "correct"
+          },
+          {
+           "answer": "whoever sends it is accountable, so proofread and verify the check-in times first",
+           "expected": "correct"
+          },
+          {
+           "answer": "its the hotel's responsibility, the manager should of read it carefully and double checked the details",
+           "expected": "correct"
+          },
+          {
+           "answer": "Humans stay accountable for anything AI writes. Review it before it goes out.",
+           "expected": "correct"
+          },
+          {
+           "answer": "The manager is to blame.",
+           "expected": "partial"
+          },
+          {
+           "answer": "He should have proofread the email before sending it out.",
+           "expected": "partial"
+          },
+          {
+           "answer": "check the email for mistakes",
+           "expected": "partial"
+          },
+          {
+           "answer": "The AI is responsible because it wrote the email",
+           "expected": "incorrect"
+          },
+          {
+           "answer": "Nobody really, guests should look at the website instead.",
+           "expected": "incorrect"
+          },
+          {
+           "answer": "dunno",
+           "expected": "unclear"
+          }
+         ]
+        }
+       }
+      ],
+      "closing": [
+       "Excellent work today, {name}.",
+       "Let me summarise what we covered. AI assistants write by predicting likely words from patterns, so they can sound completely confident while being wrong.",
+       "Before you use one at work, remove personal and confidential details and stick to the tools your organisation has approved.",
+       "And remember that you remain accountable, so every AI output is a draft to verify before it leaves your hands.",
+       "Next, watch the short video on where AI assistants help and where they fail at work. Well done."
+      ]
+     }
+    },
+    {
+     "id": "c6-L2",
+     "type": "video",
+     "title": "Where AI Assistants Help at Work, and Where They Fail",
+     "dur": 6,
+     "objectives": [
+      "Identify everyday tasks where AI assistants genuinely save time",
+      "Recognise tasks where AI output is unreliable or inappropriate",
+      "Apply the rule that AI drafts and a professional decides"
+     ],
+     "chips": [
+      "Which of my daily tasks are good candidates for AI?",
+      "Why is AI bad at recent news and exact figures?",
+      "Should AI ever make decisions about people?"
+     ],
+     "chapters": [
+      {
+       "title": "A new kind of office tool",
+       "slide": {
+        "kind": "bullets",
+        "heading": "What changed with generative AI",
+        "points": [
+         "Tools that write, summarise and rephrase on request",
+         "Plain-language instructions instead of menus",
+         "Available in browsers, phones and office software",
+         "Fast, fluent, and not always right"
+        ]
+       },
+       "narration": [
+        "Over the past few years, a new kind of tool has arrived on almost every office desk: the AI assistant that writes, summarises and rephrases text when you simply ask it in plain language.",
+        "You no longer need to learn menus or formulas. You type a request the way you would brief a colleague, and within seconds you have a draft.",
+        "That speed is genuinely useful, but it also creates a temptation to hand over tasks that the tool is not suited for.",
+        "In this video I want to give you a practical map: which tasks AI assistants do well, which ones they do badly, and the one rule that keeps you safe in between.",
+        "None of this requires technical knowledge. What it does require is the professional judgement you already use every day, applied to a new and very persuasive kind of tool."
+       ]
+      },
+      {
+       "title": "Where assistants shine",
+       "slide": {
+        "kind": "cards",
+        "heading": "Tasks AI assistants do well",
+        "cards": [
+         {
+          "label": "Drafting",
+          "text": "First versions of emails, letters, notices"
+         },
+         {
+          "label": "Summarising",
+          "text": "Condensing long documents you provide"
+         },
+         {
+          "label": "Rewording",
+          "text": "Changing tone, length or reading level"
+         },
+         {
+          "label": "Brainstorming",
+          "text": "Lists of ideas, options and questions"
+         },
+         {
+          "label": "Explaining",
+          "text": "Plain-language overviews of general topics"
+         }
+        ]
+       },
+       "narration": [
+        "Let us start with the good news. AI assistants are strongest when the task is about language and when you can easily check the result yourself.",
+        "Drafting is the classic example. A first version of a reply to a supplier, a staff notice about a training day, or a polite reminder about an unpaid invoice can be produced in seconds.",
+        "Summarising is another. If you paste in a long document that you are allowed to share, the assistant can pull out the main points, the decisions and the open questions.",
+        "Rewording is surprisingly valuable: turning a technical paragraph into plain English, shortening a report for a busy director, or making a tense email sound calmer and more professional.",
+        "And for brainstorming, it is a tireless partner, happy to suggest twenty names for a new product or ten questions to ask in an interview."
+       ]
+      },
+      {
+       "title": "Where assistants fail",
+       "slide": {
+        "kind": "cards",
+        "heading": "Tasks to treat with great caution",
+        "cards": [
+         {
+          "label": "Facts and figures",
+          "text": "May invent numbers, laws and references"
+         },
+         {
+          "label": "Recent events",
+          "text": "Training data has a cut-off date"
+         },
+         {
+          "label": "Exact calculations",
+          "text": "Arithmetic in text can silently go wrong"
+         },
+         {
+          "label": "Legal or medical advice",
+          "text": "Sounds expert, carries no responsibility"
+         },
+         {
+          "label": "Decisions about people",
+          "text": "Hiring, credit, discipline need human judgement"
+         }
+        ]
+       },
+       "narration": [
+        "Now the other side. Because assistants predict plausible text rather than looking things up, they can invent facts, figures, laws and even references to reports that do not exist.",
+        "Most assistants also learnt from data collected up to a certain date, so unless they are connected to a search tool, they may not know about a new budget measure or a recent change in regulations.",
+        "Exact calculations are another weak spot. An assistant may present a loan repayment or a commission figure that looks perfectly reasonable and is simply wrong.",
+        "Legal, medical and financial advice deserve special care, because the answer sounds expert but nobody stands behind it.",
+        "And decisions about people, such as who to shortlist, who gets credit or who is disciplined, should never be handed to a chatbot. Those decisions need human judgement, fairness and accountability."
+       ]
+      },
+      {
+       "title": "Four workplace snapshots",
+       "slide": {
+        "kind": "cards",
+        "heading": "Same tool, four workplaces",
+        "cards": [
+         {
+          "label": "Civil service",
+          "text": "Plain-language summary of a public circular"
+         },
+         {
+          "label": "Bank",
+          "text": "Generic FAQ wording, never customer data"
+         },
+         {
+          "label": "Hotel",
+          "text": "Draft guest replies, checked by front office"
+         },
+         {
+          "label": "SME",
+          "text": "Social media ideas, owner approves final post"
+         }
+        ],
+        "note": {
+         "tone": "info",
+         "text": "Illustrative scenarios, not real organisations."
+        }
+       },
+       "narration": [
+        "Let me make this concrete with four short scenarios from typical workplaces in Mauritius. These are illustrative, not real organisations.",
+        "An officer in a ministry uses an assistant to turn a dense public circular into a plain-language summary for citizens. Good use, provided she checks every date and condition against the original.",
+        "A bank employee asks for help wording a general frequently asked questions page on card security. Good use, as long as no customer information is pasted in and the bank allows the tool.",
+        "A front office supervisor at a hotel in Grand Baie drafts replies to guest reviews. Helpful, but she must check that the reply does not promise refunds or upgrades the hotel never agreed to.",
+        "And the owner of a small bakery uses AI for social media ideas. Fine, but if the post mentions prices or opening hours, those come from her own records, not from the chatbot."
+       ]
+      },
+      {
+       "title": "One rule to work by",
+       "slide": {
+        "kind": "steps",
+        "heading": "AI drafts, the professional decides",
+        "steps": [
+         {
+          "title": "Ask",
+          "sub": "A clear request with the right context"
+         },
+         {
+          "title": "Draft",
+          "sub": "Let the assistant produce a first version"
+         },
+         {
+          "title": "Check",
+          "sub": "Facts, figures, names, promises, tone"
+         },
+         {
+          "title": "Decide",
+          "sub": "You edit, approve and remain accountable"
+         }
+        ]
+       },
+       "narration": [
+        "If you remember only one thing from this video, let it be this rule: AI drafts, and the professional decides.",
+        "The assistant is excellent at producing a first version quickly. Your job is to check it, correct it and decide whether it is fit to use.",
+        "In each of our four scenarios, the time saved was real, and so was the need for a human to check the output before it reached a citizen, a customer or a guest.",
+        "Think of how a senior officer treats a letter drafted by a junior colleague. She reads it carefully, corrects anything doubtful, and only signs when she is satisfied. AI output deserves exactly the same treatment.",
+        "The checking does not need to take long. For a short email it may take a minute, but that minute is what turns a fast draft into a reliable piece of professional work."
+       ]
+      },
+      {
+       "title": "Recap",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Recap",
+        "points": [
+         "Strong: drafting, summarising, rewording, brainstorming",
+         "Weak: facts, recent events, calculations, advice",
+         "Never: decisions about people without human judgement",
+         "Rule: AI drafts, the professional decides"
+        ]
+       },
+       "narration": [
+        "To recap, AI assistants shine at language tasks you can easily check, such as drafting, summarising, rewording and brainstorming.",
+        "They are unreliable for facts, recent events, calculations and expert advice, and they should never make decisions about people.",
+        "In the next reading, we take a closer look at the different kinds of AI tools you are likely to meet at work.",
+        "Keep the rule in mind as you work through the rest of the course, because every later topic, from prompts to privacy, builds on it."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "c6-L3",
+     "type": "reading",
+     "title": "A Practical Tour of AI Assistants for the Workplace",
+     "dur": 10,
+     "objectives": [
+      "Explain in plain terms what a large language model is",
+      "Distinguish general chat assistants, built-in office assistants and specialised tools",
+      "Classify workplace tasks by how suitable they are for AI assistance"
+     ],
+     "chips": [
+      "What is a large language model, in simple words?",
+      "Is the AI in my email software different from a chatbot?",
+      "How do I decide if a task is safe to give to AI?"
+     ],
+     "body": "AI assistants have moved from novelty to everyday office tool in a remarkably short time. Many professionals now use them weekly, sometimes without realising it, because they are built into email, word processing and meeting software. This reading gives you a plain-language tour: what these tools are, the main types you are likely to meet, and a simple way to decide which tasks to give them. No technical background is needed.\n\n## What is behind the chat box?\n\nMost modern AI assistants are built on a **large language model**. \"Large\" refers to the enormous amount of text the model was trained on and the size of the model itself; \"language model\" describes what it does: it models how language works, so that it can continue a piece of text in a plausible way.\n\nWhen you type a request, the model produces its answer word by word, each time choosing a likely next word given everything so far. Because it has absorbed patterns from a vast range of writing, the results can be fluent, well organised and surprisingly helpful.\n\nThree consequences follow, and they shape everything else in this course:\n\n1. **It does not look things up by default.** Unless the tool is connected to a search engine or to your documents, its answers come from patterns learnt during training, not from checking a source.\n2. **It has a knowledge cut-off.** Training data is collected up to a certain date. Recent changes, such as a new tax rate or a revised procedure, may be unknown to it.\n3. **Fluency is not accuracy.** A wrong answer is written just as confidently as a right one.\n\n> **Plain-language summary:** an AI assistant is an extremely capable writing partner that has read a great deal but checks nothing unless you make it.\n\n## Three kinds of AI tools you will meet\n\n| Type | Examples of use | What to watch |\n|---|---|---|\n| General chat assistants | Drafting, explaining, brainstorming in a browser or app | Often consumer services; check whether your employer approves them |\n| Assistants built into office software | Summarising a meeting, suggesting email replies, drafting in a document | Can see your files and emails; follow your organisation's settings and policy |\n| Specialised tools | Translation, transcription, customer chatbots, document search | Narrower but deeper access to data; usually procured by the organisation |\n\n**General chat assistants** are what most people picture: a chat box where you type a request. Many have free consumer versions and paid business versions. The business versions usually come with stronger data protections, but only if your organisation has actually signed up for them.\n\n**Built-in assistants** are increasingly part of standard office suites. They can summarise a long email thread, draft a reply or produce minutes from a recorded meeting. Their power comes from access to your organisation's documents, which is why they are normally configured centrally by IT.\n\n**Specialised tools** do one job well, such as transcribing interviews, translating between English and French, or answering customer questions on a website. They often process large amounts of data, so organisations should choose and configure them carefully.\n\n## A traffic-light approach to tasks\n\nA useful way to decide whether to use an assistant is to sort tasks into three colours. The colour depends on two questions: *how easily can I check the result?* and *how much harm could an error cause?*\n\n- **Green: go ahead, then check.** Drafting a generic email, rewording a paragraph into plain English, brainstorming ideas for a staff event, summarising a public document, creating a checklist from your own notes.\n- **Amber: use with care and full verification.** Customer or citizen communications, summaries of internal documents in an approved tool, explanations of rules or procedures, anything containing figures or dates.\n- **Red: do not delegate to AI.** Decisions about individuals (hiring, credit, discipline, eligibility), legal or medical advice given to others, anything requiring confidential or personal data in an unapproved tool, final versions of official statements without human review.\n\nThe colours are not fixed. A task becomes greener when you can easily verify it and when it contains no personal or confidential data. It becomes redder as the consequences of error grow.\n\n## Case box: a circular for the public\n\n*This case is illustrative; the people and figures are invented.*\n\nA clerical officer in a district council office is asked to prepare a one-page, plain-language explanation of a new procedure for applying for a market stall permit. The official circular is four pages long, written in formal administrative language, and already published.\n\n**What she does well.** Because the circular is public, she pastes it into the chat assistant her department has approved and asks: *\"Act as a public information officer. Summarise this circular for members of the public with no legal background. Use short sentences, a numbered list of steps, and a final section on documents to bring. Keep it under 300 words.\"* The draft is clear and well structured, and it takes her five minutes instead of an hour.\n\n**What she checks.** She compares every step, deadline and fee in the draft against the original circular. She finds that the assistant has written \"applications close on the last day of the month\" when the circular says \"the 15th of each month\", and that it has added a document requirement that does not appear in the circular at all. She corrects both.\n\n**What she leaves out.** She does not ask the assistant to decide which past applicants would qualify under the new rules, and she does not paste in any applicant records.\n\n**Result.** A useful public notice, produced faster, with two errors caught before they could mislead citizens. This is the pattern you will see throughout the course: *AI drafts, the professional decides.*\n\n## Key takeaways\n\n- AI assistants are built on large language models that predict plausible text; they do not check facts unless connected to sources, and even then you must verify.\n- You will meet general chat assistants, assistants built into office software and specialised tools; each handles data differently.\n- Use the traffic-light approach: green for easily checked language tasks, amber for communications that need full verification, red for decisions about people and unapproved use of sensitive data.\n- Public documents in approved tools are a good starting point for safe, productive use.\n- Every draft needs a human check, and the case shows why: small errors in dates and requirements are common.\n\n## Check your understanding\n\n1. Why might an AI assistant give an outdated answer about a new government procedure?\n*Answer:* Its knowledge comes from training data collected up to a cut-off date, and unless it is connected to current sources it cannot know about changes made after that.\n2. A colleague wants to use AI to decide which loan applicants to reject. Which traffic-light colour is this, and why?\n*Answer:* Red, because it is a decision about individuals with serious consequences, which requires human judgement, fair criteria and accountability.\n3. In the case box, what made the task suitable for an AI assistant?\n*Answer:* The source circular was already public, the tool was approved, the task was a language task, and the officer could verify every detail against the original."
+    }
+   ]
+  },
+  {
+   "id": "m2",
+   "title": "Module 2 · Writing Effective Prompts",
+   "items": [
+    {
+     "id": "c6-L4",
+     "type": "video",
+     "title": "The Anatomy of a Good Prompt: Role, Task, Context and Format",
+     "dur": 6,
+     "objectives": [
+      "Describe the four building blocks of an effective prompt",
+      "Rewrite a vague prompt into a specific, well-structured one",
+      "Use audience, tone and constraints to shape the output"
+     ],
+     "chips": [
+      "What is the difference between task and context?",
+      "How long should a good prompt be?",
+      "Can you show me a before-and-after prompt?"
+     ],
+     "chapters": [
+      {
+       "title": "Why prompts matter",
+       "slide": {
+        "kind": "compare",
+        "heading": "Same tool, different prompts",
+        "columns": [
+         {
+          "title": "Vague prompt",
+          "points": [
+           "Write an email about the meeting",
+           "Generic, wrong tone, missing details",
+           "Needs heavy rewriting"
+          ]
+         },
+         {
+          "title": "Clear prompt",
+          "points": [
+           "Who, what, for whom, in what form",
+           "Usable first draft",
+           "Minutes of editing, not an hour"
+          ]
+         }
+        ]
+       },
+       "narration": [
+        "When people are disappointed with an AI assistant, the cause is very often the prompt. The tool can only work with what you give it.",
+        "If you type, write an email about the meeting, the assistant has to guess which meeting, who it is for, what was decided and how formal it should be. It will guess, and the guesses will be bland.",
+        "A good prompt is simply a good brief, the kind you would give a capable new colleague who knows nothing about your organisation.",
+        "In this video I will give you a four-part structure that works for almost every workplace task: role, task, context and format.",
+        "The good news is that writing better prompts is not a technical skill. If you can brief a colleague clearly, you already have most of what you need."
+       ]
+      },
+      {
+       "title": "Role and task",
+       "slide": {
+        "kind": "cards",
+        "heading": "Building blocks one and two",
+        "cards": [
+         {
+          "label": "Role",
+          "text": "Act as an experienced customer service writer"
+         },
+         {
+          "label": "Task",
+          "text": "Draft a reply to this guest complaint"
+         }
+        ],
+        "note": {
+         "tone": "info",
+         "text": "Start the task with a clear action verb."
+        }
+       },
+       "narration": [
+        "The first block is the role. Telling the assistant to act as an experienced human resources officer or a careful proofreader nudges it towards the vocabulary and priorities of that role.",
+        "The second block, and the most important, is the task. Start with a clear action verb: draft, summarise, rewrite, compare, list, or explain.",
+        "Be specific about the size of the job. Draft a reply is clearer than help me with this, and summarise in five bullet points is clearer than summarise.",
+        "If you have several tasks, number them, or better still, do them one at a time so that you can check each step.",
+        "You do not always need a role, but it helps most when the task calls for a particular expertise or tone, such as a formal letter, a training handout or a careful proofread."
+       ]
+      },
+      {
+       "title": "Context: what only you know",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Context the assistant cannot guess",
+        "points": [
+         "Who the audience is and what they already know",
+         "The purpose: inform, apologise, persuade, remind",
+         "Key facts, dates and decisions to include",
+         "Tone: formal, warm, firm, neutral",
+         "What to avoid: promises, jargon, sensitive details"
+        ]
+       },
+       "narration": [
+        "The third block is context, and this is where most of the quality comes from. Context is everything the assistant cannot possibly know unless you tell it.",
+        "Who is the audience? A senior official, a first-time customer, or hotel staff who speak English as a second language? Each needs a different style.",
+        "What is the purpose? Are you informing, apologising, persuading or reminding? And what are the key facts that must appear, such as the date, the deadline or the decision?",
+        "Context also includes what to avoid. For instance, do not promise a refund, do not use technical jargon, or keep it under one hundred and fifty words.",
+        "Remember the previous lesson, though. Context means relevant facts, not personal data. You can describe a customer's situation without naming the customer."
+       ]
+      },
+      {
+       "title": "Format: the shape of the answer",
+       "slide": {
+        "kind": "cards",
+        "heading": "Ask for the format you need",
+        "cards": [
+         {
+          "label": "Length",
+          "text": "Under 150 words, one page, three paragraphs"
+         },
+         {
+          "label": "Structure",
+          "text": "Bullet points, table, numbered steps"
+         },
+         {
+          "label": "Language",
+          "text": "English, French, or both versions"
+         },
+         {
+          "label": "Ready to use",
+          "text": "Email with subject line, notice with heading"
+         }
+        ]
+       },
+       "narration": [
+        "The fourth block is format. Tell the assistant the shape you want the answer to take, so you do not have to reshape it afterwards.",
+        "You might ask for an email with a subject line, a table with three columns, five bullet points for a slide, or a notice of no more than one hundred words.",
+        "In Mauritius you will often need more than one language, so you can also ask for an English version and a French version side by side, and then have a fluent colleague check both.",
+        "Asking for a format also makes the output easier to check, because missing points stand out immediately.",
+        "If you will paste the output into a particular place, such as a slide, a text message or a printed notice board, mention that too, because each one suits a different length and style."
+       ]
+      },
+      {
+       "title": "A before-and-after example",
+       "slide": {
+        "kind": "compare",
+        "heading": "Rewriting a weak prompt",
+        "columns": [
+         {
+          "title": "Before",
+          "points": [
+           "Write a post about our new cakes"
+          ]
+         },
+         {
+          "title": "After",
+          "points": [
+           "Role: social media writer for a small bakery",
+           "Task: three short Facebook post options",
+           "Context: new coconut cakes, launch Saturday, friendly tone",
+           "Format: under 60 words each, one call to action"
+          ]
+         }
+        ],
+        "note": {
+         "tone": "info",
+         "text": "Illustrative example of a small business."
+        }
+       },
+       "narration": [
+        "Let us put it all together with an illustrative example. Imagine the owner of a small family bakery in Curepipe who is launching a new range of coconut cakes.",
+        "Her first attempt is: write a post about our new cakes. The result is generic and could describe any bakery anywhere in the world.",
+        "Her improved prompt says: act as a social media writer for a small family bakery. Write three short Facebook post options announcing our new coconut cakes, which launch this Saturday.",
+        "She then adds the rest of the brief: use a warm, local tone, keep each post under sixty words, and end with an invitation to visit the shop.",
+        "The second prompt takes thirty seconds longer to write, and it produces three usable options instead of one generic paragraph. She still checks the launch date and prices herself before posting.",
+        "Notice that every part of the improved prompt came from knowledge only the owner had: the product, the launch day, the tone of her shop and the action she wanted customers to take."
+       ]
+      },
+      {
+       "title": "Recap",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Recap: role, task, context, format",
+        "points": [
+         "Role: who the assistant should act as",
+         "Task: a clear action verb and scope",
+         "Context: audience, purpose, key facts, what to avoid",
+         "Format: length, structure, language"
+        ]
+       },
+       "narration": [
+        "To recap, a strong prompt has four parts: a role, a clear task, the context only you know, and the format you need.",
+        "Context is where most of the quality comes from, but good context never needs personal data about customers or colleagues.",
+        "In the next video, we will see how to improve a draft through conversation, examples and self-checks.",
+        "With practice, writing a prompt in this way takes less than a minute and quickly becomes second nature."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "c6-L5",
+     "type": "video",
+     "title": "Improving the Output: Iteration, Examples and Self-Checks",
+     "dur": 5,
+     "objectives": [
+      "Refine an AI draft through follow-up instructions",
+      "Use examples and step-by-step requests to improve quality",
+      "Ask the assistant to state assumptions and gaps you can check"
+     ],
+     "chips": [
+      "What should I do when the first answer is not good enough?",
+      "How do examples improve a prompt?",
+      "Can I trust it when it checks its own work?"
+     ],
+     "chapters": [
+      {
+       "title": "A conversation, not a vending machine",
+       "slide": {
+        "kind": "compare",
+        "heading": "Two ways to use an assistant",
+        "columns": [
+         {
+          "title": "Vending machine",
+          "points": [
+           "One request, take what comes out",
+           "Accept or give up"
+          ]
+         },
+         {
+          "title": "Conversation",
+          "points": [
+           "Ask, review, then refine",
+           "Each round adds your judgement",
+           "Better result in two or three turns"
+          ]
+         }
+        ]
+       },
+       "narration": [
+        "Many people use an AI assistant like a vending machine. They type one request, take whatever comes out, and either accept it or give up.",
+        "The assistant actually works much better as a conversation. It remembers what you said earlier in the same chat, so you can refine the draft step by step.",
+        "In this video I will show you four techniques that professionals use to get from a rough first answer to something genuinely useful: follow-up instructions, examples, step-by-step requests, and self-checks.",
+        "None of these techniques needs any special software. They work in any assistant your organisation has approved, and they will save you a great deal of rewriting.",
+        "Keep in mind, too, that every round of refinement is also a chance to apply your own judgement, because you are reading and deciding at each step."
+       ]
+      },
+      {
+       "title": "Follow-up instructions",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Useful follow-up instructions",
+        "points": [
+         "Make it shorter and more direct",
+         "Make the tone warmer but still professional",
+         "Remove the second paragraph; add the deadline",
+         "Rewrite for a reader with no technical background",
+         "Give me two alternative opening sentences"
+        ]
+       },
+       "narration": [
+        "The simplest technique is the follow-up. Read the first draft, decide what is wrong with it, and say so plainly.",
+        "Make it shorter. Make it more formal. Remove the part about compensation. Add that the office will be closed on the public holiday. Each instruction moves the draft closer to what you need.",
+        "Be specific about the problem. Saying this is not good gives the assistant nothing to work with, whereas the tone is too apologetic for a supplier gives it a clear direction.",
+        "If a conversation has gone badly off course, it is often quicker to start a fresh chat with a better first prompt than to keep patching.",
+        "A good habit is to keep your follow-ups short and to change one thing at a time, so you can see exactly what each instruction did to the draft."
+       ]
+      },
+      {
+       "title": "Show, don't just tell",
+       "slide": {
+        "kind": "cards",
+        "heading": "Giving examples",
+        "cards": [
+         {
+          "label": "Style example",
+          "text": "Here is a notice we sent last year; match its tone"
+         },
+         {
+          "label": "Format example",
+          "text": "Use this table layout for every row"
+         },
+         {
+          "label": "Quality example",
+          "text": "A good answer looks like this one"
+         }
+        ],
+        "note": {
+         "tone": "warn",
+         "text": "Remove names and personal details from any example you paste."
+        }
+       },
+       "narration": [
+        "The second technique is to give an example. Assistants are very good at copying a pattern, so showing one good example is often more effective than a paragraph of description.",
+        "Suppose a human resources officer in a ministry wants notices that match the department's usual style. She can paste last year's training notice, with names removed, and say: write a new notice for the March workshop in the same style.",
+        "Examples work for formats too. If you want every row of a table to look a certain way, fill in the first row yourself and ask the assistant to complete the rest.",
+        "The same privacy rule applies to examples as to everything else: remove names, contact details and anything confidential before you paste.",
+        "You can also give a negative example, saying this is the kind of wording we want to avoid, which is useful when previous notices were too long or too formal."
+       ]
+      },
+      {
+       "title": "Break big tasks into steps",
+       "slide": {
+        "kind": "steps",
+        "heading": "Step by step for a larger task",
+        "steps": [
+         {
+          "title": "Outline",
+          "sub": "Ask for a structure and agree it"
+         },
+         {
+          "title": "Section by section",
+          "sub": "Draft one part at a time"
+         },
+         {
+          "title": "Review each part",
+          "sub": "Correct facts as you go"
+         },
+         {
+          "title": "Assemble and polish",
+          "sub": "Final pass for tone and length"
+         }
+        ]
+       },
+       "narration": [
+        "The third technique is to break a larger task into steps. If you ask for a complete ten-page report in one go, you will get something long, smooth and shallow.",
+        "Instead, ask for an outline first. Check that the structure makes sense, add the headings you know are needed, and only then ask for each section in turn.",
+        "Imagine the manager of a small guesthouse preparing a proposal for a tourism grant. Working outline first, then section by section, she can feed in her real figures at each stage and catch errors early.",
+        "You can also ask the assistant to ask you questions before it starts. Before drafting, list the information you need from me. This often reveals context you forgot to give.",
+        "Working in steps also keeps you in control of the content, because each section passes through your hands before the next one is written."
+       ]
+      },
+      {
+       "title": "Self-checks, and their limits",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Useful self-check prompts",
+        "points": [
+         "List the assumptions you made in this draft",
+         "Which statements here should I verify?",
+         "What is missing for a reader who is a new customer?",
+         "Rate the clarity of this text and explain why"
+        ],
+        "note": {
+         "tone": "warn",
+         "text": "A self-check points you to what to verify. It is not verification."
+        }
+       },
+       "narration": [
+        "The fourth technique is the self-check. After a draft, ask: what assumptions did you make, and which statements in this text should I verify?",
+        "This is useful because it turns hidden guesses into a visible list. The assistant might reply that it assumed the deadline was the end of the month, which you know is wrong.",
+        "But be careful. When an assistant checks its own work, it is still predicting text. It can confidently confirm an error it made a moment earlier.",
+        "So treat a self-check as a map of where to look, and then do the actual verification yourself against a reliable source, such as the official document, your own records or a knowledgeable colleague."
+       ]
+      },
+      {
+       "title": "Recap",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Recap",
+        "points": [
+         "Refine with specific follow-up instructions",
+         "Show an example of the style or format you want",
+         "Break big tasks into an outline and sections",
+         "Use self-checks to find what you must verify yourself"
+        ]
+       },
+       "narration": [
+        "To recap, treat the assistant as a conversation: refine with specific follow-ups, show examples, work step by step, and ask it to list its assumptions.",
+        "A self-check tells you where to look, but you still do the checking.",
+        "In the reading that follows, you will find a set of ready-made prompt patterns for everyday professional tasks."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "c6-L6",
+     "type": "reading",
+     "title": "Prompt Patterns for Everyday Professional Tasks",
+     "dur": 9,
+     "objectives": [
+      "Apply ready-made prompt patterns to common workplace tasks",
+      "Adapt a prompt for audience, tone and language",
+      "Build a small personal library of reusable prompts"
+     ],
+     "chips": [
+      "Which prompt pattern should I use for meeting notes?",
+      "How do I ask for a bilingual English and French version?",
+      "Can you help me turn a prompt into a reusable template?"
+     ],
+     "body": "In the videos you learnt the four building blocks of a good prompt (role, task, context and format) and four ways to improve a draft (follow-ups, examples, steps and self-checks). This reading turns those ideas into **patterns**: short, reusable templates for tasks that come up again and again at work. Copy them, adapt them, and keep the ones that work in a personal prompt library.\n\nThroughout, the square-bracket parts are placeholders for you to fill in. Remember the privacy rule from Module 1: placeholders should be filled with *anonymised* details unless your organisation's approved tool permits otherwise.\n\n## Pattern 1: Summarise for a purpose\n\nA summary is only useful if it serves a reader. Tell the assistant who the reader is and what they need to do with the information.\n\n> *\"Act as an executive assistant. Summarise the document below for [a director who has two minutes]. Give: the main decision required, three key points, any deadlines, and open questions. Use bullet points, under 150 words.\"*\n\n**Why it works:** the role sets the style, the reader sets the level, and the fixed headings make missing information obvious. **Check:** compare deadlines and figures with the original document.\n\n## Pattern 2: Draft a message\n\n> *\"Act as a [customer service writer for a hotel]. Draft a reply to the message below. Purpose: [apologise for a delayed airport transfer and explain what we are changing]. Tone: [warm, professional, not over-apologetic]. Include: [our new confirmation call the day before]. Do not: [offer refunds or discounts]. Length: under 120 words, with a subject line.\"*\n\nThe **\"Do not\"** line is one of the most valuable parts of any drafting prompt. Assistants are eager to please and will happily promise compensation, upgrades or deadlines you have no authority to offer.\n\n## Pattern 3: Rewrite for a different audience\n\n> *\"Rewrite the text below for [members of the public with no technical background]. Keep all facts unchanged. Use short sentences and everyday words. Then list any terms you simplified, so I can check the meaning is preserved.\"*\n\nThe final instruction is a built-in self-check: it shows you where the meaning might have shifted.\n\nIn Mauritius you will often need more than one language. You can add: *\"Provide an English version and a French version.\"* Always have a fluent speaker review the second language, because assistants can produce French that is grammatically correct but wrong in tone or terminology for local administrative usage. For Kreol Morisien, quality varies considerably between tools, so treat output with particular care.\n\n## Pattern 4: Extract into a table\n\n> *\"From the notes below, create a table with the columns: Action, Owner (use role, not name), Deadline, Status. If a deadline is not stated, write 'not stated' rather than guessing.\"*\n\nThe instruction *\"rather than guessing\"* matters. Without it, an assistant may fill gaps with plausible but invented dates.\n\n## Pattern 5: Brainstorm, then critique\n\n> *\"Give me 10 ideas for [reducing no-shows at our restaurant]. Then pick the three most practical for a business with [8 staff and a small budget] and explain the main risk of each.\"*\n\nAsking for critique after the list pushes the assistant beyond generic ideas and gives you something to discuss with your team.\n\n## Worked example: a small business owner's week\n\n*An illustrative scenario; the business and figures are invented.*\n\nNadia runs a small boutique guesthouse with six rooms near Mahébourg. In one week she uses four patterns:\n\n| Day | Task | Pattern | What she checks |\n|---|---|---|---|\n| Monday | Reply to a guest unhappy about noise | Draft a message, with \"do not offer a refund\" | That the reply matches what actually happened |\n| Tuesday | Update her house rules for guests | Rewrite for audience, English and French | A French-speaking friend reviews the French |\n| Thursday | Notes from a meeting with her accountant | Extract into a table | Deadlines against the accountant's email |\n| Friday | Ideas for the low season | Brainstorm, then critique | Costs against her own figures |\n\nHer first attempt at Monday's reply, with the prompt *\"reply to this angry guest\"*, produced an over-long apology offering a free night, which she had not intended. With the full drafting pattern, the reply was short, sincere and promised only what she could deliver: a quieter room on the garden side for the rest of the stay. She also replaced the guest's name with \"the guest\" before pasting the review, and added the name back in her email software.\n\nThe time saved was roughly an hour over the week, an illustrative figure, but the larger benefit was consistency: her messages now sound professional every time.\n\n## Building your own prompt library\n\nA prompt library is simply a document where you keep prompts that worked. To build one:\n\n1. **Save prompts that produced a good result**, not just the outputs.\n2. **Replace specifics with placeholders** so the prompt can be reused.\n3. **Add a \"what to check\" note** under each prompt, such as \"verify dates\" or \"do not paste customer names\".\n4. **Share with your team**, through approved channels, so that good practice spreads.\n\nTeams that share a library tend to get more consistent quality and fewer risky shortcuts.\n\n## Key takeaways\n\n- Patterns turn the role, task, context and format structure into reusable templates for common tasks.\n- Always state the reader and purpose; a summary or draft without them will be generic.\n- \"Do not\" lines and \"do not guess\" instructions prevent many of the most common AI errors.\n- Ask for bilingual versions when needed, but have a fluent human review them.\n- Keep a prompt library with a \"what to check\" note under each prompt.\n\n## Check your understanding\n\n1. Why should a drafting prompt for a hotel reply include a \"Do not\" line?\n*Answer:* Because assistants tend to please the reader and may promise refunds, upgrades or deadlines the writer is not authorised to offer.\n2. What instruction reduces the risk of invented deadlines when extracting actions from meeting notes?\n*Answer:* Telling the assistant to write \"not stated\" rather than guessing when a deadline is missing.\n3. In the worked example, what two privacy and accuracy steps did Nadia take with the guest reply?\n*Answer:* She removed the guest's name before pasting the review, and she checked that the reply matched what actually happened and promised only what she could deliver."
+    },
+    {
+     "id": "c6-L7",
+     "type": "quiz",
+     "title": "Quiz 1: How AI Assistants Work and Writing Effective Prompts",
+     "dur": 12,
+     "quiz": {
+      "time": 12,
+      "weight": 15,
+      "questions": [
+       {
+        "q": "Why can an AI assistant state an incorrect fact with complete confidence?",
+        "o": [
+         "It deliberately tries to mislead users",
+         "It predicts plausible text and does not check facts unless connected to sources",
+         "It always copies the first website it finds",
+         "It only makes mistakes when the internet is slow"
+        ],
+        "a": 1,
+        "ex": "Language models generate likely word sequences from patterns, so fluency says nothing about factual accuracy."
+       },
+       {
+        "q": "Which task is the best fit for a general AI assistant?",
+        "o": [
+         "Deciding which job applicants to reject",
+         "Calculating a customer's exact loan repayments for a contract",
+         "Rewording a published notice into plain English for the public",
+         "Giving legal advice to a citizen about their land dispute"
+        ],
+        "a": 2,
+        "ex": "Rewording a public document is a language task with low data risk that you can easily check against the original."
+       },
+       {
+        "q": "In the role, task, context and format structure, which part tells the assistant who the audience is and what to avoid?",
+        "o": [
+         "Context",
+         "Role",
+         "Format",
+         "Task"
+        ],
+        "a": 0,
+        "ex": "Context covers everything the assistant cannot know without being told, including audience, purpose, key facts and what to avoid."
+       },
+       {
+        "q": "A hotel supervisor's draft reply to a guest keeps offering a free night. What is the most effective prompt fix?",
+        "o": [
+         "Ask the assistant to be more creative",
+         "Switch to a different chatbot",
+         "Add a clear instruction: do not offer refunds, discounts or free nights",
+         "Make the prompt shorter"
+        ],
+        "a": 2,
+        "ex": "A specific 'do not' constraint stops the assistant from making promises the writer is not authorised to give."
+       },
+       {
+        "q": "You ask an assistant to list the assumptions it made in a draft. How should you treat its answer?",
+        "o": [
+         "As proof that the draft is now correct",
+         "As a pointer to what you still need to verify yourself",
+         "As a replacement for your manager's review",
+         "As irrelevant, because assistants never make assumptions"
+        ],
+        "a": 1,
+        "ex": "A self-check is still predicted text, so it shows where to look but does not replace your own verification."
+       },
+       {
+        "q": "A ministry officer wants new notices to match the department's usual style. Which technique helps most?",
+        "o": [
+         "Pasting an earlier notice, with names removed, as an example of the style",
+         "Typing the request in capital letters",
+         "Asking for the longest possible answer",
+         "Repeating the same prompt until the style changes"
+        ],
+        "a": 0,
+        "ex": "Assistants are good at copying a pattern, so a well-chosen, anonymised example is often more effective than description."
+       },
+       {
+        "q": "When extracting actions from meeting notes, which instruction reduces the risk of invented deadlines?",
+        "o": [
+         "Use as many columns as possible",
+         "Write 'not stated' where a deadline is missing rather than guessing",
+         "Translate the notes into French first",
+         "Ask for the answer in one paragraph"
+        ],
+        "a": 1,
+        "ex": "Explicitly telling the assistant not to guess prevents it from filling gaps with plausible but invented dates."
+       },
+       {
+        "q": "Which statement best describes the rule 'AI drafts, the professional decides'?",
+        "o": [
+         "AI should make final decisions because it is faster",
+         "Professionals should never use AI drafts",
+         "AI may produce a first version, but a person checks, edits and remains accountable for it",
+         "The AI provider is responsible for any errors in the final output"
+        ],
+        "a": 2,
+        "ex": "The human user verifies and approves the output and remains accountable for what is sent or decided."
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "m3",
+   "title": "Module 3 · Privacy, Confidentiality and Accuracy",
+   "items": [
+    {
+     "id": "c6-L8",
+     "type": "video",
+     "title": "What Not to Paste: Personal and Confidential Information",
+     "dur": 5,
+     "objectives": [
+      "Recognise personal data and confidential information in everyday documents",
+      "Explain why inputs to public AI tools can create privacy and confidentiality risks",
+      "Anonymise a document before using it with an AI assistant"
+     ],
+     "chips": [
+      "What counts as personal data?",
+      "What happens to the text I type into a chatbot?",
+      "How do I anonymise a document properly?"
+     ],
+     "chapters": [
+      {
+       "title": "The paste moment",
+       "slide": {
+        "kind": "bullets",
+        "heading": "The moment that matters",
+        "points": [
+         "Copy a document, paste it into a chatbot",
+         "Takes two seconds, hard to undo",
+         "The text leaves your organisation",
+         "One habit prevents most problems"
+        ]
+       },
+       "narration": [
+        "Most privacy problems with AI at work happen in a single, ordinary moment: someone copies a document, pastes it into a chatbot and presses enter.",
+        "It takes two seconds, it feels harmless, and it is very difficult to undo, because the text has now left your organisation and is held by an outside provider.",
+        "In this video we will look at what kinds of information should not be pasted into unapproved tools, why it matters, and the simple habit of anonymising that removes most of the risk.",
+        "Most people who make this mistake are simply trying to work efficiently and help a customer faster. The aim of this video is not to make you afraid of AI tools, but to give you a quick, reliable habit.",
+        "Once that habit is in place, you can use AI assistants with confidence, knowing that the people whose information you hold are protected."
+       ]
+      },
+      {
+       "title": "Personal data",
+       "slide": {
+        "kind": "cards",
+        "heading": "Personal data hides everywhere",
+        "cards": [
+         {
+          "label": "Direct identifiers",
+          "text": "Names, ID card numbers, phone, email, address"
+         },
+         {
+          "label": "Financial",
+          "text": "Account numbers, salaries, loan details"
+         },
+         {
+          "label": "Sensitive",
+          "text": "Health, religion, political opinion, criminal records"
+         },
+         {
+          "label": "Indirect",
+          "text": "Job title plus village plus date can identify someone"
+         }
+        ]
+       },
+       "narration": [
+        "Personal data is any information that relates to an identified or identifiable living person. The obvious examples are names, national identity card numbers, phone numbers, email and home addresses.",
+        "But it also includes account numbers, salaries, performance reviews, guest booking details and the content of a complaint letter about a named customer.",
+        "Some categories are especially sensitive, such as health information, religious or political views, and criminal records, and data protection law gives them extra protection.",
+        "Remember too that people can be identified indirectly. The only female head chef at a particular hotel in Flic en Flac is identifiable even without her name.",
+        "A useful test is to ask yourself whether the person concerned would be surprised or upset to learn that their details had been typed into an outside service. If the answer is yes, keep them out."
+       ]
+      },
+      {
+       "title": "Confidential business information",
+       "slide": {
+        "kind": "cards",
+        "heading": "Confidential, even with no names",
+        "cards": [
+         {
+          "label": "Commercial",
+          "text": "Pricing, margins, tenders, supplier contracts"
+         },
+         {
+          "label": "Strategic",
+          "text": "Plans, restructuring, unannounced decisions"
+         },
+         {
+          "label": "Official",
+          "text": "Draft policies, internal government papers"
+         },
+         {
+          "label": "Security",
+          "text": "Passwords, system details, internal procedures"
+         }
+        ]
+       },
+       "narration": [
+        "Privacy is not the only concern. A document can contain no personal data at all and still be confidential.",
+        "Think of a hotel's room rates negotiated with tour operators, an SME's bid for a government tender, a bank's internal procedures, or a draft policy paper circulating inside a ministry before it is announced.",
+        "Professional duties of confidentiality, employment contracts and sector rules apply to this kind of information, and sharing it with an outside service may breach them even when the intention is innocent.",
+        "And never paste passwords, access codes or technical details of your organisation's systems into any chatbot.",
+        "A simple question helps here: would my manager be comfortable seeing this document on the screen of a stranger? If not, it does not belong in an unapproved tool."
+       ]
+      },
+      {
+       "title": "Why public tools are different",
+       "slide": {
+        "kind": "compare",
+        "heading": "Consumer tool versus approved tool",
+        "columns": [
+         {
+          "title": "Free consumer chatbot",
+          "points": [
+           "Terms set by the provider",
+           "Inputs may be stored or reviewed",
+           "May be used to improve the service",
+           "No contract with your employer"
+          ]
+         },
+         {
+          "title": "Organisation-approved tool",
+          "points": [
+           "Contract and data terms agreed",
+           "Settings controlled by IT",
+           "Covered by internal policy",
+           "Still: share only what is needed"
+          ]
+         }
+        ]
+       },
+       "narration": [
+        "Why does it matter which tool you use? With a free consumer chatbot, the provider sets the terms. Depending on the service and your settings, what you type may be stored, reviewed by staff for safety, or used to improve future versions.",
+        "An organisation-approved tool is different. Your employer has usually agreed contract terms about how data is handled, and IT controls the settings.",
+        "So the first question is always: has my organisation approved this tool for this kind of information? If you do not know, ask before you paste, not after.",
+        "Even with an approved tool, the good habit remains the same: share only what the task actually needs.",
+        "If your organisation has not yet approved any AI tool, the safe course is to use AI only with public or fully anonymised information until a decision is made."
+       ]
+      },
+      {
+       "title": "Anonymise before you paste",
+       "slide": {
+        "kind": "steps",
+        "heading": "A quick anonymising routine",
+        "steps": [
+         {
+          "title": "Spot",
+          "sub": "Names, numbers, places, dates, unique details"
+         },
+         {
+          "title": "Replace",
+          "sub": "Customer A, Staff member B, Hotel X"
+         },
+         {
+          "title": "Remove",
+          "sub": "Account and ID numbers entirely"
+         },
+         {
+          "title": "Re-read",
+          "sub": "Could anyone still recognise the person?"
+         },
+         {
+          "title": "Restore",
+          "sub": "Add real details back in your own copy"
+         }
+        ]
+       },
+       "narration": [
+        "The practical answer is to anonymise before you paste. First, read the text and spot every name, number, place, date and unusual detail.",
+        "Next, replace people and organisations with neutral labels such as Customer A, Staff member B or Supplier X, and remove account and identity numbers entirely, since the assistant never needs them.",
+        "Then re-read the result and ask honestly whether anyone who knows the situation could still recognise the person. If so, generalise further.",
+        "When the assistant returns its draft, you add the real details back in your own copy, inside your organisation's systems. The help you get is just as good, and the risk is far smaller.",
+        "Imagine a human resources assistant in a ministry who wants help wording a difficult letter about repeated lateness. She can describe the situation as Staff member B, without names, dates of birth or the section, and still get an excellent draft."
+       ]
+      },
+      {
+       "title": "Recap",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Recap",
+        "points": [
+         "Personal data includes indirect identifiers",
+         "Confidential business data needs protection too",
+         "Use only tools your organisation has approved",
+         "Anonymise, paste, then restore details yourself"
+        ]
+       },
+       "narration": [
+        "To recap, personal data and confidential business information should stay out of unapproved AI tools.",
+        "Check that a tool is approved, share only what the task needs, and anonymise before you paste.",
+        "In the next reading, we look at the Data Protection Act 2017 in plain terms and what it means for everyday AI use."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "c6-L9",
+     "type": "reading",
+     "title": "Data Protection and Confidentiality When Using AI in Mauritius",
+     "dur": 10,
+     "objectives": [
+      "Outline the general principles of the Mauritius Data Protection Act 2017",
+      "Relate those principles to everyday use of AI assistants",
+      "Apply a pre-use checklist before sharing information with an AI tool"
+     ],
+     "chips": [
+      "What does the Data Protection Act 2017 say in simple terms?",
+      "Is sending data to an overseas AI provider a problem?",
+      "Who should I ask at work before using a new AI tool?"
+     ],
+     "body": "Every time you use an AI assistant with real work information, you make a small data protection decision. This reading explains, in general terms, the Mauritian legal framework for personal data and how its principles apply to everyday AI use. It is a practical orientation for professionals, **not legal advice**: for specific situations, consult your organisation's data protection officer, legal team or the guidance published by the Data Protection Office.\n\n## The legal framework in brief\n\nIn Mauritius, the processing of personal data is governed by the **Data Protection Act 2017**. The Act was designed to strengthen the rights of individuals over their personal data and is broadly aligned with modern international standards, including the European Union's General Data Protection Regulation. It is overseen by the **Data Protection Office**, headed by the Data Protection Commissioner, which provides guidance and enforces the law.\n\nA few terms are worth knowing:\n\n- **Personal data:** any information relating to an identified or identifiable living individual (the *data subject*).\n- **Special categories of personal data:** more sensitive information, such as health, racial or ethnic origin, political opinions, religious or philosophical beliefs, and criminal records, which receives stronger protection.\n- **Controller:** the organisation that decides why and how personal data is processed, for example your bank, ministry or hotel.\n- **Processor:** an organisation that processes personal data on the controller's behalf, which can include an outside AI service provider.\n- **Processing:** almost anything you do with data, including collecting, storing, sharing, and pasting it into a tool.\n\n## Principles that matter for AI use\n\nThe Act sets out principles that controllers must respect. In general terms, personal data should be:\n\n1. **Processed lawfully, fairly and transparently.** There must be a proper basis for the processing, and people should not be surprised by how their data is used.\n2. **Collected for specified, explicit purposes** and not used in ways incompatible with those purposes.\n3. **Adequate, relevant and limited** to what is necessary (often called *data minimisation*).\n4. **Accurate** and kept up to date.\n5. **Kept no longer than necessary.**\n6. **Kept secure**, with appropriate technical and organisational measures.\n\nNow translate these into the moment of using an AI tool:\n\n| Principle | What it means when you use AI |\n|---|---|\n| Lawful, fair, transparent | Would the customer or citizen reasonably expect their details to be sent to an outside AI service? Usually not. |\n| Purpose limitation | Data collected to process a loan application was not collected so that staff could experiment with chatbots. |\n| Data minimisation | The assistant almost never needs names, ID card numbers or account numbers to help you. Remove them. |\n| Accuracy | AI-generated text about a person can be wrong; it must not be stored in their file without checking. |\n| Security | Unapproved consumer tools are outside your organisation's security controls. |\n\n## Rights, decisions and transfers\n\nThree further features of the Act are especially relevant to AI.\n\n**Rights of individuals.** Data subjects have rights, including to be informed about processing, to access their data and to have inaccurate data corrected. If AI-generated content about a person ends up in an official record, those rights apply to it too.\n\n**Automated decisions.** The Act gives individuals protections concerning decisions based solely on automated processing that significantly affect them. This reinforces the course rule: decisions about people, such as credit, employment or eligibility, must involve meaningful human judgement.\n\n**Transfers abroad.** Many AI services are hosted outside Mauritius. The Act places conditions on transferring personal data to other countries, such as appropriate safeguards. This is one reason organisations approve specific tools under specific contracts rather than leaving individual staff to choose.\n\nControllers also have duties to keep records, to assess the risks of higher-risk processing, and to deal properly with personal data breaches, which can include notifying the Data Protection Office. Pasting a customer list into an unapproved tool could, in the worst case, become exactly such an incident.\n\n## Confidentiality beyond data protection\n\nData protection law covers personal data. But much workplace information is confidential for other reasons:\n\n- **Banking and financial services** operate under strict duties of confidentiality about customers' affairs.\n- **Public officers** handle information that is not yet public, such as draft policies, tender evaluations and internal minutes, and must follow their service's rules on official information.\n- **Businesses** have commercial secrets: pricing, supplier terms, bids and strategy, often protected by contracts and non-disclosure agreements.\n- **Professionals** such as accountants, lawyers and health workers have their own codes of confidentiality.\n\nAn anonymised document can still be commercially confidential. Both questions, *\"is there personal data?\"* and *\"is this confidential?\"*, need to be asked.\n\n## Case box: the SME bookkeeper\n\n*An illustrative case; the business and people are invented.*\n\nRavi does the bookkeeping for a small trading company in Port Louis. He wants help writing a polite but firm letter to customers whose invoices are more than 60 days overdue. His first instinct is to paste the full aged-debtors report, with customer names, amounts and phone numbers, into a free chatbot and ask for personalised letters.\n\nApplying the principles:\n\n- **Minimisation:** the assistant needs to know the *type* of letter, not who the debtors are.\n- **Security and transfers:** the free tool is not approved by his company, and its servers are abroad.\n- **Confidentiality:** the debtors list is commercially sensitive regardless of personal data.\n\n**Better approach.** Ravi writes: *\"Act as a credit controller for a small trading company. Draft a polite but firm reminder letter for an invoice more than 60 days overdue. Placeholders: [Customer name], [Invoice number], [Amount], [Due date]. Mention that we value the relationship and ask for payment or a call within 7 days.\"* He then fills the placeholders using the mail merge in his own accounting software. Same benefit, no customer data shared.\n\n## A pre-use checklist\n\nBefore using an AI tool with work information, run through these questions:\n\n1. Is this tool **approved** by my organisation for this kind of information?\n2. Does the text contain **personal data**, including indirect identifiers? Can I remove or replace it?\n3. Is the information **confidential** for commercial, official or professional reasons?\n4. Does the task really need this information, or would **placeholders** do?\n5. Will the output be used in a **decision about a person**? If so, who makes the decision?\n6. Who do I ask if unsure? (Your manager, IT, or the data protection officer.)\n\n## Key takeaways\n\n- The Data Protection Act 2017 governs personal data in Mauritius and is overseen by the Data Protection Office; principles include lawfulness, purpose limitation, minimisation, accuracy, storage limitation and security.\n- Data minimisation is the most practical principle for AI users: the assistant rarely needs real identifiers.\n- Decisions significantly affecting individuals should not rest solely on automated processing; keep a human decision-maker.\n- Overseas AI services raise transfer questions, which is why organisations approve specific tools.\n- Confidentiality duties apply even when no personal data is involved.\n- When unsure, use placeholders and ask your data protection officer.\n\n## Check your understanding\n\n1. Which data protection principle is most directly applied when you replace a customer's name with \"Customer A\" before using an AI tool?\n*Answer:* Data minimisation: using only the personal data that is necessary for the purpose, which here is none.\n2. Why might an organisation approve one AI tool and prohibit others?\n*Answer:* Because approved tools come with agreed contract terms, security settings and safeguards for data, including transfers abroad, which consumer tools may not provide.\n3. Ravi's debtors list has no health or other sensitive data. Why is it still inappropriate to paste it into a free chatbot?\n*Answer:* It contains personal data that is not needed for the task, the tool is unapproved and hosted abroad, and the list is commercially confidential."
+    },
+    {
+     "id": "c6-L10",
+     "type": "video",
+     "title": "Accuracy, Bias and How to Verify AI Output",
+     "dur": 5,
+     "objectives": [
+      "Recognise common forms of AI error, including invented facts and references",
+      "Apply a proportionate verification routine before using AI output",
+      "Identify bias risks when AI is used in decisions or communications about people"
+     ],
+     "chips": [
+      "What is an AI hallucination?",
+      "How much checking is enough?",
+      "How can AI output be biased if it is just predicting words?"
+     ],
+     "chapters": [
+      {
+       "title": "Errors that look like answers",
+       "slide": {
+        "kind": "cards",
+        "heading": "Common AI errors",
+        "cards": [
+         {
+          "label": "Invented facts",
+          "text": "A regulation, figure or date that does not exist"
+         },
+         {
+          "label": "Fake references",
+          "text": "Reports and links that were never published"
+         },
+         {
+          "label": "Wrong sums",
+          "text": "Plausible but incorrect calculations"
+         },
+         {
+          "label": "Out of date",
+          "text": "Old rules presented as current"
+         }
+        ]
+       },
+       "narration": [
+        "AI errors are dangerous for one reason: they do not look like errors. They arrive in the same fluent, confident sentences as everything else.",
+        "Researchers often call invented content a hallucination. The assistant may cite a section of a law that does not exist, quote a report that was never written, or give a date that is slightly wrong.",
+        "Calculations are another source of quiet mistakes, as are rules that were correct a few years ago but have since changed.",
+        "In this video we will look at how to verify output in proportion to the risk, and at a less obvious problem, which is bias.",
+        "The point is not that AI is useless. It is that the responsibility for accuracy stays with you, so you need a quick, dependable way of catching errors before they cause harm."
+       ]
+      },
+      {
+       "title": "Verify in proportion to the stakes",
+       "slide": {
+        "kind": "compare",
+        "heading": "Match the checking to the risk",
+        "columns": [
+         {
+          "title": "Low stakes",
+          "points": [
+           "Internal brainstorm, rough notes",
+           "Quick read for sense and tone"
+          ]
+         },
+         {
+          "title": "Medium stakes",
+          "points": [
+           "Customer emails, staff notices",
+           "Check every fact, date and promise"
+          ]
+         },
+         {
+          "title": "High stakes",
+          "points": [
+           "Legal, financial, public statements",
+           "Check against official sources and get a second reviewer"
+          ]
+         }
+        ]
+       },
+       "narration": [
+        "Not every output needs the same level of checking. The effort should match the stakes.",
+        "A list of brainstorming ideas for a team away day needs only a quick read. Nobody is harmed if one idea is silly.",
+        "A reply to a customer or a notice to staff needs every fact, date, figure and promise checked, because people will act on it.",
+        "And anything with legal, financial or public consequences, such as a ministerial briefing, a loan explanation or a press statement, must be checked against official sources and reviewed by a second person before release.",
+        "Ask yourself two questions to place a task on this scale. Who will act on this output, and what happens to them if it is wrong? The answers tell you how much checking is enough."
+       ]
+      },
+      {
+       "title": "A practical verification routine",
+       "slide": {
+        "kind": "steps",
+        "heading": "Five checks before you use AI output",
+        "steps": [
+         {
+          "title": "Facts",
+          "sub": "Names, dates, figures against your records"
+         },
+         {
+          "title": "Sources",
+          "sub": "Open every reference; does it exist and say this?"
+         },
+         {
+          "title": "Sums",
+          "sub": "Recalculate numbers in a spreadsheet"
+         },
+         {
+          "title": "Promises",
+          "sub": "Nothing offered that you cannot deliver"
+         },
+         {
+          "title": "Tone and fit",
+          "sub": "Right for this reader and your organisation"
+         }
+        ]
+       },
+       "narration": [
+        "Here is a simple routine you can use every time. First, check every fact, such as names, dates and figures, against your own records or an official source.",
+        "Second, if the output mentions a law, a report or a website, find and open it yourself. Make sure it exists and actually says what the assistant claims.",
+        "Third, recalculate any numbers in a spreadsheet or calculator. Fourth, look for promises, such as refunds, deadlines or approvals, that you are not authorised to make.",
+        "Finally, read it as the recipient would. Is the tone right, is it clear, and does it sound like your organisation?",
+        "This routine sounds long, but for an ordinary email it takes only a few minutes, and with practice it becomes an automatic part of how you read any draft."
+       ]
+      },
+      {
+       "title": "Bias: when patterns become unfair",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Where bias can creep in",
+        "points": [
+         "Training text reflects past stereotypes and imbalances",
+         "Different quality of answers for different groups",
+         "Assumptions about gender, age, names or accents",
+         "Most serious in hiring, credit and service decisions"
+        ]
+       },
+       "narration": [
+        "Because assistants learn from large amounts of human writing, they also absorb the stereotypes and imbalances in that writing.",
+        "That can show up quietly. An assistant asked to describe a typical engineer and a typical nurse may fall back on gender stereotypes, or it may write more confidently about some groups than others.",
+        "The risk is most serious when AI touches decisions about people. Imagine an SME owner who asks a chatbot to rank job applicants from their CVs. The ranking may reflect patterns that have nothing to do with ability.",
+        "So the rule from earlier applies with extra force. Decisions about people stay with people, using fair, documented criteria, and AI output is reviewed for unfair assumptions before it is used.",
+        "Bias can also appear in language. A customer letter drafted for one community might use assumptions or examples that feel excluding to another, so read with your whole audience in mind."
+       ]
+      },
+      {
+       "title": "Being open about AI use",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Transparency at work",
+        "points": [
+         "Follow your organisation's disclosure rules",
+         "Tell your manager when AI shaped important work",
+         "Never present AI text as checked when it is not",
+         "Keep a note of what you verified"
+        ]
+       },
+       "narration": [
+        "One more habit protects both you and your organisation: being open about AI use.",
+        "Follow your organisation's rules on disclosure, and when AI has significantly shaped an important piece of work, say so to your manager or reviewer.",
+        "For higher-stakes work, keep a short note of what you checked and against which source. If a question arises later, you can show your verification rather than simply hoping.",
+        "Openness also builds trust with customers and citizens. If your organisation decides to tell people when they are talking to an automated assistant, follow that practice consistently.",
+        "And if you discover an AI error after something has been sent, report it promptly through your normal channels, so it can be corrected and the lesson shared with colleagues."
+       ]
+      },
+      {
+       "title": "Recap",
+       "slide": {
+        "kind": "bullets",
+        "heading": "Recap",
+        "points": [
+         "AI errors look like confident answers",
+         "Verify in proportion to the stakes",
+         "Facts, sources, sums, promises, tone",
+         "Watch for bias; people decide about people"
+        ]
+       },
+       "narration": [
+        "To recap, AI errors look exactly like answers, so verification has to be a habit, scaled to the stakes.",
+        "Check facts, sources, sums, promises and tone, keep people in charge of decisions about people, and be open about how AI was used.",
+        "After the next quiz, you will apply all of this in your final assignment.",
+        "Above all, remember that a careful reader with a reliable source to hand is still the best safeguard against an error that sounds convincing."
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "m4",
+   "title": "Module 4 · Putting Safe AI Use into Practice",
+   "items": [
+    {
+     "id": "c6-L11",
+     "type": "quiz",
+     "title": "Quiz 2: Privacy, Confidentiality and Accuracy Risks",
+     "dur": 12,
+     "quiz": {
+      "time": 12,
+      "weight": 15,
+      "questions": [
+       {
+        "q": "Which of these is personal data?",
+        "o": [
+         "A hotel's published room rates",
+         "A guest's booking reference linked to their name and phone number",
+         "The national public holiday calendar",
+         "A generic template for a thank-you letter"
+        ],
+        "a": 1,
+        "ex": "Information relating to an identifiable living person, such as a named guest's booking details, is personal data."
+       },
+       {
+        "q": "Under the Data Protection Act 2017, which principle is applied when you remove names and account numbers before using an AI tool?",
+        "o": [
+         "Storage limitation",
+         "Data minimisation",
+         "Accuracy",
+         "Right of access"
+        ],
+        "a": 1,
+        "ex": "Data minimisation means using only the personal data that is necessary for the purpose."
+       },
+       {
+        "q": "A document contains no personal data but describes your company's bid for a government tender. Can you paste it into a free public chatbot?",
+        "o": [
+         "Yes, because only personal data is protected",
+         "Yes, if you delete the chat afterwards",
+         "No, because it is commercially confidential and the tool is not approved",
+         "Yes, because tender bids become public eventually"
+        ],
+        "a": 2,
+        "ex": "Confidentiality duties apply to commercial information even when it contains no personal data."
+       },
+       {
+        "q": "Which public body oversees data protection in Mauritius?",
+        "o": [
+         "The Data Protection Office",
+         "The Bank of Mauritius",
+         "The Information and Communication Technologies Authority",
+         "The Mauritius Revenue Authority"
+        ],
+        "a": 0,
+        "ex": "The Data Protection Office, headed by the Data Protection Commissioner, provides guidance on and enforces the Data Protection Act 2017."
+       },
+       {
+        "q": "An assistant's draft briefing cites 'Section 14 of a 2021 tourism regulation'. What should you do?",
+        "o": [
+         "Trust it, because the citation is specific",
+         "Find and read the regulation yourself to confirm it exists and says this",
+         "Ask the assistant whether it is sure, and accept its answer",
+         "Remove the citation but keep the claim"
+        ],
+        "a": 1,
+        "ex": "Assistants can invent precise-looking references, so every source must be opened and checked against the original."
+       },
+       {
+        "q": "An SME owner asks a chatbot to rank twenty job applicants from their CVs and plans to interview the top five. What is the main concern?",
+        "o": [
+         "The chatbot will take too long",
+         "The ranking may reflect bias, the CVs contain personal data, and decisions about people need human judgement",
+         "Chatbots cannot read CVs",
+         "There is no concern if the owner pays for the chatbot"
+        ],
+        "a": 1,
+        "ex": "Hiring decisions involve personal data and bias risks, so they require fair human criteria and accountability."
+       },
+       {
+        "q": "Which output needs the most rigorous verification?",
+        "o": [
+         "Ideas for a team lunch",
+         "A rough outline of personal notes",
+         "A public statement about a bank's new fees",
+         "A list of possible names for a meeting room"
+        ],
+        "a": 2,
+        "ex": "High-stakes public and financial communications must be checked against official sources and reviewed by a second person."
+       },
+       {
+        "q": "A colleague says: 'The chatbot wrote it, so it's not my fault if the figures are wrong.' What is the best response?",
+        "o": [
+         "Agree, the AI provider is responsible",
+         "Agree, if the chatbot is a paid version",
+         "Disagree, the person who uses or sends the output remains accountable for checking it",
+         "Disagree, the IT department is responsible"
+        ],
+        "a": 2,
+        "ex": "Whoever sends or relies on AI-assisted work is responsible for verifying it."
+       }
+      ]
+     }
+    },
+    {
+     "id": "c6-L12",
+     "type": "assignment",
+     "title": "Assignment: A Safe AI Workflow for a Task in Your Workplace",
+     "dur": 120,
+     "assignment": {
+      "weight": 70,
+      "max": 100,
+      "brief": "Choose one real, recurring task from your own work (or, if you are not currently employed, from one of the course scenarios: a ministry, a bank, a hotel or a small business) where an AI assistant could save time. Design and test a safe AI workflow for it and present it as a short practical report of 1,200 to 1,500 words, excluding prompts and appendices.\n\nYour report must include:\n1. Task and context (about 150 words): the task, who it is for, how it is done today and why AI might help. Describe it without revealing confidential details.\n2. Privacy and confidentiality assessment (about 300 words): what personal data or confidential information the task normally involves, which items must be removed or replaced with placeholders, whether the tool you used is approved by your organisation, and how the general principles of the Mauritius Data Protection Act 2017 (such as data minimisation, purpose limitation and security) apply. Do not paste any real personal or confidential data into an AI tool for this assignment; use anonymised or invented material.\n3. Prompt development (about 350 words): your first prompt, the output, and at least two improved versions using role, task, context and format, follow-ups, examples or step-by-step requests. Explain what each change achieved. Include the prompts in full in an appendix.\n4. Verification log (about 300 words): a table listing at least five specific checks you made on the final output (facts, sources, figures, promises, tone), the source you checked against, and what you found, including any errors.\n5. One-page guidance note (about 250 words): practical do and don't guidance for a colleague who will use your workflow, written in plain language.\n\nSubmit one PDF or Word document. All examples must be anonymised or invented. You may use AI assistants to help draft, but you must state where you used them and you remain responsible for the accuracy of everything you submit.",
+      "rubric": [
+       {
+        "criterion": "Prompt design and iteration",
+        "max": 25,
+        "desc": "Prompts clearly use role, task, context and format; at least two meaningful improvements are shown, and the effect of each change is explained with evidence from the outputs."
+       },
+       {
+        "criterion": "Privacy and confidentiality assessment",
+        "max": 25,
+        "desc": "Accurately identifies personal and confidential information, applies the general principles of the Data Protection Act 2017 correctly and proportionately, addresses tool approval, and uses only anonymised or invented material."
+       },
+       {
+        "criterion": "Verification and accuracy",
+        "max": 20,
+        "desc": "Verification log records at least five specific checks against named, appropriate sources, honestly reports errors found, and matches the level of checking to the stakes of the task."
+       },
+       {
+        "criterion": "Practical guidance note",
+        "max": 20,
+        "desc": "Clear, plain-language do and don't guidance that a non-technical colleague could follow immediately, including where human judgement and accountability sit."
+       },
+       {
+        "criterion": "Communication and transparency",
+        "max": 10,
+        "desc": "Well organised, within the word limit, professionally written, with an honest statement of any AI use in preparing the report."
+       }
+      ]
+     }
+    }
+   ]
+  }
+ ]
+}

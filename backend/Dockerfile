@@ -8,4 +8,4 @@ COPY . .
 RUN useradd -u 10001 -m app && mkdir -p /data/media && chown -R app /data /app
 USER app
 EXPOSE 8000
-CMD ["sh", "-c", "alembic upgrade head && python -m app.seed.seed && if [ \"$SEED_HISTORY\" = 1 ]; then python -m app.seed.history; fi && gunicorn app.main:app -k uvicorn.workers.UvicornWorker -w ${WORKERS:-3} -b 0.0.0.0:8000 --timeout 120 --access-logfile -"]
+CMD ["sh", "-c", "alembic upgrade head && python -m app.seed.seed && python -m app.seed.content && if [ \"$SEED_HISTORY\" = 1 ]; then python -m app.seed.history; fi && gunicorn app.main:app -k uvicorn.workers.UvicornWorker -w ${WORKERS:-3} -b 0.0.0.0:8000 --timeout 120 --access-logfile -"]

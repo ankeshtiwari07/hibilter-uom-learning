@@ -6,7 +6,9 @@ type Clip = { o: number; d: number; e: string; env?: Uint8Array }
 type Bank = { fps: number; clips: Record<string, Clip> }
 
 export type SayOpts = { avatarId: string; rig?: Rig | null; muted?: boolean; rate?: number; volume?: number; voiceHint?: [string, string]; pitch?: number;
-  onVideo?: (url: string | null) => void }
+  onVideo?: (url: string | null) => void
+  /** Plays a rendered full-body clip (with its own audio track); resolves true when it ends. */
+  playVideo?: (url: string, rate: number, muted: boolean, volume: number) => Promise<boolean> }
 
 class VoiceEngine {
   ctx: AudioContext | null = null
@@ -83,13 +85,18 @@ class VoiceEngine {
     const rate = Math.min(1.4, Math.max(0.7, o.rate || 1)); const vol = o.volume ?? 0.9
     const clip: any = (await this.lineClip(o.avatarId, hash)) || this.bankClip(o.avatarId, text)
     if (my !== this.token) return false
-    o.onVideo?.(clip?.video || null)
+    if (clip?.video && o.playVideo) {
+      o.rig?.setMouth(0)
+      const ok = await o.playVideo(clip.video, rate, !!o.muted, vol)
+      if (my === this.token) this.speaking = false
+      return ok && my === this.token
+    }
+    o.onVideo?.(null)
     return new Promise<boolean>(res => {
       let done = false; let pump: any, wd: any, check: any
       const finish = (ok: boolean) => {
         if (done) return; done = true; clearInterval(pump); clearTimeout(wd); clearInterval(check); o.rig?.setMouth(0)
         if (my === this.token) { this.speaking = false; this.cur = null }
-        o.onVideo?.(null)
         res(ok && my === this.token)
       }
       check = setInterval(() => { if (my !== this.token) finish(false) }, 80)

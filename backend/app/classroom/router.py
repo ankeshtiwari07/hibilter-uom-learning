@@ -62,6 +62,12 @@ async def start(body: StartIn, db: AsyncSession = Depends(get_db), user: User = 
                   outcome=outcome, hints=hints, trace=["IDLE"], status="active")
     db.add(s)
     await db.commit()
+    # Make sure this learner's personalised lines (their name in greetings/feedback) get rendered for this lecturer.
+    try:
+        from ..services.render_enqueue import enqueue
+        await enqueue(lesson.id, [avatar_id], [user.first])
+    except Exception:
+        pass
     c = await engine.load(db, s.id, user)
     return engine.snapshot(c)
 

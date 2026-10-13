@@ -21,6 +21,16 @@ services:
     depends_on: { db: { condition: service_healthy }, redis: { condition: service_started } }
     healthcheck: { test: ["CMD", "curl", "-fs", "http://localhost:8000/api/health"], interval: 15s, retries: 5 }
     restart: unless-stopped
+  render:
+    build: ../backend
+    command: ["python", "-m", "app.services.render_worker"]
+    env_file: [ .env ]
+    environment:
+      DATABASE_URL: postgresql+asyncpg://uom:${DB_PASSWORD:-uom}@db:5432/uom
+      REDIS_URL: redis://redis:6379/0
+    volumes: [ "media:/data/media", "../assets:/app/assets:ro" ]
+    depends_on: { api: { condition: service_healthy } }
+    restart: unless-stopped
   web:
     build: ../frontend
     ports: [ "${WEB_BIND:-127.0.0.1:8150}:80" ]

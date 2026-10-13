@@ -46,6 +46,20 @@ export default function Classroom() {
   const [blocked, setBlocked] = useState<string | null>(null); const [showA11y, setShowA11y] = useState(false)
   const [focus, setFocus] = useState(false); const [switching, setSwitching] = useState(false); const [presenter] = useState(sp.get('presenter') === '1')
   const [video, setVideo] = useState<string | null>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const videoDone = useRef<((ok: boolean) => void) | null>(null)
+  const playVideo = useCallback((url: string, r: number, muted: boolean, vol: number) => new Promise<boolean>(resolve => {
+    videoDone.current?.(false)
+    videoDone.current = resolve
+    setVideo(url)
+    requestAnimationFrame(() => {
+      const v = videoRef.current; if (!v) return resolve(false)
+      v.playbackRate = r; v.muted = muted; v.volume = vol
+      v.play().catch(() => { v.muted = true; v.play().catch(() => resolve(false)) })
+    })
+  }), [])
+  const endVideo = (ok: boolean) => { const d = videoDone.current; videoDone.current = null; d?.(ok) }
+  useEffect(() => { const t = setInterval(() => { if (!Voice.speaking && videoDone.current === null) setVideo(null) }, 400); return () => clearInterval(t) }, [])
   const [failNext, setFailNext] = useState(false)
   const stageRef = useRef<HTMLDivElement>(null); const rigRef = useRef<Rig | null>(null)
   const sRef = useRef<Snap | null>(null); sRef.current = s
@@ -76,7 +90,7 @@ export default function Classroom() {
       if (my !== playId.current) return false
       const it = items[i]; qPos.current = i
       setCaption(it.text); setSpeaking(true); setTranscript(t => [...t, { who: avatar?.short || 'Lecturer', text: it.text }])
-      const ok = await Voice.say(it.text, it.id, { avatarId: avatar!.id, rig: rigRef.current, muted: !audio, rate, volume, voiceHint: avatar?.calib?.voiceHint, pitch: avatar?.calib?.pitch, onVideo: setVideo })
+      const ok = await Voice.say(it.text, it.id, { avatarId: avatar!.id, rig: rigRef.current, muted: !audio, rate, volume, voiceHint: avatar?.calib?.voiceHint, pitch: avatar?.calib?.pitch, playVideo })
       if (my !== playId.current || !ok) return false
       if (it.kind === 'teach' && it.idx != null) {
         teachPos.current = it.idx + 1
@@ -87,7 +101,7 @@ export default function Classroom() {
     setSpeaking(false)
     if (my === playId.current) onDone?.()
     return true
-  }, [avatar, audio, rate, volume])
+  }, [avatar, audio, rate, volume, playVideo])
 
   const apply = useCallback((snap: Snap, opts: { play?: boolean } = {}) => {
     setS(snap); setBlocked(snap.blocked || null)
@@ -138,7 +152,7 @@ export default function Classroom() {
   useEffect(() => { if (s?.state === 'WAITING_FOR_ANSWER') setTimeout(() => answerRef.current?.focus(), 60) }, [s?.state])
   useEffect(() => { if (s?.state === 'RETRY_OR_CONTINUE' && s.last_result?.verdict === 'correct') setAnswer('') }, [s?.state, s?.last_result?.verdict])
 
-  const pause = () => { playId.current++; Voice.cancel(); setSpeaking(false); act('pause', { sent: teachPos.current }) }
+  const pause = () => { playId.current++; Voice.cancel(); videoRef.current?.pause(); endVideo(false); setSpeaking(false); act('pause', { sent: teachPos.current }) }
   const resume = () => { Voice.unlock(); act('resume') }
   const askSide = async (raw: string) => {
     const q = raw.trim(); if (!q || !s) return
@@ -302,7 +316,8 @@ export default function Classroom() {
         <div className="stage">
           <div className="bgx" /><div className="shelf" /><div className="win" />
           <div ref={stageRef} style={{ position: 'absolute', inset: 0 }} />
-          {video && <video key={video} className="media" src={video} autoPlay muted playsInline style={{ objectPosition: avatar?.calib?.pos }} />}
+          {video && <video ref={videoRef} key={video} className="media" src={video} playsInline preload="auto" style={{ objectPosition: avatar?.calib?.pos }}
+            onEnded={() => endVideo(true)} onError={() => endVideo(false)} />}
           <div className="ov-top"><span className={`live ${LIVE[st] || ''}`}><i /><span>{s?.state_label || 'Ready'}</span></span>
             {!video && <span className="sim">Animated portrait with lip-sync driven by the lecturer’s neural voice. Full-body video plays where rendered.</span>}</div>
           <div className="namecard"><b>{a.name}</b><span>{a.subject} · AI digital faculty</span></div>

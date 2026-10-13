@@ -81,6 +81,11 @@ class Ctx:
         self.s.trace = tr[-24:]
         self.event("state", frm=frm, to=to, why=why)
 
+    def max_attempts(self, cp: dict) -> int:
+        """Lecturer policy override wins over the checkpoint's own limit (mandatory checkpoints only)."""
+        o = (self.lesson.policy or {}).get("maxAttempts")
+        return int(o) if o and cp.get("mandatory") else int(cp["maxAttempts"])
+
     def policy(self) -> dict:
         return {"threshold": "required", "hints": True, "assisted": True, "simpler": True, **(self.lesson.policy or {})}
 
@@ -120,7 +125,7 @@ def feedback_lines(c: Ctx, cp: dict, r: dict, n_att: int) -> list[str]:
     req_missing = [i for i in r["missing"] if any(cc["id"] == i and cc.get("required") for cc in cp["concepts"])]
     if r["verdict"] == "correct":
         return L.correct(c.name, cp)
-    if n_att >= cp["maxAttempts"] and cp["mandatory"]:
+    if n_att >= c.max_attempts(cp) and cp["mandatory"]:
         return L.maxed(c.name)
     if r["verdict"] == "partial":
         return L.partial(c.name, (req_missing or r["missing"] or [None])[0], c.content.get("concept_ask"))
@@ -259,7 +264,7 @@ async def run_action(c: Ctx, action: str, p: dict):
             s.outcome = {**(s.outcome or {}), cp["id"]: "passed"}
         next_segment(c)
     elif action == "assisted":
-        if not cp or not cp["mandatory"] or len(c.atts(cp["id"])) < cp["maxAttempts"] or not c.policy()["assisted"]:
+        if not cp or not cp["mandatory"] or len(c.atts(cp["id"])) < c.max_attempts(cp) or not c.policy()["assisted"]:
             raise Blocked("Assisted continue is available after the maximum number of attempts")
         s.outcome = {**(s.outcome or {}), cp["id"]: "assisted"}
         c.db.add(ReviewItem(kind="assisted", session_id=s.id, checkpoint_id=cp["id"], course_id=c.lesson.course_id,
@@ -336,13 +341,13 @@ def snapshot(c: Ctx) -> dict:
     cp = c.cp()
     atts = c.atts(cp["id"]) if cp else []
     last = atts[-1] if atts else None
-    max_reached = bool(cp and cp["mandatory"] and len(atts) >= cp["maxAttempts"] and (not last or last.verdict != "correct"))
+    max_reached = bool(cp and cp["mandatory"] and len(atts) >= c.max_attempts(cp) and (not last or last.verdict != "correct"))
     return {
         "id": s.id, "version": s.version, "state": s.state, "state_label": LABEL[s.state], "resume_state": s.resume_state,
         "seg": s.seg, "seg_count": len(c.segs), "sent": s.sent, "mode": s.mode, "status": s.status,
         "avatar_id": s.avatar_id, "lesson_id": s.lesson_id, "lesson_version": s.lesson_version,
         "trace": s.trace, "outcome": s.outcome, "hints": {k: v for k, v in (s.hints or {}).items() if not k.startswith("_")},
-        "checkpoint": {"id": cp["id"], "question": cp["question"], "mandatory": cp["mandatory"], "max_attempts": cp["maxAttempts"],
+        "checkpoint": {"id": cp["id"], "question": cp["question"], "mandatory": cp["mandatory"], "max_attempts": c.max_attempts(cp),
                        "attempts": len(atts), "hint_count": len(cp["hints"])} if cp else None,
         "last_result": {"verdict": last.verdict, "found": last.found, "missing": last.missing, "mis": last.mis,
                         "engine": last.engine, "confidence": last.confidence, "ai_feedback": last.ai_feedback,

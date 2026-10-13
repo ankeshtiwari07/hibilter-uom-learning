@@ -70,6 +70,7 @@ async def dashboard(db: AsyncSession = Depends(get_db), user: User = Depends(LEC
     vf_today = sorted([s for s in vs if s.updated_at and s.updated_at >= today0 - timedelta(days=1)], key=lambda s: s.updated_at, reverse=True)[:5]
     # upcoming (next 10 days): calendar + due dates
     cal = (await db.execute(select(CalendarEvent).where(CalendarEvent.course_id.in_(cids), CalendarEvent.start >= today0,
+                                                        CalendarEvent.kind.not_in(["due", "exam"]),
                                                         CalendarEvent.start <= t + timedelta(days=10)).order_by(CalendarEvent.start).limit(8))).scalars().all() if cids else []
     due = (await db.execute(select(Assessment).where(Assessment.course_id.in_(cids), Assessment.due >= today0,
                                                      Assessment.due <= t + timedelta(days=30)).order_by(Assessment.due))).scalars().all() if cids else []
@@ -96,7 +97,15 @@ async def dashboard(db: AsyncSession = Depends(get_db), user: User = Depends(LEC
     prog = dict((await db.execute(select(Enrolment.course_id, func.avg(Enrolment.progress)).where(Enrolment.course_id.in_(cids))
                                   .group_by(Enrolment.course_id))).all()) if cids else {}
     sizes = dict((await db.execute(select(Enrolment.course_id, func.count()).where(Enrolment.course_id.in_(cids)).group_by(Enrolment.course_id))).all()) if cids else {}
+    # weekly active learners for the largest course
+    trend = None
+    if courses:
+        from .lecturer_analytics import compute
+        main = max(courses, key=lambda c: sizes.get(c.id, 0))
+        a = await compute(db, main.id, weeks=6)
+        trend = {"course": main.code, "weeks": a["weeks"], "active": a["weekly_active"]}
     return {
+        "trend": trend,
         "me": {"name": user.name, "title": user.title, "faculty": fac.name if fac else None},
         "courses": [{"id": c.id, "code": c.code, "title": c.title, "students": sizes.get(c.id, 0), "progress": round(float(prog.get(c.id) or 0)),
                      "status": c.status, "vf_enabled": c.vf_enabled} for c in courses],

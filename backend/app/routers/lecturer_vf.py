@@ -358,12 +358,16 @@ async def vf_stats(db: AsyncSession, user: User, course_id: str | None, lesson_i
         d["fn"] += 1
         d["f"] += 1 if v[0].verdict == "correct" else 0
     names = {a.id: a.short for a in (await db.execute(select(Avatar))).scalars()}
-    users = {u.id: u.name for u in (await db.execute(select(User.id, User.name).where(User.id.in_({s.user_id for s in ss[-400:]}))))}
     recent = sorted(ss, key=lambda s: s.updated_at or s.started_at, reverse=True)[:10]
+    users = dict((await db.execute(select(User.id, User.name).where(User.id.in_({s.user_id for s in recent})))).all())
     cps_order = sorted(by_cp, key=lambda k: cp_meta.get(k, {}).get("i", 99))
-    pre = [e.payload for e in (await db.execute(select(Event).where(Event.type.in_(["pre_quiz", "post_quiz"]), Event.course_id.in_(cids))
-                                                .limit(5000))).scalars()]
-    pre_scores = [p.get("score") for p in pre if p.get("phase", "pre") == "pre" and isinstance(p.get("score"), (int, float))]
+    # matched pre/post lesson quiz, if the course runs one (events 'pre_quiz' / 'post_quiz' with payload.score in %)
+    pp: dict[str, list] = {"pre_quiz": [], "post_quiz": []}
+    for typ, p in (await db.execute(select(Event.type, Event.payload).where(Event.type.in_(["pre_quiz", "post_quiz"]), Event.course_id.in_(cids)))).all():
+        if isinstance((p or {}).get("score"), (int, float)) and (not (p or {}).get("lesson_id") or p["lesson_id"] in lessons):
+            pp[typ].append(float(p["score"]))
+    prepost = ({"pre": round(sum(pp["pre_quiz"]) / len(pp["pre_quiz"])), "post": round(sum(pp["post_quiz"]) / len(pp["post_quiz"])),
+                "n_pre": len(pp["pre_quiz"]), "n_post": len(pp["post_quiz"])} if pp["pre_quiz"] and pp["post_quiz"] else None)
     return {
         "started": len(ss), "completed": len(completed), "saved": len(saved), "abandoned": len(abandoned),
         "completion": round(100 * len(completed) / len(ss), 1),
@@ -385,10 +389,10 @@ async def vf_stats(db: AsyncSession, user: User, course_id: str | None, lesson_i
         "mis": sorted([{"label": k, "n": v} for k, v in mis.items()], key=lambda x: -x["n"]),
         "by_avatar": sorted([{"id": k, "name": names.get(k, k), "s": d["s"], "c": d["c"], "first": round(100 * d["f"] / d["fn"]) if d["fn"] else None}
                              for k, d in av.items()], key=lambda x: -x["s"]),
-        "prepost": None if not pre_scores else {"n": len(pre)},
+        "prepost": prepost,
         "recent": [{"id": s.id, "name": users.get(s.user_id, "Learner"), "avatar": names.get(s.avatar_id, s.avatar_id), "status": s.status,
                     "outcome": s.outcome or {}, "attempts": {cid: len(by_sess_cp.get((s.id, cid), [])) for cid in (s.outcome or {})},
-                    "min": round(((s.ended_at or s.updated_at) - s.started_at).total_seconds() / 60) if s.started_at and (s.ended_at or s.updated_at) else None,
+                    "min": round((s.ended_at - s.started_at).total_seconds() / 60) if s.started_at and s.ended_at else None,
                     "at": iso(s.updated_at)} for s in recent],
     }
 

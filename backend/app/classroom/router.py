@@ -118,7 +118,8 @@ def public_lesson(lesson: Lesson, course_code: str | None) -> dict:
     for sg in c["segments"]:
         cp = sg["checkpoint"]
         segs.append({"id": sg["id"], "title": sg["title"], "slide": sg.get("slide"), "speech": sg["speech"],
-                     "checkpoint": {"id": cp["id"], "question": cp["question"], "mandatory": cp["mandatory"], "maxAttempts": cp["maxAttempts"],
+                     "checkpoint": {"id": cp["id"], "question": cp["question"], "mandatory": cp["mandatory"],
+                                    "maxAttempts": int((lesson.policy or {}).get("maxAttempts") or cp["maxAttempts"]) if cp["mandatory"] else cp["maxAttempts"],
                                     "concepts": [{"id": x["id"], "label": x["label"], "required": bool(x.get("required"))} for x in cp["concepts"]],
                                     "misconceptions": [{"id": m["id"], "label": m["label"]} for m in cp.get("misconceptions", [])],
                                     "hint_count": len(cp["hints"])}})

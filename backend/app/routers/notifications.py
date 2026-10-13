@@ -25,7 +25,7 @@ async def feed(db: AsyncSession = Depends(get_db), user: User = Depends(current_
     cids = await my_course_ids(db, user)
     read = set((await db.execute(select(AnnouncementRead.announcement_id).where(AnnouncementRead.user_id == user.id))).scalars())
     now_ = datetime.now(timezone.utc)
-    anns = (await db.execute(select(Announcement).where(Announcement.status == "published",
+    anns = (await db.execute(select(Announcement).where(Announcement.status.in_(["published", "scheduled"]),
             or_(Announcement.publish_at.is_(None), Announcement.publish_at <= now_), or_(Announcement.scope.in_(["uni", "university"]),
             Announcement.course_id.in_(cids), and_(Announcement.scope == "faculty", Announcement.faculty_id == user.faculty_id)))
             .order_by(Announcement.publish_at.desc()).limit(10))).scalars()

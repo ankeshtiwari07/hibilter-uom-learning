@@ -99,7 +99,7 @@ async def dashboard(db: AsyncSession = Depends(get_db), user: User = Depends(stu
     lessons = [l for l in st["lessons"].values() if l.status == "published"]
     lessons.sort(key=lambda l: (l.id in st["vf_done"], cids.index(l.course_id) if l.course_id in cids else 99, l.id))
     hero = None
-    if lessons:
+    if lessons and not studio_only():
         l = lessons[0]
         last = st["vf"].get(l.id)
         av_id = (user.prefs or {}).get("avatar") if (user.prefs or {}).get("avatar") in (l.avatars or []) else None

@@ -22,7 +22,7 @@ export default function FacultySelect() {
   return <>
     <PageHead no={30} title="Virtual faculty" sub="Choose your digital lecturer. Every lecturer teaches the same approved lesson, asks the same checkpoint questions, and reports to your human course lecturer."
       actions={lesson && <button className="btn teal lg" onClick={() => { setPrefs({ avatar: chosen }); nav(`/s-classroom/${lesson.id}?avatar=${chosen}`) }}><Icon n="playc" />Enter classroom</button>} />
-    {!ls.length ? <Empty icon="cap" title="No virtual faculty lessons yet">Your lecturers haven’t published an interactive lesson for your courses.</Empty> : <>
+    {!ls.length ? <Empty icon="cap" title="No interactive lessons open yet">Interactive lessons with your digital lecturers will open here when your lecturers publish them. Meanwhile, watch the lecture videos in <a href="/s-courses">My courses</a>.</Empty> : <>
       <div className="card"><div className="hd"><h3>Lesson</h3><AiTag label="Interactive" /></div>
         <div className="list">{ls.map(l => <label key={l.id} className="li" style={{ cursor: 'pointer' }}>
           <input type="radio" name="lesson" checked={lesson?.id === l.id} onChange={() => setLessonId(l.id)} style={{ accentColor: 'var(--teal)', marginTop: 10 }} />

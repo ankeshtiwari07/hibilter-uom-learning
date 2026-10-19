@@ -14,7 +14,10 @@ router = APIRouter(prefix="/api/notifications", tags=["notifications"])
 
 async def my_course_ids(db: AsyncSession, user: User) -> list[str]:
     if user.role == "student":
-        return list((await db.execute(select(Enrolment.course_id).where(Enrolment.user_id == user.id))).scalars())
+        from ._student_util import demo_courses
+        ids = list((await db.execute(select(Enrolment.course_id).where(Enrolment.user_id == user.id))).scalars())
+        demo = demo_courses()
+        return ids if demo is None else [c for c in ids if c in demo]
     if user.role == "lecturer":
         return list((await db.execute(select(Course.id).where(Course.lecturer_id == user.id))).scalars())
     return list((await db.execute(select(Course.id))).scalars())

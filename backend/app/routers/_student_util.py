@@ -33,8 +33,10 @@ def iso(d: datetime | None) -> str | None:
 
 
 async def enrolments(db: AsyncSession, user: User) -> list[Enrolment]:
-    return list((await db.execute(select(Enrolment).where(Enrolment.user_id == user.id, Enrolment.status == "active")
+    rows = list((await db.execute(select(Enrolment).where(Enrolment.user_id == user.id, Enrolment.status == "active")
                                   .order_by(Enrolment.id))).scalars())
+    demo = demo_courses()
+    return rows if demo is None else [e for e in rows if e.course_id in demo]
 
 
 async def enrolled_ids(db: AsyncSession, user: User) -> list[str]:
@@ -46,6 +48,9 @@ async def require_enrolled(db: AsyncSession, user: User, course_id: str) -> tupl
                             .where(Enrolment.user_id == user.id, Course.id == course_id, Enrolment.status == "active"))).first()
     if not row:
         raise HTTPException(403, "You're not enrolled in this course.")
+    demo = demo_courses()
+    if demo is not None and course_id not in demo:
+        raise HTTPException(403, "This course isn't open in the demo yet.")
     return row[0], row[1]
 
 
@@ -94,6 +99,18 @@ async def course_modules(db: AsyncSession, course_ids: list[str]) -> dict[str, l
 def studio_only() -> bool:
     """Demo mode (STUDIO_ONLY=1): only lectures with a published studio video can be opened; the rest show as coming soon."""
     return os.environ.get("STUDIO_ONLY") == "1"
+
+
+def demo_courses() -> set[str] | None:
+    """In demo mode, the courses students can see: those with at least one published studio video. None = no restriction."""
+    if not studio_only():
+        return None
+    from ..core.config import get_settings
+    root = Path(get_settings().media_dir) / "studio" / "out"
+    try:
+        return {c.name for c in root.iterdir() if c.is_dir() and any(production_manifest(c.name, i.name) for i in c.iterdir() if i.is_dir())}
+    except OSError:
+        return set()
 
 
 def production_manifest(course_id: str, item_id: str) -> dict | None:
@@ -151,7 +168,9 @@ async def item_states(db: AsyncSession, user: User, course_ids: list[str]) -> di
                     lid = it.get("lesson_id") or it.get("id")
                     les = lessons.get(lid)
                     d["lesson_id"] = lid if les else None
-                    d["link"] = f"/s-classroom/{lid}" if les and les.status == "published" else None
+                    d["link"] = f"/s-classroom/{lid}" if les and les.status == "published" and not studio_only() else None
+                    if studio_only():
+                        d["soon"] = True  # demo: interactive lessons still use the animated-portrait lecturer
                     if lid in vf_done:
                         d["status"] = "done"
                     elif lid in vf:

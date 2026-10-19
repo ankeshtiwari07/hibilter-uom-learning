@@ -71,9 +71,9 @@ function CourseView({ id, mine }: { id: string; mine: CourseCard[] }) {
           <div style={{ padding: '6px 14px' }}>{m.items.map((i, ii) => {
             const inner = <><div className={`ic ${i.vf ? 'teal' : ''}`}><Icon n={itemIcon[i.type] || 'file'} /></div>
               <div className="bd"><div className="tt"><span className="mono xs muted" style={{ marginRight: 6 }}>{mi + 1}.{ii + 1}</span>{i.title}</div><div className="ds">{kind(i)}{i.dur ? ` · ${i.type === 'assignment' ? 'about ' + mins(i.dur) + ' of work' : mins(i.dur)}` : ''}{i.id === upNext?.id ? ' · up next' : ''}</div></div>
-              {i.soon ? <span className="b out">Video coming soon</span> : <StatusBadge s={i.status} />}</>
+              {i.soon ? <span className="b out">{i.type === 'video' ? 'Video coming soon' : 'Coming soon'}</span> : <StatusBadge s={i.status} />}</>
             return i.link ? <a key={i.id} className="li" href={i.link} onClick={e => { e.preventDefault(); go(i) }} style={{ textDecoration: 'none', color: 'inherit', alignItems: 'center' }}>{inner}</a>
-              : <div key={i.id} className="li" style={{ alignItems: 'center', opacity: .6 }} title={i.soon ? 'This lecture video is being produced' : 'Not available yet'} aria-disabled="true">{inner}</div>
+              : <div key={i.id} className="li" style={{ alignItems: 'center', opacity: .6 }} title={i.soon ? (i.type === 'video' ? 'This lecture video is being produced' : 'Opens after the demo') : 'Not available yet'} aria-disabled="true">{inner}</div>
           })}</div></details>)}</div>
           : <Empty icon="layers" title="No published modules yet">Your lecturer hasn’t published content for this course.</Empty>}
       </Card>

@@ -1,3 +1,4 @@
+import os
 from datetime import datetime, timezone
 
 from fastapi import APIRouter, Depends, HTTPException
@@ -44,6 +45,8 @@ async def start(body: StartIn, db: AsyncSession = Depends(get_db), user: User = 
         enrolled = (await db.execute(select(Enrolment).where(Enrolment.user_id == user.id, Enrolment.course_id == lesson.course_id))).scalar_one_or_none()
         if not enrolled:
             raise HTTPException(403, "You're not enrolled in this course.")
+        if os.environ.get("STUDIO_ONLY") == "1":
+            raise HTTPException(403, "Interactive lessons aren't open in the demo yet.")
     prev = (await db.execute(select(VFSession).where(VFSession.user_id == user.id, VFSession.lesson_id == lesson.id,
                                                      VFSession.status.in_(["active", "saved", "saved-after-error"]))
                              .order_by(VFSession.created_at.desc()))).scalars().first()
@@ -142,6 +145,8 @@ async def get_lesson(lesson_id: str, db: AsyncSession = Depends(get_db), user: U
 async def list_lessons(db: AsyncSession = Depends(get_db), user: User = Depends(current_user)):
     from ..models import Course
     q = select(Lesson, Course).join(Course, Course.id == Lesson.course_id)
+    if user.role == "student" and os.environ.get("STUDIO_ONLY") == "1":
+        return []  # demo: interactive lessons are closed to students until their lecturers are produced
     if user.role == "student":
         q = q.join(Enrolment, Enrolment.course_id == Course.id).where(Enrolment.user_id == user.id, Lesson.status == "published")
     elif user.role == "lecturer":

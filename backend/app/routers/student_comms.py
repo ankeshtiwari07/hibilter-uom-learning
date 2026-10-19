@@ -17,7 +17,7 @@ from ..core.deps import require
 from ..models import (FAQ, Announcement, AnnouncementRead, Assessment, CalendarEvent, Course, Enrolment, Faculty, Message,
                       Programme, SupportTicket, Thread, User)
 from ..services.assistant import bm25
-from ._student_util import UNI_SCOPES, enrolled_ids, enrolments, iso, now, require_enrolled, set_pref, staff_names, visible_announcements
+from ._student_util import UNI_SCOPES, demo_courses, enrolled_ids, enrolments, iso, now, require_enrolled, set_pref, staff_names, visible_announcements
 
 router = APIRouter(prefix="/api/student", tags=["student"])
 student = require("student")
@@ -401,11 +401,12 @@ async def profile(db: AsyncSession = Depends(get_db), user: User = Depends(stude
     fac = await db.get(Faculty, user.faculty_id) if user.faculty_id else None
     rows = (await db.execute(select(Enrolment, Course).join(Course, Course.id == Enrolment.course_id).where(Enrolment.user_id == user.id)
                              .order_by(Course.code))).all()
+    demo = demo_courses()
     return {"name": user.name, "first": user.first, "email": user.email, "student_no": user.student_no, "year": user.year, "status": user.status,
             "programme": prog.name if prog else None, "level": prog.level if prog else None, "faculty": fac.name if fac else None,
             "last_login_at": iso(user.last_login_at),
             "enrolments": [{"course_id": c.id, "code": c.code, "title": c.title, "credits": c.credits, "term": c.term, "status": e.status,
-                            "progress": e.progress} for e, c in rows],
+                            "progress": e.progress} for e, c in rows if demo is None or c.id in demo],
             "prefs": user.prefs or {}, "privacy": {**PRIVACY_DEFAULT, **((user.prefs or {}).get("privacy") or {})}}
 
 

@@ -52,7 +52,7 @@ function Config({ lid, lessons, onPick }: { lid: string; lessons: any[]; onPick:
   const published = c.status === 'published'
   return <>
     <PageHead no={36} title="Configure digital lecturer" sub="Set who teaches, how they sound, which approved material they use, and the rules at each checkpoint. Only authorised staff can publish."
-      actions={<><Link className="btn" to={`/s-classroom/${lid}?avatar=${sel[0] || ''}`}><Icon n="eye" />Preview session</Link>
+      actions={<><Link className="btn" to={`/s-classroom/${lid}?avatar=${fa?.id || sel[0] || ''}`} title="Opens the lesson with the lecturer selected below"><Icon n="eye" />Preview with {fa?.short || 'lecturer'}</Link>
         <button className="btn pri" disabled={!dirty || !sel.length || save.isPending} onClick={() => save.mutate()}><Icon n="save" />{save.isPending ? 'Saving…' : 'Save settings'}</button>
         <button className={`btn ${published ? 'danger' : 'teal'}`} disabled={pub.isPending || dirty} title={dirty ? 'Save your settings first' : ''} onClick={() => (!published || confirm('Unpublish? Students will no longer be able to start this lesson.')) && pub.mutate(!published)}>{published ? 'Unpublish' : 'Publish'}</button></>} />
     <div className="filters">

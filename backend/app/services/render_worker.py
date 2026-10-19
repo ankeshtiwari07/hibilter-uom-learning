@@ -3,7 +3,9 @@
 Picks up pending MediaClip rows and produces, per spoken line and lecturer:
   1. neural voice audio (Kokoro, self-hosted on CPU) + a 50 fps loudness envelope for Tier-C lip-sync  → status 'audio'
   2. a full upper-body talking video from the EXACT portrait PNG + that audio via fal.ai          → status 'ready'
-Video is only requested for lines marked want_video (scripted, name-free lines) and only when FAL_KEY is configured.
+Per-line video is only requested for lines marked want_video (scripted, name-free lines), when FAL_KEY is configured AND
+VIDEO_LINES=1. It is off by default: fal.ai bills per second, and produced lectures come from the studio pipeline
+(app.studio), which has its own budget cap.
 Run: python -m app.services.render_worker
 """
 from __future__ import annotations
@@ -36,6 +38,7 @@ KOKORO_ONNX = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/mod
 KOKORO_VOICES = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/voices-v1.0.bin"
 VIDEO_ENGINE = os.environ.get("VIDEO_ENGINE", "fal-ai/bytedance/omnihuman/v1.5")
 VIDEO_RES = os.environ.get("VIDEO_RESOLUTION", "720p")
+VIDEO_LINES = os.environ.get("VIDEO_LINES", "0") == "1"
 MAX_ATTEMPTS = 3
 GESTURE_PROMPT = ("A university lecturer seated at a desk speaks directly to the camera in a warm, engaged teaching manner, "
                   "with natural upper-body movement and open-handed explanatory hand gestures that match the speech. "
@@ -167,7 +170,7 @@ async def process(clip_hash: str):
                 clip.status = "audio"
                 clip.engine = "kokoro-onnx-v1.0"
                 await db.commit()
-            if want_video and s.fal_key:
+            if want_video and s.fal_key and VIDEO_LINES:
                 os.environ["FAL_KEY"] = s.fal_key
                 clip.status = "rendering"
                 clip.attempts += 1
@@ -200,13 +203,14 @@ async def next_batch(limit: int = 4) -> list[str]:
     async with SessionLocal() as db:
         q = select(MediaClip.hash).where(or_(
             MediaClip.status == "pending",
-            ((MediaClip.status == "audio") & (MediaClip.attempts < MAX_ATTEMPTS) & MediaClip.qc["want_video"].as_boolean().is_(True)) if s.fal_key else false(),
+            ((MediaClip.status == "audio") & (MediaClip.attempts < MAX_ATTEMPTS) & MediaClip.qc["want_video"].as_boolean().is_(True)) if (s.fal_key and VIDEO_LINES) else false(),
         )).order_by(MediaClip.created_at).limit(limit)
         return list((await db.execute(q)).scalars())
 
 
 async def main():
-    log.info("render worker up · video engine %s · fal %s", VIDEO_ENGINE, "configured" if get_settings().fal_key else "NOT configured (audio only)")
+    log.info("render worker up · video engine %s · fal %s · %s", VIDEO_ENGINE, "configured" if get_settings().fal_key else "NOT configured",
+             "per-line video ON" if VIDEO_LINES else "per-line video off (studio pipeline renders lectures)")
     await asyncio.to_thread(kokoro)
     while True:
         try:

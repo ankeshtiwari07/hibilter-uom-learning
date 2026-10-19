@@ -88,7 +88,10 @@ function Player({ course, item }: { course: string; item: string }) {
 
   if (q.isLoading) return <Loading label="Loading lesson…" />
   if (q.error) return <ErrorBox error={q.error} retry={() => q.refetch()} />
-  const L = d!
+  const L0 = d!
+  const prod = L0.lecture?.production
+  // demo (studio-only): the transcript is what is said in the studio video
+  const L = prod?.studio_only && prod.cues?.length ? { ...L0, transcript: prod.cues.map(c => ({ t: Math.round(c.t), text: c.text })) as Line[] } : L0
   const cur = [...L.transcript].reverse().find(l => l.t <= t) || L.transcript[0]
   const done = L.item.status === 'done'
   const isVideo = L.item.type === 'video'
@@ -98,12 +101,12 @@ function Player({ course, item }: { course: string; item: string }) {
         : <Link className="btn" to={`/s-course/${L.course.id}`}><Icon n="back" />Course</Link>}
         {L.next && <button className="btn" onClick={() => nav(L.next!.link)}>Next: {L.next.title.length > 28 ? L.next.title.slice(0, 26) + '…' : L.next.title}<Icon n="chev" /></button>}</>} />
     <div className="g g-31"><div className="stack">
-      {isVideo && L.lecture?.production && <div className="mode-switch">
+      {isVideo && L.lecture?.production && !L.lecture.production.studio_only && <div className="mode-switch">
         <Seg options={[['studio', 'Studio video'], ['slides', 'Narrated slides']]} value={mode} onChange={v => setMode(v as 'studio' | 'slides')} />
         <span className="xs muted">{mode === 'studio' ? 'Filmed lecture with the virtual lecturer' : 'Slides voiced line by line, with chapter navigation'}</span></div>}
-      {isVideo && L.lecture?.production && mode === 'studio' ? <StudioVideo p={L.lecture.production} title={L.item.title} captionsDefault={cc}
+      {isVideo && L.lecture?.production && (mode === 'studio' || L.lecture.production.studio_only) ? <StudioVideo p={L.lecture.production.studio_only ? { ...L.lecture.production, partial: false } : L.lecture.production} title={L.item.title} captionsDefault={cc}
         onEnded={() => { if (!done) progress.mutate({ pos: Math.round(total), done: true }) }}
-        onContinue={() => { const lc = L.lecture!; setResumeAt(lc.chapters[Math.min(lc.production!.covers_chapters, lc.chapters.length - 1)]?.t ?? 0); setMode('slides') }} />
+        onContinue={L.lecture.production.studio_only ? undefined : () => { const lc = L.lecture!; setResumeAt(lc.chapters[Math.min(lc.production!.covers_chapters, lc.chapters.length - 1)]?.t ?? 0); setMode('slides') }} />
       : isVideo && L.lecture ? <Lecture key={resumeAt ?? 'pos'} data={L.lecture} title={L.item.title} startAt={resumeAt ?? L.item.pos ?? 0} captionsDefault={cc} reducedMotion={!!me?.prefs?.reducedMotion}
         onPosition={(pos, live) => { setT(pos); if (!live) progress.mutate({ pos }); else post(`/api/student/lessons/${course}/${item}/progress`, { pos }).catch(() => { }) }}
         onEnded={() => { if (!done) progress.mutate({ pos: Math.round(total), done: true }) }} />

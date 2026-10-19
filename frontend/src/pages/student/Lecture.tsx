@@ -16,7 +16,8 @@ export type LectureData = {
 }
 export type Production = {
   video_url: string; poster_url?: string; captions_url?: string; duration: number; partial?: boolean; built_at?: string
-  chapters: { title: string; t: number }[]; covers_chapters: number
+  chapters: { title: string; t: number }[]; covers_chapters: number; studio_only?: boolean
+  cues?: { t: number; end: number; text: string }[]
 }
 
 type Flat = LectureLine & { ch: number; li: number }

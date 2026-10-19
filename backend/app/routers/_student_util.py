@@ -1,8 +1,11 @@
 """Shared helpers for the student portal routers (not a router itself — underscore modules are skipped by main.py)."""
 from __future__ import annotations
 
+import json
+import os
 import re
 from datetime import datetime, timezone
+from pathlib import Path
 
 from fastapi import HTTPException
 from sqlalchemy import and_, or_, select
@@ -88,6 +91,22 @@ async def course_modules(db: AsyncSession, course_ids: list[str]) -> dict[str, l
     return out
 
 
+def studio_only() -> bool:
+    """Demo mode (STUDIO_ONLY=1): only lectures with a published studio video can be opened; the rest show as coming soon."""
+    return os.environ.get("STUDIO_ONLY") == "1"
+
+
+def production_manifest(course_id: str, item_id: str) -> dict | None:
+    """The published studio video for a lecture (app.studio), if any."""
+    from ..core.config import get_settings
+    p = Path(get_settings().media_dir) / "studio" / "out" / course_id / item_id / "current.json"
+    try:
+        m = json.loads(p.read_text())
+    except (OSError, ValueError):
+        return None
+    return m if m.get("video_url") and not m.get("draft") else None
+
+
 async def item_states(db: AsyncSession, user: User, course_ids: list[str]) -> dict:
     """Completion state per module item for the user, for many courses in a few queries.
 
@@ -145,6 +164,8 @@ async def item_states(db: AsyncSession, user: User, course_ids: list[str]) -> di
                         s = subs.get(a.id)
                         if s:
                             d["status"] = "done" if s.status in DONE_SUB else "progress"
+                elif typ == "video" and studio_only() and not production_manifest(cid, it.get("id")):
+                    d["soon"] = True  # demo: lecture video not produced yet
                 else:
                     d["link"] = f"/s-lesson?course={cid}&item={it.get('id')}"
                     st = lp.get((cid, it.get("id")))

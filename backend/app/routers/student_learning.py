@@ -10,12 +10,11 @@ from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from ..core.audit import audit
-from ..core.config import get_settings
 from ..core.db import get_db
 from ..core.deps import require
 from ..models import (Announcement, AnnouncementRead, Assessment, Avatar, LearningItem, MediaClip, CalendarEvent, Course, Enrolment, Event,
                       Faculty, Lesson, Programme, Source, Submission, SupportTicket, User, VFAttempt, VFSession)
-from ._student_util import (DONE_SUB, GRADED, enrolled_ids, enrolments, iso, item_states, now, require_enrolled, staff_names,
+from ._student_util import (DONE_SUB, production_manifest, studio_only, GRADED, enrolled_ids, enrolments, iso, item_states, now, require_enrolled, staff_names,
                             sync_progress, visible_announcements)
 
 router = APIRouter(prefix="/api/student", tags=["student"])
@@ -345,14 +344,14 @@ async def next_lesson(db: AsyncSession = Depends(get_db), user: User = Depends(s
                              .order_by(Event.id.desc()).limit(1))).scalar_one_or_none()
     if last:
         it = next((x for x in st["items"].get(last.course_id, []) if x["id"] == (last.payload or {}).get("item_id")), None)
-        if it and it["status"] != "done":
+        if it and it["link"] and it["status"] != "done":
             return {"course": last.course_id, "item": it["id"]}
     for cid in cids:
-        it = next((x for x in st["items"].get(cid, []) if x["type"] in ("video", "reading") and x["status"] != "done"), None)
+        it = next((x for x in st["items"].get(cid, []) if x["type"] in ("video", "reading") and x["link"] and x["status"] != "done"), None)
         if it:
             return {"course": cid, "item": it["id"]}
     for cid in cids:
-        it = next((x for x in st["items"].get(cid, []) if x["type"] in ("video", "reading")), None)
+        it = next((x for x in st["items"].get(cid, []) if x["type"] in ("video", "reading") and x["link"]), None)
         if it:
             return {"course": cid, "item": it["id"]}
     return None
@@ -367,6 +366,8 @@ async def lesson_item(course_id: str, item_id: str, db: AsyncSession = Depends(g
     if i < 0:
         raise HTTPException(404, "Lesson not found in this course")
     it = items[i]
+    if it.get("soon"):
+        raise HTTPException(403, "This lecture video is coming soon")
     from ..models import Module
     raw = next((x for m in (await db.execute(select(Module).where(Module.id == it["module_id"]))).scalars() for x in (m.items or []) if x.get("id") == item_id), {})
     demo = DEMO_PLAYER.get((c.id, item_id), {})
@@ -437,17 +438,11 @@ async def _lecture(db: AsyncSession, li: LearningItem) -> dict:
 
 def _production(li: LearningItem) -> dict | None:
     """The published studio video for this lecture (app.studio), if one has been produced."""
-    import json as _json
-    from pathlib import Path
-    p = Path(get_settings().media_dir) / "studio" / "out" / li.course_id / li.id / "current.json"
-    try:
-        m = _json.loads(p.read_text())
-    except (OSError, ValueError):
+    m = production_manifest(li.course_id, li.id)
+    if not m:
         return None
-    if m.get("draft") or not m.get("video_url"):
-        return None
-    return {k: m.get(k) for k in ("video_url", "poster_url", "captions_url", "duration", "chapters", "partial", "built_at")} | \
-        {"covers_chapters": len(m.get("chapters") or [])}
+    return {k: m.get(k) for k in ("video_url", "poster_url", "captions_url", "duration", "chapters", "partial", "built_at", "cues")} | \
+        {"covers_chapters": len(m.get("chapters") or []), "studio_only": studio_only()}
 
 
 class ProgressIn(BaseModel):

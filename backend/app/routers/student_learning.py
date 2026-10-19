@@ -548,7 +548,7 @@ async def progress(db: AsyncSession = Depends(get_db), user: User = Depends(stud
 
     # virtual-faculty checkpoint history
     sessions = list((await db.execute(select(VFSession).where(VFSession.user_id == user.id, VFSession.status != "superseded")
-                                      .order_by(VFSession.updated_at.desc()).limit(20))).scalars())
+                                      .order_by(VFSession.updated_at.desc()).limit(20))).scalars()) if not studio_only() else []
     atts = defaultdict(list)
     if sessions:
         for a in (await db.execute(select(VFAttempt).where(VFAttempt.session_id.in_([s.id for s in sessions])).order_by(VFAttempt.id))).scalars():

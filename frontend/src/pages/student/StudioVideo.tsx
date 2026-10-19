@@ -4,8 +4,9 @@ import { Icon } from '../../components/Icon'
 import { Production } from './Lecture'
 import { mmss } from './shared'
 
-export function StudioVideo({ p, title, captionsDefault, onEnded, onContinue }: {
+export function StudioVideo({ p, title, captionsDefault, onEnded, onContinue, onPosition }: {
   p: Production; title: string; captionsDefault: boolean; onEnded: () => void; onContinue?: () => void
+  onPosition?: (pos: number, live: boolean) => void  // live: while playing; otherwise paused (save it)
 }) {
   const v = useRef<HTMLVideoElement>(null)
   const [t, setT] = useState(0)
@@ -15,7 +16,8 @@ export function StudioVideo({ p, title, captionsDefault, onEnded, onContinue }: 
   return <div className="studio">
     <div className="studio-frame">
       <video ref={v} src={p.video_url} poster={p.poster_url} controls playsInline preload="metadata" aria-label={`Lecture video: ${title}`}
-        onTimeUpdate={e => setT((e.target as HTMLVideoElement).currentTime)} onPlay={() => setEnded(false)}
+        onTimeUpdate={e => { const s = (e.target as HTMLVideoElement).currentTime; setT(s); onPosition?.(s, true) }} onPlay={() => setEnded(false)}
+        onPause={e => onPosition?.((e.target as HTMLVideoElement).currentTime, false)}
         onEnded={() => { setEnded(true); if (!p.partial) onEnded() }}>
         {p.captions_url && <track kind="captions" src={p.captions_url} srcLang="en" label="English" default={captionsDefault} />}
       </video>

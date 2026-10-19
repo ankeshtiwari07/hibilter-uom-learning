@@ -183,9 +183,11 @@ async def item_states(db: AsyncSession, user: User, course_ids: list[str]) -> di
                         s = subs.get(a.id)
                         if s:
                             d["status"] = "done" if s.status in DONE_SUB else "progress"
-                elif typ == "video" and studio_only() and not production_manifest(cid, it.get("id")):
+                elif typ == "video" and studio_only() and not (pm := production_manifest(cid, it.get("id"))):
                     d["soon"] = True  # demo: lecture video not produced yet
                 else:
+                    if typ == "video" and studio_only():  # demo: the studio video is the whole lecture, so its length is the lecture's
+                        d["dur"] = max(1, round(pm.get("duration", 60) / 60))
                     d["link"] = f"/s-lesson?course={cid}&item={it.get('id')}"
                     st = lp.get((cid, it.get("id")))
                     if st:

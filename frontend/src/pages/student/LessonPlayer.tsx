@@ -40,7 +40,8 @@ function Player({ course, item }: { course: string; item: string }) {
   const key = ['s-lesson', course, item]
   const q = useQuery({ queryKey: key, queryFn: () => get<Lesson>(`/api/student/lessons/${course}/${item}`) })
   const d = q.data
-  const total = d?.lecture ? d.lecture.duration : (d?.item.dur || 10) * 60
+  const studioOnly = !!d?.lecture?.production?.studio_only
+  const total = studioOnly ? d!.lecture!.production!.duration : d?.lecture ? d.lecture.duration : (d?.item.dur || 10) * 60
   const [t, setT] = useState(0)
   const [playing, setPlaying] = useState(false)
   const [cc, setCc] = useState(me?.prefs?.captions !== false)
@@ -62,7 +63,7 @@ function Player({ course, item }: { course: string; item: string }) {
   useEffect(() => {
     if (!d || opened.current) return
     opened.current = true
-    setT(Math.min(d.item.pos || 0, total))
+    setT((d.item.pos || 0) <= total ? d.item.pos || 0 : 0)  // a position saved against a longer version restarts
     progress.mutate({ pos: d.item.pos || 0 })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [d])
@@ -106,6 +107,7 @@ function Player({ course, item }: { course: string; item: string }) {
         <span className="xs muted">{mode === 'studio' ? 'Filmed lecture with the virtual lecturer' : 'Slides voiced line by line, with chapter navigation'}</span></div>}
       {isVideo && L.lecture?.production && (mode === 'studio' || L.lecture.production.studio_only) ? <StudioVideo p={L.lecture.production.studio_only ? { ...L.lecture.production, partial: false } : L.lecture.production} title={L.item.title} captionsDefault={cc}
         onEnded={() => { if (!done) progress.mutate({ pos: Math.round(total), done: true }) }}
+        onPosition={studioOnly ? (pos, live) => { setT(pos); if (!live) progress.mutate({ pos: Math.round(pos) }) } : undefined}
         onContinue={L.lecture.production.studio_only ? undefined : () => { const lc = L.lecture!; setResumeAt(lc.chapters[Math.min(lc.production!.covers_chapters, lc.chapters.length - 1)]?.t ?? 0); setMode('slides') }} />
       : isVideo && L.lecture ? <Lecture key={resumeAt ?? 'pos'} data={L.lecture} title={L.item.title} startAt={resumeAt ?? L.item.pos ?? 0} captionsDefault={cc} reducedMotion={!!me?.prefs?.reducedMotion}
         onPosition={(pos, live) => { setT(pos); if (!live) progress.mutate({ pos }); else post(`/api/student/lessons/${course}/${item}/progress`, { pos }).catch(() => { }) }}

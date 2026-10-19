@@ -55,12 +55,24 @@ def produce(ref: str, *, draft: bool, max_seconds: float | None, publish: bool, 
           f"estimated cost ${0 if draft else est:.2f} · ledger ${engines.spent():.2f} of ${engines.budget():.2f}\n")
     if only_plan:
         return {"ref": ref, "estimate": est, "seconds": secs}
-    if not draft and engines.spent() + est > engines.budget():
-        raise engines.BudgetExceeded(f"estimated ${est:.2f} exceeds remaining budget ${engines.budget() - engines.spent():.2f}")
-
     tag = ("draft-" if draft else "") + lec.digest + (f"-{int(max_seconds)}s" if max_seconds else "")
     work = media_root() / "studio" / "work" / lec.course_id / lec.item_id / tag
     work.mkdir(parents=True, exist_ok=True)
+    if not draft:  # charge check counts only shots not already in the cache
+        kf = engines.studio_dir() / "keyframes" / lec.lecturer.id / "stage.png"
+        todo = 0.0
+        for i, s in enumerate(shots):
+            if not s.spoken:
+                continue
+            img = lec.lecturer.portrait if s.kind == "closeup" else kf
+            prompt = engines.CLOSEUP_PROMPT if s.kind == "closeup" else engines.STAGE_PROMPT
+            wav = compose.shot_audio(s, work / f"s{i:02d}.wav")
+            if not (img.exists() and engines.talk_cached(img, wav, prompt).exists()):
+                todo += s.duration
+        est = engines.estimate(todo, int(need_kf))
+        print(f"  still to generate: {todo:.0f}s · ${est:.2f}")
+        if engines.spent() + est > engines.budget():
+            raise engines.BudgetExceeded(f"estimated ${est:.2f} exceeds remaining budget ${engines.budget() - engines.spent():.2f}")
 
     # graphics
     R = graphics.Renderer()

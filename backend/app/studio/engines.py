@@ -157,10 +157,13 @@ def stage_keyframe(lec: Lecturer, n: int = 2) -> Path:
     return approved
 
 
+def talk_cached(image: Path, audio: Path, prompt: str) -> Path:
+    return studio_dir() / "cache" / f"{_sha(TALK_ENGINE, TALK_RES, image, audio, prompt)}.mp4"
+
+
 def talk(image: Path, audio: Path, prompt: str, what: str) -> Path:
     """Lip-synced, gesturing video of the lecturer in `image` speaking `audio` (cached)."""
-    key = _sha(TALK_ENGINE, TALK_RES, image, audio, prompt)
-    out = studio_dir() / "cache" / f"{key}.mp4"
+    out = talk_cached(image, audio, prompt)
     if out.exists():
         return out
     secs = probe(audio)

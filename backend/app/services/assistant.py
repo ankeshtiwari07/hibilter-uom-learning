@@ -65,6 +65,16 @@ SYSTEM = ("You are a university study assistant. Answer ONLY from the numbered a
           "and suggest asking the course lecturer. Never help complete graded assessment questions. Plain text, no markdown headings.")
 
 
+def extract(text: str, q: str, n: int = 3) -> str:
+    """No-LLM answer: the run of up to n full sentences that best matches the question (headings and fragments skipped)."""
+    sents = [s.strip() for s in re.split(r"(?<=[.!?])\s+|\n+", text) if len(s.split()) >= 6 and s.strip()[-1:] in ".!?"]
+    if not sents:
+        return text[:400]
+    qt = set(toks(q))
+    best = max(range(len(sents)), key=lambda i: len(set(toks(sents[i])) & qt))  # answer starts at the best-matching sentence
+    return " ".join(sents[best:best + n])
+
+
 async def grounded_answer(db: AsyncSession, course_ids: list[str], q: str, persona: str | None = None, max_sentences: int = 5) -> dict:
     passages = await retrieve(db, course_ids, q)
     if not passages:
@@ -72,9 +82,7 @@ async def grounded_answer(db: AsyncSession, course_ids: list[str], q: str, perso
                 "citations": [], "grounded": False, "engine": "retrieval"}
     if not llm.available():
         top = passages[0]
-        sent = re.split(r"(?<=[.!?])\s+", top["text"])
-        best = max(sent, key=lambda x: len(set(toks(x)) & set(toks(q))))
-        return {"answer": best, "citations": [{k: top[k] for k in ("id", "source", "page")}], "grounded": True, "engine": "extractive"}
+        return {"answer": extract(top["text"], q), "citations": [{k: top[k] for k in ("id", "source", "page")}], "grounded": True, "engine": "extractive"}
     s = get_settings()
     ctx = "\n\n".join(f"[{p['id']}] ({p['source']}, p.{p['page']}): {p['text']}" for p in passages)
     who = f"You are speaking as {persona}, a digital lecturer, in at most {max_sentences} short spoken sentences. " if persona else ""

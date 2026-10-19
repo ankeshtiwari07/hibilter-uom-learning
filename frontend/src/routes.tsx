@@ -6,7 +6,7 @@ const S: Role[] = ['student'], LE: Role[] = ['lecturer'], A: Role[] = ['admin'],
 const lz = (f: () => Promise<{ default: ComponentType<any> }>) => lazy(f)
 
 export const ROUTES: R[] = [
-  { path: '/s-classroom', roles: ALL, crumbs: ['Virtual faculty'], C: lz(() => import('./pages/student/FacultySelect')) },
+  { path: '/s-classroom', roles: ALL, crumbs: ['Virtual classroom'], C: lz(() => import('./pages/student/FacultySelect')) },
   { path: '/s-classroom/:lessonId', roles: ALL, crumbs: ['Virtual classroom'], demoOff: true, C: lz(() => import('./classroom/Classroom')) },
   // student
   { path: '/s-dash', roles: S, crumbs: ['Dashboard'], C: lz(() => import('./pages/student/Dashboard')) },

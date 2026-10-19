@@ -357,6 +357,27 @@ async def next_lesson(db: AsyncSession = Depends(get_db), user: User = Depends(s
     return None
 
 
+@router.get("/studio-lectures")
+async def studio_lectures(db: AsyncSession = Depends(get_db), user: User = Depends(student)):
+    """Lectures with a produced studio video, for the Virtual classroom: one card per lecturer and lecture."""
+    cids = await enrolled_ids(db, user)
+    st = await item_states(db, user, cids)
+    courses = {c.id: c for c in (await db.execute(select(Course).where(Course.id.in_(cids or ["-"])))).scalars()}
+    avs = {a.id: a for a in (await db.execute(select(Avatar))).scalars()}
+    out = []
+    for cid in cids:
+        for it in st["items"].get(cid, []):
+            m = production_manifest(cid, it["id"]) if it["type"] == "video" and it.get("link") else None
+            if not m or cid not in courses:
+                continue
+            a = avs.get(m.get("lecturer"))
+            out.append({"course_id": cid, "course_code": courses[cid].code, "course_title": courses[cid].title, "item_id": it["id"],
+                        "title": it["title"], "module": it["module"], "status": it["status"], "link": it["link"],
+                        "duration": m.get("duration"), "poster_url": m.get("poster_url"), "chapters": [c["title"] for c in m.get("chapters") or []],
+                        "lecturer": {"id": a.id, "name": a.name, "subject": a.subject, "portrait": a.portrait, "style": a.style} if a else None})
+    return out
+
+
 @router.get("/lessons/{course_id}/{item_id}")
 async def lesson_item(course_id: str, item_id: str, db: AsyncSession = Depends(get_db), user: User = Depends(student)):
     c, _ = await require_enrolled(db, user, course_id)

@@ -5,8 +5,44 @@ import { Icon } from '../../components/Icon'
 import { AiTag, Badge, Empty, ErrorBox, Loading, Note, PageHead } from '../../components/ui'
 import { get } from '../../lib/api'
 import { useAuth } from '../../lib/auth'
+import { mmss } from './shared'
 
 export default function FacultySelect() {
+  const { me } = useAuth()
+  return me?.demo && me.role === 'student' ? <StudioClassroom /> : <Interactive />
+}
+
+type StudioLecture = { course_id: string; course_code: string; course_title: string; item_id: string; title: string; module: string; status: string
+  link: string; duration: number; poster_url: string; chapters: string[]; lecturer: { id: string; name: string; subject: string; portrait: string; style: string } | null }
+
+// Demo mode: the classroom is the lecturers' studio-filmed lectures (the interactive classroom opens once every lecturer is filmed).
+function StudioClassroom() {
+  const nav = useNavigate()
+  const q = useQuery({ queryKey: ['s-studio-lectures'], queryFn: () => get<StudioLecture[]>('/api/student/studio-lectures') })
+  if (q.isLoading) return <Loading />
+  if (q.error) return <ErrorBox error={q.error} retry={() => q.refetch()} />
+  const ls = q.data || []
+  return <>
+    <PageHead no={30} title="Virtual classroom" sub="Lectures filmed with your digital lecturers. Choose a lecturer to start their lecture, with captions, chapters and a transcript." />
+    {!ls.length ? <Empty icon="cap" title="No lectures open yet">Your digital lecturers’ lectures will appear here when they are published.</Empty> : <>
+      <div className="vc-grid">{ls.map(l => <article key={l.course_id + l.item_id} className="card vc-card">
+        <button className="vc-poster" onClick={() => nav(l.link)} aria-label={`Watch ${l.title} with ${l.lecturer?.name || 'your lecturer'}`}>
+          <img src={l.poster_url} alt="" /><span className="vc-play"><Icon n="playc" /></span><span className="vc-dur">{mmss(l.duration)}</span></button>
+        <div className="vc-bd">
+          {l.lecturer && <div className="vc-who"><img src={l.lecturer.portrait} alt="" /><span><b>{l.lecturer.name}</b><span className="xs muted">{l.lecturer.subject}</span></span></div>}
+          <div className="xs muted">{l.course_code} · {l.course_title}</div>
+          <h3 className="vc-title">{l.title}</h3>
+          {l.chapters.length > 0 && <div className="vc-ch">{l.chapters.map(c => <span key={c} className="studio-chip">{c}</span>)}</div>}
+          <div className="row sb" style={{ marginTop: 'auto' }}>
+            {l.status === 'done' ? <Badge kind="good">Watched</Badge> : l.status === 'progress' ? <Badge kind="warn">In progress</Badge> : <Badge kind="out">Not started</Badge>}
+            <button className="btn teal" onClick={() => nav(l.link)}><Icon n="playc" />{l.status === 'done' ? 'Watch again' : l.status === 'progress' ? 'Resume' : 'Watch lecture'}</button></div>
+        </div></article>)}</div>
+      <Note>Digital lecturers are AI. The lectures are generated from course material your lecturers approved, and your course lecturer remains responsible for teaching and grades.</Note>
+    </>}
+  </>
+}
+
+function Interactive() {
   const nav = useNavigate(); const { me, setPrefs } = useAuth()
   const lessons = useQuery({ queryKey: ['vf-lessons'], queryFn: () => get<any[]>('/api/vf/lessons') })
   const avatars = useQuery({ queryKey: ['avatars'], queryFn: () => get<any[]>('/api/vf/avatars') })

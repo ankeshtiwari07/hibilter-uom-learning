@@ -45,9 +45,9 @@ def shot_audio(shot: Shot, out: Path) -> Path:
 
 
 def _push(zoom: float, dur: float, fy: float = 0.5) -> str:
-    """Slow push-in on a 2× source so the per-frame crop is sub-pixel smooth at output size."""
+    """Slow push-in on a 1.5× source so the per-frame crop is sub-pixel smooth at output size."""
     n = max(1, int(round(dur * FPS)))
-    return (f"scale={W * 2}:{H * 2}:force_original_aspect_ratio=increase,crop={W * 2}:{H * 2},"
+    return (f"scale={W * 3 // 2}:{H * 3 // 2}:force_original_aspect_ratio=increase,crop={W * 3 // 2}:{H * 3 // 2},"
             f"zoompan=z='1+{zoom}*on/{n}':x='iw/2-(iw/zoom/2)':y='ih*{fy}-(ih/zoom*{fy})':d=1:s={W}x{H}:fps={FPS}")
 
 

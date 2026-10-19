@@ -78,3 +78,16 @@ button.fcard{font:inherit;color:inherit;background:var(--surface)}
 .md .tbl-wrap{max-width:100%;overflow-x:auto}
 .md code{overflow-wrap:anywhere}
 .g-31>.stack,.g-31>div{min-width:0}
+
+/* produced lecture video (StudioVideo) */
+.studio-frame{position:relative;border-radius:var(--r-lg);overflow:hidden;background:#000;aspect-ratio:16/9;box-shadow:var(--shadow)}
+.studio-frame video{width:100%;height:100%;display:block;background:#000}
+.studio-end{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;
+  background:rgba(7,16,33,.82);color:#fff;padding:20px}
+.studio-end .small{color:#C9D3DF}
+.studio-ch{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.studio-chip{display:inline-flex;gap:8px;align-items:center;border:1px solid var(--line);background:var(--surface);color:var(--fg-2);
+  border-radius:999px;padding:5px 12px;font:inherit;font-size:13px;cursor:pointer}
+.studio-chip.on{border-color:var(--teal);color:var(--teal);background:var(--teal-soft)}
+.studio-chip .num{color:var(--muted)}
+.mode-switch{display:flex;align-items:center;gap:10px;flex-wrap:wrap}

@@ -2,13 +2,14 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useEffect, useRef, useState } from 'react'
 import { Link, Navigate, useNavigate, useSearchParams } from 'react-router-dom'
 import { Icon } from '../../components/Icon'
-import { AiTag, Bar, Card, Empty, ErrorBox, Field, Loading, Note, PageHead, Tabs, useToast } from '../../components/ui'
+import { AiTag, Bar, Card, Empty, ErrorBox, Field, Loading, Note, PageHead, Seg, Tabs, useToast } from '../../components/ui'
 import { del, get, post } from '../../lib/api'
 import { useAuth } from '../../lib/auth'
 import { rel } from '../../lib/format'
 import { AnswerBubble, Pending, Turn, useAsk, useRate } from './assistantUi'
 import { Markdown, headings } from '../../components/Markdown'
 import { Lecture, LectureData } from './Lecture'
+import { StudioVideo } from './StudioVideo'
 import { errText, itemIcon, mmss } from './shared'
 
 type Line = { t: number; title?: string; sub?: string; text: string }
@@ -45,6 +46,8 @@ function Player({ course, item }: { course: string; item: string }) {
   const [cc, setCc] = useState(me?.prefs?.captions !== false)
   const [muted, setMuted] = useState(false)
   const [tab, setTab] = useState('obj')
+  const [mode, setMode] = useState<'studio' | 'slides'>('studio')
+  const [resumeAt, setResumeAt] = useState<number | null>(null)
   const tRef = useRef(0); tRef.current = t
   const opened = useRef(false)
 
@@ -95,7 +98,13 @@ function Player({ course, item }: { course: string; item: string }) {
         : <Link className="btn" to={`/s-course/${L.course.id}`}><Icon n="back" />Course</Link>}
         {L.next && <button className="btn" onClick={() => nav(L.next!.link)}>Next: {L.next.title.length > 28 ? L.next.title.slice(0, 26) + '…' : L.next.title}<Icon n="chev" /></button>}</>} />
     <div className="g g-31"><div className="stack">
-      {isVideo && L.lecture ? <Lecture data={L.lecture} title={L.item.title} startAt={L.item.pos || 0} captionsDefault={cc} reducedMotion={!!me?.prefs?.reducedMotion}
+      {isVideo && L.lecture?.production && <div className="mode-switch">
+        <Seg options={[['studio', 'Studio video'], ['slides', 'Narrated slides']]} value={mode} onChange={v => setMode(v as 'studio' | 'slides')} />
+        <span className="xs muted">{mode === 'studio' ? 'Filmed lecture with the virtual lecturer' : 'Slides voiced line by line, with chapter navigation'}</span></div>}
+      {isVideo && L.lecture?.production && mode === 'studio' ? <StudioVideo p={L.lecture.production} title={L.item.title} captionsDefault={cc}
+        onEnded={() => { if (!done) progress.mutate({ pos: Math.round(total), done: true }) }}
+        onContinue={() => { const lc = L.lecture!; setResumeAt(lc.chapters[Math.min(lc.production!.covers_chapters, lc.chapters.length - 1)]?.t ?? 0); setMode('slides') }} />
+      : isVideo && L.lecture ? <Lecture key={resumeAt ?? 'pos'} data={L.lecture} title={L.item.title} startAt={resumeAt ?? L.item.pos ?? 0} captionsDefault={cc} reducedMotion={!!me?.prefs?.reducedMotion}
         onPosition={(pos, live) => { setT(pos); if (!live) progress.mutate({ pos }); else post(`/api/student/lessons/${course}/${item}/progress`, { pos }).catch(() => { }) }}
         onEnded={() => { if (!done) progress.mutate({ pos: Math.round(total), done: true }) }} />
       : isVideo ? (L.media_url

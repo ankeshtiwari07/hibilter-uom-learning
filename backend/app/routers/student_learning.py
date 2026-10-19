@@ -10,6 +10,7 @@ from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from ..core.audit import audit
+from ..core.config import get_settings
 from ..core.db import get_db
 from ..core.deps import require
 from ..models import (Announcement, AnnouncementRead, Assessment, Avatar, LearningItem, MediaClip, CalendarEvent, Course, Enrolment, Event,
@@ -430,7 +431,23 @@ async def _lecture(db: AsyncSession, li: LearningItem) -> dict:
     avatar = {"id": av.id, "name": av.name, "portrait": av.portrait, "listen_portrait": av.listen_portrait, "calib": av.calib,
               "voice_hint": (av.calib or {}).get("voiceHint")} if av else None
     return {"avatar": avatar, "chapters": out, "duration": round(t0, 1), "lines": total_lines, "ready": ready,
-            "transcript": [{"t": x["t"], "title": x["title"], "text": x["text"]} for x in transcript]}
+            "transcript": [{"t": x["t"], "title": x["title"], "text": x["text"]} for x in transcript],
+            "production": _production(li)}
+
+
+def _production(li: LearningItem) -> dict | None:
+    """The published studio video for this lecture (app.studio), if one has been produced."""
+    import json as _json
+    from pathlib import Path
+    p = Path(get_settings().media_dir) / "studio" / "out" / li.course_id / li.id / "current.json"
+    try:
+        m = _json.loads(p.read_text())
+    except (OSError, ValueError):
+        return None
+    if m.get("draft") or not m.get("video_url"):
+        return None
+    return {k: m.get(k) for k in ("video_url", "poster_url", "captions_url", "duration", "chapters", "partial", "built_at")} | \
+        {"covers_chapters": len(m.get("chapters") or [])}
 
 
 class ProgressIn(BaseModel):

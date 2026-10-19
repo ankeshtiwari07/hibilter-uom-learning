@@ -2,7 +2,7 @@ import { createContext, ReactNode, useCallback, useContext, useEffect, useState 
 import { api, post } from './api'
 
 export type Role = 'student' | 'lecturer' | 'admin'
-export type Me = { id: string; email: string; role: Role; name: string; first: string; title?: string; faculty_id?: string; programme_id?: string; student_no?: string; year?: number; prefs: Record<string, any> }
+export type Me = { id: string; email: string; role: Role; name: string; first: string; title?: string; faculty_id?: string; programme_id?: string; student_no?: string; year?: number; prefs: Record<string, any>; demo?: boolean }
 type Ctx = { me: Me | null; loading: boolean; login: (e: string, p: string) => Promise<Me>; logout: () => Promise<void>; refresh: () => Promise<void>; setPrefs: (p: Record<string, any>) => void }
 const AuthCtx = createContext<Ctx>(null as any)
 export const useAuth = () => useContext(AuthCtx)

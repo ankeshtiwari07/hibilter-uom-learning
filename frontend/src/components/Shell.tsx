@@ -42,7 +42,7 @@ export function Shell({ crumbs, children }: { crumbs: string[]; children: ReactN
           <div className="x"><span>×</span><img src="/brand/hibilter.png" alt="" /><b>Hibilter</b> AI Learning Platform</div></div>
         <nav className="nav">{NAV[me.role].map(([g, items]) => <div key={g} style={{ display: 'contents' }}>
           <div className="grp">{g}</div>
-          {items.map(([to, ic, label, hero]) => <NavLink key={to} to={to} className={({ isActive }) => `${isActive || loc.pathname.startsWith(to + '/') || (to === '/s-courses' && loc.pathname.startsWith('/s-course/')) ? 'on' : ''} ${hero || ''}`}>
+          {items.filter(([to]) => !(me.demo && to === '/vf-gallery')).map(([to, ic, label, hero]) => <NavLink key={to} to={to} className={({ isActive }) => `${isActive || loc.pathname.startsWith(to + '/') || (to === '/s-courses' && loc.pathname.startsWith('/s-course/')) ? 'on' : ''} ${hero || ''}`}>
             <Icon n={ic} /><span>{label}</span>{to === '/s-classroom' && <span className="pill">AI</span>}</NavLink>)}
         </div>)}</nav>
         <div className="foot">Concept platform with synthetic data — not an official University system. Logo use subject to University permission.</div>

@@ -1,3 +1,4 @@
+import os
 from datetime import datetime, timedelta, timezone
 
 from fastapi import APIRouter, Depends, HTTPException, Request, Response
@@ -31,7 +32,7 @@ class PasswordIn(BaseModel):
 def user_out(u: User) -> dict:
     return {"id": u.id, "email": u.email, "role": u.role, "name": u.name, "first": u.first, "title": u.title,
             "faculty_id": u.faculty_id, "programme_id": u.programme_id, "student_no": u.student_no, "year": u.year,
-            "prefs": u.prefs or {}}
+            "prefs": u.prefs or {}, "demo": os.environ.get("STUDIO_ONLY") == "1"}
 
 
 def _set_cookies(resp: Response, token: str):

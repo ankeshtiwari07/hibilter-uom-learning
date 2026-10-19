@@ -6,6 +6,7 @@ import { Voice } from '../../classroom/voice'
 import { Icon } from '../../components/Icon'
 import { Badge, Card, Empty, ErrorBox, Field, Loading, Note, PageHead, Switch, useToast } from '../../components/ui'
 import { get, post, put } from '../../lib/api'
+import { useAuth } from '../../lib/auth'
 import { fmtDate } from '../../lib/format'
 import { Sel } from './shared'
 
@@ -31,6 +32,7 @@ export default function VFConfig() {
 }
 
 function Config({ lid, lessons, onPick }: { lid: string; lessons: any[]; onPick: (id: string) => void }) {
+  const demo = !!useAuth().me?.demo  // demo mode: the animated-portrait classroom is closed, so no preview
   const qc = useQueryClient(); const toast = useToast()
   const cfg = useQuery({ queryKey: ['vf-config', lid], queryFn: () => get<any>(`/api/lecturer/vf/lessons/${lid}/config`) })
   const avatars = useQuery({ queryKey: ['avatars'], queryFn: () => get<any[]>('/api/vf/avatars') })
@@ -52,7 +54,7 @@ function Config({ lid, lessons, onPick }: { lid: string; lessons: any[]; onPick:
   const published = c.status === 'published'
   return <>
     <PageHead no={36} title="Configure digital lecturer" sub="Set who teaches, how they sound, which approved material they use, and the rules at each checkpoint. Only authorised staff can publish."
-      actions={<><Link className="btn" to={`/s-classroom/${lid}?avatar=${fa?.id || sel[0] || ''}`} title="Opens the lesson with the lecturer selected below"><Icon n="eye" />Preview with {fa?.short || 'lecturer'}</Link>
+      actions={<>{!demo && <Link className="btn" to={`/s-classroom/${lid}?avatar=${fa?.id || sel[0] || ''}`} title="Opens the lesson with the lecturer selected below"><Icon n="eye" />Preview with {fa?.short || 'lecturer'}</Link>}
         <button className="btn pri" disabled={!dirty || !sel.length || save.isPending} onClick={() => save.mutate()}><Icon n="save" />{save.isPending ? 'Saving…' : 'Save settings'}</button>
         <button className={`btn ${published ? 'danger' : 'teal'}`} disabled={pub.isPending || dirty} title={dirty ? 'Save your settings first' : ''} onClick={() => (!published || confirm('Unpublish? Students will no longer be able to start this lesson.')) && pub.mutate(!published)}>{published ? 'Unpublish' : 'Publish'}</button></>} />
     <div className="filters">
@@ -66,7 +68,8 @@ function Config({ lid, lessons, onPick }: { lid: string; lessons: any[]; onPick:
     <div className="g g-12">
       <div className="stack">
         <Card title="Lecturers offered for this lesson">
-          {fa && <Portrait a={fa} rate={rate} />}
+          {fa && (demo ? <img src={fa.portrait} alt={`${fa.name}, digital lecturer`} style={{ width: '100%', aspectRatio: '4/3.2', objectFit: 'cover', objectPosition: 'top', borderRadius: 10 }} />
+            : <Portrait a={fa} rate={rate} />)}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 6, marginTop: 10 }}>{all.map(a => <button key={a.id} className={`fcard ${a.id === focus ? 'sel' : ''}`} style={{ padding: 0, cursor: 'pointer', textAlign: 'left' }} onClick={() => setFocus(a.id)} aria-pressed={a.id === focus} title={a.name}>
             <div className="por" style={{ aspectRatio: '1/1' }}><img src={a.portrait} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: a.calib?.pos }} /></div>
             <div className="xs" style={{ padding: '4px 6px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 4 }}><span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{a.short}</span>{sel.includes(a.id) && <Icon n="check" />}</div></button>)}</div>

@@ -1,13 +1,13 @@
 import { ComponentType, lazy } from 'react'
 import type { Role } from './lib/auth'
 
-type R = { path: string; roles: Role[]; crumbs: string[]; C: ComponentType<any> }
+type R = { path: string; roles: Role[]; crumbs: string[]; C: ComponentType<any>; demoOff?: boolean }  // demoOff: closed in demo mode
 const S: Role[] = ['student'], LE: Role[] = ['lecturer'], A: Role[] = ['admin'], LA: Role[] = ['lecturer', 'admin'], ALL: Role[] = ['student', 'lecturer', 'admin']
 const lz = (f: () => Promise<{ default: ComponentType<any> }>) => lazy(f)
 
 export const ROUTES: R[] = [
   { path: '/s-classroom', roles: ALL, crumbs: ['Virtual faculty'], C: lz(() => import('./pages/student/FacultySelect')) },
-  { path: '/s-classroom/:lessonId', roles: ALL, crumbs: ['Virtual classroom'], C: lz(() => import('./classroom/Classroom')) },
+  { path: '/s-classroom/:lessonId', roles: ALL, crumbs: ['Virtual classroom'], demoOff: true, C: lz(() => import('./classroom/Classroom')) },
   // student
   { path: '/s-dash', roles: S, crumbs: ['Dashboard'], C: lz(() => import('./pages/student/Dashboard')) },
   { path: '/s-catalogue', roles: S, crumbs: ['Course catalogue'], C: lz(() => import('./pages/student/Catalogue')) },
@@ -31,7 +31,7 @@ export const ROUTES: R[] = [
   { path: '/l-grading', roles: LE, crumbs: ['Submissions & grading'], C: lz(() => import('./pages/lecturer/Grading')) },
   { path: '/l-analytics', roles: LE, crumbs: ['Class analytics'], C: lz(() => import('./pages/lecturer/ClassAnalytics')) },
   { path: '/l-comms', roles: LE, crumbs: ['Communication'], C: lz(() => import('./pages/lecturer/Communication')) },
-  { path: '/vf-gallery', roles: LA, crumbs: ['Virtual faculty', 'Faculty library'], C: lz(() => import('./pages/student/FacultySelect')) },
+  { path: '/vf-gallery', roles: LA, crumbs: ['Virtual faculty', 'Faculty library'], demoOff: true, C: lz(() => import('./pages/student/FacultySelect')) },
   { path: '/vf-config', roles: LA, crumbs: ['Virtual faculty', 'Configure'], C: lz(() => import('./pages/lecturer/VFConfig')) },
   { path: '/vf-review', roles: LA, crumbs: ['Virtual faculty', 'Review queue'], C: lz(() => import('./pages/lecturer/VFReview')) },
   { path: '/vf-analytics', roles: LA, crumbs: ['Virtual faculty', 'Analytics'], C: lz(() => import('./pages/lecturer/VFAnalytics')) },

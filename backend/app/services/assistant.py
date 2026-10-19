@@ -65,14 +65,28 @@ SYSTEM = ("You are a university study assistant. Answer ONLY from the numbered a
           "and suggest asking the course lecturer. Never help complete graded assessment questions. Plain text, no markdown headings.")
 
 
+CAUSE = {"because", "but", "so", "since", "therefore", "however", "failed", "trouble", "problem", "expensive", "brittle", "cost"}
+LEAD = ("if ", "they ", "this ", "it ", "but ", "so ", "these ", "their ", "he ", "she ", "that ")
+
+
 def extract(text: str, q: str, n: int = 3) -> str:
-    """No-LLM answer: the run of up to n full sentences that best matches the question (headings and fragments skipped)."""
-    sents = [s.strip() for s in re.split(r"(?<=[.!?])\s+|\n+", text) if len(s.split()) >= 6 and s.strip()[-1:] in ".!?"]
+    """No-LLM answer: the best-matching sentence plus the sentences that carry it on (or explain why, for a why-question)."""
+    stem = lambda s: {w[:4] for w in toks(s)}  # noqa: E731 — crude stemming: test/testing, learn/learning
+    sents = [s.strip() for s in re.split(r"(?<=[.!?])\s+|\n+", text)
+             if len(s.split()) >= 4 and s.strip()[-1:] in ".!?" and not re.match(r"(why|how|what|when|where)\b.*\.$", s.strip(), re.I)]
     if not sents:
         return text[:400]
-    qt = set(toks(q))
-    best = max(range(len(sents)), key=lambda i: len(set(toks(sents[i])) & qt))  # answer starts at the best-matching sentence
-    return " ".join(sents[best:best + n])
+    qs, why = stem(q), q.lower().lstrip().startswith("why")
+    ss = [stem(s) for s in sents]
+    df = Counter(w for s in ss for w in s)
+    sc = [sum(math.log(1 + len(sents) / df[w]) for w in s & qs) for s in ss]  # rare words ("2012") count more than common ones
+    keep = lambda k: sc[k] > 0 or (why and bool(set(re.findall(r"[a-z]+", sents[k].lower())) & CAUSE))  # noqa: E731
+    win = lambda i: sc[i] + sum(w * (sc[k] or (0.9 * max(sc) / 2 if keep(k) else 0)) for w, k in zip((0.6, 0.4), range(i + 1, i + n)) if k < len(sents))  # noqa: E731
+    best = max(range(len(sents)), key=win)
+    out = [best] + [k for k in range(best + 1, min(best + n, len(sents))) if keep(k)]
+    if best > 0 and sents[best].lower().startswith(LEAD):  # "If they cannot tell…" needs the sentence before it
+        out.insert(0, best - 1)
+    return " ".join(sents[k] for k in sorted(set(out))[:n])
 
 
 async def grounded_answer(db: AsyncSession, course_ids: list[str], q: str, persona: str | None = None, max_sentences: int = 5) -> dict:

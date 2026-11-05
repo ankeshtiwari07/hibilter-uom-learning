@@ -10,7 +10,7 @@ from sqlalchemy import and_, or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from ..core.db import get_db
-from ..core.deps import current_user
+from ..core.deps import current_user, owner_id
 from ..models import Announcement, Course, Enrolment, Lesson, Module, User
 from ._student_util import UNI_SCOPES, enrolled_ids, iso, visible_announcements
 
@@ -34,7 +34,7 @@ async def search(q: str = Query(min_length=2, max_length=100), db: AsyncSession 
     if user.role == "student":
         mine = await enrolled_ids(db, user)
     elif user.role == "lecturer":
-        mine = list((await db.execute(select(Course.id).where(Course.lecturer_id == user.id))).scalars())
+        mine = list((await db.execute(select(Course.id).where(Course.lecturer_id == owner_id(user)))).scalars())
     else:
         mine = None  # admin: all
 

@@ -9,7 +9,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from ..core.audit import audit
 from ..core.config import get_settings
 from ..core.db import get_db
-from ..core.deps import current_user
+from ..core.deps import TRIAL_EXPIRED, current_user, trial_expired
 from ..core.ratelimit import hit
 from ..core.security import COOKIE, CSRF_COOKIE, hash_password, make_token, new_csrf, verify_password
 from ..models import User
@@ -61,6 +61,8 @@ async def login(body: LoginIn, request: Request, response: Response, db: AsyncSe
         raise HTTPException(401, "Email or password is incorrect.")
     if u.status != "active":
         raise HTTPException(403, "This account is suspended. Contact the academic office.")
+    if trial_expired(u):
+        raise HTTPException(403, TRIAL_EXPIRED)
     u.failed_logins, u.locked_until, u.last_login_at = 0, None, now
     await audit(db, u, "Signed in", "auth", u.email, detail={"ip": ip})
     await db.commit()
@@ -84,6 +86,8 @@ async def me(response: Response, request: Request, user: User = Depends(current_
 
 @router.post("/password")
 async def change_password(body: PasswordIn, db: AsyncSession = Depends(get_db), user: User = Depends(current_user)):
+    if user.expires_at:
+        raise HTTPException(403, "Trial accounts share one password, so it can't be changed here.")
     if not verify_password(body.current, user.password_hash):
         raise HTTPException(400, "Current password is incorrect.")
     if len(body.new) < 10:

@@ -6,7 +6,7 @@ from sqlalchemy import and_, or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from ..core.db import get_db
-from ..core.deps import current_user
+from ..core.deps import current_user, owner_id
 from ..models import Announcement, AnnouncementRead, Assessment, Course, Enrolment, Submission, User
 
 router = APIRouter(prefix="/api/notifications", tags=["notifications"])
@@ -19,7 +19,7 @@ async def my_course_ids(db: AsyncSession, user: User) -> list[str]:
         demo = demo_courses()
         return ids if demo is None else [c for c in ids if c in demo]
     if user.role == "lecturer":
-        return list((await db.execute(select(Course.id).where(Course.lecturer_id == user.id))).scalars())
+        return list((await db.execute(select(Course.id).where(Course.lecturer_id == owner_id(user)))).scalars())
     return list((await db.execute(select(Course.id))).scalars())
 
 

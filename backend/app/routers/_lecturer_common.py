@@ -9,6 +9,7 @@ from fastapi import HTTPException
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from ..core.deps import owner_id
 from ..models import Assessment, Course, Enrolment, Event, Lesson, Submission, User, VFSession
 
 
@@ -23,7 +24,7 @@ def iso(d: datetime | None) -> str | None:
 async def my_courses(db: AsyncSession, user: User) -> list[Course]:
     q = select(Course).order_by(Course.code)
     if user.role != "admin":
-        q = q.where(Course.lecturer_id == user.id)
+        q = q.where(Course.lecturer_id == owner_id(user))
     return list((await db.execute(q)).scalars())
 
 
@@ -35,7 +36,7 @@ async def owned_course(db: AsyncSession, user: User, course_id: str) -> Course:
     c = await db.get(Course, course_id)
     if not c:
         raise HTTPException(404, "Course not found")
-    if user.role != "admin" and c.lecturer_id != user.id:
+    if user.role != "admin" and c.lecturer_id != owner_id(user):
         raise HTTPException(403, "You can only manage courses you teach.")
     return c
 

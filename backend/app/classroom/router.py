@@ -8,7 +8,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from ..core.db import get_db
-from ..core.deps import current_user
+from ..core.deps import current_user, owner_id
 from ..models import Avatar, Enrolment, Lesson, User, VFSession
 from . import engine
 from .fsm import Blocked
@@ -150,7 +150,7 @@ async def list_lessons(db: AsyncSession = Depends(get_db), user: User = Depends(
     if user.role == "student":
         q = q.join(Enrolment, Enrolment.course_id == Course.id).where(Enrolment.user_id == user.id, Lesson.status == "published")
     elif user.role == "lecturer":
-        q = q.where(Course.lecturer_id == user.id)
+        q = q.where(Course.lecturer_id == owner_id(user))
     rows = (await db.execute(q)).all()
     out = []
     for l, c in rows:

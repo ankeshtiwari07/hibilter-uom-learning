@@ -56,6 +56,10 @@ class User(TS, Base):
     locked_until: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     last_login_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     risk: Mapped[dict] = mapped_column(JSON, default=dict)  # cached at-risk signals
+    # Trial (customer demo) accounts: sign-in and every request stop at expires_at; acts_for makes a read-only
+    # lecturer that sees the courses of the lecturer it mirrors.
+    expires_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    acts_for: Mapped[str | None] = mapped_column(String(32))
 
 
 class Course(TS, Base):

@@ -27,7 +27,11 @@ EDITIONS = {
         "subject": "AI × Quantum Brief: what changed this week for BFSI, retail and finance",
         "sections": [
             ("BFSI · Banking, financial services & insurance", ["quantum computing banking", "AI fraud detection bank", "AI insurance claims"]),
-            ("Retail management", ["AI retail", "AI demand forecasting supply chain"]),
+            ("Retail management", ['"retailers" AI -bank -banking', '"retail" AI shoppers OR stores OR ecommerce -bank -banking',
+                                   'AI "demand forecasting" retail OR grocery OR ecommerce'],
+             # headline itself must be about retail, and not about banking/insurance (those go under BFSI)
+             {"must": r"retail|shopper|store|e-?commerce|grocer|supermarket|merchandis|checkout|consumer goods|\bcpg\b|fashion|walmart|amazon|tesco|target corp|flipkart|reliance retail|ikea|inventory",
+              "not": r"\bbank|banking|insur|lender|fintech|\bpayments? bank"}),
             ("Data science & AI", ["generative AI enterprise adoption", "quantum machine learning"]),
             ("Finance & markets", ["AI asset management", "quantum computing finance risk"]),
         ],
@@ -101,7 +105,10 @@ async def gather(edition: str) -> list[dict]:
     cutoff = datetime.now(timezone.utc) - timedelta(days=8)
     sections = []
     async with httpx.AsyncClient(timeout=20, follow_redirects=True, headers={"User-Agent": "Mozilla/5.0 (newsletter digest)"}) as c:
-        for title, queries in EDITIONS[edition]["sections"]:
+        for title, queries, *rules in EDITIONS[edition]["sections"]:
+            rule = rules[0] if rules else {}
+            must = re.compile(rule["must"], re.I) if rule.get("must") else None
+            bad = re.compile(rule["not"], re.I) if rule.get("not") else None
             picked = []
             for q in queries:
                 for a in await _feed(c, q):
@@ -109,7 +116,8 @@ async def gather(edition: str) -> list[dict]:
                         break
                     k = _key(a["title"])
                     if (not a["url"] or a["url"] in seen_url or k in seen_t or PRESS_WIRES.search(a["source"] or "")
-                            or len(a["title"]) < 25 or (a["published"] and datetime.fromisoformat(a["published"]) < cutoff)):
+                            or len(a["title"]) < 25 or (a["published"] and datetime.fromisoformat(a["published"]) < cutoff)
+                            or (must and not must.search(a["title"])) or (bad and bad.search(a["title"]))):
                         continue
                     seen_url.add(a["url"]); seen_t.add(k)
                     picked.append({**a, "note": "", "include": True})

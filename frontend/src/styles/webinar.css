@@ -11,7 +11,7 @@
 .wb-hero .wb-wrap{position:relative}
 .wb-brands{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .wb-plate{display:inline-flex;align-items:center;gap:8px;background:#F6F7FB;border-radius:10px;padding:6px 12px;height:44px;box-shadow:0 6px 24px rgba(0,0,0,.25)}
-.wb-plate .mk{height:28px;width:auto}.wb-plate .wd{height:18px;width:auto}.wb-plate .tq{height:30px;width:auto}
+.wb-plate .mk{height:28px;width:auto}.wb-plate .wd{height:18px;width:auto}.wb-tq{height:40px;width:auto}
 .wb-brands .amp{font-size:20px;color:#9FB4D8;font-family:var(--f-display);font-style:italic}
 .wb-brands .pres{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#9FB4D8;margin-left:4px}
 .wb-hello{margin:30px 0 0;font-family:var(--f-display);font-style:italic;font-size:22px;color:#BFD3F5}
@@ -21,7 +21,7 @@
 .wb-kicker b{font-weight:700;letter-spacing:.06em;color:#0A1530;background:#F5C76B;padding:3px 9px;border-radius:999px;font-size:11px}
 @keyframes wbpulse{50%{box-shadow:0 0 0 8px rgba(34,211,238,0)}}
 .wb-hero h1{margin:14px 0 0;font-size:clamp(32px,5.4vw,58px);line-height:1.06;font-weight:700;letter-spacing:-.02em;max-width:880px;color:#F4F8FF}
-.wb-hero h1 .g{background:linear-gradient(90deg,#7EE8F5,#A78BFA);-webkit-background-clip:text;background-clip:text;color:transparent}
+.wb-hero h1 .wb-g{background:linear-gradient(90deg,#7EE8F5,#A78BFA);-webkit-background-clip:text;background-clip:text;color:transparent}
 .wb-meta{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:20px;font-size:14.5px;color:#C9D7EE}
 .wb-meta span{display:inline-flex;align-items:center;gap:7px}.wb-meta svg{width:17px;height:17px;color:#7EE8F5}
 .wb-tracks{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
@@ -74,7 +74,7 @@
 @media (max-width:560px){
   .wb-wrap{padding:0 16px}
   .wb-disc{grid-template-columns:1fr}
-  .wb-plate{height:38px;padding:5px 9px}.wb-plate .mk{height:22px}.wb-plate .wd{height:14px}.wb-plate .tq{height:24px}
+  .wb-plate{height:38px;padding:5px 9px}.wb-plate .mk{height:22px}.wb-plate .wd{height:14px}.wb-tq{height:32px}
   .wb-hero{padding-bottom:40px}
   .wb-card{padding:16px}
 }

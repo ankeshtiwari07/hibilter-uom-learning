@@ -50,12 +50,12 @@ export default function Webinar() {
         <div className="wb-brands">
           <span className="wb-plate"><img src="/brand/hib_mark.png" alt="" className="mk" /><img src="/brand/hib_word.png" alt="Hibilter IT Systems" className="wd" /></span>
           <span className="amp">&amp;</span>
-          <span className="wb-plate"><img src="/brand/tuquant.png" alt="TuQuant" className="tq" /></span>
+          <img src="/brand/tuquant.png" alt="TuQuant" className="wb-tq" />
           <span className="pres">present</span>
         </div>
         {guest && <p className="wb-hello">{guest}, your invitation is waiting.</p>}
         <div className="wb-kicker"><i />{d?.kicker || 'LIVE WEBINAR'}{mba && <b>For MBA students</b>}</div>
-        <h1>{d ? <>The True Potential of <span className="g">AI</span> and <span className="g">Quantum Computing</span></> : ' '}</h1>
+        <h1>{d ? <>The True Potential of <span className="wb-g">AI</span> and <span className="wb-g">Quantum Computing</span></> : ' '}</h1>
         <div className="wb-meta">
           <span><Icon n="cal" />{d?.when || 'Date & time announcing soon'}</span>
           <span><Icon n="play" />{d?.where || 'Online'}</span>

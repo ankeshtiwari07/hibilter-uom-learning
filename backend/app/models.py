@@ -422,3 +422,47 @@ class AcademicTerm(Base):
     start: Mapped[date] = mapped_column(Date)
     end: Mapped[date] = mapped_column(Date)
     current: Mapped[bool] = mapped_column(Boolean, default=False)
+
+
+# ---------- Public events (webinars) ----------
+class Webinar(TS, Base):
+    """A public event with its own registration page (/webinar/<id>)."""
+    __tablename__ = "webinars"
+    id: Mapped[str] = mapped_column(String(48), primary_key=True)  # slug
+    title: Mapped[str] = mapped_column(String(200))
+    presenters: Mapped[str] = mapped_column(String(200), default="")
+    kicker: Mapped[str] = mapped_column(String(80), default="LIVE WEBINAR")
+    summary: Mapped[str] = mapped_column(Text, default="")
+    when_text: Mapped[str] = mapped_column(String(120), default="Date & time to be announced")
+    starts_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    duration_min: Mapped[int] = mapped_column(Integer, default=60)
+    where_text: Mapped[str] = mapped_column(String(120), default="Online")
+    join_url: Mapped[str | None] = mapped_column(String(500))  # shown to registrants only once set
+    status: Mapped[str] = mapped_column(String(16), default="open")  # open | closed
+    capacity: Mapped[int | None] = mapped_column(Integer)
+    meta: Mapped[dict] = mapped_column(JSON, default=dict)  # tracks, videos, highlights
+
+
+class WebinarRegistration(TS, Base):
+    __tablename__ = "webinar_registrations"
+    __table_args__ = (UniqueConstraint("webinar_id", "email", name="uq_webinar_email"),)
+    id: Mapped[str] = mapped_column(String(32), primary_key=True, default=uid)
+    webinar_id: Mapped[str] = mapped_column(ForeignKey("webinars.id", ondelete="CASCADE"), index=True)
+    ref: Mapped[str] = mapped_column(String(16), unique=True)  # shown to the registrant, e.g. AQ-7F3K2Q
+    name: Mapped[str] = mapped_column(String(200))
+    email: Mapped[str] = mapped_column(String(200))
+    phone: Mapped[str | None] = mapped_column(String(32))
+    role: Mapped[str] = mapped_column(String(24))  # student | faculty | professional | other
+    institution: Mapped[str] = mapped_column(String(200))
+    programme: Mapped[str | None] = mapped_column(String(120))  # track or programme
+    year_of_study: Mapped[str | None] = mapped_column(String(24))
+    city: Mapped[str | None] = mapped_column(String(120))
+    question: Mapped[str | None] = mapped_column(Text)
+    source: Mapped[str] = mapped_column(String(48), default="direct")  # whatsapp | linkedin | email | mba | direct ...
+    utm: Mapped[dict] = mapped_column(JSON, default=dict)
+    consent_updates: Mapped[bool] = mapped_column(Boolean, default=False)
+    status: Mapped[str] = mapped_column(String(16), default="registered")  # registered | attended | cancelled
+    notes: Mapped[str | None] = mapped_column(Text)
+    updated_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    ip_hash: Mapped[str | None] = mapped_column(String(64))
+    user_agent: Mapped[str | None] = mapped_column(String(300))

@@ -1,10 +1,12 @@
-import { ReactNode, Suspense } from "react"
+import { lazy, ReactNode, Suspense } from "react"
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { Shell } from './components/Shell'
 import { Loading } from './components/ui'
 import { HOME, Role, useAuth } from './lib/auth'
 import Login from './pages/Login'
 import { ROUTES } from './routes'
+
+const Webinar = lazy(() => import('./pages/public/Webinar'))
 
 function Guard({ roles, crumbs, demoOff, children }: { roles: Role[]; crumbs: string[]; demoOff?: boolean; children: ReactNode }) {
   const { me, loading } = useAuth(); const loc = useLocation()
@@ -18,6 +20,8 @@ export default function App() {
   const { me, loading } = useAuth()
   return <Routes>
     <Route path="/login" element={<Login />} />
+    <Route path="/webinar" element={<Suspense fallback={<Loading />}><Webinar /></Suspense>} />
+    <Route path="/webinar/:variant" element={<Suspense fallback={<Loading />}><Webinar /></Suspense>} />
     {ROUTES.map(r => <Route key={r.path} path={r.path} element={<Guard roles={r.roles} crumbs={r.crumbs} demoOff={r.demoOff}><r.C /></Guard>} />)}
     <Route path="*" element={loading ? <Loading /> : <Navigate to={me ? HOME[me.role] : '/login'} replace />} />
   </Routes>

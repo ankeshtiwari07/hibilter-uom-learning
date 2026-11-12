@@ -19,7 +19,7 @@ export const NAV: Record<Role, [string, NavItem[]][]> = {
   ],
   admin: [
     ['Leadership', [['/a-dash', 'home', 'Institutional overview'], ['/a-perf', 'line', 'Performance analytics'], ['/vf-analytics', 'cap', 'Virtual faculty analytics', 'hero'], ['/a-risk', 'flag', 'Learners for follow-up'], ['/a-reports', 'csv', 'Reporting centre']]],
-    ['Administration', [['/a-structure', 'bldg', 'Academic structure'], ['/a-directory', 'users', 'Student directory'], ['/a-notices', 'mega', 'Notices & calendar'], ['/a-users', 'shield', 'Users & roles'], ['/vf-config', 'cog', 'Virtual faculty settings'], ['/a-settings', 'lock', 'Settings & audit']]],
+    ['Administration', [['/a-structure', 'bldg', 'Academic structure'], ['/a-directory', 'users', 'Student directory'], ['/a-notices', 'mega', 'Notices & calendar'], ['/a-users', 'shield', 'Users & roles'], ['/a-webinar', 'mega', 'Webinar registrations'], ['/vf-config', 'cog', 'Virtual faculty settings'], ['/a-settings', 'lock', 'Settings & audit']]],
   ],
 }
 const ROLE_LABEL: Record<Role, string> = { student: 'Student', lecturer: 'Lecturer', admin: 'Administrator' }

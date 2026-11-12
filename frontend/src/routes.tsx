@@ -44,6 +44,7 @@ export const ROUTES: R[] = [
   { path: '/a-reports', roles: A, crumbs: ['Reporting centre'], C: lz(() => import('./pages/admin/Reports')) },
   { path: '/a-notices', roles: A, crumbs: ['Notices & calendar'], C: lz(() => import('./pages/admin/Notices')) },
   { path: '/a-users', roles: A, crumbs: ['Users & roles'], C: lz(() => import('./pages/admin/Users')) },
+  { path: '/a-webinar', roles: A, crumbs: ['Webinar registrations'], C: lz(() => import('./pages/admin/Webinars')) },
   { path: '/a-settings', roles: A, crumbs: ['Settings & audit'], C: lz(() => import('./pages/admin/Settings')) },
   { path: '/search', roles: ALL, crumbs: ['Search'], C: lz(() => import('./pages/common/Search')) },
 ]

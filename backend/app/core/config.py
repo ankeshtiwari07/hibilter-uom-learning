@@ -15,6 +15,7 @@ class Settings(BaseSettings):
     cors_origins: str = ""
 
     anthropic_api_key: str | None = None
+    newsletter_anthropic_key: str | None = None  # separate key for the weekly brief; always calls api.anthropic.com directly
     llm_model: str = "claude-opus-5-5"
     llm_effort: str = "low"
     llm_timeout_s: float = 20.0

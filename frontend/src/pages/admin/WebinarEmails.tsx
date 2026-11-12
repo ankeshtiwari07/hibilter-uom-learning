@@ -1,4 +1,4 @@
-/* Webinar emails: date/time update to registrants, weekly newsletter drafts (review → approve → send), company section. */
+/* Webinar emails: automatic date/time updates, weekly newsletter (auto-sent after a review window, or sent by hand), company section. */
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 import { Icon } from '../../components/Icon'
@@ -10,10 +10,10 @@ import { InlineErr } from './shared'
 type Item = { title: string; url: string; source: string; note: string; include: boolean; published?: string | null }
 type Section = { title: string; items: Item[] }
 type Company = { name: string; url: string; text: string }
-type Camp = { id: string; kind: string; edition: string | null; subject: string; status: string; created_at: string; created_by: string | null; approved_by: string | null; approved_at: string | null; recipients: number; sent: number; queued: number; failed: number; week: string | null; articles: number }
+type Camp = { id: string; kind: string; edition: string | null; subject: string; status: string; created_at: string; created_by: string | null; approved_by: string | null; approved_at: string | null; recipients: number; sent: number; queued: number; failed: number; week: string | null; articles: number; auto_send_at: string | null; auto_held: string | null }
 export type MailStatus = { configured: boolean; sender: string | null; owner_notify: string | null; totals: { queued: number; sent: number; failed: number }
   audience: { registered: number; newsletter_mba: number; newsletter_general: number; unsubscribed: number }; update_needed: boolean; auto_updates: boolean; auto_at: string | null
-  last_update: { at: string | null; event: { when: string } | null; by: string | null; recipients: number | null }; campaigns: Camp[]; company: Company[]; next_newsletter: string; failed: { to: string; kind: string; error: string; at: string }[] }
+  last_update: { at: string | null; event: { when: string } | null; by: string | null; recipients: number | null }; campaigns: Camp[]; company: Company[]; next_newsletter: string; newsletter_auto: boolean; newsletter_hold_min: number; failed: { to: string; kind: string; error: string; at: string }[] }
 type Full = { id: string; kind: string; edition: string | null; subject: string; status: string; html: string; audience: number; label?: string
   content: { headline?: string; intro?: string; outro?: string; sections?: Section[]; company?: Company[]; note?: string; ai?: boolean } }
 
@@ -48,13 +48,13 @@ export function WebinarEmails({ wid, title, when }: { wid: string; title: string
         <div><div className="xs muted">Newsletter · general edition</div><b style={{ fontSize: 20 }}>{d.audience.newsletter_general}</b></div>
         <div><div className="xs muted">Unsubscribed</div><b style={{ fontSize: 20 }}>{d.audience.unsubscribed}</b></div>
       </div>
-      <p className="xs muted">Sender: <span className="mono">{d.sender || 'not connected'}</span> · Next newsletter drafts: {fmtDate(d.next_newsletter, true)} (every Monday) — nothing is sent until you approve it. Registrants get a confirmation email automatically when they sign up.{d.totals.queued ? ` ${d.totals.queued} emails waiting to send.` : ''}</p>
+      <p className="xs muted">Sender: <span className="mono">{d.sender || 'not connected'}</span> · Next newsletter drafts: {fmtDate(d.next_newsletter, true)} (every Monday) — {d.newsletter_auto ? `they send automatically ${Math.round(d.newsletter_hold_min / 60 * 10) / 10} hours later unless you discard them; drafts with too few articles wait for you.` : 'nothing is sent until you approve it.'} Registrants get a confirmation email automatically when they sign up.{d.totals.queued ? ` ${d.totals.queued} emails waiting to send.` : ''}</p>
       {d.campaigns.length ? <div className="tbl-wrap" style={{ marginTop: 10 }}><table className="t"><thead><tr><th>Email</th><th>Status</th><th className="adm-hide-sm">Delivery</th><th>Created</th></tr></thead>
         <tbody>{d.campaigns.map(c => <tr key={c.id} style={{ cursor: 'pointer' }} onClick={() => setOpen(c.id)}>
           <td><div className="small"><b>{c.kind === 'newsletter' ? `Newsletter · ${ED[c.edition || ''] || ''}` : 'Date & time update'}</b></div><div className="xs muted">{c.subject}</div>{c.kind === 'newsletter' && <div className="xs muted">{c.articles} articles · {c.week}</div>}</td>
           <td><Badge kind={ST[c.status]?.[0]}>{ST[c.status]?.[1] || c.status}</Badge></td>
-          <td className="small adm-hide-sm">{c.status === 'draft' ? '—' : <>{c.sent}/{c.recipients} sent{c.queued ? ` · ${c.queued} queued` : ''}{c.failed ? <span style={{ color: 'var(--bad)' }}> · {c.failed} failed</span> : ''}</>}</td>
-          <td className="small">{rel(c.created_at)}<div className="xs muted">{c.approved_by ? `sent by ${c.approved_by}` : c.created_by}</div></td></tr>)}</tbody></table></div>
+          <td className="small adm-hide-sm">{c.status === 'draft' ? (c.auto_send_at ? <>Sends automatically {fmtDate(c.auto_send_at, true)}</> : c.auto_held ? <span style={{ color: 'var(--warn)' }}>{c.auto_held}</span> : '—') : <>{c.sent}/{c.recipients} sent{c.queued ? ` · ${c.queued} queued` : ''}{c.failed ? <span style={{ color: 'var(--bad)' }}> · {c.failed} failed</span> : ''}</>}</td>
+          <td className="small">{rel(c.created_at)}<div className="xs muted">{c.approved_by ? (c.approved_by === 'Automatic' ? 'sent automatically' : `sent by ${c.approved_by}`) : c.created_by}</div></td></tr>)}</tbody></table></div>
         : <Empty icon="mega" title="No emails yet">The first newsletter drafts appear on Monday, or click “Draft newsletter now”.</Empty>}
       {d.failed.length > 0 && <details style={{ marginTop: 10 }}><summary className="small" style={{ cursor: 'pointer', color: 'var(--bad)' }}>{d.totals.failed} failed deliveries</summary>
         <ul className="xs">{d.failed.map((f, i) => <li key={i}><span className="mono">{f.to}</span> · {f.kind} · {f.error}</li>)}</ul></details>}

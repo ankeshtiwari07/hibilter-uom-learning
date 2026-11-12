@@ -87,16 +87,34 @@ async def weekly() -> None:
                 continue
             made = await newsletter.generate_drafts(db, w.id)
             log.info("newsletter drafts for %s: %s", w.id, [c.id for c in made])
-            if s.owner_notify_email and mail.configured():
+            if s.owner_notify_email and mail.configured() and made:
                 url = f"{mail.base()}/a-webinar"
-                body = (f"<p>This week’s AI × Quantum Brief drafts are ready for <b>{mail.esc(w.title)}</b>: "
-                        f"{len(made)} editions (MBA and general).</p><p>Nothing is sent until you review and approve them.</p>"
-                        f"<p>{mail.button('Review the drafts', url)}</p>")
-                db.add(EmailMessage(kind="notice", to_email=s.owner_notify_email, subject="Newsletter drafts ready for review",
-                                    html=mail.layout("Newsletter drafts ready", body, "Sent to the webinar administrator."),
-                                    text=f"This week's newsletter drafts are ready. Review: {url}", headers={}, status="queued"))
+                auto = s.newsletter_auto_send
+                when = (datetime.now(timezone.utc) + timedelta(minutes=s.newsletter_auto_hold_min)).astimezone(timezone(timedelta(hours=5, minutes=30)))
+                line = (f"They will be sent automatically at <b>{when:%H:%M} IST</b>. To change or stop one, edit or discard it before then."
+                        if auto else "Nothing is sent until you review and approve them.")
+                body = (f"<p>This week’s AI × Quantum Brief is ready for <b>{mail.esc(w.title)}</b>: "
+                        f"{len(made)} editions (MBA and general).</p><p>{line}</p><p>{mail.button('Review the drafts', url)}</p>")
+                notice(db, "Newsletter: this week’s brief " + ("sends at " + f"{when:%H:%M} IST" if auto else "is ready for review"),
+                       body, f"This week's newsletter drafts are ready. Review: {url}")
                 await db.commit()
 
+
+def notice(db, subject: str, body: str, text: str) -> None:
+    s = get_settings()
+    if s.owner_notify_email and mail.configured():
+        db.add(EmailMessage(kind="notice", to_email=s.owner_notify_email, subject=subject,
+                            html=mail.layout(subject, body, "Sent to the webinar administrator."), text=text, headers={}, status="queued"))
+
+
+async def auto_newsletters() -> None:
+    async with SessionLocal() as db:
+        notes = await newsletter.auto_send(db)
+        if notes:
+            url = f"{mail.base()}/a-webinar"
+            notice(db, "Newsletter: this week’s sending report", "".join(f"<p>{mail.esc(n)}</p>" for n in notes)
+                   + f"<p>{mail.button('Open the portal', url)}</p>", "\n".join(notes) + f"\n{url}")
+            await db.commit()
 
 async def main() -> None:
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(name)s %(levelname)s %(message)s")
@@ -106,6 +124,10 @@ async def main() -> None:
             await weekly()
         except Exception:
             log.exception("weekly newsletter step failed")
+        try:
+            await auto_newsletters()
+        except Exception:
+            log.exception("automatic newsletter step failed")
         try:
             async with SessionLocal() as db:
                 await event_updates.auto_send(db)

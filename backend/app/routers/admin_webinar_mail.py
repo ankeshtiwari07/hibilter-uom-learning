@@ -1,7 +1,8 @@
 """Administrator: webinar emails — date/time updates to registrants and the weekly newsletter (draft → approve → send).
 
 Date/time updates go out automatically (services/event_updates) once the details are saved; the admin can also send
-one now with a custom message. Newsletters never reach anyone without an explicit admin approval. Sends are audited.
+one now with a custom message. Weekly newsletter drafts send themselves after a review window (NEWSLETTER_AUTO_*)
+unless edited down or discarded; the admin can also send one immediately. Sends are audited.
 """
 from __future__ import annotations
 
@@ -56,7 +57,8 @@ def _summary(c: C, stats: dict) -> dict:
             "created_at": c.created_at.isoformat(), "created_by": c.created_by, "approved_by": c.approved_by,
             "approved_at": c.approved_at.isoformat() if c.approved_at else None, "recipients": c.recipients,
             "sent": stats.get((c.id, "sent"), 0), "queued": stats.get((c.id, "queued"), 0), "failed": stats.get((c.id, "failed"), 0),
-            "week": (c.content or {}).get("week"), "articles": sum(len([i for i in s.get("items", []) if i.get("include", True)])
+            "week": (c.content or {}).get("week"), "auto_send_at": (c.content or {}).get("auto_send_at") if c.status == "draft" else None,
+            "auto_held": (c.content or {}).get("auto_held"), "articles": sum(len([i for i in s.get("items", []) if i.get("include", True)])
                                                                     for s in (c.content or {}).get("sections", []))}
 
 
@@ -86,6 +88,7 @@ async def status(wid: str, db: AsyncSession = Depends(get_db), user: User = ADMI
                         "by": last_upd.approved_by if last_upd else None, "recipients": last_upd.recipients if last_upd else None},
         "campaigns": [_summary(c, stats) for c in camps],
         "company": await newsletter.company(db), "next_newsletter": _next_newsletter(),
+        "newsletter_auto": s.newsletter_auto_send, "newsletter_hold_min": s.newsletter_auto_hold_min,
         "failed": [{"to": m.to_email, "kind": m.kind, "error": m.error, "at": m.created_at.isoformat()} for m in failed],
     }
 
@@ -189,17 +192,13 @@ async def send(wid: str, cid: str, db: AsyncSession = Depends(get_db), user: Use
     if c.kind != "newsletter" or c.status != "draft":
         raise HTTPException(409, "This email has already been sent or discarded.")
     if not mail.configured():
-        raise HTTPException(409, "Email isn’t set up yet — add the events@hibilter.com mailbox details first.")
-    regs = (await db.execute(_audience(wid, "newsletter", c.edition))).scalars().all()
-    if not regs:
+        raise HTTPException(409, "Email sending isn’t connected yet.")
+    if not (await db.execute(_audience(wid, "newsletter", c.edition).limit(1))).first():
         raise HTTPException(409, "Nobody has opted in to this edition yet.")
-    for r in regs:
-        s, h, t = mail.newsletter(w, r, c.content or {}, c.subject)
-        mail.queue(db, "newsletter", r.email, s, h, t, campaign_id=c.id, registration_id=r.id, unsub=mail.unsub_api_url(r.id))
-    c.status, c.approved_by, c.approved_at, c.recipients = "sending", user.name, datetime.now(timezone.utc), len(regs)
-    await audit(db, user, "Sent newsletter", "data", f"{c.subject} ({c.edition})", detail={"recipients": len(regs)})
+    n = await newsletter.send_campaign(db, w, c, user.name)
+    await audit(db, user, "Sent newsletter", "data", f"{c.subject} ({c.edition})", detail={"recipients": n})
     await db.commit()
-    return {"ok": True, "recipients": len(regs)}
+    return {"ok": True, "recipients": n}
 
 
 @router.post("/{wid}/campaigns/{cid}/discard")

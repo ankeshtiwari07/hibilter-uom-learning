@@ -16,6 +16,9 @@ class Settings(BaseSettings):
 
     anthropic_api_key: str | None = None
     event_update_hold_min: int = 10  # automatic date/time update waits this long after the last edit
+    newsletter_auto_send: bool = True  # weekly drafts go out on their own after the hold below
+    newsletter_auto_hold_min: int = 120  # time to review/edit/discard the drafts before they send
+    newsletter_min_articles: int = 3  # below this the draft is held for a human instead of sending
     newsletter_anthropic_key: str | None = None  # separate key for the weekly brief; always calls api.anthropic.com directly
     llm_model: str = "claude-opus-5-5"
     llm_effort: str = "low"

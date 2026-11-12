@@ -12,11 +12,12 @@ from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 
 import httpx
-from sqlalchemy import select
+from sqlalchemy import or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from ..core.config import get_settings
-from ..models import EmailCampaign, Setting
+from ..models import EmailCampaign, Setting, Webinar, WebinarRegistration
+from . import mail
 
 log = logging.getLogger("uom.newsletter")
 
@@ -173,9 +174,63 @@ async def generate_drafts(db: AsyncSession, wid: str, by: str = "Weekly schedule
             "sections": sections, "company": [dict(x) for x in comp], "outro": "",
         }
         content = await _ai_polish(edition, content)
+        if by == "Weekly schedule" and get_settings().newsletter_auto_send:
+            content["auto_send_at"] = (datetime.now(timezone.utc) + timedelta(minutes=get_settings().newsletter_auto_hold_min)).isoformat()
         c = EmailCampaign(webinar_id=wid, kind="newsletter", edition=edition, subject=cfg["subject"], content=content,
                           status="draft", created_by=by)
         db.add(c)
         made.append(c)
     await db.commit()
     return made
+
+
+def audience(wid: str, edition: str | None):
+    """Newsletter readers: registered, opted in, not unsubscribed; MBA programmes get the MBA edition."""
+    q = select(WebinarRegistration).where(WebinarRegistration.webinar_id == wid, WebinarRegistration.status != "cancelled",
+                                          WebinarRegistration.consent_updates.is_(True), WebinarRegistration.unsubscribed_at.is_(None))
+    mba = WebinarRegistration.programme.ilike("MBA%")
+    return q.where(mba) if edition == "mba" else q.where(or_(WebinarRegistration.programme.is_(None), ~mba))
+
+
+def article_count(c: EmailCampaign) -> int:
+    return sum(len([i for i in s.get("items", []) if i.get("include", True)]) for s in (c.content or {}).get("sections", []))
+
+
+async def send_campaign(db: AsyncSession, w, c: EmailCampaign, by: str) -> int:
+    """Queue a newsletter draft to its edition's readers and mark it sending. Caller commits."""
+    regs = (await db.execute(audience(w.id, c.edition))).scalars().all()
+    for r in regs:
+        s_, h, t = mail.newsletter(w, r, c.content or {}, c.subject)
+        mail.queue(db, "newsletter", r.email, s_, h, t, campaign_id=c.id, registration_id=r.id, unsub=mail.unsub_api_url(r.id))
+    c.status, c.approved_by, c.approved_at, c.recipients = "sending", by, datetime.now(timezone.utc), len(regs)
+    c.content = {k: v for k, v in (c.content or {}).items() if k != "auto_send_at"}
+    return len(regs)
+
+
+async def auto_send(db: AsyncSession) -> list[str]:
+    """Mailer step: send weekly drafts whose review window has passed. Returns notes for the owner."""
+    s = get_settings()
+    if not s.newsletter_auto_send or not mail.configured():
+        return []
+    now = datetime.now(timezone.utc)
+    notes = []
+    drafts = (await db.execute(select(EmailCampaign).where(EmailCampaign.kind == "newsletter", EmailCampaign.status == "draft"))).scalars().all()
+    for c in drafts:
+        at = (c.content or {}).get("auto_send_at")
+        if not at or datetime.fromisoformat(at) > now:
+            continue
+        w = await db.get(Webinar, c.webinar_id)
+        rest = {k: v for k, v in (c.content or {}).items() if k != "auto_send_at"}
+        if now - datetime.fromisoformat(at) > timedelta(days=2):  # e.g. email was down: don't send last week's news
+            c.content = {**rest, "auto_held": "Missed its send time — the news may be stale. Review before sending."}
+        elif article_count(c) < s.newsletter_min_articles:
+            c.content = {**rest, "auto_held": f"Only {article_count(c)} articles found — held for you to review."}
+            notes.append(f"{c.edition} edition held: only {article_count(c)} articles found this week. Review it before sending.")
+        elif not (await db.execute(audience(c.webinar_id, c.edition).limit(1))).first():
+            c.content, c.status = {**rest, "auto_held": "Nobody has opted in to this edition yet."}, "discarded"
+        else:
+            n = await send_campaign(db, w, c, "Automatic")
+            notes.append(f"{c.edition} edition sent automatically to {n} reader{'s' if n != 1 else ''}.")
+            log.info("newsletter %s (%s) auto-sent to %d", c.id, c.edition, n)
+        await db.commit()
+    return notes

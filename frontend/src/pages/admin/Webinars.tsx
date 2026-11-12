@@ -41,8 +41,8 @@ export default function Webinars() {
         <Kpi label="Cancelled" value={k!.cancelled} />
       </div>
       <div className="g g-21">
-        <Card title="Registrations per day" actions={<span className="xs muted">last 30 days</span>}>
-          {k!.total ? <VBars data={d.data!.daily.map(x => ({ label: fmtDate(x.date), value: x.value }))} color="#7C5CFF" /> : <Empty icon="chart" title="No registrations yet">Share the link to start collecting registrations.</Empty>}
+        <Card title="Registrations per day" actions={<span className="xs muted">last 14 days</span>}>
+          {k!.total ? <VBars data={d.data!.daily.slice(-14).map(x => ({ label: fmtDate(x.date).replace(/ \w+$/, ''), value: x.value }))} color="#7C5CFF" /> : <Empty icon="chart" title="No registrations yet">Share the link to start collecting registrations.</Empty>}
         </Card>
         <Card title="Where they came from">{d.data!.by_source.length ? <HBars rows={d.data!.by_source} /> : <p className="small muted">—</p>}</Card>
       </div>

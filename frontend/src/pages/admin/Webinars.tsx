@@ -6,7 +6,7 @@ import { Badge, Card, Empty, ErrorBox, Field, HBars, Kpi, Loading, Modal, PageHe
 import { download, get, patch } from '../../lib/api'
 import { fmtDate, rel } from '../../lib/format'
 import { InlineErr, Pager, qs, Sel, useDebounced } from './shared'
-import { AnnounceModal, useMail, WebinarEmails } from './WebinarEmails'
+import { WebinarEmails } from './WebinarEmails'
 
 const WID = 'ai-quantum-2026'
 type W = { id: string; title: string; presenters: string; summary: string; when: string; starts_at: string | null; duration_min: number; where: string; status: string; capacity: number | null; join_url: string | null; open: boolean }
@@ -24,7 +24,6 @@ export default function Webinars() {
   const params = { q: dq, ...f }
   const list = useQuery({ queryKey: ['adm-webinar-regs', WID, params, page], queryFn: () => get<{ items: Reg[]; total: number }>(`/api/admin/webinars/${WID}/registrations` + qs({ ...params, page, size: 25 })), placeholderData: p => p, refetchInterval: 30_000 })
   const [open, setOpen] = useState<Reg | null>(null); const [edit, setEdit] = useState(false); const [busyCsv, setBusyCsv] = useState(false)
-  const mailQ = useMail(WID); const [tell, setTell] = useState<string | null>(null)
   const refresh = () => { qc.invalidateQueries({ queryKey: ['adm-webinar'] }); qc.invalidateQueries({ queryKey: ['adm-webinar-regs'] }) }
   const setFl = (k: string, v: string) => { setF({ ...f, [k]: v }); setPage(1) }
   const exportCsv = async () => { setBusyCsv(true); try { await download(`/api/admin/webinars/${WID}/registrations.csv` + qs(params), `webinar-registrations-${new Date().toISOString().slice(0, 10)}.csv`); toast('Export downloaded') } catch (e: any) { toast(e.message, true) } finally { setBusyCsv(false) } }
@@ -75,9 +74,8 @@ export default function Webinars() {
       </>}
     </div>}
     {open && <RegModal r={open} onClose={() => setOpen(null)} onSaved={() => { setOpen(null); refresh(); toast('Registration updated') }} />}
-    {edit && w && <EditModal w={w} onClose={() => setEdit(false)} onSaved={(nw: W) => { setEdit(false); refresh(); qc.invalidateQueries({ queryKey: ['adm-webinar-mail'] }); toast('Event details saved — the public page shows them now')
-      if ((nw.when !== w.when || nw.starts_at !== w.starts_at || nw.join_url !== w.join_url) && k!.total > 0) setTell(nw.when) }} />}
-    {tell && <AnnounceModal wid={WID} title={w!.title} when={tell} configured={!!mailQ.data?.configured} onClose={() => setTell(null)} onSent={n => { setTell(null); toast(`Update queued for ${n} registrants`); qc.invalidateQueries({ queryKey: ['adm-webinar-mail'] }) }} />}
+    {edit && w && <EditModal w={w} onClose={() => setEdit(false)} onSaved={(nw: W) => { setEdit(false); refresh(); qc.invalidateQueries({ queryKey: ['adm-webinar-mail'] }); const told = nw.when !== w.when || nw.starts_at !== w.starts_at || nw.join_url !== w.join_url || nw.where !== w.where
+      toast(told && k!.total > 0 ? 'Saved. Registrants will be emailed the new details automatically in 10 minutes' : 'Event details saved — the public page shows them now') }} />}
   </>
 }
 

@@ -14,7 +14,7 @@ from sqlalchemy import func, select
 from ..core.config import get_settings
 from ..core.db import SessionLocal
 from ..models import EmailCampaign, EmailMessage, Setting, Webinar
-from . import mail, newsletter
+from . import event_updates, mail, newsletter
 
 log = logging.getLogger("uom.mailer")
 TICK = 10
@@ -106,6 +106,11 @@ async def main() -> None:
             await weekly()
         except Exception:
             log.exception("weekly newsletter step failed")
+        try:
+            async with SessionLocal() as db:
+                await event_updates.auto_send(db)
+        except Exception:
+            log.exception("automatic event update step failed")
         try:
             n = await deliver()
             if n:

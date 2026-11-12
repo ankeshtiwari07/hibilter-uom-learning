@@ -12,8 +12,8 @@ type Section = { title: string; items: Item[] }
 type Company = { name: string; url: string; text: string }
 type Camp = { id: string; kind: string; edition: string | null; subject: string; status: string; created_at: string; created_by: string | null; approved_by: string | null; approved_at: string | null; recipients: number; sent: number; queued: number; failed: number; week: string | null; articles: number }
 export type MailStatus = { configured: boolean; sender: string | null; owner_notify: string | null; totals: { queued: number; sent: number; failed: number }
-  audience: { registered: number; newsletter_mba: number; newsletter_general: number; unsubscribed: number }; update_needed: boolean
-  last_update: { at: string | null; event: { when: string } | null }; campaigns: Camp[]; company: Company[]; next_newsletter: string; failed: { to: string; kind: string; error: string; at: string }[] }
+  audience: { registered: number; newsletter_mba: number; newsletter_general: number; unsubscribed: number }; update_needed: boolean; auto_updates: boolean; auto_at: string | null
+  last_update: { at: string | null; event: { when: string } | null; by: string | null; recipients: number | null }; campaigns: Camp[]; company: Company[]; next_newsletter: string; failed: { to: string; kind: string; error: string; at: string }[] }
 type Full = { id: string; kind: string; edition: string | null; subject: string; status: string; html: string; audience: number; label?: string
   content: { headline?: string; intro?: string; outro?: string; sections?: Section[]; company?: Company[]; note?: string; ai?: boolean } }
 
@@ -34,9 +34,10 @@ export function WebinarEmails({ wid, title, when }: { wid: string; title: string
   if (m.error) return <ErrorBox error={m.error} retry={() => m.refetch()} />
   const d = m.data!
   return <div className="stack">
-    {!d.configured && <Note kind="warn" icon="alert"><b>Email sending isn’t connected yet.</b> Once the <span className="mono">events@hibilter.com</span> mailbox is set up on the server, updates and newsletters can be sent. You can already prepare and preview drafts.</Note>}
-    {d.update_needed && d.audience.registered > 0 && <div className="note warn" role="alert"><Icon n="cal" /><div style={{ flex: 1 }}><b>Registrants haven’t been told the latest date.</b> The event now shows “{when}”{d.last_update.event ? ` (last update said “${d.last_update.event.when}”)` : ''}. Send it to {d.audience.registered} registered {d.audience.registered === 1 ? 'person' : 'people'}.</div>
-      <button className="btn pri sm" onClick={() => setAnnounce(true)}>Send update</button></div>}
+    {!d.configured && <Note kind="warn" icon="alert"><b>Email sending isn’t connected yet.</b> Once a mailbox is set up on the server, updates and newsletters can be sent. You can already prepare and preview drafts.</Note>}
+    {d.update_needed && d.audience.registered > 0 && <div className="note" role="status"><Icon n="cal" /><div style={{ flex: 1 }}><b>{!d.configured ? 'The new date will be emailed once email is connected.' : !d.auto_updates ? 'Registrants haven’t been told the latest date.' : `Emailing the new date automatically ${autoWhen(d.auto_at)}.`}</b> The event now shows “{when}”{d.last_update.event ? ` (last update said “${d.last_update.event.when}”)` : ''}. Goes to {d.audience.registered} registered {d.audience.registered === 1 ? 'person' : 'people'}; edit the date again to reset the wait.</div>
+      <button className="btn pri sm" disabled={!d.configured} onClick={() => setAnnounce(true)}>Send now</button></div>}
+    {!d.update_needed && d.last_update.at && <p className="xs muted" style={{ margin: 0 }}><Icon n="check" /> Registrants were told “{d.last_update.event?.when}” {rel(d.last_update.at)}{d.last_update.by ? ` (${d.last_update.by === 'Automatic' ? 'sent automatically' : 'sent by ' + d.last_update.by})` : ''}. Any change to the date, time, place or joining link is emailed to them automatically.</p>}
     <Card title="Emails" actions={<div className="row" style={{ gap: 6 }}>
       <button className="btn sm" onClick={() => setAnnounce(true)}><Icon n="cal" />Send date update</button>
       <button className="btn sm" disabled={gen.isPending} onClick={() => gen.mutate()}><Icon n="refresh" />{gen.isPending ? 'Collecting articles…' : 'Draft newsletter now'}</button>
@@ -66,6 +67,12 @@ export function WebinarEmails({ wid, title, when }: { wid: string; title: string
 
 function Preview({ html }: { html: string }) {
   return <iframe title="Email preview" srcDoc={html} sandbox="" style={{ width: '100%', height: 460, border: '1px solid var(--line)', borderRadius: 8, background: '#EEF2F6' }} />
+}
+
+function autoWhen(at: string | null) {
+  if (!at) return 'shortly'
+  const t = new Date(at)
+  return t.getTime() - Date.now() < 30_000 ? 'within a minute' : `at ${t.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}`
 }
 
 export function AnnounceModal({ wid, title, when, configured, onClose, onSent }: { wid: string; title: string; when: string; configured: boolean; onClose: () => void; onSent: (n: number) => void }) {

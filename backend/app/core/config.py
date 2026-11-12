@@ -15,6 +15,7 @@ class Settings(BaseSettings):
     cors_origins: str = ""
 
     anthropic_api_key: str | None = None
+    event_update_hold_min: int = 10  # automatic date/time update waits this long after the last edit
     newsletter_anthropic_key: str | None = None  # separate key for the weekly brief; always calls api.anthropic.com directly
     llm_model: str = "claude-opus-5-5"
     llm_effort: str = "low"

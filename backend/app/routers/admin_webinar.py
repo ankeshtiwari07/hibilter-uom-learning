@@ -145,6 +145,8 @@ async def update_webinar(wid: str, body: WebinarPatch, db: AsyncSession = Depend
             changed[k] = str(v) if v is not None else None
             setattr(w, k, v)
     if changed:
+        if set(changed) & {"when_text", "starts_at", "where_text", "join_url"}:  # starts the automatic-update hold
+            w.meta = {**(w.meta or {}), "event_changed_at": datetime.now(timezone.utc).isoformat()}
         await audit(db, user, "Updated webinar", "system", w.title, detail=changed)
     await db.commit()
     return _admin_view(w)

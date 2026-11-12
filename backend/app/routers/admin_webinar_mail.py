@@ -1,6 +1,7 @@
 """Administrator: webinar emails — date/time updates to registrants and the weekly newsletter (draft → approve → send).
 
-Nothing reaches registrants without an explicit admin action; every send is audited.
+Date/time updates go out automatically (services/event_updates) once the details are saved; the admin can also send
+one now with a custom message. Newsletters never reach anyone without an explicit admin approval. Sends are audited.
 """
 from __future__ import annotations
 
@@ -16,7 +17,7 @@ from ..core.config import get_settings
 from ..core.db import get_db
 from ..core.deps import require
 from ..models import EmailCampaign as C, EmailMessage as M, User, Webinar, WebinarRegistration as R
-from ..services import mail, newsletter
+from ..services import event_updates as eu, mail, newsletter
 
 router = APIRouter(prefix="/api/admin/webinars", tags=["admin-webinar-mail"])
 ADMIN = Depends(require("admin"))
@@ -40,11 +41,6 @@ def _audience(wid: str, kind: str, edition: str | None):
 
 async def _count(db, q) -> int:
     return (await db.execute(select(func.count()).select_from(q.subquery()))).scalar_one()
-
-
-def _event_snapshot(w: Webinar) -> dict:
-    return {"when": w.when_text, "where": w.where_text, "starts_at": w.starts_at.isoformat() if w.starts_at else None,
-            "join_url": w.join_url}
 
 
 def _next_newsletter() -> str:
@@ -72,10 +68,9 @@ async def status(wid: str, db: AsyncSession = Depends(get_db), user: User = ADMI
     stats = {(a, b): n for a, b, n in (await db.execute(select(M.campaign_id, M.status, func.count())
                                                         .where(M.campaign_id.in_([c.id for c in camps] or [""])).group_by(M.campaign_id, M.status))).all()}
     totals = dict((await db.execute(select(M.status, func.count()).group_by(M.status))).all())
-    last_upd = next((c for c in camps if c.kind == "event_update" and c.status in ("sending", "sent")), None)
-    snap = _event_snapshot(w)
+    last_upd = await eu.last_update(db, wid)
     told = (last_upd.content or {}).get("event") if last_upd else None
-    date_set = bool(w.starts_at) or "soon" not in w.when_text.lower()
+    needed = eu.date_set(w) and bool(eu.changed_fields(w, told))
     failed = (await db.execute(select(M).where(M.status == "failed").order_by(M.id.desc()).limit(10))).scalars().all()
     return {
         "configured": mail.configured(), "sender": mail.sender() or None, "owner_notify": s.owner_notify_email,
@@ -84,8 +79,11 @@ async def status(wid: str, db: AsyncSession = Depends(get_db), user: User = ADMI
                      "newsletter_mba": await _count(db, _audience(wid, "newsletter", "mba")),
                      "newsletter_general": await _count(db, _audience(wid, "newsletter", "general")),
                      "unsubscribed": await _count(db, select(R).where(R.webinar_id == wid, R.unsubscribed_at.is_not(None)))},
-        "update_needed": date_set and (told is None or any(told.get(k) != snap[k] for k in ("when", "where", "starts_at", "join_url"))),
-        "last_update": {"at": last_upd.approved_at.isoformat() if last_upd and last_upd.approved_at else None, "event": told},
+        "update_needed": needed,
+        "auto_updates": (w.meta or {}).get("auto_event_updates", True) is not False,
+        "auto_at": eu.auto_at(w).isoformat() if needed else None,
+        "last_update": {"at": last_upd.approved_at.isoformat() if last_upd and last_upd.approved_at else None, "event": told,
+                        "by": last_upd.approved_by if last_upd else None, "recipients": last_upd.recipients if last_upd else None},
         "campaigns": [_summary(c, stats) for c in camps],
         "company": await newsletter.company(db), "next_newsletter": _next_newsletter(),
         "failed": [{"to": m.to_email, "kind": m.kind, "error": m.error, "at": m.created_at.isoformat()} for m in failed],
@@ -107,16 +105,10 @@ async def announce(wid: str, body: AnnounceIn, db: AsyncSession = Depends(get_db
     if body.dry_run:
         return {"recipients": len(regs), "subject": subj, "html": html, "configured": mail.configured()}
     if not mail.configured():
-        raise HTTPException(409, "Email isn’t set up yet — add the events@hibilter.com mailbox details first.")
+        raise HTTPException(409, "Email sending isn’t connected yet.")
     if not regs:
         raise HTTPException(409, "Nobody is registered yet.")
-    c = C(webinar_id=wid, kind="event_update", subject=body.subject.strip(),
-          content={"note": body.note, "event": _event_snapshot(w)}, status="sending", created_by=user.name,
-          approved_by=user.name, approved_at=datetime.now(timezone.utc), recipients=len(regs))
-    db.add(c); await db.flush()
-    for r in regs:
-        s, h, t = mail.event_update(w, r, c.subject, body.note)
-        mail.queue(db, "event_update", r.email, s, h, t, campaign_id=c.id, registration_id=r.id)
+    c, _ = await eu.queue_update(db, w, body.subject, body.note, user.name)
     await audit(db, user, "Sent webinar update", "data", w.title, detail={"recipients": len(regs), "when": w.when_text})
     await db.commit()
     return {"ok": True, "recipients": len(regs), "campaign": c.id}

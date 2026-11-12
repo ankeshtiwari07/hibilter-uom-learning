@@ -6,6 +6,7 @@ import { Badge, Card, Empty, ErrorBox, Field, HBars, Kpi, Loading, Modal, PageHe
 import { download, get, patch } from '../../lib/api'
 import { fmtDate, rel } from '../../lib/format'
 import { InlineErr, Pager, qs, Sel, useDebounced } from './shared'
+import { AnnounceModal, useMail, WebinarEmails } from './WebinarEmails'
 
 const WID = 'ai-quantum-2026'
 type W = { id: string; title: string; presenters: string; summary: string; when: string; starts_at: string | null; duration_min: number; where: string; status: string; capacity: number | null; join_url: string | null; open: boolean }
@@ -23,6 +24,7 @@ export default function Webinars() {
   const params = { q: dq, ...f }
   const list = useQuery({ queryKey: ['adm-webinar-regs', WID, params, page], queryFn: () => get<{ items: Reg[]; total: number }>(`/api/admin/webinars/${WID}/registrations` + qs({ ...params, page, size: 25 })), placeholderData: p => p, refetchInterval: 30_000 })
   const [open, setOpen] = useState<Reg | null>(null); const [edit, setEdit] = useState(false); const [busyCsv, setBusyCsv] = useState(false)
+  const mailQ = useMail(WID); const [tell, setTell] = useState<string | null>(null)
   const refresh = () => { qc.invalidateQueries({ queryKey: ['adm-webinar'] }); qc.invalidateQueries({ queryKey: ['adm-webinar-regs'] }) }
   const setFl = (k: string, v: string) => { setF({ ...f, [k]: v }); setPage(1) }
   const exportCsv = async () => { setBusyCsv(true); try { await download(`/api/admin/webinars/${WID}/registrations.csv` + qs(params), `webinar-registrations-${new Date().toISOString().slice(0, 10)}.csv`); toast('Export downloaded') } catch (e: any) { toast(e.message, true) } finally { setBusyCsv(false) } }
@@ -32,6 +34,7 @@ export default function Webinars() {
       actions={<><button className="btn" onClick={() => setEdit(true)} disabled={!w}><Icon n="cog" />Event details</button><button className="btn pri" onClick={exportCsv} disabled={busyCsv}><Icon n="csv" />{busyCsv ? 'Exporting…' : 'Export CSV'}</button></>} />
     {d.isLoading ? <Loading /> : d.error ? <ErrorBox error={d.error} retry={() => d.refetch()} /> : <div className="stack">
       <ShareLinks w={w!} />
+      <WebinarEmails wid={WID} title={w!.title} when={w!.when} />
       <div className="g g6">
         <Kpi label="Registered" value={k!.total.toLocaleString()} delta={k!.capacity ? `of ${k!.capacity} seats` : 'no seat limit'} />
         <Kpi label="Today" value={k!.today} delta="since midnight UTC" />
@@ -72,7 +75,9 @@ export default function Webinars() {
       </>}
     </div>}
     {open && <RegModal r={open} onClose={() => setOpen(null)} onSaved={() => { setOpen(null); refresh(); toast('Registration updated') }} />}
-    {edit && w && <EditModal w={w} onClose={() => setEdit(false)} onSaved={() => { setEdit(false); refresh(); toast('Event details saved — the public page shows them now') }} />}
+    {edit && w && <EditModal w={w} onClose={() => setEdit(false)} onSaved={(nw: W) => { setEdit(false); refresh(); qc.invalidateQueries({ queryKey: ['adm-webinar-mail'] }); toast('Event details saved — the public page shows them now')
+      if ((nw.when !== w.when || nw.starts_at !== w.starts_at || nw.join_url !== w.join_url) && k!.total > 0) setTell(nw.when) }} />}
+    {tell && <AnnounceModal wid={WID} title={w!.title} when={tell} configured={!!mailQ.data?.configured} onClose={() => setTell(null)} onSent={n => { setTell(null); toast(`Update queued for ${n} registrants`); qc.invalidateQueries({ queryKey: ['adm-webinar-mail'] }) }} />}
   </>
 }
 
@@ -117,14 +122,14 @@ function toLocalInput(iso: string | null) {
   return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}`
 }
 
-function EditModal({ w, onClose, onSaved }: { w: W; onClose: () => void; onSaved: () => void }) {
+function EditModal({ w, onClose, onSaved }: { w: W; onClose: () => void; onSaved: (nw: W) => void }) {
   const [f, setF] = useState({ when_text: w.when, starts_at: toLocalInput(w.starts_at), duration_min: String(w.duration_min || 60), where_text: w.where, join_url: w.join_url || '', status: w.status, capacity: w.capacity ? String(w.capacity) : '' })
   const [err, setErr] = useState<string | null>(null)
   const m = useMutation({
     mutationFn: () => patch(`/api/admin/webinars/${WID}`, { when_text: f.when_text.trim(), where_text: f.where_text.trim(), join_url: f.join_url.trim() || null, status: f.status,
       capacity: f.capacity ? Number(f.capacity) : 0, duration_min: Number(f.duration_min) || 60,
       ...(f.starts_at ? { starts_at: new Date(f.starts_at).toISOString() } : { clear_starts_at: true }) }),
-    onSuccess: onSaved, onError: (e: any) => setErr(e.message) })
+    onSuccess: (r: any) => onSaved(r as W), onError: (e: any) => setErr(e.message) })
   return <Modal title="Event details" onClose={onClose} footer={<><button className="btn" onClick={onClose}>Cancel</button><button className="btn pri" disabled={m.isPending} onClick={() => m.mutate()}>{m.isPending ? 'Saving…' : 'Save'}</button></>}>
     <div className="col">
       <Field label="Date & time as shown on the page" htmlFor="ev-w" hint="e.g. Saturday 28 November 2026 · 4:00 PM (MUT)"><input className="inp" id="ev-w" maxLength={120} value={f.when_text} onChange={e => setF({ ...f, when_text: e.target.value })} /></Field>

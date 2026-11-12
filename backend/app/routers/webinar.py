@@ -11,7 +11,7 @@ import secrets
 from datetime import datetime, timedelta, timezone
 
 from fastapi import APIRouter, Depends, HTTPException, Request
-from fastapi.responses import Response
+from fastapi.responses import RedirectResponse, Response
 from pydantic import BaseModel, Field, field_validator
 from sqlalchemy import func, select
 from sqlalchemy.exc import IntegrityError
@@ -21,6 +21,7 @@ from ..core.config import get_settings
 from ..core.db import get_db
 from ..core.ratelimit import hit
 from ..models import Webinar, WebinarRegistration
+from ..services import mail
 
 router = APIRouter(prefix="/api/webinar", tags=["webinar-public"])
 EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[A-Za-z]{2,}$")
@@ -57,6 +58,28 @@ async def _get(db: AsyncSession, wid: str) -> Webinar:
 async def _count(db: AsyncSession, wid: str) -> int:
     return (await db.execute(select(func.count()).select_from(WebinarRegistration)
                              .where(WebinarRegistration.webinar_id == wid, WebinarRegistration.status != "cancelled"))).scalar_one()
+
+
+async def _unsub(db: AsyncSession, t: str) -> dict:
+    rid = mail.check_token(t)
+    r = await db.get(WebinarRegistration, rid) if rid else None
+    if not r:
+        raise HTTPException(404, "This unsubscribe link isn't valid.")
+    if not r.unsubscribed_at:
+        r.unsubscribed_at = datetime.now(timezone.utc)
+        await db.commit()
+    return {"ok": True, "email": r.email[:2] + "…@" + r.email.split("@")[-1]}
+
+
+@router.post("/unsubscribe")
+async def unsubscribe(t: str, db: AsyncSession = Depends(get_db)):
+    """Used by the unsubscribe page and by mail clients' one-click unsubscribe (RFC 8058)."""
+    return await _unsub(db, t)
+
+
+@router.get("/unsubscribe")
+async def unsubscribe_link(t: str):
+    return RedirectResponse(f"/webinar/unsubscribe?t={t}", status_code=303)
 
 
 @router.get("/{wid}")
@@ -146,6 +169,8 @@ async def register(wid: str, body: RegIn, request: Request, db: AsyncSession = D
             setattr(existing, k, v)
         if existing.status == "cancelled":
             existing.status = "registered"
+        if body.consent_updates:
+            existing.unsubscribed_at = None
         existing.updated_at = datetime.now(timezone.utc)
         await db.commit()
         return {"ok": True, "ref": existing.ref, "name": existing.name, "already": True, "email": existing.email}
@@ -157,6 +182,10 @@ async def register(wid: str, body: RegIn, request: Request, db: AsyncSession = D
                                   source=source, utm=utm, **fields)
         db.add(reg)
         try:
+            await db.flush()
+            if mail.configured():
+                s_, h_, t_ = mail.confirmation(w, reg)
+                mail.queue(db, "confirmation", reg.email, s_, h_, t_, registration_id=reg.id)
             await db.commit()
             return {"ok": True, "ref": reg.ref, "name": reg.name, "already": False, "email": reg.email}
         except IntegrityError:  # ref collision, or a double-submit raced us on the email
@@ -183,3 +212,4 @@ async def ics(wid: str, db: AsyncSession = Depends(get_db)):
         f"LOCATION:{esc(w.where_text)}", "END:VEVENT", "END:VCALENDAR", ""])
     return Response(body, media_type="text/calendar; charset=utf-8",
                     headers={"Content-Disposition": f'attachment; filename="{w.id}.ics"'})
+

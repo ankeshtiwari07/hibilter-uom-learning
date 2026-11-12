@@ -26,6 +26,22 @@ class Settings(BaseSettings):
 
     login_rate_per_min: int = 10
 
+    # Outgoing email (webinar updates + newsletter). Hostinger: smtp.hostinger.com, port 465 (SSL).
+    smtp_host: str | None = None
+    smtp_port: int = 465
+    smtp_user: str | None = None
+    smtp_password: str | None = None
+    smtp_starttls: bool = False  # True for port 587
+    mail_from_email: str | None = None  # defaults to smtp_user
+    mail_from_name: str = "Hibilter IT Systems & TuQuant"
+    mail_reply_to: str | None = None
+    mail_rate_per_min: int = 20
+    owner_notify_email: str | None = None  # gets "newsletter drafts ready" notices
+    public_base_url: str = "https://learn.34-14-150-134.sslip.io"
+    newsletter_llm_model: str = "claude-sonnet-5-5"
+    newsletter_weekday: int = 0  # Monday
+    newsletter_hour_utc: int = 4  # 08:00 Mauritius / 09:30 India
+
 
 @lru_cache
 def get_settings() -> Settings:

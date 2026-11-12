@@ -466,3 +466,39 @@ class WebinarRegistration(TS, Base):
     updated_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     ip_hash: Mapped[str | None] = mapped_column(String(64))
     user_agent: Mapped[str | None] = mapped_column(String(300))
+    unsubscribed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))  # from the newsletter
+
+
+class EmailCampaign(TS, Base):
+    """An email to a group: event update or newsletter edition. Drafts are approved by an admin before sending."""
+    __tablename__ = "email_campaigns"
+    id: Mapped[str] = mapped_column(String(32), primary_key=True, default=uid)
+    webinar_id: Mapped[str] = mapped_column(ForeignKey("webinars.id", ondelete="CASCADE"), index=True)
+    kind: Mapped[str] = mapped_column(String(24))  # event_update | newsletter
+    edition: Mapped[str | None] = mapped_column(String(24))  # newsletter: mba | general
+    subject: Mapped[str] = mapped_column(String(200))
+    content: Mapped[dict] = mapped_column(JSON, default=dict)
+    status: Mapped[str] = mapped_column(String(16), default="draft")  # draft | sending | sent | discarded
+    created_by: Mapped[str | None] = mapped_column(String(200))
+    approved_by: Mapped[str | None] = mapped_column(String(200))
+    approved_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    recipients: Mapped[int] = mapped_column(Integer, default=0)
+
+
+class EmailMessage(TS, Base):
+    __tablename__ = "email_messages"
+    __table_args__ = (UniqueConstraint("campaign_id", "to_email", name="uq_campaign_email"),)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    campaign_id: Mapped[str | None] = mapped_column(ForeignKey("email_campaigns.id", ondelete="CASCADE"), index=True)
+    registration_id: Mapped[str | None] = mapped_column(String(32), index=True)
+    kind: Mapped[str] = mapped_column(String(24))  # confirmation | event_update | newsletter | test | notice
+    to_email: Mapped[str] = mapped_column(String(200))
+    subject: Mapped[str] = mapped_column(String(200))
+    html: Mapped[str] = mapped_column(Text)
+    text: Mapped[str] = mapped_column(Text)
+    headers: Mapped[dict] = mapped_column(JSON, default=dict)
+    status: Mapped[str] = mapped_column(String(16), default="queued", index=True)  # queued | sent | failed
+    attempts: Mapped[int] = mapped_column(Integer, default=0)
+    next_attempt_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    error: Mapped[str | None] = mapped_column(Text)
+    sent_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))

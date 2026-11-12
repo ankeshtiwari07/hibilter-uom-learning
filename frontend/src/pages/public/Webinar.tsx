@@ -34,6 +34,7 @@ const MBA: [string, string, string][] = [
 
 export default function Webinar() {
   const { variant } = useParams(); const loc = useLocation()
+  if (variant === 'unsubscribe') return <Unsubscribe />
   const mba = variant === 'mba'
   const sp = useMemo(() => new URLSearchParams(loc.search), [loc.search])
   const guest = (sp.get('name') || '').replace(/[^\p{L}\p{M} .'-]/gu, '').trim().slice(0, 60)
@@ -141,7 +142,7 @@ function RegForm({ d, mba, guest, sp, onDone }: { d: Info; mba: boolean; guest: 
     <div className="field"><label htmlFor="wb-question">A question for the speakers <span className="muted">(optional)</span></label><textarea className="inp" id="wb-question" rows={3} maxLength={600} value={f.question} onChange={e => set('question', e.target.value)} placeholder="What would you most like answered?" /></div>
     <div className="wb-hp" aria-hidden><label>Website<input tabIndex={-1} autoComplete="off" value={f.website} onChange={e => set('website', e.target.value)} /></label></div>
     <label className="wb-check" id="wb-consent" tabIndex={-1}><input type="checkbox" checked={f.consent} onChange={e => set('consent', e.target.checked)} /><span>I agree to be contacted about this webinar (date, joining link, reminders). *</span></label><E k="consent" />
-    <label className="wb-check"><input type="checkbox" checked={f.updates} onChange={e => set('updates', e.target.checked)} /><span>Also tell me about future events from Hibilter IT Systems and TuQuant.</span></label>
+    <label className="wb-check"><input type="checkbox" checked={f.updates} onChange={e => set('updates', e.target.checked)} /><span>Also send me the weekly AI × Quantum Brief — industry news and what Hibilter IT Systems and TuQuant are building. Unsubscribe any time.</span></label>
     {formErr && <div className="note bad" role="alert"><Icon n="alert" /><div>{formErr}</div></div>}
     <button className="wb-cta block" type="submit" disabled={busy}>{busy ? 'Registering…' : 'Register now'}{!busy && <Icon n="arrow" />}</button>
   </form>
@@ -163,4 +164,19 @@ function Ticket({ d, done, mba }: { d: Info; done: Done; mba: boolean }) {
       <a className="btn sm" href={`https://wa.me/?text=${encodeURIComponent(share)}`} target="_blank" rel="noopener noreferrer"><Icon n="send" />WhatsApp</a>
       <button className="btn sm" onClick={() => navigator.clipboard?.writeText(`${link}?src=friend`).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1800) })}><Icon n={copied ? 'check' : 'file'} />{copied ? 'Copied' : 'Copy link'}</button></div>
   </div>
+}
+
+function Unsubscribe() {
+  const t = new URLSearchParams(location.search).get('t') || ''
+  const [st, setSt] = useState<'idle' | 'busy' | 'done' | 'err'>('idle'); const [msg, setMsg] = useState('')
+  const go = async () => { setSt('busy'); try { await post(`/api/webinar/unsubscribe?t=${encodeURIComponent(t)}`); setSt('done') } catch (e: any) { setMsg(e.message); setSt('err') } }
+  useEffect(() => { document.title = 'Unsubscribe · AI × Quantum Brief' }, [])
+  return <div className="wb"><header className="wb-hero" style={{ paddingBottom: 30 }}><div className="wb-glow" aria-hidden /><div className="wb-wrap">
+    <div className="wb-brands"><span className="wb-plate"><img src="/brand/hib_mark.png" alt="" className="mk" /><img src="/brand/hib_word.png" alt="Hibilter IT Systems" className="wd" /></span><span className="amp">&amp;</span><img src="/brand/tuquant.png" alt="TuQuant" className="wb-tq" /></div></div></header>
+    <main className="wb-wrap" style={{ maxWidth: 560, padding: '28px 16px' }}><div className="wb-card">
+      {st === 'done' ? <><h3>You’re unsubscribed</h3><p className="small">You won’t receive the AI × Quantum Brief any more. You’ll still get essential emails about the webinar you registered for (date and joining link).</p></>
+        : st === 'err' ? <><h3>That didn’t work</h3><p className="small">{msg} Reply to any of our emails and we’ll remove you by hand.</p></>
+        : <><h3>Unsubscribe from the AI × Quantum Brief?</h3><p className="small muted">You’ll stop getting the weekly newsletter. Webinar emails (date, joining link) still arrive.</p>
+          <button className="wb-cta" disabled={!t || st === 'busy'} onClick={go}>{st === 'busy' ? 'Unsubscribing…' : 'Unsubscribe'}</button></>}
+    </div></main></div>
 }
